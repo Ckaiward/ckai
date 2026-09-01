@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CKAI // NULL_VOID</title>
+    <title>CKAI // CORE_SYSTEM</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&family=Space+Grotesk:wght@700&display=swap');
 
@@ -32,13 +32,13 @@
             background-size: 20px 20px;
         }
 
-        /* EFFET SCANLINE GLITCH */
+        /* SCANLINES */
         body::before {
             content: " ";
             display: block;
             position: fixed;
             top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
             background-size: 100% 4px;
             z-index: 99;
             pointer-events: none;
@@ -69,13 +69,12 @@
             text-decoration: none;
             letter-spacing: 2px;
             text-transform: uppercase;
-            position: relative;
         }
 
         .brand::after {
-            content: ' [SIGNAL_LOST]';
+            content: ' [MAIN_NODE]';
             font-size: 14px;
-            color: var(--accent-alert);
+            color: var(--accent-glitch);
             font-family: 'Share Tech Mono', monospace;
         }
 
@@ -92,10 +91,7 @@
             cursor: pointer;
         }
 
-        .tab-btn:hover {
-            color: #fff;
-            border-color: var(--text-muted);
-        }
+        .tab-btn:hover { color: #fff; border-color: var(--text-muted); }
 
         .tab-btn.active {
             background: var(--text-main);
@@ -112,142 +108,164 @@
             font-size: 22px;
             color: var(--text-muted);
             text-transform: uppercase;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             letter-spacing: 1px;
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 25px;
-        }
-
-        @media (max-width: 850px) {
-            .dashboard-grid { grid-template-columns: 1fr; }
-        }
-
-        .column-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .channel-block {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            background: var(--panel-bg);
-            border: 1px solid var(--border-hard);
-            padding: 12px;
-        }
-
-        .channel-head {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border-hard);
-            padding-bottom: 8px;
+            gap: 10px;
         }
 
-        .channel-name {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .tag-ckai { color: #fff; }
-        .tag-clevraickai { color: var(--accent-glitch); }
-        .tag-galere { color: var(--accent-alert); }
-
-        .sub-link {
-            font-size: 10px;
-            color: var(--text-muted);
-            text-decoration: none;
-            border: 1px solid var(--border-hard);
-            padding: 2px 6px;
-        }
-
-        .sub-link:hover {
-            color: #fff;
+        .section-header::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
             background: var(--border-hard);
         }
 
-        /* CARROUSEL GAUCHE */
-        .large-carousel-container {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 12px;
+        /* 1. SECTION PRINCIPALE (CKAI HERO) */
+        .featured-hero {
+            display: grid;
+            grid-template-columns: 1.8fr 1fr;
+            gap: 15px;
+            margin-bottom: 40px;
         }
 
-        .large-carousel-container::-webkit-scrollbar { height: 2px; }
-        .large-carousel-container::-webkit-scrollbar-thumb { background: var(--border-hard); }
+        @media (max-width: 850px) {
+            .featured-hero { grid-template-columns: 1fr; }
+        }
 
-        .large-video-card {
-            min-width: 100%;
-            background: #000;
+        .main-player-box {
+            background: var(--panel-bg);
             border: 1px solid var(--border-hard);
-            scroll-snap-align: start;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        .large-thumb-box {
+        .video-embed-container {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
             background: #000;
-            filter: grayscale(100%) contrast(120%);
+            filter: grayscale(80%) contrast(110%);
         }
 
-        .large-thumb-box:hover { filter: none; }
+        .video-embed-container:hover { filter: none; }
 
-        .large-thumb-box iframe {
+        .video-embed-container iframe {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%; border: 0;
         }
 
-        .large-video-info {
-            padding: 10px;
-            font-size: 12px;
-            color: var(--text-main);
-            background: var(--panel-bg);
-            border-top: 1px solid var(--border-hard);
+        .main-video-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 15px;
+            color: #fff;
+            text-transform: uppercase;
         }
 
-        /* COMPACTS DROITE */
-        .compact-video-list {
+        /* RECOMMANDATIONS A DROITE */
+        .side-recommended {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .rec-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-hard);
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .rec-card:hover {
+            border-color: var(--text-muted);
+            background: #111114;
+        }
+
+        .rec-thumb-box {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .rec-thumb-box img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+        }
+
+        .rec-card:hover .rec-thumb-box img { filter: none; }
+
+        .rec-title {
+            font-size: 11px;
+            color: var(--text-main);
+            line-height: 1.3;
+        }
+
+        /* 2. DÉFILEMENT AUTRES CHAÎNES */
+        .other-channels-section {
+            margin-bottom: 40px;
+        }
+
+        .carousel-track {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding-bottom: 10px;
+            scroll-snap-type: x mandatory;
+        }
+
+        .carousel-track::-webkit-scrollbar { height: 3px; }
+        .carousel-track::-webkit-scrollbar-thumb { background: var(--border-hard); }
+
+        .channel-card-scroll {
+            min-width: 240px;
+            max-width: 240px;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-hard);
+            padding: 10px;
+            scroll-snap-align: start;
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
 
-        .compact-video-card {
+        .channel-card-tag {
+            font-size: 10px;
+            color: var(--accent-alert);
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-hard);
+            padding-bottom: 4px;
+        }
+
+        .mini-video-link {
             display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 6px;
-            background: #000;
-            border: 1px solid var(--border-hard);
+            flex-direction: column;
+            gap: 6px;
             text-decoration: none;
             color: inherit;
         }
 
-        .compact-video-card:hover {
-            border-color: var(--text-muted);
-            background: #050505;
-        }
-
-        .mini-thumb {
-            width: 70px;
-            height: 40px;
+        .mini-video-thumb {
+            width: 100%;
+            height: 120px;
             object-fit: cover;
             filter: grayscale(100%);
             border: 1px solid var(--border-hard);
         }
 
-        .compact-video-card:hover .mini-thumb { filter: none; }
+        .mini-video-link:hover .mini-video-thumb { filter: none; }
 
-        .video-title {
+        .mini-video-title {
             font-size: 11px;
             color: var(--text-main);
             white-space: nowrap;
@@ -255,41 +273,23 @@
             text-overflow: ellipsis;
         }
 
-        /* BOTTOM SECTION */
-        .bottom-section {
-            margin-top: 40px;
-            padding-top: 25px;
-            border-top: 1px dashed var(--border-hard);
+        /* 3. BASE : CATEGORIES DE JEUX */
+        .game-categories {
             display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 25px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            border-top: 1px dashed var(--border-hard);
+            padding-top: 25px;
         }
 
         @media (max-width: 850px) {
-            .bottom-section { grid-template-columns: 1fr; }
-        }
-
-        .vod-player-box {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            background: #000;
-            border: 1px solid var(--border-hard);
-            filter: grayscale(80%);
-        }
-
-        .vod-player-box:hover { filter: none; }
-
-        .vod-player-box iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%; border: 0;
+            .game-categories { grid-template-columns: 1fr; }
         }
 
         .category-block {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
             padding: 10px;
-            margin-bottom: 10px;
         }
 
         .category-title {
@@ -311,8 +311,6 @@
             padding: 2px 6px;
             color: var(--text-muted);
         }
-
-        .game-item:hover { color: var(--text-main); }
 
         /* TWITCH */
         .twitch-container {
@@ -357,137 +355,108 @@
 
     <div id="home" class="tab-content active">
 
-        <div class="section-header">> RECENT_FLUX</div>
-
-        <div class="dashboard-grid">
-
-            <div class="channel-block">
-                <div class="channel-head">
-                    <span class="channel-name tag-ckai">CKAI</span>
-                    <a href="https://www.youtube.com/@ckaiward" target="_blank" class="sub-link">LINK ➔</a>
-                </div>
-                <div class="large-carousel-container">
-                    
-                    <div class="large-video-card">
-                        <div class="large-thumb-box">
-                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-                        </div>
-                        <div class="large-video-info">
-                            <div class="large-video-title">WAITING_FOR_DATA_01</div>
-                        </div>
-                    </div>
-
-                    <div class="large-video-card">
-                        <div class="large-thumb-box">
-                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-                        </div>
-                        <div class="large-video-info">
-                            <div class="large-video-title">WAITING_FOR_DATA_02</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="column-stack">
-
-                <div class="channel-block">
-                    <div class="channel-head">
-                        <span class="channel-name tag-clevraickai">C'EST LE C</span>
-                        <a href="https://www.youtube.com/@clevraickai" target="_blank" class="sub-link">LINK ➔</a>
-                    </div>
-                    <div class="compact-video-list">
-                        
-                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="compact-video-card">
-                            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="mini-thumb" alt="">
-                            <div class="video-meta">
-                                <div class="video-title">WAITING_FOR_DATA_01</div>
-                            </div>
-                        </a>
-
-                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="compact-video-card">
-                            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="mini-thumb" alt="">
-                            <div class="video-meta">
-                                <div class="video-title">WAITING_FOR_DATA_02</div>
-                            </div>
-                        </a>
-
-                    </div>
-                </div>
-
-                <div class="channel-block">
-                    <div class="channel-head">
-                        <span class="channel-name tag-galere">GROSSE GALÈRE</span>
-                        <a href="https://www.youtube.com/@Grossegal%C3%A8reckai" target="_blank" class="sub-link">LINK ➔</a>
-                    </div>
-                    <div class="compact-video-list">
-
-                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="compact-video-card">
-                            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="mini-thumb" alt="">
-                            <div class="video-meta">
-                                <div class="video-title">WAITING_FOR_DATA_01</div>
-                            </div>
-                        </a>
-
-                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="compact-video-card">
-                            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="mini-thumb" alt="">
-                            <div class="video-meta">
-                                <div class="video-title">WAITING_FOR_DATA_02</div>
-                            </div>
-                        </a>
-
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="bottom-section">
-            <div class="channel-block">
-                <div class="channel-head">
-                    <span class="channel-name" style="color: var(--text-muted);">LAST_VOD // CKAI:STREAM</span>
-                    <a href="https://www.youtube.com/@CkaiStream" target="_blank" class="sub-link">LINK ➔</a>
-                </div>
-                <div class="vod-player-box">
+        <div class="section-header">> CORE_NODE // CKAI</div>
+        
+        <div class="featured-hero">
+            <div class="main-player-box">
+                <div class="video-embed-container">
                     <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                 </div>
+                <div class="main-video-title">Grosse Vidéo Principale CKAI</div>
             </div>
 
-            <div class="game-categories">
-                <div class="category-block">
-                    <div class="category-title cat-not-finished">[!] PAS FINI</div>
-                    <div class="game-list">
-                        <span class="game-item">SOL CESTO</span>
-                        <span class="game-item">KENSHI</span>
-                        <span class="game-item">KINGDOM HEARTS</span>
+            <div class="side-recommended">
+                
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="rec-card">
+                    <div class="rec-thumb-box">
+                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" alt="">
                     </div>
+                    <div class="rec-title">Vidéo Recommandée 01 - CKAI</div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="rec-card">
+                    <div class="rec-thumb-box">
+                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" alt="">
+                    </div>
+                    <div class="rec-title">Vidéo Recommandée 02 - CKAI</div>
+                </a>
+
+            </div>
+        </div>
+
+        <div class="other-channels-section">
+            <div class="section-header">> EXTERNAL_NODES // AUTRES CHAÎNES</div>
+            
+            <div class="carousel-track">
+                
+                <div class="channel-card-scroll">
+                    <div class="channel-card-tag" style="color: var(--accent-glitch);">C'est le C</div>
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="mini-video-link">
+                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="mini-video-thumb" alt="">
+                        <div class="mini-video-title">Titre Vidéo C'est le C</div>
+                    </a>
                 </div>
 
-                <div class="category-block">
-                    <div class="category-title cat-finished">[OK] TERMINÉ</div>
-                    <div class="game-list">
-                        <span class="game-item">MAX PAYNE 3</span>
-                        <span class="game-item">CRASH BANDICOOT N.SANE TRILOGY</span>
-                        <span class="game-item">MOUSE P.I. FOR HIRE</span>
-                        <span class="game-item">FINAL FANTASY VII REMAKE INTERGRADE</span>
-                        <span class="game-item">007 FIRST LIGHT</span>
-                        <span class="game-item">FIRE EMBLEM (GBA)</span>
-                        <span class="game-item">SHADOW MAN REMASTERED</span>
-                        <span class="game-item">TUNIC</span>
-                        <span class="game-item">MINIT</span>
-                        <span class="game-item">FINAL FANTASY VII REBIRTH</span>
-                        <span class="game-item">SPLINTER CELL CHAOS THEORY</span>
-                        <span class="game-item">MORROWIND</span>
-                    </div>
+                <div class="channel-card-scroll">
+                    <div class="channel-card-tag" style="color: var(--accent-alert);">Grosse Galère</div>
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="mini-video-link">
+                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="mini-video-thumb" alt="">
+                        <div class="mini-video-title">Titre Vidéo Grosse Galère</div>
+                    </a>
                 </div>
 
-                <div class="category-block">
-                    <div class="category-title cat-bad">[X] NUL BITE</div>
-                    <div class="game-list">
-                        <span class="game-item">KINGDOM COME DELIVRANCE</span>
-                        <span class="game-item">REPLACED</span>
-                    </div>
+                <div class="channel-card-scroll">
+                    <div class="channel-card-tag" style="color: #fff;">CkaiStream (VOD)</div>
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="mini-video-link">
+                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="mini-video-thumb" alt="">
+                        <div class="mini-video-title">Dernière VOD Live</div>
+                    </a>
+                </div>
+
+                <div class="channel-card-scroll">
+                    <div class="channel-card-tag" style="color: var(--text-muted);">Bonus / Archive</div>
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="mini-video-link">
+                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="mini-video-thumb" alt="">
+                        <div class="mini-video-title">Vidéo Bonus</div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="game-categories">
+            <div class="category-block">
+                <div class="category-title cat-not-finished">[!] PAS FINI</div>
+                <div class="game-list">
+                    <span class="game-item">SOL CESTO</span>
+                    <span class="game-item">KENSHI</span>
+                    <span class="game-item">KINGDOM HEARTS</span>
+                </div>
+            </div>
+
+            <div class="category-block">
+                <div class="category-title cat-finished">[OK] TERMINÉ</div>
+                <div class="game-list">
+                    <span class="game-item">MAX PAYNE 3</span>
+                    <span class="game-item">CRASH BANDICOOT N.SANE TRILOGY</span>
+                    <span class="game-item">MOUSE P.I. FOR HIRE</span>
+                    <span class="game-item">FINAL FANTASY VII REMAKE INTERGRADE</span>
+                    <span class="game-item">007 FIRST LIGHT</span>
+                    <span class="game-item">FIRE EMBLEM (GBA)</span>
+                    <span class="game-item">SHADOW MAN REMASTERED</span>
+                    <span class="game-item">TUNIC</span>
+                    <span class="game-item">MINIT</span>
+                    <span class="game-item">FINAL FANTASY VII REBIRTH</span>
+                    <span class="game-item">SPLINTER CELL CHAOS THEORY</span>
+                    <span class="game-item">MORROWIND</span>
+                </div>
+            </div>
+
+            <div class="category-block">
+                <div class="category-title cat-bad">[X] NUL BITE</div>
+                <div class="game-list">
+                    <span class="game-item">KINGDOM COME DELIVRANCE</span>
+                    <span class="game-item">REPLACED</span>
                 </div>
             </div>
         </div>
