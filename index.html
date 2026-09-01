@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CKAI // ABYSS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Metamorphous&family=Eczar:wght@600;800&display=swap');
+
+        :root {
+            --bg-void: #080708;
+            --card-dark: #111013;
+            --border-iron: #383431;
+            --border-gold: #8c734b;
+            --accent-blood: #8a1212;
+            --accent-crimson: #c91a1a;
+            --accent-gold: #d4af37;
+            --text-light: #d6d0c4;
+            --text-dim: #7a746b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.2s ease; }
+
+        body {
+            font-family: 'Eczar', serif;
+            background-color: var(--bg-void);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(138, 18, 18, 0.12), transparent 60%),
+                radial-gradient(circle at 50% 80%, rgba(0, 0, 0, 0.95), var(--bg-void));
+            background-attachment: fixed;
+        }
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 1100px;
+            padding: 35px 20px;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 25px;
+            margin-bottom: 35px;
+            border-bottom: 2px solid var(--border-iron);
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: var(--accent-blood);
+            box-shadow: 0 0 10px var(--accent-crimson);
+        }
+
+        .brand {
+            font-family: 'Cinzel', serif;
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon { color: var(--accent-crimson); }
+
+        .nav-tabs { display: flex; gap: 10px; }
+
+        .tab-btn {
+            background: rgba(17, 16, 19, 0.8);
+            border: 1px solid var(--border-iron);
+            color: var(--text-dim);
+            padding: 8px 18px;
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            background: var(--accent-blood);
+            color: #fff;
+            border-color: var(--accent-crimson);
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .dungeon-banner {
+            font-family: 'Metamorphous', cursive;
+            font-size: 15px;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 25px;
+            align-items: stretch;
+        }
+
+        @media (max-width: 850px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+
+        .column-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: space-between;
+        }
+
+        .channel-block {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .channel-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-iron);
+            padding-bottom: 6px;
+        }
+
+        .channel-name {
+            font-family: 'Cinzel', serif;
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .tag-ckai { color: var(--accent-crimson); }
+        .tag-clevraickai { color: var(--accent-gold); }
+        .tag-galere { color: #8a8a93; }
+
+        .sub-link {
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            color: var(--text-dim);
+            text-decoration: none;
+        }
+
+        /* CARROUSEL GAUCHE (CKAI) */
+        .large-carousel-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 15px;
+            height: 100%;
+        }
+
+        .large-carousel-container::-webkit-scrollbar { height: 4px; }
+        .large-carousel-container::-webkit-scrollbar-thumb { background: var(--border-iron); }
+
+        .large-video-card {
+            min-width: 100%;
+            background: var(--card-dark);
+            border: 1px solid var(--border-iron);
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .large-thumb-box {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            background: #000;
+        }
+
+        .large-thumb-box iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%; border: 0;
+        }
+
+        .large-video-info {
+            padding: 15px;
+            background: #0d0c0e;
+            border-top: 1px solid var(--border-iron);
+            flex-grow: 1;
+        }
+
+        .large-video-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        /* COMPACTS DROITE */
+        .compact-video-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .compact-video-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px;
+            background: var(--card-dark);
+            border: 1px solid var(--border-iron);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .compact-video-card:hover {
+            border-color: var(--border-gold);
+            background: #17151a;
+        }
+
+        .mini-thumb {
+            width: 80px;
+            height: 45px;
+            object-fit: cover;
+            border: 1px solid var(--border-iron);
+            flex-shrink: 0;
+        }
+
+        .video-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-light);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* BOTTOM SECTION */
+        .bottom-section {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-iron);
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 850px) {
+            .bottom-section { grid-template-columns: 1fr; }
+        }
+
+        .vod-player-box {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            background: #000;
+            border: 1px solid var(--border-iron);
+            margin-top: 10px;
+        }
+
+        .vod-player-box iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%; border: 0;
+        }
+
+        .category-block {
+            background: var(--card-dark);
+            border: 1px solid var(--border-iron);
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+
+        .category-title {
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+
+        .cat-not-finished { color: #4ea8de; }
+        .cat-finished { color: #52b788; }
+        .cat-bad { color: #e63946; }
+
+        .game-list { display: flex; flex-wrap: wrap; gap: 6px; }
+
+        .game-item {
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            background: #0d0c0e;
+            border: 1px solid var(--border-iron);
+            padding: 4px 8px;
+        }
+
+        /* TWITCH */
+        .twitch-container {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+            height: 500px;
+        }
+
+        .twitch-frame {
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--border-iron);
+            background: #000;
+        }
+
+        .pip-popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 280px;
+            background: var(--card-dark);
+            border: 1px solid var(--border-gold);
+            z-index: 100;
+        }
+        .pip-video { position: relative; padding-bottom: 56.25%; }
+        .pip-video iframe { position: absolute; top:0; left:0; width:100%; height:100%; border:0; }
+        .pip-close { position: absolute; top: 4px; right: 4px; background: rgba(0,0,0,0.8); color: #fff; border: 0; cursor: pointer;}
+    </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+
+    <header>
+        <a href="#" class="brand"><span class="brand-icon">⚔</span> CKAI</a>
+        <nav class="nav-tabs">
+            <button class="tab-btn active" onclick="openTab('home', this)">Sanctuaire</button>
+            <button class="tab-btn" onclick="openTab('twitch', this)">Direct Twitch</button>
+        </nav>
+    </header>
+
+    <div id="home" class="tab-content active">
+
+        <div class="dungeon-banner">Dernières Chroniques</div>
+
+        <div class="dashboard-grid">
+
+            <div class="channel-block">
+                <div class="channel-head">
+                    <span class="channel-name tag-ckai">Ckai</span>
+                    <a href="https://www.youtube.com/@ckaiward" target="_blank" class="sub-link">Rejoindre ➔</a>
+                </div>
+                <div class="large-carousel-container">
+                    
+                    <div class="large-video-card">
+                        <div class="large-thumb-box">
+                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                        </div>
+                        <div class="large-video-info">
+                            <div class="large-video-title">Titre de ta dernière vidéo CKAI</div>
+                        </div>
+                    </div>
+
+                    <div class="large-video-card">
+                        <div class="large-thumb-box">
+                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                        </div>
+                        <div class="large-video-info">
+                            <div class="large-video-title">Titre de l'avant-dernière vidéo</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="column-stack">
+
+                <div class="channel-block">
+                    <div class="channel-head">
+                        <span class="channel-name tag-clevraickai">C'est le C</span>
+                        <a href="https://www.youtube.com/@clevraickai" target="_blank" class="sub-link">Rejoindre ➔</a>
+                    </div>
+                    <div class="compact-video-list">
+                        
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="compact-video-card">
+                            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="mini-thumb" alt="">
+                            <div class="video-meta">
+                                <div class="video-title">Titre vidéo C'est le C</div>
+                            </div>
+                        </a>
+
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="compact-video-card">
+                            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="mini-thumb" alt="">
+                            <div class="video-meta">
+                                <div class="video-title">Autre vidéo C'est le C</div>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="channel-block">
+                    <div class="channel-head">
+                        <span class="channel-name tag-galere">Grosse Galère</span>
+                        <a href="https://www.youtube.com/@Grossegal%C3%A8reckai" target="_blank" class="sub-link">Rejoindre ➔</a>
+                    </div>
+                    <div class="compact-video-list">
+
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="compact-video-card">
+                            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="mini-thumb" alt="">
+                            <div class="video-meta">
+                                <div class="video-title">Titre vidéo Grosse Galère</div>
+                            </div>
+                        </a>
+
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="compact-video-card">
+                            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="mini-thumb" alt="">
+                            <div class="video-meta">
+                                <div class="video-title">Autre vidéo Grosse Galère</div>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="bottom-section">
+            <div class="channel-block">
+                <div class="channel-head">
+                    <span class="channel-name" style="color: var(--accent-gold);">DERNIÈRE VOD (CKAI:STREAM)</span>
+                    <a href="https://www.youtube.com/@CkaiStream" target="_blank" class="sub-link">Rejoindre ➔</a>
+                </div>
+                <div class="vod-player-box">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="game-categories">
+                <div class="category-block">
+                    <div class="category-title cat-not-finished">✓ PAS FINI</div>
+                    <div class="game-list">
+                        <span class="game-item">SOL CESTO</span>
+                        <span class="game-item">KENSHI</span>
+                        <span class="game-item">KINGDOM HEARTS</span>
+                    </div>
+                </div>
+
+                <div class="category-block">
+                    <div class="category-title cat-finished">✓ TERMINÉ</div>
+                    <div class="game-list">
+                        <span class="game-item">MAX PAYNE 3</span>
+                        <span class="game-item">CRASH BANDICOOT N.SANE TRILOGY</span>
+                        <span class="game-item">MOUSE P.I. FOR HIRE</span>
+                        <span class="game-item">FINAL FANTASY VII REMAKE INTERGRADE</span>
+                        <span class="game-item">007 FIRST LIGHT</span>
+                        <span class="game-item">FIRE EMBLEM (GBA)</span>
+                        <span class="game-item">SHADOW MAN REMASTERED</span>
+                        <span class="game-item">TUNIC</span>
+                        <span class="game-item">MINIT</span>
+                        <span class="game-item">FINAL FANTASY VII REBIRTH</span>
+                        <span class="game-item">SPLINTER CELL CHAOS THEORY</span>
+                        <span class="game-item">MORROWIND</span>
+                    </div>
+                </div>
+
+                <div class="category-block">
+                    <div class="category-title cat-bad">✕ NUL BITE</div>
+                    <div class="game-list">
+                        <span class="game-item">KINGDOM COME DELIVRANCE</span>
+                        <span class="game-item">REPLACED</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="twitch" class="tab-content">
+        <div class="twitch-container">
+            <iframe id="twitch-main-player" class="twitch-frame" allowfullscreen></iframe>
+            <iframe id="twitch-chat" class="twitch-frame"></iframe>
+        </div>
+    </div>
+
+</div>
+
+<div class="pip-popup" id="pipPopup">
+    <div class="pip-video">
+        <button class="pip-close" onclick="document.getElementById('pipPopup').style.display='none'">✕</button>
+        <iframe id="twitch-pip-player" allowfullscreen></iframe>
+    </div>
+</div>
+
+<script>
+    let currentHost = window.location.hostname || "localhost";
+    document.getElementById("twitch-main-player").src = `https://player.twitch.tv/?channel=ckai&parent=${currentHost}`;
+    document.getElementById("twitch-pip-player").src = `https://player.twitch.tv/?channel=ckai&parent=${currentHost}`;
+    document.getElementById("twitch-chat").src = `https://www.twitch.tv/embed/ckai/chat?parent=${currentHost}&darkpopout`;
+
+    function openTab(tabId, btn) {
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
