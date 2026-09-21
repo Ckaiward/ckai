@@ -264,43 +264,49 @@
             text-overflow: ellipsis;
         }
 
-        /* 3. BASE : CATEGORIES DE JEUX */
-        .game-categories {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+        /* 3. SECTION JEUX STREAM EN 2026 */
+        .stream-games-section {
             border-top: 1px dashed var(--border-hard);
             padding-top: 25px;
         }
 
-        @media (max-width: 850px) {
-            .game-categories { grid-template-columns: 1fr; }
-        }
-
-        .category-block {
+        .stream-games-block {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
-            padding: 10px;
+            padding: 15px;
         }
 
-        .category-title {
+        .stream-games-title {
             font-family: 'VT323', monospace;
-            font-size: 16px;
-            margin-bottom: 6px;
+            font-size: 20px;
+            color: var(--accent-glitch);
+            margin-bottom: 12px;
+            letter-spacing: 1px;
         }
 
-        .cat-not-finished { color: #888899; }
-        .cat-finished { color: var(--accent-glitch); }
-        .cat-bad { color: var(--accent-alert); }
+        .game-list-interactive {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
 
-        .game-list { display: flex; flex-wrap: wrap; gap: 4px; }
-
-        .game-item {
-            font-size: 10px;
+        .game-link-item {
+            font-size: 11px;
             background: #000;
             border: 1px solid var(--border-hard);
-            padding: 2px 6px;
-            color: var(--text-muted);
+            padding: 6px 12px;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+
+        .game-link-item:hover {
+            background: var(--accent-glitch);
+            color: #000;
+            border-color: var(--accent-glitch);
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
         }
 
         /* TWITCH */
@@ -425,40 +431,28 @@
             </div>
         </div>
 
-        <!-- 3. JEUX ET CATEGORIES -->
-        <div class="game-categories">
-            <div class="category-block">
-                <div class="category-title cat-not-finished">[!] PAS FINI</div>
-                <div class="game-list">
-                    <span class="game-item">SOL CESTO</span>
-                    <span class="game-item">KENSHI</span>
-                    <span class="game-item">KINGDOM HEARTS</span>
-                </div>
-            </div>
-
-            <div class="category-block">
-                <div class="category-title cat-finished">[OK] TERMINÉ</div>
-                <div class="game-list">
-                    <span class="game-item">MAX PAYNE 3</span>
-                    <span class="game-item">CRASH BANDICOOT N.SANE TRILOGY</span>
-                    <span class="game-item">MOUSE P.I. FOR HIRE</span>
-                    <span class="game-item">FINAL FANTASY VII REMAKE INTERGRADE</span>
-                    <span class="game-item">007 FIRST LIGHT</span>
-                    <span class="game-item">FIRE EMBLEM (GBA)</span>
-                    <span class="game-item">SHADOW MAN REMASTERED</span>
-                    <span class="game-item">TUNIC</span>
-                    <span class="game-item">MINIT</span>
-                    <span class="game-item">FINAL FANTASY VII REBIRTH</span>
-                    <span class="game-item">SPLINTER CELL CHAOS THEORY</span>
-                    <span class="game-item">MORROWIND</span>
-                </div>
-            </div>
-
-            <div class="category-block">
-                <div class="category-title cat-bad">[X] NUL BITE</div>
-                <div class="game-list">
-                    <span class="game-item">KINGDOM COME DELIVRANCE</span>
-                    <span class="game-item">REPLACED</span>
+        <!-- 3. JEUX JOUÉS EN STREAM EN 2026 -->
+        <div class="stream-games-section">
+            <div class="stream-games-block">
+                <div class="stream-games-title">> JEUX JOUÉS EN STREAM EN 2026</div>
+                <div class="game-list-interactive">
+                    <a href="https://www.youtube.com/results?search_query=SOL+CESTO+CKAI" target="_blank" class="game-link-item">SOL CESTO</a>
+                    <a href="https://www.youtube.com/results?search_query=KENSHI+CKAI" target="_blank" class="game-link-item">KENSHI</a>
+                    <a href="https://www.youtube.com/results?search_query=KINGDOM+HEARTS+CKAI" target="_blank" class="game-link-item">KINGDOM HEARTS</a>
+                    <a href="https://www.youtube.com/watch?v=UBzpaYjw2og&list=PLeaKN15x3GXK1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-link-item">MAX PAYNE 3</a>
+                    <a href="https://www.youtube.com/watch?v=mr2Zb0nPTGM&list=PLeaKN15x3GXJlfAT9vPk8_6DrwhKlIdGv" target="_blank" class="game-link-item">CRASH BANDICOOT N.SANE TRILOGY</a>
+                    <a href="https://www.youtube.com/results?search_query=MOUSE+P.I.+FOR+HIRE+CKAI" target="_blank" class="game-link-item">MOUSE P.I. FOR HIRE</a>
+                    <a href="https://www.youtube.com/results?search_query=FINAL+FANTASY+VII+REMAKE+INTERGRADE+CKAI" target="_blank" class="game-link-item">FINAL FANTASY VII REMAKE INTERGRADE</a>
+                    <a href="https://www.youtube.com/results?search_query=007+FIRST+LIGHT+CKAI" target="_blank" class="game-link-item">007 FIRST LIGHT</a>
+                    <a href="https://www.youtube.com/results?search_query=FIRE+EMBLEM+GBA+CKAI" target="_blank" class="game-link-item">FIRE EMBLEM (GBA)</a>
+                    <a href="https://www.youtube.com/results?search_query=SHADOW+MAN+REMASTERED+CKAI" target="_blank" class="game-link-item">SHADOW MAN REMASTERED</a>
+                    <a href="https://www.youtube.com/results?search_query=TUNIC+CKAI" target="_blank" class="game-link-item">TUNIC</a>
+                    <a href="https://www.youtube.com/results?search_query=MINIT+CKAI" target="_blank" class="game-link-item">MINIT</a>
+                    <a href="https://www.youtube.com/results?search_query=FINAL+FANTASY+VII+REBIRTH+CKAI" target="_blank" class="game-link-item">FINAL FANTASY VII REBIRTH</a>
+                    <a href="https://www.youtube.com/results?search_query=SPLINTER+CELL+CHAOS+THEORY+CKAI" target="_blank" class="game-link-item">SPLINTER CELL CHAOS THEORY</a>
+                    <a href="https://www.youtube.com/results?search_query=MORROWIND+CKAI" target="_blank" class="game-link-item">MORROWIND</a>
+                    <a href="https://www.youtube.com/results?search_query=KINGDOM+COME+DELIVERANCE+CKAI" target="_blank" class="game-link-item">KINGDOM COME DELIVRANCE</a>
+                    <a href="https://www.youtube.com/results?search_query=REPLACED+CKAI" target="_blank" class="game-link-item">REPLACED</a>
                 </div>
             </div>
         </div>
