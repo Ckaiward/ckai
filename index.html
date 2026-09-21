@@ -264,30 +264,19 @@
             text-overflow: ellipsis;
         }
 
-        /* 3. SECTION JEUX STREAM EN 2026 */
-        .stream-games-section {
-            border-top: 1px dashed var(--border-hard);
-            padding-top: 25px;
-        }
-
-        .stream-games-block {
+        /* 3. JEUX JOUÉS EN STREAM EN 2026 */
+        .single-category-block {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
-            padding: 15px;
+            padding: 20px;
+            margin-top: 20px;
         }
 
-        .stream-games-title {
-            font-family: 'VT323', monospace;
-            font-size: 20px;
-            color: var(--accent-glitch);
-            margin-bottom: 12px;
-            letter-spacing: 1px;
-        }
-
-        .game-list-interactive {
+        .game-list-links {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
+            margin-top: 15px;
         }
 
         .game-link-item {
@@ -302,14 +291,14 @@
         }
 
         .game-link-item:hover {
-            background: var(--accent-glitch);
             color: #000;
+            background: var(--accent-glitch);
             border-color: var(--accent-glitch);
             font-weight: bold;
-            box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+            box-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
         }
 
-        /* TWITCH */
+        /* TWITCH ONGLET PRINCIPAL */
         .twitch-container {
             display: grid;
             grid-template-columns: 1fr 300px;
@@ -324,18 +313,73 @@
             background: #000;
         }
 
+        /* TWITCH MINI POPUP FLOTTANT ET DÉPLAÇABLE */
         .pip-popup {
             position: fixed;
-            bottom: 15px;
-            right: 15px;
-            width: 250px;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
             background: #000;
-            border: 1px solid var(--border-hard);
-            z-index: 100;
+            border: 1px solid var(--accent-glitch);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            border-radius: 4px;
+            overflow: hidden;
         }
-        .pip-video { position: relative; padding-bottom: 56.25%; }
-        .pip-video iframe { position: absolute; top:0; left:0; width:100%; height:100%; border:0; }
-        .pip-close { position: absolute; top: 2px; right: 2px; background: #000; color: #fff; border: 1px solid var(--border-hard); cursor: pointer; font-size: 10px; padding: 2px 4px; }
+
+        .pip-header {
+            background: #111115;
+            padding: 6px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: move;
+            border-bottom: 1px solid var(--border-hard);
+            user-select: none;
+        }
+
+        .pip-title {
+            font-size: 11px;
+            color: var(--accent-glitch);
+            font-weight: bold;
+        }
+
+        .pip-controls {
+            display: flex;
+            gap: 4px;
+        }
+
+        .pip-btn {
+            background: #000;
+            color: #fff;
+            border: 1px solid var(--border-hard);
+            cursor: pointer;
+            font-size: 10px;
+            padding: 2px 6px;
+            font-family: inherit;
+        }
+
+        .pip-btn:hover {
+            border-color: var(--text-main);
+            color: var(--accent-glitch);
+        }
+
+        .pip-video {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            transition: max-height 0.3s ease;
+        }
+
+        .pip-video iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%; border: 0;
+        }
+
+        /* MUTE / RÉDUIT */
+        .pip-popup.minimized .pip-video {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -432,28 +476,34 @@
         </div>
 
         <!-- 3. JEUX JOUÉS EN STREAM EN 2026 -->
-        <div class="stream-games-section">
-            <div class="stream-games-block">
-                <div class="stream-games-title">> JEUX JOUÉS EN STREAM EN 2026</div>
-                <div class="game-list-interactive">
-                    <a href="https://www.youtube.com/results?search_query=SOL+CESTO+CKAI" target="_blank" class="game-link-item">SOL CESTO</a>
-                    <a href="https://www.youtube.com/results?search_query=KENSHI+CKAI" target="_blank" class="game-link-item">KENSHI</a>
-                    <a href="https://www.youtube.com/results?search_query=KINGDOM+HEARTS+CKAI" target="_blank" class="game-link-item">KINGDOM HEARTS</a>
-                    <a href="https://www.youtube.com/watch?v=UBzpaYjw2og&list=PLeaKN15x3GXK1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-link-item">MAX PAYNE 3</a>
-                    <a href="https://www.youtube.com/watch?v=mr2Zb0nPTGM&list=PLeaKN15x3GXJlfAT9vPk8_6DrwhKlIdGv" target="_blank" class="game-link-item">CRASH BANDICOOT N.SANE TRILOGY</a>
-                    <a href="https://www.youtube.com/results?search_query=MOUSE+P.I.+FOR+HIRE+CKAI" target="_blank" class="game-link-item">MOUSE P.I. FOR HIRE</a>
-                    <a href="https://www.youtube.com/results?search_query=FINAL+FANTASY+VII+REMAKE+INTERGRADE+CKAI" target="_blank" class="game-link-item">FINAL FANTASY VII REMAKE INTERGRADE</a>
-                    <a href="https://www.youtube.com/results?search_query=007+FIRST+LIGHT+CKAI" target="_blank" class="game-link-item">007 FIRST LIGHT</a>
-                    <a href="https://www.youtube.com/results?search_query=FIRE+EMBLEM+GBA+CKAI" target="_blank" class="game-link-item">FIRE EMBLEM (GBA)</a>
-                    <a href="https://www.youtube.com/results?search_query=SHADOW+MAN+REMASTERED+CKAI" target="_blank" class="game-link-item">SHADOW MAN REMASTERED</a>
-                    <a href="https://www.youtube.com/results?search_query=TUNIC+CKAI" target="_blank" class="game-link-item">TUNIC</a>
-                    <a href="https://www.youtube.com/results?search_query=MINIT+CKAI" target="_blank" class="game-link-item">MINIT</a>
-                    <a href="https://www.youtube.com/results?search_query=FINAL+FANTASY+VII+REBIRTH+CKAI" target="_blank" class="game-link-item">FINAL FANTASY VII REBIRTH</a>
-                    <a href="https://www.youtube.com/results?search_query=SPLINTER+CELL+CHAOS+THEORY+CKAI" target="_blank" class="game-link-item">SPLINTER CELL CHAOS THEORY</a>
-                    <a href="https://www.youtube.com/results?search_query=MORROWIND+CKAI" target="_blank" class="game-link-item">MORROWIND</a>
-                    <a href="https://www.youtube.com/results?search_query=KINGDOM+COME+DELIVERANCE+CKAI" target="_blank" class="game-link-item">KINGDOM COME DELIVRANCE</a>
-                    <a href="https://www.youtube.com/results?search_query=REPLACED+CKAI" target="_blank" class="game-link-item">REPLACED</a>
-                </div>
+        <div class="section-header">> PLAYLISTS // ARCHIVES DE STREAM</div>
+        
+        <div class="single-category-block">
+            <div style="font-family: 'VT323', monospace; font-size: 20px; color: var(--accent-glitch);">
+                [>] JEUX JOUÉS EN STREAM EN 2026
+            </div>
+            
+            <div class="game-list-links">
+                <!-- Remplacer les href="#" par tes liens de playlists YouTube -->
+                <a href="https://www.youtube.com/watch?v=C0VcqE2K75A&list=PLeaKN15x3GXIRhsxDX5KTs-LqiQNp7y8O" target="_blank" class="game-link-item">SOL CESTO</a>
+                <a href="https://www.youtube.com/watch?v=VrpmlWSg5ZU&list=PLeaKN15x3GXImBy0mLy8d94ocz_sXjGhP" target="_blank" class="game-link-item">KENSHI</a>
+                <a href="#" target="_blank" class="game-link-item">KINGDOM HEARTS I FINAL MIX</a>
+                <a href="#" target="_blank" class="game-link-item">KINGDOM HEARTS RE: CHAIN OF MEMORIES</a>
+                <a href="#" target="_blank" class="game-link-item">KINGDOM HEARTS II FINAL MIX</a>
+                <a href="https://www.youtube.com/watch?v=UBzpaYjw2og&list=PLeaKN15x3GXK1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-link-item">MAX PAYNE 3</a>
+                <a href="https://www.youtube.com/watch?v=mr2Zb0nPTGM&list=PLeaKN15x3GXJlfAT9vPk8_6DrwhKlIdGv" target="_blank" class="game-link-item">CRASH BANDICOOT N.SANE TRILOGY</a>
+                <a href="https://www.youtube.com/watch?v=C0VcqE2K75A&list=PLeaKN15x3GXIRhsxDX5KTs-LqiQNp7y8O" target="_blank" class="game-link-item">MOUSE P.I. FOR HIRE</a>
+                <a href="https://www.youtube.com/watch?v=FNUDMWKVa-w&list=PLeaKN15x3GXLmQ9j5jQse_G5oCNB3ncYX" target="_blank" class="game-link-item">FINAL FANTASY VII REMAKE INTERGRADE</a>
+                <a href="https://www.youtube.com/watch?v=QyPCW9CUkhE&list=PLeaKN15x3GXIFGhljOHJuPhi2ss-bmll-" target="_blank" class="game-link-item">007 FIRST LIGHT</a>
+                <a href="https://www.youtube.com/watch?v=lBpxUooGIhM&list=PLeaKN15x3GXKWbnohpX-aMRaxmSna0LhI" target="_blank" class="game-link-item">FIRE EMBLEM (GBA)</a>
+                <a href="https://www.youtube.com/watch?v=hyyNmbsxJPE&list=PLeaKN15x3GXLBVUOM96o1HqXpC1B_RXhd" target="_blank" class="game-link-item">SHADOW MAN REMASTERED</a>
+                <a href="https://www.youtube.com/watch?v=47lZhJA_1Hg&list=PLJjQWj1aVnf0" target="_blank" class="game-link-item">TUNIC</a>
+                <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&list=PLNcyDCaofkHY" target="_blank" class="game-link-item">MINIT</a>
+                <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&list=PLNcyDCaofkHY" target="_blank" class="game-link-item">FINAL FANTASY VII REBIRTH</a>
+                <a href="#" target="_blank" class="game-link-item">SPLINTER CELL CHAOS THEORY</a>
+                <a href="#" target="_blank" class="game-link-item">MORROWIND</a>
+                <a href="https://www.youtube.com/watch?v=1Xs7jUmwClA&list=PLeaKN15x3GXLnVahTm5gzuQOK4vmUk1Wn" target="_blank" class="game-link-item">KINGDOM COME DELIVRANCE</a>
+                <a href="https://www.youtube.com/watch?v=CyQYS8oNcXw&list=PLeaKN15x3GXItlfhnhL0t3HJg1NPZIqKa" target="_blank" class="game-link-item">REPLACED</a>
             </div>
         </div>
 
@@ -469,9 +519,16 @@
 
 </div>
 
+<!-- FENÊTRE TWITCH FLOTTANTE & RÉDUISIBLE -->
 <div class="pip-popup" id="pipPopup">
+    <div class="pip-header" id="pipHeader">
+        <span class="pip-title">[LIVE] TWITCH_FEED</span>
+        <div class="pip-controls">
+            <button class="pip-btn" onclick="toggleMinimizePip()" id="pipMinBtn">[-]</button>
+            <button class="pip-btn" onclick="document.getElementById('pipPopup').style.display='none'">[X]</button>
+        </div>
+    </div>
     <div class="pip-video">
-        <button class="pip-close" onclick="document.getElementById('pipPopup').style.display='none'">[X]</button>
         <iframe id="twitch-pip-player" allowfullscreen></iframe>
     </div>
 </div>
@@ -487,6 +544,60 @@
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.getElementById(tabId).classList.add('active');
         btn.classList.add('active');
+    }
+
+    /* REDUIRE / AGRANDIR LA FENÊTRE TWITCH */
+    function toggleMinimizePip() {
+        const popup = document.getElementById('pipPopup');
+        const minBtn = document.getElementById('pipMinBtn');
+        popup.classList.toggle('minimized');
+        if (popup.classList.contains('minimized')) {
+            minBtn.innerText = '[+]';
+        } else {
+            minBtn.innerText = '[-]';
+        }
+    }
+
+    /* DRAG & DROP FENÊTRE TWITCH FLOTTANTE */
+    dragElement(document.getElementById("pipPopup"));
+
+    function dragElement(elmnt) {
+        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        const header = document.getElementById("pipHeader");
+        if (header) {
+            header.onmousedown = dragMouseDown;
+        } else {
+            elmnt.onmousedown = dragMouseDown;
+        }
+
+        function dragMouseDown(e) {
+            e = e || window.event;
+            // Ne pas déplacer si on clique sur les boutons réductions/fermeture
+            if (e.target.tagName === 'BUTTON') return;
+            e.preventDefault();
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(e) {
+            e = e || window.event;
+            e.preventDefault();
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+            elmnt.style.bottom = "auto";
+            elmnt.style.right = "auto";
+        }
+
+        function closeDragElement() {
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
     }
 </script>
 
