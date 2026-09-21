@@ -341,10 +341,10 @@
             color: var(--accent-glitch);
         }
 
-        /* 4. SECTION PROCHAINS JEUX & FORMULAIRE */
+        /* 4. SECTION PROCHAINS JEUX & VOTES */
         .upcoming-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 15px;
             margin-top: 20px;
             margin-bottom: 30px;
@@ -359,10 +359,27 @@
             justify-content: space-between;
             gap: 12px;
             position: relative;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s ease;
+            overflow: hidden;
         }
 
         .upcoming-card:hover {
             border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        .upcoming-card.voted {
+            border-color: var(--accent-glitch);
+            background: #031208;
+        }
+
+        .upcoming-card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 2;
         }
 
         .upcoming-game-name {
@@ -372,16 +389,99 @@
             text-transform: uppercase;
         }
 
+        .upcoming-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-top: 1px dashed var(--border-hard);
+            padding-top: 8px;
+            z-index: 2;
+        }
+
         .proposed-by-box {
             font-size: 11px;
             color: var(--text-muted);
-            border-top: 1px dashed var(--border-hard);
-            padding-top: 8px;
         }
 
         .proposed-by-user {
             color: var(--accent-blue);
             font-weight: bold;
+        }
+
+        .vote-count-box {
+            font-size: 11px;
+            color: var(--accent-glitch);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .vote-btn-indicator {
+            font-size: 10px;
+            padding: 2px 6px;
+            border: 1px solid var(--border-hard);
+            background: #111;
+            color: #888;
+            border-radius: 2px;
+            margin-top: 6px;
+            align-self: flex-start;
+        }
+
+        .upcoming-card.voted .vote-btn-indicator {
+            border-color: var(--accent-glitch);
+            color: var(--accent-glitch);
+            background: rgba(0,255,102,0.1);
+        }
+
+        /* OVERLAY AU SURVOL AVEC POURCENTAGE */
+        .vote-hover-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(5, 5, 10, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+            z-index: 10;
+            padding: 15px;
+            border: 1px solid var(--accent-blue);
+        }
+
+        .upcoming-card:hover .vote-hover-overlay {
+            opacity: 1;
+        }
+
+        .percentage-display {
+            font-family: 'VT323', monospace;
+            font-size: 32px;
+            color: var(--accent-glitch);
+            line-height: 1;
+        }
+
+        .percentage-bar-bg {
+            width: 100%;
+            height: 6px;
+            background: var(--border-hard);
+            overflow: hidden;
+            border-radius: 3px;
+        }
+
+        .percentage-bar-fill {
+            height: 100%;
+            background: var(--accent-glitch);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .percentage-stats {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
         }
 
         /* FORMULAIRE RETRO */
@@ -406,10 +506,20 @@
             gap: 15px;
         }
 
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .form-row { flex-direction: column; }
+        }
+
         .form-group {
             display: flex;
             flex-direction: column;
             gap: 6px;
+            flex: 1;
         }
 
         .form-group label {
@@ -465,6 +575,14 @@
             margin-bottom: 30px;
         }
 
+        @media (max-width: 800px) {
+            .twitch-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            .twitch-frame { height: 350px; }
+        }
+
         .twitch-frame {
             width: 100%;
             height: 100%;
@@ -472,7 +590,7 @@
             background: #000;
         }
 
-        /* TWITCH MINI POPUP FLOTTANT ET DÉPLAÇABLE */
+        /* TWITCH MINI POPUP FLOTTANT */
         .pip-popup {
             position: fixed;
             bottom: 20px;
@@ -503,10 +621,7 @@
             font-weight: bold;
         }
 
-        .pip-controls {
-            display: flex;
-            gap: 4px;
-        }
+        .pip-controls { display: flex; gap: 4px; }
 
         .pip-btn {
             background: #000;
@@ -535,9 +650,7 @@
             top: 0; left: 0; width: 100%; height: 100%; border: 0;
         }
 
-        .pip-popup.minimized .pip-video {
-            display: none;
-        }
+        .pip-popup.minimized .pip-video { display: none; }
     </style>
 </head>
 <body>
@@ -555,7 +668,6 @@
     <!-- ONGLET ACCUEIL (ARCHIVES) -->
     <div id="home" class="tab-content active">
 
-        <!-- 1. CHAÎNE PRINCIPALE (HERO) -->
         <div class="section-header">> CORE_NODE // CKAI</div>
         
         <div class="featured-hero">
@@ -583,12 +695,10 @@
             </div>
         </div>
 
-        <!-- 2. DÉFILEMENT AUTRES CHAÎNES -->
         <div class="other-channels-section">
             <div class="section-header">> EXTERNAL_NODES // AUTRES CHAÎNES</div>
             
             <div class="carousel-track">
-                
                 <div class="channel-card-scroll">
                     <div class="channel-card-tag" style="color: var(--accent-glitch);">C'est le C</div>
                     <a href="https://youtu.be/-suS2RgZyxI" target="_blank" class="mini-video-link">
@@ -620,7 +730,6 @@
                         <div class="mini-video-title">Grosse Galère - Vidéo 2</div>
                     </a>
                 </div>
-
             </div>
         </div>
 
@@ -634,7 +743,6 @@
             <iframe id="twitch-chat" class="twitch-frame"></iframe>
         </div>
 
-        <!-- 3. JEUX JOUÉS EN STREAM EN 2026 -->
         <div class="section-header">> PLAYLISTS // ARCHIVES DE STREAM</div>
         
         <div class="single-category-block">
@@ -643,7 +751,6 @@
             </div>
             
             <div class="game-grid">
-                
                 <a href="https://www.youtube.com/watch?v=QyPCW9CUkhE&list=PLeaKN15x3GXIFGhljOHJuPhi2ss-bmll-" target="_blank" class="game-card-square">
                     <img src="https://i.ibb.co/JRnBqW36/007-FIRST-LIGHT.jpg" alt="007 First Light Cover" class="game-card-bg">
                     <div class="game-card-overlay"></div>
@@ -651,7 +758,7 @@
                 </a>
 
                 <a href="https://www.youtube.com/watch?v=mr2Zb0nPTGM&list=PLeaKN15x3GXJlfAT9vPk8_6DrwhKlIdGv" target="_blank" class="game-card-square">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/731490/header.jpg" alt="Crash Bandicoot N.Sane Trilogy Cover" class="game-card-bg">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/731490/header.jpg" alt="Crash Bandicoot Cover" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Crash Bandicoot N.Sane Trilogy</div>
                 </a>
@@ -663,7 +770,7 @@
                 </a>
 
                 <a href="https://www.youtube.com/watch?v=FNUDMWKVa-w&list=PLeaKN15x3GXLmQ9j5jQse_G5oCNB3ncYX" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/LD4z5tzf/ff7-remake.jpg" alt="Final Fantasy VII Remake Cover" class="game-card-bg">
+                    <img src="https://i.ibb.co/LD4z5tzf/ff7-remake.jpg" alt="FF VII Remake Cover" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">FF VII Remake Intergrade</div>
                 </a>
@@ -681,27 +788,15 @@
                 </a>
 
                 <a href="https://www.youtube.com/watch?v=1Xs7jUmwClA&list=PLeaKN15x3GXLnVahTm5gzuQOK4vmUk1Wn" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/nswkHvGR/Kingdom-come-delivrance.jpg" alt="Kingdom Come Deliverance Cover" class="game-card-bg">
+                    <img src="https://i.ibb.co/nswkHvGR/Kingdom-come-delivrance.jpg" alt="Kingdom Come Cover" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Kingdom Come Deliverance</div>
                 </a>
 
                 <a href="#" target="_blank" class="game-card-square">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMjA4MTYxMDU3NF5BMl5BanBnXkFtZTcwNTI1ODgwNw@@._V1_.jpg" alt="Kingdom Hearts I Cover" class="game-card-bg">
+                    <img src="https://m.media-amazon.com/images/M/MV5BMjA4MTYxMDU3NF5BMl5BanBnXkFtZTcwNTI1ODgwNw@@._V1_.jpg" alt="Kingdom Hearts Cover" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Kingdom Hearts I Final Mix</div>
-                </a>
-
-                <a href="#" target="_blank" class="game-card-square">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMDY3Nzg2YTAtMzBiMy00OTI5LWFhOGUtMmNkYThhMzA3YzQ5XkEyXkFqcGc@._V1_.jpg" alt="Kingdom Hearts II Cover" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Kingdom Hearts II Final Mix</div>
-                </a>
-
-                <a href="#" target="_blank" class="game-card-square">
-                    <img src="https://m.media-amazon.com/images/M/MV5BYzA2ZDdmMzMtODc5Ny00OTc5LTk2YTktYzQ3ZjYyZDhhMzgzXkEyXkFqcGc@._V1_.jpg" alt="Kingdom Hearts Chain of Memories Cover" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Kingdom Hearts Re: Chain of Memories</div>
                 </a>
 
                 <a href="https://www.youtube.com/watch?v=UBzpaYjw2og&list=PLeaKN15x3GXK1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
@@ -710,46 +805,10 @@
                     <div class="game-card-title">Max Payne 3</div>
                 </a>
 
-                <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&list=PLNcyDCaofkHY" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/Y4KG5C6Q/minnit.jpg" alt="Minit Cover" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Minit</div>
-                </a>
-
-                <a href="#" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/JRky9Wfw/morrowind.jpg" alt="Morrowind Cover" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Morrowind</div>
-                </a>
-
-                <a href="https://www.youtube.com/watch?v=C0VcqE2K75A&list=PLeaKN15x3GXIRhsxDX5KTs-LqiQNp7y8O" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/gMZjdPX2/MOUSE-PI-FOR-HIRE.jpg" alt="Mouse P.I. For Hire Cover" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Mouse P.I. For Hire</div>
-                </a>
-
                 <a href="https://www.youtube.com/watch?v=CyQYS8oNcXw&list=PLeaKN15x3GXItlfhnhL0t3HJg1NPZIqKa" target="_blank" class="game-card-square">
                     <img src="https://i.ibb.co/7dkm2gGP/replaced.jpg" alt="Replaced Cover" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Replaced</div>
-                </a>
-
-                <a href="https://www.youtube.com/watch?v=hyyNmbsxJPE&list=PLeaKN15x3GXLBVUOM96o1HqXpC1B_RXhd" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/VpLDfXCP/shadow-man.jpg" alt="Shadow Man Remastered Cover" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Shadow Man Remastered</div>
-                </a>
-
-                <a href="https://www.youtube.com/watch?v=C0VcqE2K75A&list=PLeaKN15x3GXIRhsxDX5KTs-LqiQNp7y8O" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/ym0phSGC/sol-cesto.jpg" alt="Sol Cesto Cover" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Sol Cesto</div>
-                </a>
-
-                <a href="#" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/WvMDwy21/splinter-cell-chaos-thoery.jpg" alt="Splinter Cell Chaos Theory Cover" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Splinter Cell Chaos Theory</div>
                 </a>
 
                 <a href="https://www.youtube.com/watch?v=47lZhJA_1Hg&list=PLJjQWj1aVnf0" target="_blank" class="game-card-square">
@@ -757,52 +816,35 @@
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Tunic</div>
                 </a>
-
             </div>
         </div>
 
-        <!-- 4. SECTION PROCHAINS JEUX -->
-        <div class="section-header">> UPCOMING_GAMES // PROCHAINS JEUX</div>
+        <div class="section-header">> UPCOMING_GAMES // PROCHAINS JEUX (VOTES)</div>
 
         <div class="single-category-block">
             <div style="font-family: 'VT323', monospace; font-size: 22px; color: var(--accent-blue);">
-                [>] JEUX EN ATTENTE DE STREAM
+                [>] JEUX EN ATTENTE DE STREAM (CLIQUEZ POUR VOTER)
             </div>
 
-            <!-- LISTE DE PROCHAINS JEUX -->
-            <div class="upcoming-grid">
-                
-                <div class="upcoming-card">
-                    <div class="upcoming-game-name">CRASH BANDICOOT 4</div>
-                    <div class="proposed-by-box">
-                        Proposé par : <span class="proposed-by-user">LETTWAVE</span>
-                    </div>
-                </div>
-
-                <div class="upcoming-card">
-                    <div class="upcoming-game-name">METAL GEAR SOLID</div>
-                    <div class="proposed-by-box">
-                        Proposé par : <span class="proposed-by-user">GRAYFOX</span>
-                    </div>
-                </div>
-
-                <div class="upcoming-card">
-                    <div class="upcoming-game-name">TUROK</div>
-                    <div class="proposed-by-box">
-                        Proposé par : <span class="proposed-by-user">WESHSEN</span>
-                    </div>
-                </div>
-
+            <!-- LISTE DYNAMIQUE DES PROCHAINS JEUX -->
+            <div class="upcoming-grid" id="upcoming-games-list">
+                <!-- Généré par JavaScript -->
             </div>
 
             <!-- FORMULAIRE DE PROPOSITION -->
             <div class="suggest-form-container">
                 <div class="suggest-form-title">[+] PROPOSER UN JEU À FAIRE EN STREAM</div>
                 
-                <form class="suggest-form" onsubmit="event.preventDefault(); alert('Proposition envoyée !');">
-                    <div class="form-group">
-                        <label for="game-name">Nom du jeu</label>
-                        <input type="text" id="game-name" class="form-control" placeholder="ex: Resident Evil 4 Remake" required>
+                <form class="suggest-form" id="suggestGameForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="user-pseudo">Votre Pseudo</label>
+                            <input type="text" id="user-pseudo" class="form-control" placeholder="ex: User_99" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="game-name">Nom du jeu</label>
+                            <input type="text" id="game-name" class="form-control" placeholder="ex: Resident Evil 4 Remake" required>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -810,7 +852,7 @@
                         <textarea id="game-reason" class="form-control" placeholder="Explique en quelques mots pourquoi ce jeu serait cool en live..." required></textarea>
                     </div>
 
-                    <button type="submit" class="submit-btn">> ENVOYER LA PROPOSITION</button>
+                    <button type="submit" class="submit-btn">> ENVOYER ET VOTER</button>
                 </form>
             </div>
         </div>
@@ -819,7 +861,7 @@
 
 </div>
 
-<!-- FENÊTRE TWITCH FLOTTANTE & RÉDUISIBLE -->
+<!-- FENÊTRE TWITCH FLOTTANTE -->
 <div class="pip-popup" id="pipPopup">
     <div class="pip-header" id="pipHeader">
         <span class="pip-title">[LIVE] TWITCH_FEED</span>
@@ -834,6 +876,7 @@
 </div>
 
 <script>
+    // INITIALISATION DU PLAYER TWITCH
     let currentHost = window.location.hostname || "localhost";
     document.getElementById("twitch-main-player").src = `https://player.twitch.tv/?channel=ckai&parent=${currentHost}`;
     document.getElementById("twitch-pip-player").src = `https://player.twitch.tv/?channel=ckai&parent=${currentHost}`;
@@ -846,19 +889,15 @@
         btn.classList.add('active');
     }
 
-    /* REDUIRE / AGRANDIR LA FENÊTRE TWITCH */
+    /* REDUIRE / AGRANDIR TWITCH FLOTTANT */
     function toggleMinimizePip() {
         const popup = document.getElementById('pipPopup');
         const minBtn = document.getElementById('pipMinBtn');
         popup.classList.toggle('minimized');
-        if (popup.classList.contains('minimized')) {
-            minBtn.innerText = '[+]';
-        } else {
-            minBtn.innerText = '[-]';
-        }
+        minBtn.innerText = popup.classList.contains('minimized') ? '[+]' : '[-]';
     }
 
-    /* DRAG & DROP FENÊTRE TWITCH FLOTTANTE */
+    /* DRAG & DROP FENÊTRE FLOTTANTE */
     dragElement(document.getElementById("pipPopup"));
 
     function dragElement(elmnt) {
@@ -866,8 +905,6 @@
         const header = document.getElementById("pipHeader");
         if (header) {
             header.onmousedown = dragMouseDown;
-        } else {
-            elmnt.onmousedown = dragMouseDown;
         }
 
         function dragMouseDown(e) {
@@ -898,6 +935,117 @@
             document.onmousemove = null;
         }
     }
+
+    /* SYSTEME DE VOTE & LISTE DE JEUX */
+    const defaultGames = [
+        { id: '1', title: 'Silent Hill 2 Remake', user: 'Pseudo_01', votes: 14 },
+        { id: '2', title: 'Metal Gear Solid Delta', user: 'ShadowFan', votes: 22 },
+        { id: '3', title: 'Hollow Knight: Silksong', user: 'CKAI_Fan', votes: 35 }
+    ];
+
+    let gamesList = JSON.parse(localStorage.getItem('ckai_upcoming_games')) || defaultGames;
+    let userVotes = JSON.parse(localStorage.getItem('ckai_user_votes')) || {};
+
+    function saveGamesData() {
+        localStorage.setItem('ckai_upcoming_games', JSON.stringify(gamesList));
+        localStorage.setItem('ckai_user_votes', JSON.stringify(userVotes));
+    }
+
+    function getTotalVotes() {
+        return gamesList.reduce((acc, game) => acc + game.votes, 0);
+    }
+
+    function renderUpcomingGames() {
+        const container = document.getElementById('upcoming-games-list');
+        container.innerHTML = '';
+        const totalVotes = getTotalVotes();
+
+        // Trier par nombre de votes décroissant
+        gamesList.sort((a, b) => b.votes - a.votes);
+
+        gamesList.forEach(game => {
+            const hasVoted = !!userVotes[game.id];
+            const percentage = totalVotes > 0 ? ((game.votes / totalVotes) * 100).toFixed(1) : 0;
+
+            const card = document.createElement('div');
+            card.className = `upcoming-card ${hasVoted ? 'voted' : ''}`;
+            card.onclick = () => toggleVote(game.id);
+
+            card.innerHTML = `
+                <div class="upcoming-card-content">
+                    <div class="upcoming-game-name">${escapeHtml(game.title)}</div>
+                    <div class="vote-btn-indicator">${hasVoted ? '✔ VOTÉ' : '+ CLIQUER POUR VOTER'}</div>
+                </div>
+
+                <div class="upcoming-card-footer">
+                    <div class="proposed-by-box">Par: <span class="proposed-by-user">${escapeHtml(game.user)}</span></div>
+                    <div class="vote-count-box">▲ <span>${game.votes}</span></div>
+                </div>
+
+                <div class="vote-hover-overlay">
+                    <div class="percentage-display">${percentage}%</div>
+                    <div class="percentage-bar-bg">
+                        <div class="percentage-bar-fill" style="width: ${percentage}%;"></div>
+                    </div>
+                    <div class="percentage-stats">${game.votes} / ${totalVotes} VOTES TOTAL</div>
+                </div>
+            `;
+
+            container.appendChild(card);
+        });
+    }
+
+    function toggleVote(gameId) {
+        const game = gamesList.find(g => g.id === gameId);
+        if (!game) return;
+
+        if (userVotes[gameId]) {
+            game.votes -= 1;
+            delete userVotes[gameId];
+        } else {
+            game.votes += 1;
+            userVotes[gameId] = true;
+        }
+
+        saveGamesData();
+        renderUpcomingGames();
+    }
+
+    document.getElementById('suggestGameForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const pseudoInput = document.getElementById('user-pseudo');
+        const gameInput = document.getElementById('game-name');
+
+        const newGame = {
+            id: Date.now().toString(),
+            title: gameInput.value.trim(),
+            user: pseudoInput.value.trim() || 'Anonyme',
+            votes: 1
+        };
+
+        gamesList.push(newGame);
+        userVotes[newGame.id] = true; // Auto-vote à la création
+
+        saveGamesData();
+        renderUpcomingGames();
+
+        gameInput.value = '';
+        document.getElementById('game-reason').value = '';
+        alert('Jeu ajouté avec succès à la liste !');
+    });
+
+    function escapeHtml(text) {
+        return text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    // Chargement initial
+    renderUpcomingGames();
 </script>
 
 </body>
