@@ -274,8 +274,9 @@
         }
 
         .gold-border-block {
-            border-color: rgba(255, 204, 0, 0.4);
-            background: linear-gradient(180deg, rgba(255, 204, 0, 0.03) 0%, rgba(12, 12, 13, 1) 100%);
+            border-color: rgba(255, 204, 0, 0.3);
+            background: linear-gradient(180deg, rgba(255, 204, 0, 0.02) 0%, rgba(12, 12, 13, 1) 100%);
+            padding: 15px 20px;
         }
 
         .blue-border-block {
@@ -383,79 +384,96 @@
             font-weight: bold;
         }
 
+        /* NOUVEAU STYLE COMPACT POUR LES POINTS DE CHAÎNE */
+        .points-grid-compact {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .points-card-compact {
+            background: #000;
+            border: 1px solid var(--border-hard);
+            padding: 8px 10px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 48px;
+            transition: all 0.2s ease;
+        }
+
+        .points-card-compact:not(.completed):hover {
+            border-color: var(--accent-gold);
+            background: rgba(255, 204, 0, 0.03);
+        }
+
+        .points-card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 11px;
+            color: #fff;
+            text-transform: uppercase;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .points-card-user {
+            font-size: 9px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .points-card-user span {
+            color: var(--accent-gold);
+        }
+
+        /* CARTE COMPLÉTÉE SOURIS/OVERLAY */
+        .points-card-compact.completed {
+            background: #000;
+            border-color: rgba(255, 0, 51, 0.2);
+            overflow: hidden;
+        }
+
+        .completed-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(5, 5, 5, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            z-index: 5;
+            transition: opacity 0.2s ease;
+        }
+
+        .completed-x {
+            color: var(--accent-alert);
+            font-family: 'VT323', monospace;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .completed-text {
+            color: var(--accent-alert);
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .points-card-compact.completed:hover .completed-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+
         .upcoming-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 15px;
             margin-top: 20px;
             margin-bottom: 20px;
-        }
-
-        .points-card {
-            background: #0a0800;
-            border: 1px solid rgba(255, 204, 0, 0.3);
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 10px;
-            position: relative;
-            transition: all 0.2s ease;
-        }
-
-        .points-card:hover {
-            border-color: var(--accent-gold);
-            transform: translateY(-2px);
-            box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
-        }
-
-        .points-card.completed {
-            background: #08080a;
-            border-color: rgba(255, 0, 51, 0.3);
-            opacity: 0.65;
-        }
-
-        .points-card.completed:hover {
-            border-color: var(--accent-alert);
-            box-shadow: 0 0 10px rgba(255, 0, 51, 0.2);
-            opacity: 0.9;
-        }
-
-        .points-card.completed .upcoming-game-name {
-            text-decoration: line-through;
-            color: var(--text-muted) !important;
-        }
-
-        .completed-stamp {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255, 0, 51, 0.2);
-            border: 1px solid var(--accent-alert);
-            color: var(--accent-alert);
-            font-size: 9px;
-            font-weight: bold;
-            padding: 2px 6px;
-            letter-spacing: 1px;
-            transform: rotate(-5deg);
-            z-index: 5;
-        }
-
-        .points-badge {
-            font-size: 10px;
-            background: rgba(255, 204, 0, 0.15);
-            color: var(--accent-gold);
-            border: 1px solid var(--accent-gold);
-            padding: 2px 6px;
-            align-self: flex-start;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .points-card.completed .points-badge {
-            background: rgba(255, 0, 51, 0.1);
-            color: var(--accent-alert);
-            border-color: var(--accent-alert);
         }
 
         .community-card {
@@ -545,16 +563,16 @@
 
         .delete-card-btn {
             position: absolute;
-            top: 8px;
-            right: 8px;
+            top: 4px;
+            right: 4px;
             background: rgba(255, 0, 51, 0.2);
             border: 1px solid var(--accent-alert);
             color: var(--accent-alert);
             font-family: 'Share Tech Mono', monospace;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: bold;
-            width: 22px;
-            height: 22px;
+            width: 18px;
+            height: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -993,15 +1011,15 @@
 
         <div class="section-header">> UPCOMING_QUEUE // JEUX À VENIR</div>
 
-        <!-- LISTE 1 : JEUX PAYÉS PAR POINTS DE CHAÎNE -->
+        <!-- LISTE 1 : JEUX PAYÉS PAR POINTS DE CHAÎNE (FORMAT COMPACT) -->
         <div class="single-category-block gold-border-block">
             <div class="upcoming-header-bar">
-                <div style="font-family: 'VT323', monospace; font-size: 22px; color: var(--accent-gold);">
-                    [★] JEUX ACHETÉS AVEC LES POINTS DE CHAÎNE (TWITCH)
+                <div style="font-family: 'VT323', monospace; font-size: 18px; color: var(--accent-gold);">
+                    [★] JEUX POINTS DE CHAÎNE
                 </div>
             </div>
 
-            <div class="upcoming-grid" id="channel-points-games-list">
+            <div class="points-grid-compact" id="channel-points-games-list">
                 <!-- JS Inject -->
             </div>
         </div>
@@ -1140,17 +1158,16 @@
         { id: '3', title: 'Hollow Knight: Silksong', user: 'CKAI_Fan', votes: 36 }
     ];
 
-    // Clés v3 pour garantir la reinitialisation complète
-    let channelPointsGames = JSON.parse(localStorage.getItem('ckai_points_games_v3')) || initialPointsGames;
-    let communityGames = JSON.parse(localStorage.getItem('ckai_community_games_v3')) || defaultCommunityGames;
-    let userVotes = JSON.parse(localStorage.getItem('ckai_user_votes_v3')) || {};
+    let channelPointsGames = JSON.parse(localStorage.getItem('ckai_points_games_v4')) || initialPointsGames;
+    let communityGames = JSON.parse(localStorage.getItem('ckai_community_games_v4')) || defaultCommunityGames;
+    let userVotes = JSON.parse(localStorage.getItem('ckai_user_votes_v4')) || {};
     let isAdmin = false;
     const ADMIN_PASSWORD = "admin";
 
     function saveData() {
-        localStorage.setItem('ckai_points_games_v3', JSON.stringify(channelPointsGames));
-        localStorage.setItem('ckai_community_games_v3', JSON.stringify(communityGames));
-        localStorage.setItem('ckai_user_votes_v3', JSON.stringify(userVotes));
+        localStorage.setItem('ckai_points_games_v4', JSON.stringify(channelPointsGames));
+        localStorage.setItem('ckai_community_games_v4', JSON.stringify(communityGames));
+        localStorage.setItem('ckai_user_votes_v4', JSON.stringify(userVotes));
     }
 
     function getTotalVotes() {
@@ -1204,27 +1221,27 @@
         container.innerHTML = '';
 
         if (channelPointsGames.length === 0) {
-            container.innerHTML = `<div style="color:var(--text-muted); font-size:12px;">Aucun jeu en attente.</div>`;
+            container.innerHTML = `<div style="color:var(--text-muted); font-size:11px;">Aucun jeu en attente.</div>`;
             return;
         }
 
         channelPointsGames.forEach(game => {
             const card = document.createElement('div');
-            card.className = `points-card ${game.completed ? 'completed' : ''}`;
+            card.className = `points-card-compact ${game.completed ? 'completed' : ''}`;
 
             let deleteBtnHtml = isAdmin ? `<div class="delete-card-btn" onclick="deletePointsGame('${game.id}', event)">X</div>` : '';
-            let stampHtml = game.completed ? `<div class="completed-stamp">TERMINÉ</div>` : '';
+            let completedOverlayHtml = game.completed ? `
+                <div class="completed-overlay">
+                    <span class="completed-x">✕</span>
+                    <span class="completed-text">COMPLETED</span>
+                </div>
+            ` : '';
 
             card.innerHTML = `
                 ${deleteBtnHtml}
-                ${stampHtml}
-                <div class="upcoming-card-content">
-                    <div class="points-badge">${game.completed ? 'COMPLETED' : '★ RECOMPENSE'}</div>
-                    <div class="upcoming-game-name" style="color:var(--accent-gold);">${escapeHtml(game.title)}</div>
-                </div>
-                <div class="upcoming-card-footer">
-                    <div class="proposed-by-box">Request: <span class="proposed-by-user" style="color:${game.completed ? 'var(--text-muted)' : 'var(--accent-gold)'};">${escapeHtml(game.user)}</span></div>
-                </div>
+                ${completedOverlayHtml}
+                <div class="points-card-title">${escapeHtml(game.title)}</div>
+                <div class="points-card-user">par <span>${escapeHtml(game.user)}</span></div>
             `;
             container.appendChild(card);
         });
