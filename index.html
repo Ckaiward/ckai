@@ -267,7 +267,7 @@
             text-overflow: ellipsis;
         }
 
-        /* BLOCK BLOC DE CATEGORIE ET DE LISTE */
+        /* BLOCS DE CATEGORIE */
         .single-category-block {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
@@ -393,7 +393,7 @@
             margin-bottom: 20px;
         }
 
-        /* CARTES STYLE POINS DE CHAINE (OR) */
+        /* CARTES STYLE POINTS DE CHAINE (OR) */
         .points-card {
             background: #0a0800;
             border: 1px solid rgba(255, 204, 0, 0.3);
@@ -412,6 +412,39 @@
             box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
         }
 
+        /* STYLE POUR LES JEUX TERMINÉS / BARRÉS */
+        .points-card.completed {
+            background: #08080a;
+            border-color: rgba(255, 0, 51, 0.3);
+            opacity: 0.65;
+        }
+
+        .points-card.completed:hover {
+            border-color: var(--accent-alert);
+            box-shadow: 0 0 10px rgba(255, 0, 51, 0.2);
+            opacity: 0.9;
+        }
+
+        .points-card.completed .upcoming-game-name {
+            text-decoration: line-through;
+            color: var(--text-muted) !important;
+        }
+
+        .completed-stamp {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 0, 51, 0.2);
+            border: 1px solid var(--accent-alert);
+            color: var(--accent-alert);
+            font-size: 9px;
+            font-weight: bold;
+            padding: 2px 6px;
+            letter-spacing: 1px;
+            transform: rotate(-5deg);
+            z-index: 5;
+        }
+
         .points-badge {
             font-size: 10px;
             background: rgba(255, 204, 0, 0.15);
@@ -421,6 +454,12 @@
             align-self: flex-start;
             text-transform: uppercase;
             font-weight: bold;
+        }
+
+        .points-card.completed .points-badge {
+            background: rgba(255, 0, 51, 0.1);
+            color: var(--accent-alert);
+            border-color: var(--accent-alert);
         }
 
         /* CARTES STYLE COMMUNAUTE (BLEU/GLITCH) */
@@ -922,7 +961,7 @@
 
         <div class="section-header">> UPCOMING_QUEUE // JEUX À VENIR</div>
 
-        <!-- LISTE 1 : JEUX PAYÉS PAR POINTS DE CHAÎNE -->
+        <!-- LISTE 1 : JEUX PAYÉS PAR POINTS DE CHAÎNE (AVEC DONNÉES EXACTES DU SCREENSHOT) -->
         <div class="single-category-block gold-border-block">
             <div class="upcoming-header-bar">
                 <div style="font-family: 'VT323', monospace; font-size: 22px; color: var(--accent-gold);">
@@ -1053,11 +1092,20 @@
         }
     }
 
-    /* --- DATA LISTE 1 : JEUX POINTS DE CHAINE --- */
-    let channelPointsGames = JSON.parse(localStorage.getItem('ckai_points_games')) || [
-        { id: 'p1', title: 'Cyberpunk 2077: Phantom Liberty', user: 'V_Lover', points: '50 000 PTS' },
-        { id: 'p2', title: 'Elden Ring DLC', user: 'Tarnished_One', points: '100 000 PTS' }
+    /* --- DONNÉES ISSUES DIRECTEMENT DU SCREENSHOT --- */
+    const initialPointsGames = [
+        { id: 'p1', title: 'CRASH BANDICOOT N.SANE TRILOGY', user: 'LettWave', completed: true },
+        { id: 'p2', title: 'MINIT', user: 'LettWave', completed: true },
+        { id: 'p3', title: 'CRASH BANDICOOT 4', user: 'LettWave', completed: false },
+        { id: 'p4', title: 'Shadowman Remaster', user: 'WeshSen', completed: true },
+        { id: 'p5', title: 'Turok', user: 'WeshSen', completed: false },
+        { id: 'p6', title: 'METAL GEAR SOLID', user: 'Grayfox', completed: false },
+        { id: 'p7', title: 'MAX PAYNE 3', user: 'Skunksx', completed: true },
+        { id: 'p8', title: 'Splinter Cell Chaos Theory', user: 'Coldacity', completed: true },
+        { id: 'p9', title: 'GOTCHA FORCE (GC)', user: 'Kirochi', completed: false }
     ];
+
+    let channelPointsGames = JSON.parse(localStorage.getItem('ckai_points_games')) || initialPointsGames;
 
     /* --- DATA LISTE 2 : JEUX PROPOSÉS / VOTES --- */
     const defaultCommunityGames = [
@@ -1137,23 +1185,25 @@
 
         channelPointsGames.forEach(game => {
             const card = document.createElement('div');
-            card.className = 'points-card';
+            card.className = `points-card ${game.completed ? 'completed' : ''}`;
 
             let deleteBtnHtml = '';
             if (isAdmin) {
                 deleteBtnHtml = `<div class="delete-card-btn" onclick="deletePointsGame('${game.id}', event)" title="Supprimer ce jeu">X</div>`;
             }
 
+            let stampHtml = game.completed ? `<div class="completed-stamp">TERMINÉ</div>` : '';
+
             card.innerHTML = `
                 ${deleteBtnHtml}
+                ${stampHtml}
                 <div class="upcoming-card-content">
-                    <div class="points-badge">★ RECOMPENSE STREAM</div>
+                    <div class="points-badge">${game.completed ? 'COMPLETED' : '★ RECOMPENSE'}</div>
                     <div class="upcoming-game-name" style="color:var(--accent-gold);">${escapeHtml(game.title)}</div>
                 </div>
 
                 <div class="upcoming-card-footer">
-                    <div class="proposed-by-box">Acheté par: <span class="proposed-by-user" style="color:var(--accent-gold);">${escapeHtml(game.user)}</span></div>
-                    <div class="vote-count-box" style="color:var(--accent-gold);">${game.points || 'Points Twitch'}</div>
+                    <div class="proposed-by-box">Request: <span class="proposed-by-user" style="color:${game.completed ? 'var(--text-muted)' : 'var(--accent-gold)'};">${escapeHtml(game.user)}</span></div>
                 </div>
             `;
 
