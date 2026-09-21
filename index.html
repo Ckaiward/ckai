@@ -125,7 +125,7 @@
             background: var(--border-hard);
         }
 
-        /* 1. SECTION PRINCIPALE (CKAI HERO) */
+        /* 1. HERO SECTION */
         .featured-hero {
             display: grid;
             grid-template-columns: 1.8fr 1fr;
@@ -165,7 +165,6 @@
             text-transform: uppercase;
         }
 
-        /* RECOMMANDATIONS A DROITE */
         .side-recommended {
             display: flex;
             flex-direction: column;
@@ -208,7 +207,7 @@
             line-height: 1.3;
         }
 
-        /* 2. DÉFILEMENT AUTRES CHAÎNES */
+        /* 2. CAROUSEL CHAÎNES */
         .other-channels-section {
             margin-bottom: 40px;
         }
@@ -267,7 +266,6 @@
             text-overflow: ellipsis;
         }
 
-        /* BLOCS DE CATEGORIE */
         .single-category-block {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
@@ -285,10 +283,10 @@
             background: linear-gradient(180deg, rgba(0, 204, 255, 0.03) 0%, rgba(12, 12, 13, 1) 100%);
         }
 
-        /* 3. JEUX JOUÉS EN STREAM EN 2026 (GRILLE CARRÉE) */
+        /* 3. GRILLE DE TOUS LES JEUX JOUÉS */
         .game-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             gap: 15px;
             margin-top: 20px;
         }
@@ -311,7 +309,7 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             object-fit: cover;
-            filter: brightness(0.7) contrast(1.1);
+            filter: brightness(0.75) contrast(1.1);
             transition: transform 0.3s ease, filter 0.3s ease;
         }
 
@@ -319,21 +317,21 @@
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2) 100%);
+            background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%);
             z-index: 1;
         }
 
         .game-card-title {
             position: relative;
             z-index: 2;
-            padding: 12px;
+            padding: 10px;
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
             color: #fff;
             text-transform: uppercase;
-            line-height: 1.3;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
             width: 100%;
             text-align: center;
         }
@@ -346,14 +344,14 @@
 
         .game-card-square:hover .game-card-bg {
             transform: scale(1.08);
-            filter: brightness(0.9) contrast(1.1);
+            filter: brightness(0.95) contrast(1.1);
         }
 
         .game-card-square:hover .game-card-title {
             color: var(--accent-glitch);
         }
 
-        /* 4. SECTIONS PROCHAINS JEUX & VOTES */
+        /* 4. UPCOMING & VOTES */
         .upcoming-header-bar {
             display: flex;
             justify-content: space-between;
@@ -393,7 +391,6 @@
             margin-bottom: 20px;
         }
 
-        /* CARTES POINTS DE CHAINE (OR) */
         .points-card {
             background: #0a0800;
             border: 1px solid rgba(255, 204, 0, 0.3);
@@ -412,7 +409,6 @@
             box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
         }
 
-        /* JEUX TERMINÉS / BARRÉS */
         .points-card.completed {
             background: #08080a;
             border-color: rgba(255, 0, 51, 0.3);
@@ -462,7 +458,6 @@
             border-color: var(--accent-alert);
         }
 
-        /* CARTES COMMUNAUTE (BLEU/GLITCH) */
         .community-card {
             background: #000;
             border: 1px solid var(--border-hard);
@@ -727,7 +722,7 @@
             background: #000;
         }
 
-        /* TWITCH MINI POPUP FLOTTANT */
+        /* TWITCH POPUP PIP */
         .pip-popup {
             position: fixed;
             bottom: 20px;
@@ -802,7 +797,7 @@
         </nav>
     </header>
 
-    <!-- ONGLET ACCUEIL (ARCHIVES) -->
+    <!-- ONGLET ARCHIVES -->
     <div id="home" class="tab-content active">
 
         <div class="section-header">> CORE_NODE // CKAI</div>
@@ -872,7 +867,7 @@
 
     </div>
 
-    <!-- TAB TWITCH (LIVE_FEED) -->
+    <!-- ONGLET TWITCH -->
     <div id="twitch" class="tab-content">
         
         <div class="twitch-container">
@@ -882,74 +877,114 @@
 
         <div class="section-header">> PLAYLISTS // ARCHIVES DE STREAM</div>
         
+        <!-- SECTION TOUS LES 15 JEUX JOUÉS DE VOTRE DOSSIER -->
         <div class="single-category-block">
             <div style="font-family: 'VT323', monospace; font-size: 22px; color: var(--accent-glitch);">
                 [>] JEUX JOUÉS EN STREAM EN 2026
             </div>
             
             <div class="game-grid">
+                <!-- 1. 007 FIRST LIGHT -->
                 <a href="https://www.youtube.com/watch?v=QyPCW9CUkhE&list=PLeaKN15x3GXIFGhljOHJuPhi2ss-bmll-" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/JRnBqW36/007-FIRST-LIGHT.jpg" alt="007 First Light Cover" class="game-card-bg">
+                    <img src="https://i.ibb.co/JRnBqW36/007-FIRST-LIGHT.jpg" alt="007 First Light" class="game-card-bg">
                     <div class="game-card-overlay"></div>
-                    <div class="game-card-title">007 First Light</div>
+                    <div class="game-card-title">007 FIRST LIGHT</div>
                 </a>
 
-                <a href="https://www.youtube.com/watch?v=mr2Zb0nPTGM&list=PLeaKN15x3GXJlfAT9vPk8_6DrwhKlIdGv" target="_blank" class="game-card-square">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/731490/header.jpg" alt="Crash Bandicoot Cover" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Crash Bandicoot N.Sane Trilogy</div>
-                </a>
-
+                <!-- 2. FF7 REBIRTH -->
                 <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&list=PLNcyDCaofkHY" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/r2wftb9N/FF7-rebirth.jpg" alt="FF VII Rebirth Cover" class="game-card-bg">
+                    <img src="https://i.ibb.co/r2wftb9N/FF7-rebirth.jpg" alt="FF VII Rebirth" class="game-card-bg">
                     <div class="game-card-overlay"></div>
-                    <div class="game-card-title">FF VII Rebirth</div>
+                    <div class="game-card-title">FF7 Rebirth</div>
                 </a>
 
+                <!-- 3. FF7 REMAKE -->
                 <a href="https://www.youtube.com/watch?v=FNUDMWKVa-w&list=PLeaKN15x3GXLmQ9j5jQse_G5oCNB3ncYX" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/LD4z5tzf/ff7-remake.jpg" alt="FF VII Remake Cover" class="game-card-bg">
+                    <img src="https://i.ibb.co/LD4z5tzf/ff7-remake.jpg" alt="FF VII Remake" class="game-card-bg">
                     <div class="game-card-overlay"></div>
-                    <div class="game-card-title">FF VII Remake Intergrade</div>
+                    <div class="game-card-title">FF7 Remake</div>
                 </a>
 
+                <!-- 4. FIRE EMBLEM -->
                 <a href="https://www.youtube.com/watch?v=lBpxUooGIhM&list=PLeaKN15x3GXKWbnohpX-aMRaxmSna0LhI" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/zT6BzL61/FIRE-EMBLEM.jpg" alt="Fire Emblem Cover" class="game-card-bg">
+                    <img src="https://i.ibb.co/zT6BzL61/FIRE-EMBLEM.jpg" alt="Fire Emblem" class="game-card-bg">
                     <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Fire Emblem (GBA)</div>
+                    <div class="game-card-title">FIRE EMBLEM</div>
                 </a>
 
+                <!-- 5. KENSHI -->
                 <a href="https://www.youtube.com/watch?v=VrpmlWSg5ZU&list=PLeaKN15x3GXImBy0mLy8d94ocz_sXjGhP" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/S4VP8P2K/kenshi.jpg" alt="Kenshi Cover" class="game-card-bg">
+                    <img src="https://i.ibb.co/S4VP8P2K/kenshi.jpg" alt="Kenshi" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Kenshi</div>
                 </a>
 
+                <!-- 6. KINGDOM COME DELIVERANCE -->
                 <a href="https://www.youtube.com/watch?v=1Xs7jUmwClA&list=PLeaKN15x3GXLnVahTm5gzuQOK4vmUk1Wn" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/nswkHvGR/Kingdom-come-delivrance.jpg" alt="Kingdom Come Cover" class="game-card-bg">
+                    <img src="https://i.ibb.co/nswkHvGR/Kingdom-come-delivrance.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Kingdom Come Deliverance</div>
                 </a>
 
-                <a href="#" target="_blank" class="game-card-square">
-                    <img src="https://static.wikia.nocookie.net/kingdomhearts/images/e/e0/Kingdom_Hearts_1_Cover.jpg/revision/latest?cb=20180424035653" alt="Kingdom Hearts Cover" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Kingdom Hearts I Final Mix</div>
-                </a>
-
+                <!-- 7. MAX PAYNE 3 -->
                 <a href="https://www.youtube.com/watch?v=UBzpaYjw2og&list=PLeaKN15x3GXK1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/PvqTCqff/MAX-PAYNE-3.jpg" alt="Max Payne 3 Cover" class="game-card-bg">
+                    <img src="https://i.ibb.co/PvqTCqff/MAX-PAYNE-3.jpg" alt="Max Payne 3" class="game-card-bg">
                     <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Max Payne 3</div>
+                    <div class="game-card-title">MAX PAYNE 3</div>
                 </a>
 
+                <!-- 8. MINNIT -->
+                <a href="#" target="_blank" class="game-card-square">
+                    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/823230/header.jpg" alt="Minit" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Minit</div>
+                </a>
+
+                <!-- 9. MORROWIND -->
+                <a href="#" target="_blank" class="game-card-square">
+                    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/22320/header.jpg" alt="Morrowind" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Morrowind</div>
+                </a>
+
+                <!-- 10. MOUSE PI FOR HIRE -->
+                <a href="#" target="_blank" class="game-card-square">
+                    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2416450/header.jpg" alt="Mouse PI for Hire" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">MOUSE PI FOR HIRE</div>
+                </a>
+
+                <!-- 11. REPLACED -->
                 <a href="https://www.youtube.com/watch?v=CyQYS8oNcXw&list=PLeaKN15x3GXItlfhnhL0t3HJg1NPZIqKa" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/7dkm2gGP/replaced.jpg" alt="Replaced Cover" class="game-card-bg">
+                    <img src="https://i.ibb.co/7dkm2gGP/replaced.jpg" alt="Replaced" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Replaced</div>
                 </a>
 
+                <!-- 12. SHADOW MAN -->
+                <a href="#" target="_blank" class="game-card-square">
+                    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1350170/header.jpg" alt="Shadow Man" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Shadow Man</div>
+                </a>
+
+                <!-- 13. SOL CESTO -->
+                <a href="#" target="_blank" class="game-card-square">
+                    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2738490/header.jpg" alt="Sol Cesto" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Sol Cesto</div>
+                </a>
+
+                <!-- 14. SPLINTER CELL CHAOS THEORY -->
+                <a href="#" target="_blank" class="game-card-square">
+                    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/13570/header.jpg" alt="Splinter Cell Chaos Theory" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Splinter Cell Chaos Theory</div>
+                </a>
+
+                <!-- 15. TUNIC -->
                 <a href="https://www.youtube.com/watch?v=47lZhJA_1Hg&list=PLJjQWj1aVnf0" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/LdszVfKr/tunic.jpg" alt="Tunic Cover" class="game-card-bg">
+                    <img src="https://i.ibb.co/LdszVfKr/tunic.jpg" alt="Tunic" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Tunic</div>
                 </a>
@@ -967,7 +1002,7 @@
             </div>
 
             <div class="upcoming-grid" id="channel-points-games-list">
-                <!-- Chargé via JS -->
+                <!-- JS Inject -->
             </div>
         </div>
 
@@ -981,7 +1016,7 @@
             </div>
 
             <div class="upcoming-grid" id="community-games-list">
-                <!-- Chargé via JS -->
+                <!-- JS Inject -->
             </div>
 
             <!-- FORMULAIRE -->
@@ -1014,7 +1049,7 @@
 
 </div>
 
-<!-- TWITCH FLOTTANT -->
+<!-- TWITCH POPUP PIP -->
 <div class="pip-popup" id="pipPopup">
     <div class="pip-header" id="pipHeader">
         <span class="pip-title">[LIVE] TWITCH_FEED</span>
@@ -1086,7 +1121,7 @@
         }
     }
 
-    /* --- TOUS LES JEUX DU SCREENSHOT --- */
+    /* --- DONNÉES POINTS DE CHAÎNE ET COMMUNAUTÉ --- */
     const initialPointsGames = [
         { id: 'p1', title: 'CRASH BANDICOOT N.SANE TRILOGY', user: 'LettWave', completed: true },
         { id: 'p2', title: 'MINIT', user: 'LettWave', completed: true },
@@ -1105,17 +1140,17 @@
         { id: '3', title: 'Hollow Knight: Silksong', user: 'CKAI_Fan', votes: 36 }
     ];
 
-    // Utilisation des clés V2 pour forcer l'affichage sans conflit de cache
-    let channelPointsGames = JSON.parse(localStorage.getItem('ckai_points_games_v2')) || initialPointsGames;
-    let communityGames = JSON.parse(localStorage.getItem('ckai_community_games_v2')) || defaultCommunityGames;
-    let userVotes = JSON.parse(localStorage.getItem('ckai_user_votes_v2')) || {};
+    // Clés v3 pour garantir la reinitialisation complète
+    let channelPointsGames = JSON.parse(localStorage.getItem('ckai_points_games_v3')) || initialPointsGames;
+    let communityGames = JSON.parse(localStorage.getItem('ckai_community_games_v3')) || defaultCommunityGames;
+    let userVotes = JSON.parse(localStorage.getItem('ckai_user_votes_v3')) || {};
     let isAdmin = false;
     const ADMIN_PASSWORD = "admin";
 
     function saveData() {
-        localStorage.setItem('ckai_points_games_v2', JSON.stringify(channelPointsGames));
-        localStorage.setItem('ckai_community_games_v2', JSON.stringify(communityGames));
-        localStorage.setItem('ckai_user_votes_v2', JSON.stringify(userVotes));
+        localStorage.setItem('ckai_points_games_v3', JSON.stringify(channelPointsGames));
+        localStorage.setItem('ckai_community_games_v3', JSON.stringify(communityGames));
+        localStorage.setItem('ckai_user_votes_v3', JSON.stringify(userVotes));
     }
 
     function getTotalVotes() {
