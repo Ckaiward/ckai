@@ -264,7 +264,7 @@
             text-overflow: ellipsis;
         }
 
-        /* 3. JEUX JOUÉS EN STREAM EN 2026 */
+        /* 3. JEUX JOUÉS EN STREAM EN 2026 (GRILLE CARRÉE) */
         .single-category-block {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
@@ -272,32 +272,71 @@
             margin-top: 20px;
         }
 
-        .game-list-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 15px;
             margin-top: 20px;
         }
 
-        /* RECTANGLES DE JEUX AGRANDIS */
-        .game-link-item {
-            font-size: 13px;
-            letter-spacing: 0.5px;
-            background: #000;
+        .game-card-square {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background-color: #000;
             border: 1px solid var(--border-hard);
-            padding: 10px 18px;
-            color: var(--text-main);
+            overflow: hidden;
             text-decoration: none;
-            transition: all 0.2s ease;
-            display: inline-block;
+            display: flex;
+            align-items: flex-end;
+            transition: all 0.25s ease;
         }
 
-        .game-link-item:hover {
-            color: #000;
-            background: var(--accent-glitch);
-            border-color: var(--accent-glitch);
+        .game-card-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7) contrast(1.1);
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .game-card-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2) 100%);
+            z-index: 1;
+        }
+
+        .game-card-title {
+            position: relative;
+            z-index: 2;
+            padding: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 12px;
             font-weight: bold;
-            box-shadow: 0 0 12px rgba(0, 255, 102, 0.4);
+            color: #fff;
+            text-transform: uppercase;
+            line-height: 1.3;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            width: 100%;
+            text-align: center;
+        }
+
+        .game-card-square:hover {
+            border-color: var(--accent-glitch);
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .game-card-square:hover .game-card-bg {
+            transform: scale(1.08);
+            filter: brightness(0.9) contrast(1.1);
+        }
+
+        .game-card-square:hover .game-card-title {
+            color: var(--accent-glitch);
         }
 
         /* TWITCH ONGLET PRINCIPAL */
@@ -378,7 +417,6 @@
             top: 0; left: 0; width: 100%; height: 100%; border: 0;
         }
 
-        /* MUTE / RÉDUIT */
         .pip-popup.minimized .pip-video {
             display: none;
         }
@@ -402,7 +440,6 @@
         <div class="section-header">> CORE_NODE // CKAI</div>
         
         <div class="featured-hero">
-            <!-- GROSSE VIDÉO PRINCIPALE CKAI -->
             <div class="main-player-box">
                 <div class="video-embed-container">
                     <iframe src="https://www.youtube.com/embed/KS2ARw2Ctts" allowfullscreen></iframe>
@@ -410,10 +447,7 @@
                 <div class="main-video-title">Dernière Vidéo CKAI</div>
             </div>
 
-            <!-- 2 VIDÉOS RECOMMANDÉES A DROITE -->
             <div class="side-recommended">
-                
-                <!-- RECOMMANDÉ 1 -->
                 <a href="https://youtu.be/uzXsah-SJmY" target="_blank" class="rec-card">
                     <div class="rec-thumb-box">
                         <img src="https://img.youtube.com/vi/uzXsah-SJmY/hqdefault.jpg" alt="">
@@ -421,14 +455,12 @@
                     <div class="rec-title">Recommandé 01 - CKAI</div>
                 </a>
 
-                <!-- RECOMMANDÉ 2 -->
                 <a href="https://youtu.be/Hs4M52a5cS8" target="_blank" class="rec-card">
                     <div class="rec-thumb-box">
                         <img src="https://img.youtube.com/vi/Hs4M52a5cS8/hqdefault.jpg" alt="">
                     </div>
                     <div class="rec-title">Recommandé 02 - CKAI</div>
                 </a>
-
             </div>
         </div>
 
@@ -438,7 +470,6 @@
             
             <div class="carousel-track">
                 
-                <!-- C'EST LE C (Vidéo 1) -->
                 <div class="channel-card-scroll">
                     <div class="channel-card-tag" style="color: var(--accent-glitch);">C'est le C</div>
                     <a href="https://youtu.be/-suS2RgZyxI" target="_blank" class="mini-video-link">
@@ -447,7 +478,6 @@
                     </a>
                 </div>
 
-                <!-- C'EST LE C (Vidéo 2) -->
                 <div class="channel-card-scroll">
                     <div class="channel-card-tag" style="color: var(--accent-glitch);">C'est le C</div>
                     <a href="https://youtu.be/BNOc9XchjRE" target="_blank" class="mini-video-link">
@@ -456,7 +486,6 @@
                     </a>
                 </div>
 
-                <!-- GROSSE GALÈRE (Vidéo 1) -->
                 <div class="channel-card-scroll">
                     <div class="channel-card-tag" style="color: var(--accent-alert);">Grosse Galère</div>
                     <a href="https://youtu.be/sMU200R94BE" target="_blank" class="mini-video-link">
@@ -465,7 +494,6 @@
                     </a>
                 </div>
 
-                <!-- GROSSE GALÈRE (Vidéo 2) -->
                 <div class="channel-card-scroll">
                     <div class="channel-card-tag" style="color: var(--accent-alert);">Grosse Galère</div>
                     <a href="https://youtu.be/dbnNkeh6ciw" target="_blank" class="mini-video-link">
@@ -477,7 +505,7 @@
             </div>
         </div>
 
-        <!-- 3. JEUX JOUÉS EN STREAM EN 2026 -->
+        <!-- 3. JEUX JOUÉS EN STREAM EN 2026 (GRILLE CARRÉE AVEC COVERS) -->
         <div class="section-header">> PLAYLISTS // ARCHIVES DE STREAM</div>
         
         <div class="single-category-block">
@@ -485,26 +513,122 @@
                 [>] JEUX JOUÉS EN STREAM EN 2026
             </div>
             
-            <div class="game-list-links">
-                <a href="https://www.youtube.com/watch?v=C0VcqE2K75A&list=PLeaKN15x3GXIRhsxDX5KTs-LqiQNp7y8O" target="_blank" class="game-link-item">SOL CESTO</a>
-                <a href="https://www.youtube.com/watch?v=VrpmlWSg5ZU&list=PLeaKN15x3GXImBy0mLy8d94ocz_sXjGhP" target="_blank" class="game-link-item">KENSHI</a>
-                <a href="#" target="_blank" class="game-link-item">KINGDOM HEARTS I FINAL MIX</a>
-                <a href="#" target="_blank" class="game-link-item">KINGDOM HEARTS RE: CHAIN OF MEMORIES</a>
-                <a href="#" target="_blank" class="game-link-item">KINGDOM HEARTS II FINAL MIX</a>
-                <a href="https://www.youtube.com/watch?v=UBzpaYjw2og&list=PLeaKN15x3GXK1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-link-item">MAX PAYNE 3</a>
-                <a href="https://www.youtube.com/watch?v=mr2Zb0nPTGM&list=PLeaKN15x3GXJlfAT9vPk8_6DrwhKlIdGv" target="_blank" class="game-link-item">CRASH BANDICOOT N.SANE TRILOGY</a>
-                <a href="https://www.youtube.com/watch?v=C0VcqE2K75A&list=PLeaKN15x3GXIRhsxDX5KTs-LqiQNp7y8O" target="_blank" class="game-link-item">MOUSE P.I. FOR HIRE</a>
-                <a href="https://www.youtube.com/watch?v=FNUDMWKVa-w&list=PLeaKN15x3GXLmQ9j5jQse_G5oCNB3ncYX" target="_blank" class="game-link-item">FINAL FANTASY VII REMAKE INTERGRADE</a>
-                <a href="https://www.youtube.com/watch?v=QyPCW9CUkhE&list=PLeaKN15x3GXIFGhljOHJuPhi2ss-bmll-" target="_blank" class="game-link-item">007 FIRST LIGHT</a>
-                <a href="https://www.youtube.com/watch?v=lBpxUooGIhM&list=PLeaKN15x3GXKWbnohpX-aMRaxmSna0LhI" target="_blank" class="game-link-item">FIRE EMBLEM (GBA)</a>
-                <a href="https://www.youtube.com/watch?v=hyyNmbsxJPE&list=PLeaKN15x3GXLBVUOM96o1HqXpC1B_RXhd" target="_blank" class="game-link-item">SHADOW MAN REMASTERED</a>
-                <a href="https://www.youtube.com/watch?v=47lZhJA_1Hg&list=PLJjQWj1aVnf0" target="_blank" class="game-link-item">TUNIC</a>
-                <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&list=PLNcyDCaofkHY" target="_blank" class="game-link-item">MINIT</a>
-                <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&list=PLNcyDCaofkHY" target="_blank" class="game-link-item">FINAL FANTASY VII REBIRTH</a>
-                <a href="#" target="_blank" class="game-link-item">SPLINTER CELL CHAOS THEORY</a>
-                <a href="#" target="_blank" class="game-link-item">MORROWIND</a>
-                <a href="https://www.youtube.com/watch?v=1Xs7jUmwClA&list=PLeaKN15x3GXLnVahTm5gzuQOK4vmUk1Wn" target="_blank" class="game-link-item">KINGDOM COME DELIVRANCE</a>
-                <a href="https://www.youtube.com/watch?v=CyQYS8oNcXw&list=PLeaKN15x3GXItlfhnhL0t3HJg1NPZIqKa" target="_blank" class="game-link-item">REPLACED</a>
+            <div class="game-grid">
+                
+                <a href="https://www.youtube.com/watch?v=C0VcqE2K75A&list=PLeaKN15x3GXIRhsxDX5KTs-LqiQNp7y8O" target="_blank" class="game-card-square">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/2855160/header.jpg" alt="Sol Cesto Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Sol Cesto</div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=VrpmlWSg5ZU&list=PLeaKN15x3GXImBy0mLy8d94ocz_sXjGhP" target="_blank" class="game-card-square">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/233860/header.jpg" alt="Kenshi Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kenshi</div>
+                </a>
+
+                <a href="#" target="_blank" class="game-card-square">
+                    <img src="https://m.media-amazon.com/images/M/MV5BMjA4MTYxMDU3NF5BMl5BanBnXkFtZTcwNTI1ODgwNw@@._V1_.jpg" alt="Kingdom Hearts I Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts I Final Mix</div>
+                </a>
+
+                <a href="#" target="_blank" class="game-card-square">
+                    <img src="https://m.media-amazon.com/images/M/MV5BYzA2ZDdmMzMtODc5Ny00OTc5LTk2YTktYzQ3ZjYyZDhhMzgzXkEyXkFqcGc@._V1_.jpg" alt="Kingdom Hearts Chain of Memories Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts Re: Chain of Memories</div>
+                </a>
+
+                <a href="#" target="_blank" class="game-card-square">
+                    <img src="https://m.media-amazon.com/images/M/MV5BMDY3Nzg2YTAtMzBiMy00OTI5LWFhOGUtMmNkYThhMzA3YzQ5XkEyXkFqcGc@._V1_.jpg" alt="Kingdom Hearts II Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts II Final Mix</div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=UBzpaYjw2og&list=PLeaKN15x3GXK1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/204100/header.jpg" alt="Max Payne 3 Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Max Payne 3</div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=mr2Zb0nPTGM&list=PLeaKN15x3GXJlfAT9vPk8_6DrwhKlIdGv" target="_blank" class="game-card-square">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/731490/header.jpg" alt="Crash Bandicoot N.Sane Trilogy Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Crash Bandicoot N.Sane Trilogy</div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=C0VcqE2K75A&list=PLeaKN15x3GXIRhsxDX5KTs-LqiQNp7y8O" target="_blank" class="game-card-square">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/2223800/header.jpg" alt="Mouse P.I. For Hire Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Mouse P.I. For Hire</div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=FNUDMWKVa-w&list=PLeaKN15x3GXLmQ9j5jQse_G5oCNB3ncYX" target="_blank" class="game-card-square">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1462040/header.jpg" alt="Final Fantasy VII Remake Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">FF VII Remake Intergrade</div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=QyPCW9CUkhE&list=PLeaKN15x3GXIFGhljOHJuPhi2ss-bmll-" target="_blank" class="game-card-square">
+                    <img src="https://m.media-amazon.com/images/M/MV5BNDAwNzNhMTItODgwNi00Y2RkLTk2MWUtMjM1YmJhZTdhNTNlXkEyXkFqcGc@._V1_.jpg" alt="007 First Light Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">007 First Light</div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=lBpxUooGIhM&list=PLeaKN15x3GXKWbnohpX-aMRaxmSna0LhI" target="_blank" class="game-card-square">
+                    <img src="https://m.media-amazon.com/images/M/MV5BMjA3NTU0NTM1Ml5BMl5BanBnXkFtZTgwNTI5NDc4MDE@._V1_.jpg" alt="Fire Emblem Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Fire Emblem (GBA)</div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=hyyNmbsxJPE&list=PLeaKN15x3GXLBVUOM96o1HqXpC1B_RXhd" target="_blank" class="game-card-square">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1413870/header.jpg" alt="Shadow Man Remastered Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Shadow Man Remastered</div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=47lZhJA_1Hg&list=PLJjQWj1aVnf0" target="_blank" class="game-card-square">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/553420/header.jpg" alt="Tunic Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Tunic</div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&list=PLNcyDCaofkHY" target="_blank" class="game-card-square">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/609490/header.jpg" alt="Minit Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Minit</div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&list=PLNcyDCaofkHY" target="_blank" class="game-card-square">
+                    <img src="https://m.media-amazon.com/images/M/MV5BMjA2MDk5YjktYTcxNy00YzZkLTg3YzUtNjc1NDdmNmIyMTU1XkEyXkFqcGc@._V1_.jpg" alt="FF VII Rebirth Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">FF VII Rebirth</div>
+                </a>
+
+                <a href="#" target="_blank" class="game-card-square">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/22390/header.jpg" alt="Splinter Cell Chaos Theory Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Splinter Cell Chaos Theory</div>
+                </a>
+
+                <a href="#" target="_blank" class="game-card-square">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/22320/header.jpg" alt="Morrowind Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Morrowind</div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=1Xs7jUmwClA&list=PLeaKN15x3GXLnVahTm5gzuQOK4vmUk1Wn" target="_blank" class="game-card-square">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/379430/header.jpg" alt="Kingdom Come Deliverance Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Come Deliverance</div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=CyQYS8oNcXw&list=PLeaKN15x3GXItlfhnhL0t3HJg1NPZIqKa" target="_blank" class="game-card-square">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1663220/header.jpg" alt="Replaced Cover" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Replaced</div>
+                </a>
+
             </div>
         </div>
 
@@ -573,7 +697,6 @@
 
         function dragMouseDown(e) {
             e = e || window.event;
-            // Ne pas déplacer si on clique sur les boutons réductions/fermeture
             if (e.target.tagName === 'BUTTON') return;
             e.preventDefault();
             pos3 = e.clientX;
