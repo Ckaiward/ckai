@@ -462,6 +462,7 @@
             grid-template-columns: 1fr 300px;
             gap: 15px;
             height: 480px;
+            margin-bottom: 30px;
         }
 
         .twitch-frame {
@@ -551,6 +552,7 @@
         </nav>
     </header>
 
+    <!-- ONGLET ACCUEIL (ARCHIVES) -->
     <div id="home" class="tab-content active">
 
         <!-- 1. CHAÎNE PRINCIPALE (HERO) -->
@@ -620,6 +622,16 @@
                 </div>
 
             </div>
+        </div>
+
+    </div>
+
+    <!-- TAB TWITCH (LIVE_FEED) -->
+    <div id="twitch" class="tab-content">
+        
+        <div class="twitch-container">
+            <iframe id="twitch-main-player" class="twitch-frame" allowfullscreen></iframe>
+            <iframe id="twitch-chat" class="twitch-frame"></iframe>
         </div>
 
         <!-- 3. JEUX JOUÉS EN STREAM EN 2026 -->
@@ -749,7 +761,7 @@
             </div>
         </div>
 
-        <!-- 4. NOUVELLE SECTION : PROCHAINS JEUX -->
+        <!-- 4. SECTION PROCHAINS JEUX -->
         <div class="section-header">> UPCOMING_GAMES // PROCHAINS JEUX</div>
 
         <div class="single-category-block">
@@ -803,14 +815,6 @@
             </div>
         </div>
 
-    </div>
-
-    <!-- TAB TWITCH -->
-    <div id="twitch" class="tab-content">
-        <div class="twitch-container">
-            <iframe id="twitch-main-player" class="twitch-frame" allowfullscreen></iframe>
-            <iframe id="twitch-chat" class="twitch-frame"></iframe>
-        </div>
     </div>
 
 </div>
