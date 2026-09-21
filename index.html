@@ -12,6 +12,7 @@
             --panel-bg: #0c0c0d;
             --accent-glitch: #00ff66;
             --accent-alert: #ff0033;
+            --accent-blue: #00ccff;
             --text-main: #e0e0e0;
             --text-muted: #55555d;
             --border-hard: #1f1f24;
@@ -109,6 +110,7 @@
             color: var(--text-muted);
             text-transform: uppercase;
             margin-bottom: 15px;
+            margin-top: 30px;
             letter-spacing: 1px;
             display: flex;
             align-items: center;
@@ -339,6 +341,121 @@
             color: var(--accent-glitch);
         }
 
+        /* 4. SECTION PROCHAINS JEUX & FORMULAIRE */
+        .upcoming-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .upcoming-card {
+            background: #000;
+            border: 1px solid var(--border-hard);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 12px;
+            position: relative;
+        }
+
+        .upcoming-card:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .upcoming-game-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .proposed-by-box {
+            font-size: 11px;
+            color: var(--text-muted);
+            border-top: 1px dashed var(--border-hard);
+            padding-top: 8px;
+        }
+
+        .proposed-by-user {
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        /* FORMULAIRE RETRO */
+        .suggest-form-container {
+            background: #08080a;
+            border: 1px dashed var(--border-hard);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .suggest-form-title {
+            font-family: 'VT323', monospace;
+            font-size: 20px;
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .suggest-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .form-control {
+            background: #000;
+            border: 1px solid var(--border-hard);
+            color: #fff;
+            font-family: 'Share Tech Mono', monospace;
+            padding: 10px;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-blue);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .submit-btn {
+            background: #000;
+            border: 1px solid var(--accent-blue);
+            color: var(--accent-blue);
+            font-family: 'Share Tech Mono', monospace;
+            padding: 10px 20px;
+            font-size: 13px;
+            text-transform: uppercase;
+            cursor: pointer;
+            align-self: flex-start;
+            transition: all 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-blue);
+            color: #000;
+            font-weight: bold;
+        }
+
         /* TWITCH ONGLET PRINCIPAL */
         .twitch-container {
             display: grid;
@@ -505,7 +622,7 @@
             </div>
         </div>
 
-        <!-- 3. JEUX JOUÉS EN STREAM EN 2026 (TRIÉS PAR ORDRE ALPHABÉTIQUE) -->
+        <!-- 3. JEUX JOUÉS EN STREAM EN 2026 -->
         <div class="section-header">> PLAYLISTS // ARCHIVES DE STREAM</div>
         
         <div class="single-category-block">
@@ -629,6 +746,60 @@
                     <div class="game-card-title">Tunic</div>
                 </a>
 
+            </div>
+        </div>
+
+        <!-- 4. NOUVELLE SECTION : PROCHAINS JEUX -->
+        <div class="section-header">> UPCOMING_GAMES // PROCHAINS JEUX</div>
+
+        <div class="single-category-block">
+            <div style="font-family: 'VT323', monospace; font-size: 22px; color: var(--accent-blue);">
+                [>] JEUX EN ATTENTE DE STREAM
+            </div>
+
+            <!-- LISTE DE PROCHAINS JEUX -->
+            <div class="upcoming-grid">
+                
+                <div class="upcoming-card">
+                    <div class="upcoming-game-name">Silent Hill 2 Remake</div>
+                    <div class="proposed-by-box">
+                        Proposé par : <span class="proposed-by-user">Pseudo_01</span>
+                    </div>
+                </div>
+
+                <div class="upcoming-card">
+                    <div class="upcoming-game-name">Metal Gear Solid Delta</div>
+                    <div class="proposed-by-box">
+                        Proposé par : <span class="proposed-by-user">ShadowFan</span>
+                    </div>
+                </div>
+
+                <div class="upcoming-card">
+                    <div class="upcoming-game-name">Hollow Knight: Silksong</div>
+                    <div class="proposed-by-box">
+                        Proposé par : <span class="proposed-by-user">CKAI_Fan</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- FORMULAIRE DE PROPOSITION -->
+            <div class="suggest-form-container">
+                <div class="suggest-form-title">[+] PROPOSER UN JEU À FAIRE EN STREAM</div>
+                
+                <form class="suggest-form" onsubmit="event.preventDefault(); alert('Proposition envoyée !');">
+                    <div class="form-group">
+                        <label for="game-name">Nom du jeu</label>
+                        <input type="text" id="game-name" class="form-control" placeholder="ex: Resident Evil 4 Remake" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="game-reason">Pourquoi ce serait sympa d'y jouer en stream ?</label>
+                        <textarea id="game-reason" class="form-control" placeholder="Explique en quelques mots pourquoi ce jeu serait cool en live..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">> ENVOYER LA PROPOSITION</button>
+                </form>
             </div>
         </div>
 
