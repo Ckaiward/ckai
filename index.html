@@ -384,7 +384,7 @@
             font-weight: bold;
         }
 
-        /* NOUVEAU STYLE COMPACT POUR LES POINTS DE CHAÎNE */
+        /* POINTS DE CHAÎNE COMPACTS */
         .points-grid-compact {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
@@ -429,7 +429,6 @@
             color: var(--accent-gold);
         }
 
-        /* CARTE COMPLÉTÉE SOURIS/OVERLAY */
         .points-card-compact.completed {
             background: #000;
             border-color: rgba(255, 0, 51, 0.2);
@@ -895,7 +894,7 @@
 
         <div class="section-header">> PLAYLISTS // ARCHIVES DE STREAM</div>
         
-        <!-- SECTION TOUS LES 15 JEUX JOUÉS DE VOTRE DOSSIER -->
+        <!-- JEUX JOUÉS -->
         <div class="single-category-block">
             <div style="font-family: 'VT323', monospace; font-size: 22px; color: var(--accent-glitch);">
                 [>] JEUX JOUÉS EN STREAM EN 2026
@@ -1011,7 +1010,7 @@
 
         <div class="section-header">> UPCOMING_QUEUE // JEUX À VENIR</div>
 
-        <!-- LISTE 1 : JEUX PAYÉS PAR POINTS DE CHAÎNE (FORMAT COMPACT) -->
+        <!-- LISTE 1 : JEUX POINTS DE CHAÎNE -->
         <div class="single-category-block gold-border-block">
             <div class="upcoming-header-bar">
                 <div style="font-family: 'VT323', monospace; font-size: 18px; color: var(--accent-gold);">
@@ -1024,13 +1023,17 @@
             </div>
         </div>
 
-        <!-- LISTE 2 : JEUX PROPOSÉS PAR LA COMMUNAUTÉ -->
+        <!-- LISTE 2 : JEUX COMMUNAUTÉ -->
         <div class="single-category-block blue-border-block" style="margin-top: 30px;">
             <div class="upcoming-header-bar">
                 <div style="font-family: 'VT323', monospace; font-size: 22px; color: var(--accent-blue);">
                     [+] JEUX PROPOSÉS PAR LA COMMUNAUTÉ (CLIQUEZ POUR VOTER)
                 </div>
-                <button class="admin-toggle-btn" id="adminToggleBtn" onclick="toggleAdminMode()">[MODE ADMIN]</button>
+                <!-- CHAMP ADMIN INTÉGRÉ -->
+                <div id="admin-container" style="display: inline-block;">
+                    <input type="password" id="adminPasswordInput" placeholder="Mot de passe..." onkeydown="checkAdminEnter(event)" style="display: none; padding: 4px 8px; background: #000; color: #00ff66; border: 1px solid var(--accent-alert); font-family: inherit; font-size: 11px; outline: none; margin-right: 5px;">
+                    <button class="admin-toggle-btn" id="adminToggleBtn" onclick="toggleAdminMode()">[MODE ADMIN]</button>
+                </div>
             </div>
 
             <div class="upcoming-grid" id="community-games-list">
@@ -1162,7 +1165,7 @@
     let communityGames = JSON.parse(localStorage.getItem('ckai_community_games_v4')) || defaultCommunityGames;
     let userVotes = JSON.parse(localStorage.getItem('ckai_user_votes_v4')) || {};
     let isAdmin = false;
-    const ADMIN_PASSWORD = "admin";
+    const ADMIN_PASSWORD = "giratina";
 
     function saveData() {
         localStorage.setItem('ckai_points_games_v4', JSON.stringify(channelPointsGames));
@@ -1175,22 +1178,39 @@
     }
 
     function toggleAdminMode() {
+        const inputField = document.getElementById('adminPasswordInput');
+        const btn = document.getElementById('adminToggleBtn');
+
         if (!isAdmin) {
-            const pwd = prompt("Entrez le mot de passe administrateur :");
-            if (pwd === ADMIN_PASSWORD) {
-                isAdmin = true;
-                document.getElementById('adminToggleBtn').classList.add('active');
-                document.getElementById('adminToggleBtn').innerText = '[ADMIN ACTIVÉ]';
-                alert("Mode Admin Activé.");
-            } else if (pwd !== null) {
-                alert("Mot de passe incorrect.");
+            if (inputField.style.display === 'none') {
+                inputField.style.display = 'inline-block';
+                inputField.focus();
+                btn.innerText = '[VALIDER]';
+            } else {
+                if (inputField.value === ADMIN_PASSWORD) {
+                    isAdmin = true;
+                    inputField.style.display = 'none';
+                    inputField.value = '';
+                    btn.classList.add('active');
+                    btn.innerText = '[ADMIN ACTIVÉ]';
+                } else {
+                    alert("Mot de passe incorrect.");
+                    inputField.value = '';
+                    inputField.focus();
+                }
             }
         } else {
             isAdmin = false;
-            document.getElementById('adminToggleBtn').classList.remove('active');
-            document.getElementById('adminToggleBtn').innerText = '[MODE ADMIN]';
+            btn.classList.remove('active');
+            btn.innerText = '[MODE ADMIN]';
         }
         renderAllGameLists();
+    }
+
+    function checkAdminEnter(event) {
+        if (event.key === 'Enter') {
+            toggleAdminMode();
+        }
     }
 
     function deleteCommunityGame(gameId, event) {
