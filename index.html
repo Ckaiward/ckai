@@ -3,645 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CKAI // CORE_SYSTEM</title>
+    <title>HUB // Écran d'accueil</title>
+    <!-- Polices rétro / cyberpunk -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&family=Space+Grotesk:wght@700&display=swap');
-
         :root {
-            --bg-dark: #050505;
-            --panel-bg: #0c0c0d;
+            --bg-main: #0c0c0d;
+            --panel-bg: #141416;
+            --border-hard: #2a2a2f;
+            --text-main: #e0e0e6;
+            --text-muted: #8b8b9e;
             --accent-glitch: #00ff66;
-            --accent-alert: #ff0033;
-            --accent-blue: #00ccff;
-            --accent-gold: #ffcc00;
-            --text-main: #e0e0e0;
-            --text-muted: #55555d;
-            --border-hard: #1f1f24;
+            --accent-blue: #00e5ff;
+            --accent-alert: #ff4060;
         }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Share Tech Mono', monospace;
-            background-color: var(--bg-dark);
+            background-color: var(--bg-main);
             color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            background-image: 
-                linear-gradient(rgba(12, 12, 13, 0.8) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(12, 12, 13, 0.8) 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-
-        /* SCANLINES */
-        body::before {
-            content: " ";
-            display: block;
-            position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
-            background-size: 100% 4px;
-            z-index: 99;
-            pointer-events: none;
-            opacity: 0.6;
-        }
-
-        .main-wrapper {
-            width: 100%;
-            max-width: 1100px;
-            padding: 30px 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--border-hard);
-        }
-
-        .brand {
-            font-family: 'VT323', monospace;
-            font-size: 38px;
-            color: #fff;
-            text-decoration: none;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .brand::after {
-            content: ' [MAIN_NODE]';
-            font-size: 14px;
-            color: var(--accent-glitch);
             font-family: 'Share Tech Mono', monospace;
+            margin: 0;
+            padding: 20px;
         }
 
-        .nav-tabs { display: flex; gap: 8px; }
-
-        .tab-btn {
-            background: #000;
-            border: 1px solid var(--border-hard);
-            color: var(--text-muted);
-            padding: 8px 16px;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 12px;
-            text-transform: uppercase;
-            cursor: pointer;
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        .tab-btn:hover { color: #fff; border-color: var(--text-muted); }
-
-        .tab-btn.active {
-            background: var(--text-main);
-            color: #000;
-            border-color: var(--text-main);
-            font-weight: bold;
-        }
-
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-
-        .section-header {
-            font-family: 'VT323', monospace;
-            font-size: 22px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            margin-bottom: 15px;
+        /* --- STYLES DU BLOC PATREON --- */
+        .patreon-section {
+            background: linear-gradient(180deg, rgba(255, 64, 96, 0.05) 0%, rgba(12, 12, 13, 1) 100%);
+            border: 1px solid rgba(255, 64, 96, 0.4);
+            padding: 20px;
             margin-top: 30px;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-header::after {
-            content: '';
-            flex-grow: 1;
-            height: 1px;
-            background: var(--border-hard);
-        }
-
-        /* 1. HERO SECTION */
-        .featured-hero {
             display: grid;
-            grid-template-columns: 1.8fr 1fr;
-            gap: 15px;
-            margin-bottom: 40px;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            align-items: center;
         }
 
-        @media (max-width: 850px) {
-            .featured-hero { grid-template-columns: 1fr; }
+        @media (max-width: 800px) {
+            .patreon-section { grid-template-columns: 1fr; }
         }
 
-        .main-player-box {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-hard);
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .video-embed-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            background: #000;
-        }
-
-        .video-embed-container iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%; border: 0;
-        }
-
-        .main-video-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 15px;
-            color: #fff;
+        .patreon-info h3 {
+            font-family: 'VT323', monospace;
+            font-size: 24px;
+            color: var(--accent-alert);
+            margin-bottom: 8px;
             text-transform: uppercase;
+            margin-top: 0;
         }
 
-        .side-recommended {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .rec-card {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-hard);
-            padding: 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .rec-card:hover {
-            border-color: var(--text-muted);
-            background: #111114;
-        }
-
-        .rec-thumb-box {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            background: #000;
-            overflow: hidden;
-        }
-
-        .rec-thumb-box img {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
-        }
-
-        .rec-title {
-            font-size: 11px;
+        .patreon-info p {
+            font-size: 12px;
             color: var(--text-main);
-            line-height: 1.3;
+            line-height: 1.4;
+            margin-bottom: 12px;
         }
 
-        /* 2. CAROUSEL CHAÎNES */
-        .other-channels-section {
-            margin-bottom: 40px;
-        }
-
-        .carousel-track {
-            display: flex;
-            overflow-x: auto;
-            gap: 15px;
-            padding-bottom: 10px;
-            scroll-snap-type: x mandatory;
-        }
-
-        .carousel-track::-webkit-scrollbar { height: 3px; }
-        .carousel-track::-webkit-scrollbar-thumb { background: var(--border-hard); }
-
-        .channel-card-scroll {
-            min-width: 240px;
-            max-width: 240px;
-            background: var(--panel-bg);
-            border: 1px solid var(--border-hard);
-            padding: 10px;
-            scroll-snap-align: start;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .channel-card-tag {
-            font-size: 10px;
-            color: var(--accent-glitch);
-            text-transform: uppercase;
-            border-bottom: 1px solid var(--border-hard);
-            padding-bottom: 4px;
-        }
-
-        .mini-video-link {
+        .patreon-feed-list {
+            font-size: 11px;
+            color: var(--text-muted);
+            border-left: 2px solid var(--accent-alert);
+            padding-left: 10px;
             display: flex;
             flex-direction: column;
             gap: 6px;
-            text-decoration: none;
-            color: inherit;
         }
 
-        .mini-video-thumb {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border: 1px solid var(--border-hard);
-        }
-
-        .mini-video-title {
-            font-size: 11px;
-            color: var(--text-main);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .single-category-block {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-hard);
-            padding: 24px;
-            margin-top: 20px;
-        }
-
-        .gold-border-block {
-            border-color: rgba(255, 204, 0, 0.3);
-            background: linear-gradient(180deg, rgba(255, 204, 0, 0.02) 0%, rgba(12, 12, 13, 1) 100%);
-            padding: 15px 20px;
-        }
-
-        .blue-border-block {
-            border-color: rgba(0, 204, 255, 0.4);
-            background: linear-gradient(180deg, rgba(0, 204, 255, 0.03) 0%, rgba(12, 12, 13, 1) 100%);
-        }
-
-        /* 3. GRILLE DE TOUS LES JEUX JOUÉS */
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .game-card-square {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            background-color: #000;
-            border: 1px solid var(--border-hard);
-            overflow: hidden;
-            text-decoration: none;
-            display: flex;
-            align-items: flex-end;
-            transition: all 0.25s ease;
-        }
-
-        .game-card-bg {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            filter: brightness(0.75) contrast(1.1);
-            transition: transform 0.3s ease, filter 0.3s ease;
-        }
-
-        .game-card-overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%);
-            z-index: 1;
-        }
-
-        .game-card-title {
-            position: relative;
-            z-index: 2;
-            padding: 10px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 11px;
+        .patreon-feed-item span {
+            color: var(--accent-alert);
             font-weight: bold;
-            color: #fff;
+        }
+
+        .patreon-cta-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-align: center;
+        }
+
+        .patreon-btn {
+            background: var(--accent-alert);
+            color: #000;
+            border: none;
+            padding: 12px 20px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            font-weight: bold;
             text-transform: uppercase;
-            line-height: 1.2;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
             width: 100%;
             text-align: center;
         }
 
-        .game-card-square:hover {
-            border-color: var(--accent-glitch);
-            box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
+        .patreon-btn:hover {
+            background: #ff6584;
+            box-shadow: 0 0 15px rgba(255, 64, 96, 0.5);
             transform: translateY(-2px);
         }
 
-        .game-card-square:hover .game-card-bg {
-            transform: scale(1.08);
-            filter: brightness(0.95) contrast(1.1);
-        }
-
-        .game-card-square:hover .game-card-title {
-            color: var(--accent-glitch);
-        }
-
-        /* 4. UPCOMING & VOTES */
-        .upcoming-header-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .admin-toggle-btn {
-            background: #000;
+        /* --- STYLES DE LA PROGRESSION DES VIDÉOS --- */
+        .progress-section {
+            background: var(--panel-bg);
             border: 1px solid var(--border-hard);
-            color: var(--text-muted);
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 11px;
-            padding: 4px 10px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .admin-toggle-btn:hover {
-            border-color: var(--accent-alert);
-            color: var(--accent-alert);
-        }
-
-        .admin-toggle-btn.active {
-            border-color: var(--accent-alert);
-            background: rgba(255, 0, 51, 0.1);
-            color: var(--accent-alert);
-            font-weight: bold;
-        }
-
-        /* POINTS DE CHAÎNE COMPACTS */
-        .points-grid-compact {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-            gap: 8px;
-            margin-top: 12px;
-        }
-
-        .points-card-compact {
-            background: #000;
-            border: 1px solid var(--border-hard);
-            padding: 8px 10px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 48px;
-            transition: all 0.2s ease;
-        }
-
-        .points-card-compact:not(.completed):hover {
-            border-color: var(--accent-gold);
-            background: rgba(255, 204, 0, 0.03);
-        }
-
-        .points-card-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 11px;
-            color: #fff;
-            text-transform: uppercase;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .points-card-user {
-            font-size: 9px;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        .points-card-user span {
-            color: var(--accent-gold);
-        }
-
-        .points-card-compact.completed {
-            background: #000;
-            border-color: rgba(255, 0, 51, 0.2);
-            overflow: hidden;
-        }
-
-        .completed-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(5, 5, 5, 0.95);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            z-index: 5;
-            transition: opacity 0.2s ease;
-        }
-
-        .completed-x {
-            color: var(--accent-alert);
-            font-family: 'VT323', monospace;
-            font-size: 20px;
-            font-weight: bold;
-            line-height: 1;
-        }
-
-        .completed-text {
-            color: var(--accent-alert);
-            font-size: 10px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .points-card-compact.completed:hover .completed-overlay {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .upcoming-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        .community-card {
-            background: #000;
-            border: 1px solid var(--border-hard);
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 12px;
-            position: relative;
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.2s ease;
-            overflow: hidden;
-        }
-
-        .community-card:hover {
-            border-color: var(--accent-blue);
-            transform: translateY(-2px);
-        }
-
-        .community-card.voted {
-            border-color: var(--accent-glitch);
-            background: #031208;
-        }
-
-        .upcoming-card-content {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            z-index: 2;
-        }
-
-        .upcoming-game-name {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 14px;
-            color: #fff;
-            text-transform: uppercase;
-            padding-right: 25px;
-        }
-
-        .upcoming-card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            border-top: 1px dashed var(--border-hard);
-            padding-top: 8px;
-            z-index: 2;
-        }
-
-        .proposed-by-box {
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
-        .proposed-by-user {
-            color: var(--accent-blue);
-            font-weight: bold;
-        }
-
-        .vote-count-box {
-            font-size: 11px;
-            color: var(--accent-glitch);
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .vote-btn-indicator {
-            font-size: 10px;
-            padding: 2px 6px;
-            border: 1px solid var(--border-hard);
-            background: #111;
-            color: #888;
-            border-radius: 2px;
-            margin-top: 6px;
-            align-self: flex-start;
-        }
-
-        .community-card.voted .vote-btn-indicator {
-            border-color: var(--accent-glitch);
-            color: var(--accent-glitch);
-            background: rgba(0,255,102,0.1);
-        }
-
-        .delete-card-btn {
-            position: absolute;
-            top: 4px;
-            right: 4px;
-            background: rgba(255, 0, 51, 0.2);
-            border: 1px solid var(--accent-alert);
-            color: var(--accent-alert);
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 10px;
-            font-weight: bold;
-            width: 18px;
-            height: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 20;
-            transition: all 0.2s ease;
-        }
-
-        .delete-card-btn:hover {
-            background: var(--accent-alert);
-            color: #000;
-        }
-
-        .vote-hover-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(5, 5, 10, 0.95);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.25s ease;
-            z-index: 10;
-            padding: 15px;
-            border: 1px solid var(--accent-blue);
-        }
-
-        .community-card:hover .vote-hover-overlay {
-            opacity: 1;
-        }
-
-        .percentage-display {
-            font-family: 'VT323', monospace;
-            font-size: 32px;
-            color: var(--accent-glitch);
-            line-height: 1;
-        }
-
-        .percentage-bar-bg {
-            width: 100%;
-            height: 6px;
-            background: var(--border-hard);
-            overflow: hidden;
-            border-radius: 3px;
-        }
-
-        .percentage-bar-fill {
-            height: 100%;
-            background: var(--accent-glitch);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .percentage-stats {
-            font-size: 10px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-
-        .suggest-form-container {
-            background: #08080a;
-            border: 1px dashed var(--accent-blue);
             padding: 20px;
-            margin-top: 25px;
+            margin-top: 30px;
         }
 
-        .suggest-form-title {
+        .progress-header {
             font-family: 'VT323', monospace;
             font-size: 20px;
             color: var(--accent-blue);
@@ -649,718 +126,118 @@
             text-transform: uppercase;
         }
 
-        .suggest-form {
+        .progress-list {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
 
-        .form-row {
-            display: flex;
-            gap: 15px;
-        }
-
-        @media (max-width: 600px) {
-            .form-row { flex-direction: column; }
-        }
-
-        .form-group {
+        .progress-item {
             display: flex;
             flex-direction: column;
             gap: 6px;
-            flex: 1;
         }
 
-        .form-group label {
-            font-size: 11px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-
-        .form-control {
-            background: #000;
-            border: 1px solid var(--border-hard);
-            color: #fff;
-            font-family: 'Share Tech Mono', monospace;
-            padding: 10px;
-            font-size: 13px;
-            outline: none;
-        }
-
-        .form-control:focus {
-            border-color: var(--accent-blue);
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .submit-btn {
-            background: #000;
-            border: 1px solid var(--accent-blue);
-            color: var(--accent-blue);
-            font-family: 'Share Tech Mono', monospace;
-            padding: 10px 20px;
-            font-size: 13px;
-            text-transform: uppercase;
-            cursor: pointer;
-            align-self: flex-start;
-            transition: all 0.2s ease;
-        }
-
-        .submit-btn:hover {
-            background: var(--accent-blue);
-            color: #000;
-            font-weight: bold;
-        }
-
-        /* TWITCH ONGLET PRINCIPAL */
-        .twitch-container {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 15px;
-            height: 480px;
-            margin-bottom: 30px;
-        }
-
-        @media (max-width: 800px) {
-            .twitch-container {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
-            .twitch-frame { height: 350px; }
-        }
-
-        .twitch-frame {
-            width: 100%;
-            height: 100%;
-            border: 1px solid var(--border-hard);
-            background: #000;
-        }
-
-        /* TWITCH POPUP PIP */
-        .pip-popup {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 300px;
-            background: #000;
-            border: 1px solid var(--accent-glitch);
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .pip-header {
-            background: #111115;
-            padding: 6px 10px;
+        .progress-info-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            cursor: move;
-            border-bottom: 1px solid var(--border-hard);
-            user-select: none;
+            font-size: 11px;
+            text-transform: uppercase;
         }
 
-        .pip-title {
-            font-size: 11px;
-            color: var(--accent-glitch);
+        .progress-title {
+            color: var(--text-main);
             font-weight: bold;
         }
 
-        .pip-controls { display: flex; gap: 4px; }
+        .progress-percentage {
+            font-family: 'VT323', monospace;
+            font-size: 16px;
+        }
 
-        .pip-btn {
+        .progress-track {
+            width: 100%;
+            height: 8px;
             background: #000;
-            color: #fff;
             border: 1px solid var(--border-hard);
-            cursor: pointer;
-            font-size: 10px;
-            padding: 2px 6px;
-            font-family: inherit;
-        }
-
-        .pip-btn:hover {
-            border-color: var(--text-main);
-            color: var(--accent-glitch);
-        }
-
-        .pip-video {
+            overflow: hidden;
             position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            transition: max-height 0.3s ease;
         }
 
-        .pip-video iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%; border: 0;
+        .progress-fill {
+            height: 100%;
+            transition: width 0.4s ease;
         }
-
-        .pip-popup.minimized .pip-video { display: none; }
     </style>
 </head>
 <body>
 
-<div class="main-wrapper">
+    <div class="container">
+        <!-- ACCUEIL / ARCHIVES -->
+        <div id="home">
+            <h1 style="font-family: 'VT323', monospace; font-size: 32px; color: var(--accent-glitch); margin-bottom: 5px;">[ ARCHIVES // ACCUEIL ]</h1>
+            <p style="font-size: 12px; color: var(--text-muted); margin-top: 0;">Bienvenue sur le hub central des flux et des productions.</p>
 
-    <header>
-        <a href="#" class="brand">CKAI</a>
-        <nav class="nav-tabs">
-            <button class="tab-btn active" onclick="openTab('home', this)">// ARCHIVES</button>
-            <button class="tab-btn" onclick="openTab('twitch', this)">// LIVE_FEED</button>
-        </nav>
-    </header>
-
-    <!-- ONGLET ARCHIVES -->
-    <div id="home" class="tab-content active">
-
-        <div class="section-header">> CORE_NODE // CKAI</div>
-        
-        <div class="featured-hero">
-            <div class="main-player-box">
-                <div class="video-embed-container">
-                    <iframe src="https://www.youtube.com/embed/KS2ARw2Ctts" allowfullscreen></iframe>
-                </div>
-                <div class="main-video-title">Dernière Vidéo CKAI</div>
-            </div>
-
-            <div class="side-recommended">
-                <a href="https://youtu.be/uzXsah-SJmY" target="_blank" class="rec-card">
-                    <div class="rec-thumb-box">
-                        <img src="https://img.youtube.com/vi/uzXsah-SJmY/hqdefault.jpg" alt="">
-                    </div>
-                    <div class="rec-title">Recommandé 01 - CKAI</div>
-                </a>
-
-                <a href="https://youtu.be/Hs4M52a5cS8" target="_blank" class="rec-card">
-                    <div class="rec-thumb-box">
-                        <img src="https://img.youtube.com/vi/Hs4M52a5cS8/hqdefault.jpg" alt="">
-                    </div>
-                    <div class="rec-title">Recommandé 02 - CKAI</div>
-                </a>
-            </div>
-        </div>
-
-        <div class="other-channels-section">
-            <div class="section-header">> EXTERNAL_NODES // AUTRES CHAÎNES</div>
-            
-            <div class="carousel-track">
-                <div class="channel-card-scroll">
-                    <div class="channel-card-tag" style="color: var(--accent-glitch);">C'est le C</div>
-                    <a href="https://youtu.be/-suS2RgZyxI" target="_blank" class="mini-video-link">
-                        <img src="https://img.youtube.com/vi/-suS2RgZyxI/hqdefault.jpg" class="mini-video-thumb" alt="">
-                        <div class="mini-video-title">C'est le C - Vidéo 1</div>
-                    </a>
-                </div>
-
-                <div class="channel-card-scroll">
-                    <div class="channel-card-tag" style="color: var(--accent-glitch);">C'est le C</div>
-                    <a href="https://youtu.be/BNOc9XchjRE" target="_blank" class="mini-video-link">
-                        <img src="https://img.youtube.com/vi/BNOc9XchjRE/hqdefault.jpg" class="mini-video-thumb" alt="">
-                        <div class="mini-video-title">C'est le C - Vidéo 2</div>
-                    </a>
-                </div>
-
-                <div class="channel-card-scroll">
-                    <div class="channel-card-tag" style="color: var(--accent-alert);">Grosse Galère</div>
-                    <a href="https://youtu.be/sMU200R94BE" target="_blank" class="mini-video-link">
-                        <img src="https://img.youtube.com/vi/sMU200R94BE/hqdefault.jpg" class="mini-video-thumb" alt="">
-                        <div class="mini-video-title">Grosse Galère - Vidéo 1</div>
-                    </a>
-                </div>
-
-                <div class="channel-card-scroll">
-                    <div class="channel-card-tag" style="color: var(--accent-alert);">Grosse Galère</div>
-                    <a href="https://youtu.be/dbnNkeh6ciw" target="_blank" class="mini-video-link">
-                        <img src="https://img.youtube.com/vi/dbnNkeh6ciw/hqdefault.jpg" class="mini-video-thumb" alt="">
-                        <div class="mini-video-title">Grosse Galère - Vidéo 2</div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- ONGLET TWITCH -->
-    <div id="twitch" class="tab-content">
-        
-        <div class="twitch-container">
-            <iframe id="twitch-main-player" class="twitch-frame" allowfullscreen></iframe>
-            <iframe id="twitch-chat" class="twitch-frame"></iframe>
-        </div>
-
-        <div class="section-header">> PLAYLISTS // ARCHIVES DE STREAM</div>
-        
-        <!-- JEUX JOUÉS -->
-        <div class="single-category-block">
-            <div style="font-family: 'VT323', monospace; font-size: 22px; color: var(--accent-glitch);">
-                [>] JEUX JOUÉS EN STREAM EN 2026
-            </div>
-            
-            <div class="game-grid">
-                <!-- 1. 007 FIRST LIGHT -->
-                <a href="https://www.youtube.com/watch?v=QyPCW9CUkhE&list=PLeaKN15x3GXIFGhljOHJuPhi2ss-bmll-" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/JRnBqW36/007-FIRST-LIGHT.jpg" alt="007 First Light" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">007 FIRST LIGHT</div>
-                </a>
-
-                <!-- 2. FF7 REBIRTH -->
-                <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&list=PLNcyDCaofkHY" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/r2wftb9N/FF7-rebirth.jpg" alt="FF VII Rebirth" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">FF7 Rebirth</div>
-                </a>
-
-                <!-- 3. FF7 REMAKE -->
-                <a href="https://www.youtube.com/watch?v=FNUDMWKVa-w&list=PLeaKN15x3GXLmQ9j5jQse_G5oCNB3ncYX" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/LD4z5tzf/ff7-remake.jpg" alt="FF VII Remake" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">FF7 Remake</div>
-                </a>
-
-                <!-- 4. FIRE EMBLEM -->
-                <a href="https://www.youtube.com/watch?v=lBpxUooGIhM&list=PLeaKN15x3GXKWbnohpX-aMRaxmSna0LhI" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/zT6BzL61/FIRE-EMBLEM.jpg" alt="Fire Emblem" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">FIRE EMBLEM</div>
-                </a>
-
-                <!-- 5. KENSHI -->
-                <a href="https://www.youtube.com/watch?v=VrpmlWSg5ZU&list=PLeaKN15x3GXImBy0mLy8d94ocz_sXjGhP" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/S4VP8P2K/kenshi.jpg" alt="Kenshi" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Kenshi</div>
-                </a>
-
-                <!-- 6. KINGDOM COME DELIVERANCE -->
-                <a href="https://www.youtube.com/watch?v=1Xs7jUmwClA&list=PLeaKN15x3GXLnVahTm5gzuQOK4vmUk1Wn" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/nswkHvGR/Kingdom-come-delivrance.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Kingdom Come Deliverance</div>
-                </a>
-
-                <!-- 7. MAX PAYNE 3 -->
-                <a href="https://www.youtube.com/watch?v=UBzpaYjw2og&list=PLeaKN15x3GXK1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/PvqTCqff/MAX-PAYNE-3.jpg" alt="Max Payne 3" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">MAX PAYNE 3</div>
-                </a>
-
-                <!-- 8. MINNIT -->
-                <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&list=PLNcyDCaofkHY" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/Y4KG5C6Q/minnit.jpg" alt="Minit" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Minit</div>
-                </a>
-
-                <!-- 9. MORROWIND -->
-                <a href="#" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/JRky9Wfw/morrowind.jpg" alt="Morrowind" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Morrowind</div>
-                </a>
-
-                <!-- 10. MOUSE PI FOR HIRE -->
-                <a href="https://www.youtube.com/watch?v=C0VcqE2K75A&list=PLeaKN15x3GXIRhsxDX5KTs-LqiQNp7y8O" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/gMZjdPX2/MOUSE-PI-FOR-HIRE.jpg" alt="Mouse PI for Hire" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">MOUSE PI FOR HIRE</div>
-                </a>
-
-                <!-- 11. REPLACED -->
-                <a href="https://www.youtube.com/watch?v=CyQYS8oNcXw&list=PLeaKN15x3GXItlfhnhL0t3HJg1NPZIqKa" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/7dkm2gGP/replaced.jpg" alt="Replaced" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Replaced</div>
-                </a>
-
-                <!-- 12. SHADOW MAN -->
-                <a href="https://www.youtube.com/watch?v=hyyNmbsxJPE&list=PLeaKN15x3GXLBVUOM96o1HqXpC1B_RXhd" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/VpLDfXCP/shadow-man.jpg" alt="Shadow Man" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Shadow Man</div>
-                </a>
-
-                <!-- 13. SOL CESTO -->
-                <a href="https://www.youtube.com/watch?v=5TmXx08-Ju8&list=PLeaKN15x3GXIDWmIa4stA_5YMlnwAHfO0" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/ym0phSGC/sol-cesto.jpg" alt="Sol Cesto" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Sol Cesto</div>
-                </a>
-
-                <!-- 14. SPLINTER CELL CHAOS THEORY -->
-                <a href="#" target="_blank" class="game-card-square">
-                    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/13570/header.jpg" alt="Splinter Cell Chaos Theory" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Splinter Cell Chaos Theory</div>
-                </a>
-
-                <!-- 15. TUNIC -->
-                <a href="https://www.youtube.com/watch?v=47lZhJA_1Hg&list=PLJjQWj1aVnf0" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/LdszVfKr/tunic.jpg" alt="Tunic" class="game-card-bg">
-                    <div class="game-card-overlay"></div>
-                    <div class="game-card-title">Tunic</div>
-                </a>
-            </div>
-        </div>
-
-        <div class="section-header">> UPCOMING_QUEUE // JEUX À VENIR</div>
-
-        <!-- LISTE 1 : JEUX POINTS DE CHAÎNE -->
-        <div class="single-category-block gold-border-block">
-            <div class="upcoming-header-bar">
-                <div style="font-family: 'VT323', monospace; font-size: 18px; color: var(--accent-gold);">
-                    [★] JEUX POINTS DE CHAÎNE
-                </div>
-            </div>
-
-            <div class="points-grid-compact" id="channel-points-games-list">
-                <!-- JS Inject -->
-            </div>
-        </div>
-
-        <!-- LISTE 2 : JEUX COMMUNAUTÉ -->
-        <div class="single-category-block blue-border-block" style="margin-top: 30px;">
-            <div class="upcoming-header-bar">
-                <div style="font-family: 'VT323', monospace; font-size: 22px; color: var(--accent-blue);">
-                    [+] JEUX PROPOSÉS PAR LA COMMUNAUTÉ (CLIQUEZ POUR VOTER)
-                </div>
-                <!-- CHAMP ADMIN INTÉGRÉ -->
-                <div id="admin-container" style="display: inline-block;">
-                    <input type="password" id="adminPasswordInput" placeholder="Mot de passe..." onkeydown="checkAdminEnter(event)" style="display: none; padding: 4px 8px; background: #000; color: #00ff66; border: 1px solid var(--accent-alert); font-family: inherit; font-size: 11px; outline: none; margin-right: 5px;">
-                    <button class="admin-toggle-btn" id="adminToggleBtn" onclick="toggleAdminMode()">[MODE ADMIN]</button>
-                </div>
-            </div>
-
-            <div class="upcoming-grid" id="community-games-list">
-                <!-- JS Inject -->
-            </div>
-
-            <!-- FORMULAIRE -->
-            <div class="suggest-form-container">
-                <div class="suggest-form-title">[+] PROPOSER UN JEU À FAIRE EN STREAM</div>
+            <!-- BLOC PROGRESSION DES VIDÉOS PAR CHAÎNE -->
+            <div class="progress-section">
+                <div class="progress-header">[>] STATUT DES ENCOURS // PROGRESSION DES VIDÉOS</div>
                 
-                <form class="suggest-form" id="suggestGameForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="user-pseudo">Votre Pseudo</label>
-                            <input type="text" id="user-pseudo" class="form-control" placeholder="ex: User_99" required>
+                <div class="progress-list">
+                    <!-- Projet Chaîne 1 : CKAI -->
+                    <div class="progress-item">
+                        <div class="progress-info-row">
+                            <span class="progress-title">CKAI // Rétrospective & Test</span>
+                            <span class="progress-percentage" style="color: var(--accent-glitch);">75%</span>
                         </div>
-                        <div class="form-group">
-                            <label for="game-name">Nom du jeu</label>
-                            <input type="text" id="game-name" class="form-control" placeholder="ex: Resident Evil 4 Remake" required>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width: 75%; background: var(--accent-glitch);"></div>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="game-reason">Pourquoi ce serait sympa d'y jouer en stream ?</label>
-                        <textarea id="game-reason" class="form-control" placeholder="Explique en quelques mots pourquoi ce jeu serait cool en live..." required></textarea>
+                    <!-- Projet Chaîne 2 : C'est le C -->
+                    <div class="progress-item">
+                        <div class="progress-info-row">
+                            <span class="progress-title">C'est le C // Épisode Spécial</span>
+                            <span class="progress-percentage" style="color: var(--accent-blue);">40%</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width: 40%; background: var(--accent-blue);"></div>
+                        </div>
                     </div>
 
-                    <button type="submit" class="submit-btn">> ENVOYER ET VOTER</button>
-                </form>
+                    <!-- Projet Chaîne 3 : Grosse Galère -->
+                    <div class="progress-item">
+                        <div class="progress-info-row">
+                            <span class="progress-title">Grosse Galère // Tournage en cours</span>
+                            <span class="progress-percentage" style="color: var(--accent-alert);">20%</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width: 20%; background: var(--accent-alert);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BLOC PATREON & ACTUS -->
+            <div class="patreon-section">
+                <div class="patreon-info">
+                    <h3>[◆] TRANSMISSION PATREON // ACTUALITÉS</h3>
+                    <p>Soutiens le laboratoire pour débloquer des contenus exclusifs, participer aux choix prioritaires et faire vivre la chaîne au quotidien !</p>
+                    
+                    <div class="patreon-feed-list">
+                        <div class="patreon-feed-item"><span>[DERNIÈRE ACTU]</span> Sondage exclusif lancé pour le prochain projet du mois.</div>
+                        <div class="patreon-feed-item"><span>[OBJECTIF]</span> Merci aux contributeurs pour le nouveau palier atteint !</div>
+                    </div>
+                </div>
+
+                <div class="patreon-cta-box">
+                    <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Rejoins les soutiens</div>
+                    <!-- Remplace le lien '#' par ton lien Patreon réel -->
+                    <a href="https://www.patreon.com" target="_blank" class="patreon-btn">> REJOINDRE LE PATREON</a>
+                </div>
             </div>
         </div>
-
     </div>
-
-</div>
-
-<!-- TWITCH POPUP PIP -->
-<div class="pip-popup" id="pipPopup">
-    <div class="pip-header" id="pipHeader">
-        <span class="pip-title">[LIVE] TWITCH_FEED</span>
-        <div class="pip-controls">
-            <button class="pip-btn" onclick="toggleMinimizePip()" id="pipMinBtn">[-]</button>
-            <button class="pip-btn" onclick="document.getElementById('pipPopup').style.display='none'">[X]</button>
-        </div>
-    </div>
-    <div class="pip-video">
-        <iframe id="twitch-pip-player" allowfullscreen></iframe>
-    </div>
-</div>
-
-<script>
-    let currentHost = window.location.hostname || "localhost";
-    document.getElementById("twitch-main-player").src = `https://player.twitch.tv/?channel=ckai&parent=${currentHost}`;
-    document.getElementById("twitch-pip-player").src = `https://player.twitch.tv/?channel=ckai&parent=${currentHost}`;
-    document.getElementById("twitch-chat").src = `https://www.twitch.tv/embed/ckai/chat?parent=${currentHost}&darkpopout`;
-
-    function openTab(tabId, btn) {
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
-        btn.classList.add('active');
-    }
-
-    function toggleMinimizePip() {
-        const popup = document.getElementById('pipPopup');
-        const minBtn = document.getElementById('pipMinBtn');
-        popup.classList.toggle('minimized');
-        minBtn.innerText = popup.classList.contains('minimized') ? '[+]' : '[-]';
-    }
-
-    dragElement(document.getElementById("pipPopup"));
-
-    function dragElement(elmnt) {
-        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-        const header = document.getElementById("pipHeader");
-        if (header) {
-            header.onmousedown = dragMouseDown;
-        }
-
-        function dragMouseDown(e) {
-            e = e || window.event;
-            if (e.target.tagName === 'BUTTON') return;
-            e.preventDefault();
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            document.onmouseup = closeDragElement;
-            document.onmousemove = elementDrag;
-        }
-
-        function elementDrag(e) {
-            e = e || window.event;
-            e.preventDefault();
-            pos1 = pos3 - e.clientX;
-            pos2 = pos4 - e.clientY;
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-            elmnt.style.bottom = "auto";
-            elmnt.style.right = "auto";
-        }
-
-        function closeDragElement() {
-            document.onmouseup = null;
-            document.onmousemove = null;
-        }
-    }
-
-    /* --- DONNÉES POINTS DE CHAÎNE ET COMMUNAUTÉ --- */
-    const initialPointsGames = [
-        { id: 'p1', title: 'CRASH BANDICOOT N.SANE TRILOGY', user: 'LettWave', completed: true },
-        { id: 'p2', title: 'MINIT', user: 'LettWave', completed: true },
-        { id: 'p3', title: 'CRASH BANDICOOT 4', user: 'LettWave', completed: false },
-        { id: 'p4', title: 'Shadowman Remaster', user: 'WeshSen', completed: true },
-        { id: 'p5', title: 'Turok', user: 'WeshSen', completed: false },
-        { id: 'p6', title: 'METAL GEAR SOLID', user: 'Grayfox', completed: false },
-        { id: 'p7', title: 'MAX PAYNE 3', user: 'Skunksx', completed: true },
-        { id: 'p8', title: 'Splinter Cell Chaos Theory', user: 'Coldacity', completed: true },
-        { id: 'p9', title: 'GOTCHA FORCE (GC)', user: 'Kirochi', completed: false }
-    ];
-
-    const defaultCommunityGames = [
-        { id: '1', title: 'Silent Hill 2 Remake', user: 'Pseudo_01', votes: 15 },
-        { id: '2', title: 'Metal Gear Solid Delta', user: 'ShadowFan', votes: 23 },
-        { id: '3', title: 'Hollow Knight: Silksong', user: 'CKAI_Fan', votes: 36 }
-    ];
-
-    let channelPointsGames = JSON.parse(localStorage.getItem('ckai_points_games_v4')) || initialPointsGames;
-    let communityGames = JSON.parse(localStorage.getItem('ckai_community_games_v4')) || defaultCommunityGames;
-    let userVotes = JSON.parse(localStorage.getItem('ckai_user_votes_v4')) || {};
-    let isAdmin = false;
-    const ADMIN_PASSWORD = "giratina";
-
-    function saveData() {
-        localStorage.setItem('ckai_points_games_v4', JSON.stringify(channelPointsGames));
-        localStorage.setItem('ckai_community_games_v4', JSON.stringify(communityGames));
-        localStorage.setItem('ckai_user_votes_v4', JSON.stringify(userVotes));
-    }
-
-    function getTotalVotes() {
-        return communityGames.reduce((acc, game) => acc + game.votes, 0);
-    }
-
-    function toggleAdminMode() {
-        const inputField = document.getElementById('adminPasswordInput');
-        const btn = document.getElementById('adminToggleBtn');
-
-        if (!isAdmin) {
-            if (inputField.style.display === 'none') {
-                inputField.style.display = 'inline-block';
-                inputField.focus();
-                btn.innerText = '[VALIDER]';
-            } else {
-                if (inputField.value === ADMIN_PASSWORD) {
-                    isAdmin = true;
-                    inputField.style.display = 'none';
-                    inputField.value = '';
-                    btn.classList.add('active');
-                    btn.innerText = '[ADMIN ACTIVÉ]';
-                } else {
-                    alert("Mot de passe incorrect.");
-                    inputField.value = '';
-                    inputField.focus();
-                }
-            }
-        } else {
-            isAdmin = false;
-            btn.classList.remove('active');
-            btn.innerText = '[MODE ADMIN]';
-        }
-        renderAllGameLists();
-    }
-
-    function checkAdminEnter(event) {
-        if (event.key === 'Enter') {
-            toggleAdminMode();
-        }
-    }
-
-    function deleteCommunityGame(gameId, event) {
-        event.stopPropagation();
-        if (!isAdmin) return;
-        const game = communityGames.find(g => g.id === gameId);
-        if (game && confirm(`Supprimer "${game.title}" ?`)) {
-            communityGames = communityGames.filter(g => g.id !== gameId);
-            delete userVotes[gameId];
-            saveData();
-            renderCommunityGames();
-        }
-    }
-
-    function deletePointsGame(gameId, event) {
-        event.stopPropagation();
-        if (!isAdmin) return;
-        const game = channelPointsGames.find(g => g.id === gameId);
-        if (game && confirm(`Supprimer "${game.title}" ?`)) {
-            channelPointsGames = channelPointsGames.filter(g => g.id !== gameId);
-            saveData();
-            renderChannelPointsGames();
-        }
-    }
-
-    function renderChannelPointsGames() {
-        const container = document.getElementById('channel-points-games-list');
-        container.innerHTML = '';
-
-        if (channelPointsGames.length === 0) {
-            container.innerHTML = `<div style="color:var(--text-muted); font-size:11px;">Aucun jeu en attente.</div>`;
-            return;
-        }
-
-        channelPointsGames.forEach(game => {
-            const card = document.createElement('div');
-            card.className = `points-card-compact ${game.completed ? 'completed' : ''}`;
-
-            let deleteBtnHtml = isAdmin ? `<div class="delete-card-btn" onclick="deletePointsGame('${game.id}', event)">X</div>` : '';
-            let completedOverlayHtml = game.completed ? `
-                <div class="completed-overlay">
-                    <span class="completed-x">✕</span>
-                    <span class="completed-text">COMPLETED</span>
-                </div>
-            ` : '';
-
-            card.innerHTML = `
-                ${deleteBtnHtml}
-                ${completedOverlayHtml}
-                <div class="points-card-title">${escapeHtml(game.title)}</div>
-                <div class="points-card-user">par <span>${escapeHtml(game.user)}</span></div>
-            `;
-            container.appendChild(card);
-        });
-    }
-
-    function renderCommunityGames() {
-        const container = document.getElementById('community-games-list');
-        container.innerHTML = '';
-        const totalVotes = getTotalVotes();
-
-        communityGames.sort((a, b) => b.votes - a.votes);
-
-        communityGames.forEach(game => {
-            const hasVoted = !!userVotes[game.id];
-            const percentage = totalVotes > 0 ? ((game.votes / totalVotes) * 100).toFixed(1) : 0;
-
-            const card = document.createElement('div');
-            card.className = `community-card ${hasVoted ? 'voted' : ''}`;
-            card.onclick = () => toggleVote(game.id);
-
-            let deleteBtnHtml = isAdmin ? `<div class="delete-card-btn" onclick="deleteCommunityGame('${game.id}', event)">X</div>` : '';
-
-            card.innerHTML = `
-                ${deleteBtnHtml}
-                <div class="upcoming-card-content">
-                    <div class="upcoming-game-name">${escapeHtml(game.title)}</div>
-                    <div class="vote-btn-indicator">${hasVoted ? '✔ VOTÉ' : '+ CLIQUER POUR VOTER'}</div>
-                </div>
-                <div class="upcoming-card-footer">
-                    <div class="proposed-by-box">Par: <span class="proposed-by-user">${escapeHtml(game.user)}</span></div>
-                    <div class="vote-count-box">▲ <span>${game.votes}</span></div>
-                </div>
-                <div class="vote-hover-overlay">
-                    <div class="percentage-display">${percentage}%</div>
-                    <div class="percentage-bar-bg">
-                        <div class="percentage-bar-fill" style="width: ${percentage}%;"></div>
-                    </div>
-                    <div class="percentage-stats">${game.votes} / ${totalVotes} VOTES TOTAL</div>
-                </div>
-            `;
-            container.appendChild(card);
-        });
-    }
-
-    function toggleVote(gameId) {
-        const game = communityGames.find(g => g.id === gameId);
-        if (!game) return;
-
-        if (userVotes[gameId]) {
-            game.votes -= 1;
-            delete userVotes[gameId];
-        } else {
-            game.votes += 1;
-            userVotes[gameId] = true;
-        }
-
-        saveData();
-        renderCommunityGames();
-    }
-
-    document.getElementById('suggestGameForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const pseudoInput = document.getElementById('user-pseudo');
-        const gameInput = document.getElementById('game-name');
-
-        const newGame = {
-            id: Date.now().toString(),
-            title: gameInput.value.trim(),
-            user: pseudoInput.value.trim() || 'Anonyme',
-            votes: 1
-        };
-
-        communityGames.push(newGame);
-        userVotes[newGame.id] = true;
-
-        saveData();
-        renderCommunityGames();
-
-        gameInput.value = '';
-        document.getElementById('game-reason').value = '';
-        alert('Jeu ajouté à la liste !');
-    });
-
-    function escapeHtml(text) {
-        return text
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
-
-    function renderAllGameLists() {
-        renderChannelPointsGames();
-        renderCommunityGames();
-    }
-
-    renderAllGameLists();
-</script>
 
 </body>
 </html>
