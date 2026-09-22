@@ -208,7 +208,7 @@
             line-height: 1.3;
         }
 
-        /* NOUVEAUX BLOCS ACCUEIL : PROGRESSION & PATREON */
+        /* PROGRESSION */
         .progress-section {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
@@ -268,66 +268,53 @@
             transition: width 0.4s ease;
         }
 
+        /* PATREON SECTION AMÉLIORÉE */
         .patreon-section {
-            background: linear-gradient(180deg, rgba(255, 64, 96, 0.05) 0%, rgba(12, 12, 13, 1) 100%);
+            background: linear-gradient(180deg, rgba(255, 64, 96, 0.08) 0%, rgba(12, 12, 13, 1) 100%);
             border: 1px solid rgba(255, 64, 96, 0.4);
-            padding: 20px;
+            padding: 25px;
             margin-top: 30px;
             margin-bottom: 40px;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
+            display: flex;
+            flex-direction: column;
             gap: 20px;
+        }
+
+        .patreon-top-row {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-bottom: 1px solid rgba(255, 64, 96, 0.2);
+            padding-bottom: 15px;
         }
 
-        @media (max-width: 800px) {
-            .patreon-section { grid-template-columns: 1fr; }
+        .patreon-brand-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .patreon-info h3 {
+        .patreon-logo-svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--accent-patreon);
+        }
+
+        .patreon-brand-title h3 {
             font-family: 'VT323', monospace;
-            font-size: 24px;
+            font-size: 26px;
             color: var(--accent-patreon);
-            margin-bottom: 8px;
             text-transform: uppercase;
-        }
-
-        .patreon-info p {
-            font-size: 12px;
-            color: var(--text-main);
-            line-height: 1.4;
-            margin-bottom: 12px;
-        }
-
-        .patreon-feed-list {
-            font-size: 11px;
-            color: var(--text-muted);
-            border-left: 2px solid var(--accent-patreon);
-            padding-left: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .patreon-feed-item span {
-            color: var(--accent-patreon);
-            font-weight: bold;
-        }
-
-        .patreon-cta-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-align: center;
+            letter-spacing: 1px;
         }
 
         .patreon-btn {
             background: var(--accent-patreon);
             color: #000;
             border: none;
-            padding: 12px 20px;
+            padding: 12px 24px;
             font-family: 'Share Tech Mono', monospace;
             font-size: 13px;
             font-weight: bold;
@@ -335,14 +322,95 @@
             text-decoration: none;
             cursor: pointer;
             transition: all 0.2s ease;
-            width: 100%;
-            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .patreon-btn:hover {
             background: #ff6584;
             box-shadow: 0 0 15px rgba(255, 64, 96, 0.5);
             transform: translateY(-2px);
+        }
+
+        .patreon-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 800px) {
+            .patreon-content-grid { grid-template-columns: 1fr; }
+        }
+
+        .patreon-desc p {
+            font-size: 12px;
+            color: var(--text-main);
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .patreon-perks {
+            font-size: 11px;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .patreon-perks span {
+            color: var(--accent-patreon);
+            font-weight: bold;
+        }
+
+        .patreon-feed-container {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--border-hard);
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .patreon-feed-header {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--accent-patreon);
+            letter-spacing: 1px;
+            border-bottom: 1px dashed var(--border-hard);
+            padding-bottom: 6px;
+        }
+
+        .patreon-feed-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 160px;
+            overflow-y: auto;
+        }
+
+        .patreon-feed-item {
+            background: #0c0c0d;
+            border-left: 2px solid var(--accent-patreon);
+            padding: 8px 10px;
+            font-size: 11px;
+        }
+
+        .patreon-post-date {
+            font-size: 9px;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .patreon-post-title {
+            color: #fff;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+
+        .patreon-post-snippet {
+            color: var(--text-muted);
+            font-size: 10px;
         }
 
         /* 2. CAROUSEL CHAÎNES */
@@ -1022,21 +1090,46 @@
             </div>
         </div>
 
-        <!-- BLOC PATREON & ACTUS -->
+        <!-- BLOC PATREON & ACTUS REMIS EN AVANT -->
         <div class="patreon-section">
-            <div class="patreon-info">
-                <h3>[◆] TRANSMISSION PATREON // ACTUALITÉS</h3>
-                <p>Tu peux soutenir tous mes projets sur internet</p>
-                
-                <div class="patreon-feed-list">
-                    <div class="patreon-feed-item"><span>[DERNIÈRE ACTU]</span> Test.</div>
-                    <div class="patreon-feed-item"><span>[OBJECTIF]</span> Merci aux contributeurs pour le nouveau palier atteint !</div>
+            <div class="patreon-top-row">
+                <div class="patreon-brand-title">
+                    <!-- Véritable Logo Patreon (SVG officiel) -->
+                    <svg class="patreon-logo-svg" viewBox="0 0 569 546" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M365.2 56.7C455.5 56.7 528.8 130 528.8 220.3C528.8 310.6 455.5 383.9 365.2 383.9C274.9 383.9 201.6 310.6 201.6 220.3C201.6 130 274.9 56.7 365.2 56.7ZM0 489.3H75.5V56.7H0V489.3Z"/>
+                    </svg>
+                    <h3>PATREON // ZONE DE SOUTIEN & PUBLICATIONS</h3>
                 </div>
+                <a href="https://www.patreon.com" target="_blank" class="patreon-btn">
+                    > DEVENIR PATRON
+                </a>
             </div>
 
-            <div class="patreon-cta-box">
-                <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Rejoins les soutiens</div>
-                <a href="https://www.patreon.com" target="_blank" class="patreon-btn">> REJOINDRE LE PATREON</a>
+            <div class="patreon-content-grid">
+                <div class="patreon-desc">
+                    <p>Accède en avant-première aux coulisses, aux scripts en cours de rédaction, aux sondages exclusifs et soutiens directement l'ensemble des projets créatifs (CKAI, C'est le C, Grosse Galère).</p>
+                    <div class="patreon-perks">
+                        <div>> <span>Avantage 01:</span> Vues anticipées des vidéos</div>
+                        <div>> <span>Avantage 02:</span> Rôles et salons VIP sur Discord</div>
+                        <div>> <span>Avantage 03:</span> Votes prioritaires sur les projets</div>
+                    </div>
+                </div>
+
+                <div class="patreon-feed-container">
+                    <div class="patreon-feed-header">[DERNIÈRES PUBLICATIONS OFFICIELLES]</div>
+                    <div class="patreon-feed-list">
+                        <div class="patreon-feed-item">
+                            <div class="patreon-post-date">IL Y A 2 JOURS</div>
+                            <div class="patreon-post-title">Point d'avancement du script CKAI #14</div>
+                            <div class="patreon-post-snippet">Aperçu exclusif des recherches documentaires et premier plan de montage partagé...</div>
+                        </div>
+                        <div class="patreon-feed-item">
+                            <div class="patreon-post-date">IL Y A 1 SEMAINE</div>
+                            <div class="patreon-post-title">Sondage : Quel format pour le prochain projet ?</div>
+                            <div class="patreon-post-snippet">Donnez votre avis dès maintenant sur la direction artistique de la prochaine vidéo.</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
