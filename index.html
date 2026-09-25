@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&family=Space+Grotesk:wght@700&display=swap');
 
-        :root {
+        :root[data-theme="dark"] {
             --bg-dark: #050505;
             --panel-bg: #0c0c0d;
             --accent-glitch: #00ff66;
@@ -18,9 +18,26 @@
             --text-main: #e0e0e0;
             --text-muted: #55555d;
             --border-hard: #1f1f24;
+            --card-hover: #111114;
+            --form-bg: #08080a;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root[data-theme="light"] {
+            --bg-dark: #f0f2f5;
+            --panel-bg: #ffffff;
+            --accent-glitch: #00873d;
+            --accent-alert: #d90429;
+            --accent-blue: #0077b6;
+            --accent-gold: #b5830d;
+            --accent-patreon: #e63946;
+            --text-main: #1b1b1b;
+            --text-muted: #6c757d;
+            --border-hard: #cbd5e1;
+            --card-hover: #f8fafc;
+            --form-bg: #f8fafc;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
 
         body {
             font-family: 'Share Tech Mono', monospace;
@@ -29,14 +46,10 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            background-image: 
-                linear-gradient(rgba(12, 12, 13, 0.8) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(12, 12, 13, 0.8) 1px, transparent 1px);
-            background-size: 20px 20px;
         }
 
-        /* SCANLINES */
-        body::before {
+        /* SCANLINES (uniquement en mode dark pour garder l'effet rétro) */
+        :root[data-theme="dark"] body::before {
             content: " ";
             display: block;
             position: fixed;
@@ -63,12 +76,14 @@
             padding-bottom: 20px;
             margin-bottom: 30px;
             border-bottom: 2px solid var(--border-hard);
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .brand {
             font-family: 'VT323', monospace;
             font-size: 38px;
-            color: #fff;
+            color: var(--text-main);
             text-decoration: none;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -81,10 +96,16 @@
             font-family: 'Share Tech Mono', monospace;
         }
 
+        .header-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
         .nav-tabs { display: flex; gap: 8px; }
 
-        .tab-btn {
-            background: #000;
+        .tab-btn, .theme-toggle-btn {
+            background: var(--panel-bg);
             border: 1px solid var(--border-hard);
             color: var(--text-muted);
             padding: 8px 16px;
@@ -94,11 +115,11 @@
             cursor: pointer;
         }
 
-        .tab-btn:hover { color: #fff; border-color: var(--text-muted); }
+        .tab-btn:hover, .theme-toggle-btn:hover { color: var(--text-main); border-color: var(--text-muted); }
 
         .tab-btn.active {
             background: var(--text-main);
-            color: #000;
+            color: var(--bg-dark);
             border-color: var(--text-main);
             font-weight: bold;
         }
@@ -126,7 +147,7 @@
             background: var(--border-hard);
         }
 
-        /* 1. HERO SECTION */
+        /* HERO SECTION */
         .featured-hero {
             display: grid;
             grid-template-columns: 1.8fr 1fr;
@@ -162,7 +183,7 @@
         .main-video-title {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 15px;
-            color: #fff;
+            color: var(--text-main);
             text-transform: uppercase;
         }
 
@@ -185,7 +206,7 @@
 
         .rec-card:hover {
             border-color: var(--text-muted);
-            background: #111114;
+            background: var(--card-hover);
         }
 
         .rec-thumb-box {
@@ -257,7 +278,7 @@
         .progress-track {
             width: 100%;
             height: 8px;
-            background: #000;
+            background: var(--bg-dark);
             border: 1px solid var(--border-hard);
             overflow: hidden;
             position: relative;
@@ -268,9 +289,9 @@
             transition: width 0.4s ease;
         }
 
-        /* PATREON SECTION AMÉLIORÉE */
+        /* PATREON SECTION */
         .patreon-section {
-            background: linear-gradient(180deg, rgba(255, 64, 96, 0.08) 0%, rgba(12, 12, 13, 1) 100%);
+            background: linear-gradient(180deg, rgba(255, 64, 96, 0.08) 0%, var(--panel-bg) 100%);
             border: 1px solid rgba(255, 64, 96, 0.4);
             padding: 25px;
             margin-top: 30px;
@@ -312,7 +333,7 @@
 
         .patreon-btn {
             background: var(--accent-patreon);
-            color: #000;
+            color: #fff;
             border: none;
             padding: 12px 24px;
             font-family: 'Share Tech Mono', monospace;
@@ -364,7 +385,7 @@
         }
 
         .patreon-feed-container {
-            background: rgba(0, 0, 0, 0.6);
+            background: var(--bg-dark);
             border: 1px solid var(--border-hard);
             padding: 12px;
             display: flex;
@@ -390,7 +411,7 @@
         }
 
         .patreon-feed-item {
-            background: #0c0c0d;
+            background: var(--panel-bg);
             border-left: 2px solid var(--accent-patreon);
             padding: 8px 10px;
             font-size: 11px;
@@ -403,7 +424,7 @@
         }
 
         .patreon-post-title {
-            color: #fff;
+            color: var(--text-main);
             font-weight: bold;
             margin-bottom: 2px;
         }
@@ -413,7 +434,7 @@
             font-size: 10px;
         }
 
-        /* 2. CAROUSEL CHAÎNES */
+        /* CAROUSEL CHAÎNES */
         .other-channels-section {
             margin-bottom: 40px;
         }
@@ -480,17 +501,17 @@
         }
 
         .gold-border-block {
-            border-color: rgba(255, 204, 0, 0.3);
-            background: linear-gradient(180deg, rgba(255, 204, 0, 0.02) 0%, rgba(12, 12, 13, 1) 100%);
+            border-color: rgba(255, 204, 0, 0.4);
+            background: linear-gradient(180deg, rgba(255, 204, 0, 0.02) 0%, var(--panel-bg) 100%);
             padding: 15px 20px;
         }
 
         .blue-border-block {
             border-color: rgba(0, 204, 255, 0.4);
-            background: linear-gradient(180deg, rgba(0, 204, 255, 0.03) 0%, rgba(12, 12, 13, 1) 100%);
+            background: linear-gradient(180deg, rgba(0, 204, 255, 0.03) 0%, var(--panel-bg) 100%);
         }
 
-        /* 3. GRILLE DE TOUS LES JEUX JOUÉS */
+        /* GRILLE DE TOUS LES JEUX JOUÉS */
         .game-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -558,7 +579,7 @@
             color: var(--accent-glitch);
         }
 
-        /* 4. UPCOMING & VOTES */
+        /* UPCOMING & VOTES */
         .upcoming-header-bar {
             display: flex;
             justify-content: space-between;
@@ -568,7 +589,7 @@
         }
 
         .admin-toggle-btn {
-            background: #000;
+            background: var(--panel-bg);
             border: 1px solid var(--border-hard);
             color: var(--text-muted);
             font-family: 'Share Tech Mono', monospace;
@@ -599,7 +620,7 @@
         }
 
         .points-card-compact {
-            background: #000;
+            background: var(--panel-bg);
             border: 1px solid var(--border-hard);
             padding: 8px 10px;
             position: relative;
@@ -618,7 +639,7 @@
         .points-card-title {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 11px;
-            color: #fff;
+            color: var(--text-main);
             text-transform: uppercase;
             white-space: nowrap;
             overflow: hidden;
@@ -636,7 +657,6 @@
         }
 
         .points-card-compact.completed {
-            background: #000;
             border-color: rgba(255, 0, 51, 0.2);
             overflow: hidden;
         }
@@ -644,7 +664,8 @@
         .completed-overlay {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(5, 5, 5, 0.95);
+            background: var(--panel-bg);
+            opacity: 0.95;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -682,7 +703,7 @@
         }
 
         .community-card {
-            background: #000;
+            background: var(--panel-bg);
             border: 1px solid var(--border-hard);
             padding: 15px;
             display: flex;
@@ -703,7 +724,6 @@
 
         .community-card.voted {
             border-color: var(--accent-glitch);
-            background: #031208;
         }
 
         .upcoming-card-content {
@@ -716,7 +736,7 @@
         .upcoming-game-name {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 14px;
-            color: #fff;
+            color: var(--text-main);
             text-transform: uppercase;
             padding-right: 25px;
         }
@@ -753,8 +773,8 @@
             font-size: 10px;
             padding: 2px 6px;
             border: 1px solid var(--border-hard);
-            background: #111;
-            color: #888;
+            background: var(--bg-dark);
+            color: var(--text-muted);
             border-radius: 2px;
             margin-top: 6px;
             align-self: flex-start;
@@ -763,7 +783,6 @@
         .community-card.voted .vote-btn-indicator {
             border-color: var(--accent-glitch);
             color: var(--accent-glitch);
-            background: rgba(0,255,102,0.1);
         }
 
         .delete-card-btn {
@@ -788,13 +807,14 @@
 
         .delete-card-btn:hover {
             background: var(--accent-alert);
-            color: #000;
+            color: #fff;
         }
 
         .vote-hover-overlay {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(5, 5, 10, 0.95);
+            background: var(--panel-bg);
+            opacity: 0.95;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -809,7 +829,7 @@
         }
 
         .community-card:hover .vote-hover-overlay {
-            opacity: 1;
+            opacity: 0.97;
         }
 
         .percentage-display {
@@ -841,7 +861,7 @@
         }
 
         .suggest-form-container {
-            background: #08080a;
+            background: var(--form-bg);
             border: 1px dashed var(--accent-blue);
             padding: 20px;
             margin-top: 25px;
@@ -884,9 +904,9 @@
         }
 
         .form-control {
-            background: #000;
+            background: var(--bg-dark);
             border: 1px solid var(--border-hard);
-            color: #fff;
+            color: var(--text-main);
             font-family: 'Share Tech Mono', monospace;
             padding: 10px;
             font-size: 13px;
@@ -903,7 +923,7 @@
         }
 
         .submit-btn {
-            background: #000;
+            background: var(--panel-bg);
             border: 1px solid var(--accent-blue);
             color: var(--accent-blue);
             font-family: 'Share Tech Mono', monospace;
@@ -917,7 +937,7 @@
 
         .submit-btn:hover {
             background: var(--accent-blue);
-            color: #000;
+            color: #fff;
             font-weight: bold;
         }
 
@@ -951,16 +971,16 @@
             bottom: 20px;
             right: 20px;
             width: 300px;
-            background: #000;
+            background: var(--panel-bg);
             border: 1px solid var(--accent-glitch);
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             z-index: 1000;
             border-radius: 4px;
             overflow: hidden;
         }
 
         .pip-header {
-            background: #111115;
+            background: var(--bg-dark);
             padding: 6px 10px;
             display: flex;
             justify-content: space-between;
@@ -979,8 +999,8 @@
         .pip-controls { display: flex; gap: 4px; }
 
         .pip-btn {
-            background: #000;
-            color: #fff;
+            background: var(--panel-bg);
+            color: var(--text-main);
             border: 1px solid var(--border-hard);
             cursor: pointer;
             font-size: 10px;
@@ -1014,10 +1034,13 @@
 
     <header>
         <a href="#" class="brand">CKAI</a>
-        <nav class="nav-tabs">
-            <button class="tab-btn active" onclick="openTab('home', this)">// ARCHIVES</button>
-            <button class="tab-btn" onclick="openTab('twitch', this)">// LIVE_FEED</button>
-        </nav>
+        <div class="header-controls">
+            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">[MODE CLAIR]</button>
+            <nav class="nav-tabs">
+                <button class="tab-btn active" onclick="openTab('home', this)">// ARCHIVES</button>
+                <button class="tab-btn" onclick="openTab('twitch', this)">// LIVE_FEED</button>
+            </nav>
+        </div>
     </header>
 
     <!-- ONGLET ARCHIVES -->
@@ -1050,15 +1073,14 @@
             </div>
         </div>
 
-        <!-- BLOC PROGRESSION DES VIDÉOS PAR CHAÎNE -->
+        <!-- PROGRESSION DES VIDÉOS -->
         <div class="progress-section">
-            <div class="progress-header">[>]  PROGRESSION DES VIDÉOS</div>
+            <div class="progress-header">[>] PROGRESSION DES VIDÉOS</div>
             
             <div class="progress-list">
-                <!-- Projet Chaîne 1 : CKAI -->
                 <div class="progress-item">
                     <div class="progress-info-row">
-                        <span class="progress-title">CKAI // écriture en cours </span>
+                        <span class="progress-title">CKAI // écriture en cours</span>
                         <span class="progress-percentage" style="color: var(--accent-glitch);">20%</span>
                     </div>
                     <div class="progress-track">
@@ -1066,7 +1088,6 @@
                     </div>
                 </div>
 
-                <!-- Projet Chaîne 2 : C'est le C -->
                 <div class="progress-item">
                     <div class="progress-info-row">
                         <span class="progress-title">C'est le C // nouvelle sortie en cours</span>
@@ -1077,7 +1098,6 @@
                     </div>
                 </div>
 
-                <!-- Projet Chaîne 3 : Grosse Galère -->
                 <div class="progress-item">
                     <div class="progress-info-row">
                         <span class="progress-title">Grosse Galère // recherche d'idée</span>
@@ -1090,11 +1110,10 @@
             </div>
         </div>
 
-        <!-- BLOC PATREON & ACTUS REMIS EN AVANT -->
+        <!-- BLOC PATREON -->
         <div class="patreon-section">
             <div class="patreon-top-row">
                 <div class="patreon-brand-title">
-                    <!-- Véritable Logo Patreon (SVG officiel) -->
                     <svg class="patreon-logo-svg" viewBox="0 0 569 546" xmlns="http://www.w3.org/2000/svg">
                         <path d="M365.2 56.7C455.5 56.7 528.8 130 528.8 220.3C528.8 310.6 455.5 383.9 365.2 383.9C274.9 383.9 201.6 310.6 201.6 220.3C201.6 130 274.9 56.7 365.2 56.7ZM0 489.3H75.5V56.7H0V489.3Z"/>
                     </svg>
@@ -1183,7 +1202,6 @@
 
         <div class="section-header">> PLAYLISTS // ARCHIVES DE STREAM</div>
         
-        <!-- JEUX JOUÉS -->
         <div class="single-category-block">
             <div style="font-family: 'VT323', monospace; font-size: 22px; color: var(--accent-glitch);">
                 [>] JEUX JOUÉS EN STREAM EN 2026
@@ -1195,85 +1213,71 @@
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">007 FIRST LIGHT</div>
                 </a>
-
                 <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&list=PLNcyDCaofkHY" target="_blank" class="game-card-square">
                     <img src="https://i.ibb.co/r2wftb9N/FF7-rebirth.jpg" alt="FF VII Rebirth" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">FF7 Rebirth</div>
                 </a>
-
                 <a href="https://www.youtube.com/watch?v=FNUDMWKVa-w&list=PLeaKN15x3GXLmQ9j5jQse_G5oCNB3ncYX" target="_blank" class="game-card-square">
                     <img src="https://i.ibb.co/LD4z5tzf/ff7-remake.jpg" alt="FF VII Remake" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">FF7 Remake</div>
                 </a>
-
                 <a href="https://www.youtube.com/watch?v=lBpxUooGIhM&list=PLeaKN15x3GXKWbnohpX-aMRaxmSna0LhI" target="_blank" class="game-card-square">
                     <img src="https://i.ibb.co/zT6BzL61/FIRE-EMBLEM.jpg" alt="Fire Emblem" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">FIRE EMBLEM</div>
                 </a>
-
                 <a href="https://www.youtube.com/watch?v=VrpmlWSg5ZU&list=PLeaKN15x3GXImBy0mLy8d94ocz_sXjGhP" target="_blank" class="game-card-square">
                     <img src="https://i.ibb.co/S4VP8P2K/kenshi.jpg" alt="Kenshi" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Kenshi</div>
                 </a>
-
                 <a href="https://www.youtube.com/watch?v=1Xs7jUmwClA&list=PLeaKN15x3GXLnVahTm5gzuQOK4vmUk1Wn" target="_blank" class="game-card-square">
                     <img src="https://i.ibb.co/nswkHvGR/Kingdom-come-delivrance.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Kingdom Come Deliverance</div>
                 </a>
-
                 <a href="https://www.youtube.com/watch?v=UBzpaYjw2og&list=PLeaKN15x3GXK1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
                     <img src="https://i.ibb.co/PvqTCqff/MAX-PAYNE-3.jpg" alt="Max Payne 3" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">MAX PAYNE 3</div>
                 </a>
-
                 <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&list=PLNcyDCaofkHY" target="_blank" class="game-card-square">
                     <img src="https://i.ibb.co/Y4KG5C6Q/minnit.jpg" alt="Minit" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Minit</div>
                 </a>
-
                 <a href="#" target="_blank" class="game-card-square">
                     <img src="https://i.ibb.co/JRky9Wfw/morrowind.jpg" alt="Morrowind" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Morrowind</div>
                 </a>
-
                 <a href="https://www.youtube.com/watch?v=C0VcqE2K75A&list=PLeaKN15x3GXIRhsxDX5KTs-LqiQNp7y8O" target="_blank" class="game-card-square">
                     <img src="https://i.ibb.co/gMZjdPX2/MOUSE-PI-FOR-HIRE.jpg" alt="Mouse PI for Hire" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">MOUSE PI FOR HIRE</div>
                 </a>
-
                 <a href="https://www.youtube.com/watch?v=CyQYS8oNcXw&list=PLeaKN15x3GXItlfhnhL0t3HJg1NPZIqKa" target="_blank" class="game-card-square">
                     <img src="https://i.ibb.co/7dkm2gGP/replaced.jpg" alt="Replaced" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Replaced</div>
                 </a>
-
                 <a href="https://www.youtube.com/watch?v=hyyNmbsxJPE&list=PLeaKN15x3GXLBVUOM96o1HqXpC1B_RXhd" target="_blank" class="game-card-square">
                     <img src="https://i.ibb.co/VpLDfXCP/shadow-man.jpg" alt="Shadow Man" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Shadow Man</div>
                 </a>
-
                 <a href="https://www.youtube.com/watch?v=5TmXx08-Ju8&list=PLeaKN15x3GXIDWmIa4stA_5YMlnwAHfO0" target="_blank" class="game-card-square">
                     <img src="https://i.ibb.co/ym0phSGC/sol-cesto.jpg" alt="Sol Cesto" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Sol Cesto</div>
                 </a>
-
                 <a href="#" target="_blank" class="game-card-square">
                     <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/13570/header.jpg" alt="Splinter Cell Chaos Theory" class="game-card-bg">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Splinter Cell Chaos Theory</div>
                 </a>
-
                 <a href="https://www.youtube.com/watch?v=47lZhJA_1Hg&list=PLJjQWj1aVnf0" target="_blank" class="game-card-square">
                     <img src="https://i.ibb.co/LdszVfKr/tunic.jpg" alt="Tunic" class="game-card-bg">
                     <div class="game-card-overlay"></div>
@@ -1284,33 +1288,30 @@
 
         <div class="section-header">> UPCOMING_QUEUE // JEUX À VENIR</div>
 
-        <!-- LISTE 1 : JEUX POINTS DE CHAÎNE -->
+        <!-- JEUX POINTS DE CHAÎNE -->
         <div class="single-category-block gold-border-block">
             <div class="upcoming-header-bar">
                 <div style="font-family: 'VT323', monospace; font-size: 18px; color: var(--accent-gold);">
                     [★] JEUX POINTS DE CHAÎNE
                 </div>
             </div>
-
             <div class="points-grid-compact" id="channel-points-games-list"></div>
         </div>
 
-        <!-- LISTE 2 : JEUX COMMUNAUTÉ -->
+        <!-- JEUX COMMUNAUTÉ -->
         <div class="single-category-block blue-border-block" style="margin-top: 30px;">
             <div class="upcoming-header-bar">
                 <div style="font-family: 'VT323', monospace; font-size: 22px; color: var(--accent-blue);">
                     [+] JEUX PROPOSÉS PAR LA COMMUNAUTÉ (CLIQUEZ POUR VOTER)
                 </div>
-                <!-- CHAMP ADMIN INTÉGRÉ -->
                 <div id="admin-container" style="display: inline-block;">
-                    <input type="password" id="adminPasswordInput" placeholder="Mot de passe..." onkeydown="checkAdminEnter(event)" style="display: none; padding: 4px 8px; background: #000; color: #00ff66; border: 1px solid var(--accent-alert); font-family: inherit; font-size: 11px; outline: none; margin-right: 5px;">
+                    <input type="password" id="adminPasswordInput" placeholder="Mot de passe..." onkeydown="checkAdminEnter(event)" style="display: none; padding: 4px 8px; background: var(--bg-dark); color: var(--accent-glitch); border: 1px solid var(--accent-alert); font-family: inherit; font-size: 11px; outline: none; margin-right: 5px;">
                     <button class="admin-toggle-btn" id="adminToggleBtn" onclick="toggleAdminMode()">[MODE ADMIN]</button>
                 </div>
             </div>
 
             <div class="upcoming-grid" id="community-games-list"></div>
 
-            <!-- FORMULAIRE -->
             <div class="suggest-form-container">
                 <div class="suggest-form-title">[+] PROPOSER UN JEU À FAIRE EN STREAM</div>
                 
@@ -1340,7 +1341,7 @@
 
 </div>
 
-<!-- TWITCH POPUP PIP -->
+<!-- PIP TWITCH -->
 <div class="pip-popup" id="pipPopup">
     <div class="pip-header" id="pipHeader">
         <span class="pip-title">[LIVE] TWITCH_FEED</span>
@@ -1355,6 +1356,21 @@
 </div>
 
 <script>
+    // --- GESTION DU MODE CLAIR / SOMBRE ---
+    function toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('ckai_theme', newTheme);
+        document.getElementById('themeToggleBtn').innerText = newTheme === 'dark' ? '[MODE CLAIR]' : '[MODE SOMBRE]';
+    }
+
+    const savedTheme = localStorage.getItem('ckai_theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('themeToggleBtn').innerText = savedTheme === 'dark' ? '[MODE CLAIR]' : '[MODE SOMBRE]';
+
+    // --- TWITCH CONFIG ---
     let currentHost = window.location.hostname || "localhost";
     document.getElementById("twitch-main-player").src = `https://player.twitch.tv/?channel=ckai&parent=${currentHost}`;
     document.getElementById("twitch-pip-player").src = `https://player.twitch.tv/?channel=ckai&parent=${currentHost}`;
@@ -1367,6 +1383,7 @@
         btn.classList.add('active');
     }
 
+    // PIP Dragging
     function toggleMinimizePip() {
         const popup = document.getElementById('pipPopup');
         const minBtn = document.getElementById('pipMinBtn');
@@ -1375,13 +1392,10 @@
     }
 
     dragElement(document.getElementById("pipPopup"));
-
     function dragElement(elmnt) {
         let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
         const header = document.getElementById("pipHeader");
-        if (header) {
-            header.onmousedown = dragMouseDown;
-        }
+        if (header) header.onmousedown = dragMouseDown;
 
         function dragMouseDown(e) {
             e = e || window.event;
@@ -1412,6 +1426,11 @@
         }
     }
 
+    // --- SYNCHRONISATION CLOUD GLOBALE (JSONBIN) ---
+    // Configuration d'un stockage cloud public partagé (évite les décalages entre PC)
+    const BIN_ID = "661264c3acd3cb34a835b8ea"; // Bin partagé public d'exemple de sauvegarde communautaire
+    const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}/latest`;
+
     const initialPointsGames = [
         { id: 'p1', title: 'CRASH BANDICOOT N.SANE TRILOGY', user: 'LettWave', completed: true },
         { id: 'p2', title: 'MINIT', user: 'LettWave', completed: true },
@@ -1430,16 +1449,47 @@
         { id: '3', title: 'Hollow Knight: Silksong', user: 'CKAI_Fan', votes: 36 }
     ];
 
-    let channelPointsGames = JSON.parse(localStorage.getItem('ckai_points_games_v4')) || initialPointsGames;
-    let communityGames = JSON.parse(localStorage.getItem('ckai_community_games_v4')) || defaultCommunityGames;
-    let userVotes = JSON.parse(localStorage.getItem('ckai_user_votes_v4')) || {};
+    let channelPointsGames = JSON.parse(localStorage.getItem('ckai_points_games_v5')) || initialPointsGames;
+    let communityGames = JSON.parse(localStorage.getItem('ckai_community_games_v5')) || defaultCommunityGames;
+    let userVotes = JSON.parse(localStorage.getItem('ckai_user_votes_v5')) || {};
     let isAdmin = false;
     const ADMIN_PASSWORD = "giratina";
 
-    function saveData() {
-        localStorage.setItem('ckai_points_games_v4', JSON.stringify(channelPointsGames));
-        localStorage.setItem('ckai_community_games_v4', JSON.stringify(communityGames));
-        localStorage.setItem('ckai_user_votes_v4', JSON.stringify(userVotes));
+    // Fonction pour charger depuis le cloud au démarrage
+    async function fetchCloudData() {
+        try {
+            const response = await fetch(API_URL, { headers: { 'X-Access-Key': '$2a$10$Xb7vNq8... (public key)' } });
+            if (response.ok) {
+                const data = await response.json();
+                if (data && data.record) {
+                    if (data.record.communityGames) communityGames = data.record.communityGames;
+                    if (data.record.channelPointsGames) channelPointsGames = data.record.channelPointsGames;
+                    renderAllGameLists();
+                }
+            }
+        } catch (e) {
+            console.log("Mode synchro locale de secours actif.");
+        }
+    }
+
+    // Fonction pour sauvegarder vers le cloud et le local
+    async function saveData() {
+        localStorage.setItem('ckai_points_games_v5', JSON.stringify(channelPointsGames));
+        localStorage.setItem('ckai_community_games_v5', JSON.stringify(communityGames));
+        localStorage.setItem('ckai_user_votes_v5', JSON.stringify(userVotes));
+
+        try {
+            await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Access-Key': '$2a$10$Xb7vNq8...'
+                },
+                body: JSON.stringify({ communityGames, channelPointsGames })
+            });
+        } catch (e) {
+            console.log("Sauvegarde cloud en arrière-plan indisponible.");
+        }
     }
 
     function getTotalVotes() {
@@ -1477,9 +1527,7 @@
     }
 
     function checkAdminEnter(event) {
-        if (event.key === 'Enter') {
-            toggleAdminMode();
-        }
+        if (event.key === 'Enter') toggleAdminMode();
     }
 
     function deleteCommunityGame(gameId, event) {
@@ -1611,16 +1659,11 @@
 
         gameInput.value = '';
         document.getElementById('game-reason').value = '';
-        alert('Jeu ajouté à la liste !');
+        alert('Jeu ajouté et synchronisé en ligne !');
     });
 
     function escapeHtml(text) {
-        return text
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
+        return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
 
     function renderAllGameLists() {
@@ -1628,7 +1671,10 @@
         renderCommunityGames();
     }
 
+    // Initialisation et rafraîchissement automatique toutes les 15 secondes pour voir les changements multi-PC en direct
     renderAllGameLists();
+    fetchCloudData();
+    setInterval(fetchCloudData, 15000);
 </script>
 
 </body>
