@@ -8,18 +8,18 @@
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&family=Space+Grotesk:wght@700&display=swap');
 
         :root[data-theme="dark"] {
-            --bg-dark: #050505;
-            --panel-bg: #0c0c0d;
+            --bg-dark: #121215;
+            --panel-bg: #1a1a1e;
             --accent-glitch: #00ff66;
             --accent-alert: #ff0033;
             --accent-blue: #00ccff;
             --accent-gold: #ffcc00;
             --accent-patreon: #ff4060;
-            --text-main: #e0e0e0;
-            --text-muted: #55555d;
-            --border-hard: #1f1f24;
-            --card-hover: #111114;
-            --form-bg: #08080a;
+            --text-main: #f5f5f7;
+            --text-muted: #94949e;
+            --border-hard: #2d2d35;
+            --card-hover: #222227;
+            --form-bg: #151518;
         }
 
         :root[data-theme="light"] {
@@ -46,6 +46,8 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
+            font-size: 15px;
+            line-height: 1.5;
         }
 
         /* SCANLINES (uniquement en mode dark) */
@@ -54,11 +56,11 @@
             display: block;
             position: fixed;
             top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%);
             background-size: 100% 4px;
             z-index: 99;
             pointer-events: none;
-            opacity: 0.6;
+            opacity: 0.4;
         }
 
         .main-wrapper {
@@ -82,7 +84,7 @@
 
         .brand {
             font-family: 'VT323', monospace;
-            font-size: 38px;
+            font-size: 42px;
             color: var(--text-main);
             text-decoration: none;
             letter-spacing: 2px;
@@ -91,7 +93,7 @@
 
         .brand::after {
             content: ' [MAIN_NODE]';
-            font-size: 14px;
+            font-size: 15px;
             color: var(--accent-glitch);
             font-family: 'Share Tech Mono', monospace;
         }
@@ -108,15 +110,16 @@
         .tab-btn, .theme-toggle-btn {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
-            color: var(--text-muted);
-            padding: 8px 16px;
+            color: var(--text-main);
+            padding: 10px 18px;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 12px;
+            font-size: 13px;
+            font-weight: bold;
             text-transform: uppercase;
             cursor: pointer;
         }
 
-        .tab-btn:hover, .theme-toggle-btn:hover { color: var(--text-main); border-color: var(--text-muted); }
+        .tab-btn:hover, .theme-toggle-btn:hover { color: var(--accent-glitch); border-color: var(--text-muted); }
 
         .tab-btn.active {
             background: var(--text-main);
@@ -130,7 +133,7 @@
 
         .section-header {
             font-family: 'VT323', monospace;
-            font-size: 22px;
+            font-size: 24px;
             color: var(--text-muted);
             text-transform: uppercase;
             margin-bottom: 15px;
@@ -163,10 +166,10 @@
         .main-player-box {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
-            padding: 10px;
+            padding: 12px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .video-embed-container {
@@ -183,7 +186,7 @@
 
         .main-video-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 15px;
+            font-size: 16px;
             color: var(--text-main);
             text-transform: uppercase;
         }
@@ -191,16 +194,16 @@
         .side-recommended {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .rec-card {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
-            padding: 8px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
             text-decoration: none;
             color: inherit;
         }
@@ -225,9 +228,10 @@
         }
 
         .rec-title {
-            font-size: 11px;
+            font-size: 13px;
             color: var(--text-main);
-            line-height: 1.3;
+            line-height: 1.4;
+            font-weight: 500;
         }
 
         /* PROGRESSION */
@@ -241,7 +245,7 @@
 
         .progress-header {
             font-family: 'VT323', monospace;
-            font-size: 20px;
+            font-size: 22px;
             color: var(--accent-blue);
             margin-bottom: 15px;
             text-transform: uppercase;
@@ -262,7 +266,7 @@
         .progress-info-row {
             display: flex;
             justify-content: space-between;
-            font-size: 11px;
+            font-size: 13px;
             text-transform: uppercase;
         }
 
@@ -273,12 +277,12 @@
 
         .progress-percentage {
             font-family: 'VT323', monospace;
-            font-size: 16px;
+            font-size: 18px;
         }
 
         .progress-track {
             width: 100%;
-            height: 8px;
+            height: 10px;
             background: var(--bg-dark);
             border: 1px solid var(--border-hard);
             overflow: hidden;
@@ -326,7 +330,7 @@
 
         .patreon-brand-title h3 {
             font-family: 'VT323', monospace;
-            font-size: 26px;
+            font-size: 28px;
             color: var(--accent-patreon);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -338,7 +342,7 @@
             border: none;
             padding: 12px 24px;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: bold;
             text-transform: uppercase;
             text-decoration: none;
@@ -366,18 +370,18 @@
         }
 
         .patreon-desc p {
-            font-size: 12px;
+            font-size: 14px;
             color: var(--text-main);
-            line-height: 1.5;
+            line-height: 1.6;
             margin-bottom: 15px;
         }
 
         .patreon-perks {
-            font-size: 11px;
-            color: var(--text-muted);
+            font-size: 13px;
+            color: var(--text-main);
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
         }
 
         .patreon-perks span {
@@ -388,34 +392,35 @@
         .patreon-feed-container {
             background: var(--bg-dark);
             border: 1px solid var(--border-hard);
-            padding: 12px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
 
         .patreon-feed-header {
-            font-size: 10px;
+            font-size: 12px;
             text-transform: uppercase;
             color: var(--accent-patreon);
             letter-spacing: 1px;
             border-bottom: 1px dashed var(--border-hard);
             padding-bottom: 6px;
+            font-weight: bold;
         }
 
         .patreon-feed-list {
             display: flex;
             flex-direction: column;
             gap: 8px;
-            max-height: 160px;
+            max-height: 180px;
             overflow-y: auto;
         }
 
         .patreon-feed-item {
             background: var(--panel-bg);
-            border-left: 2px solid var(--accent-patreon);
-            padding: 8px 10px;
-            font-size: 11px;
+            border-left: 3px solid var(--accent-patreon);
+            padding: 10px 12px;
+            font-size: 13px;
             text-decoration: none;
             color: inherit;
             display: block;
@@ -427,7 +432,7 @@
         }
 
         .patreon-post-date {
-            font-size: 9px;
+            font-size: 11px;
             color: var(--text-muted);
             margin-bottom: 2px;
         }
@@ -440,7 +445,7 @@
 
         .patreon-post-snippet {
             color: var(--text-muted);
-            font-size: 10px;
+            font-size: 12px;
         }
 
         /* CAROUSEL CHAÎNES */
@@ -456,50 +461,52 @@
             scroll-snap-type: x mandatory;
         }
 
-        .carousel-track::-webkit-scrollbar { height: 3px; }
+        .carousel-track::-webkit-scrollbar { height: 5px; }
         .carousel-track::-webkit-scrollbar-thumb { background: var(--border-hard); }
 
         .channel-card-scroll {
-            min-width: 240px;
-            max-width: 240px;
+            min-width: 250px;
+            max-width: 250px;
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
-            padding: 10px;
+            padding: 12px;
             scroll-snap-align: start;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         .channel-card-tag {
-            font-size: 10px;
+            font-size: 12px;
             color: var(--accent-glitch);
             text-transform: uppercase;
             border-bottom: 1px solid var(--border-hard);
-            padding-bottom: 4px;
+            padding-bottom: 6px;
+            font-weight: bold;
         }
 
         .mini-video-link {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
             text-decoration: none;
             color: inherit;
         }
 
         .mini-video-thumb {
             width: 100%;
-            height: 120px;
+            height: 130px;
             object-fit: cover;
             border: 1px solid var(--border-hard);
         }
 
         .mini-video-title {
-            font-size: 11px;
+            font-size: 13px;
             color: var(--text-main);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            font-weight: 500;
         }
 
         .single-category-block {
@@ -512,7 +519,7 @@
         .gold-border-block {
             border-color: rgba(255, 204, 0, 0.4);
             background: linear-gradient(180deg, rgba(255, 204, 0, 0.02) 0%, var(--panel-bg) 100%);
-            padding: 15px 20px;
+            padding: 20px;
         }
 
         .blue-border-block {
@@ -523,7 +530,7 @@
         /* GRILLE DES LIENS (NOUVEL ONGLET) */
         .links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 15px;
             margin-top: 20px;
             margin-bottom: 30px;
@@ -532,7 +539,7 @@
         .link-card {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
-            padding: 20px;
+            padding: 22px;
             text-decoration: none;
             color: inherit;
             display: flex;
@@ -550,27 +557,28 @@
         }
 
         .link-card-tag {
-            font-size: 10px;
+            font-size: 12px;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: bold;
         }
 
         .link-card-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 16px;
+            font-size: 18px;
             color: var(--text-main);
             text-transform: uppercase;
         }
 
         .link-card-desc {
-            font-size: 11px;
-            color: var(--text-muted);
-            line-height: 1.4;
+            font-size: 13px;
+            color: var(--text-main);
+            line-height: 1.5;
         }
 
         .link-card-action {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--accent-glitch);
             font-weight: bold;
             margin-top: 5px;
@@ -582,8 +590,8 @@
         /* PLANNING DE LA SEMAINE */
         .schedule-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
             margin-top: 15px;
             margin-bottom: 30px;
         }
@@ -591,10 +599,10 @@
         .schedule-card {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
-            padding: 12px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
             position: relative;
             overflow: hidden;
             transition: all 0.2s ease;
@@ -614,39 +622,39 @@
 
         .schedule-day {
             font-family: 'VT323', monospace;
-            font-size: 18px;
+            font-size: 20px;
             color: var(--text-main);
             text-transform: uppercase;
             border-bottom: 1px dashed var(--border-hard);
-            padding-bottom: 4px;
+            padding-bottom: 6px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .schedule-status {
-            font-size: 9px;
-            padding: 2px 5px;
+            font-size: 10px;
+            padding: 3px 6px;
             text-transform: uppercase;
             font-weight: bold;
         }
 
         .status-live { background: rgba(0, 255, 102, 0.2); color: var(--accent-glitch); border: 1px solid var(--accent-glitch); }
         .status-planned { background: rgba(0, 204, 255, 0.15); color: var(--accent-blue); border: 1px solid var(--accent-blue); }
-        .status-off { background: rgba(85, 85, 93, 0.15); color: var(--text-muted); border: 1px solid var(--border-hard); }
+        .status-off { background: rgba(148, 148, 158, 0.15); color: var(--text-muted); border: 1px solid var(--border-hard); }
 
         .schedule-content {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--text-muted);
-            line-height: 1.3;
+            line-height: 1.4;
         }
 
         .schedule-game-title {
             font-family: 'Space Grotesk', sans-serif;
             color: var(--text-main);
-            font-size: 11px;
+            font-size: 12px;
             font-weight: bold;
-            margin-top: 2px;
+            margin-top: 4px;
             text-transform: uppercase;
         }
 
@@ -676,7 +684,7 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             object-fit: cover;
-            filter: brightness(0.75) contrast(1.1);
+            filter: brightness(0.8) contrast(1.1);
             transition: transform 0.3s ease, filter 0.3s ease;
         }
 
@@ -693,11 +701,11 @@
             z-index: 2;
             padding: 10px;
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: bold;
             color: #fff;
             text-transform: uppercase;
-            line-height: 1.2;
+            line-height: 1.3;
             text-shadow: 0 2px 4px rgba(0,0,0,0.9);
             width: 100%;
             text-align: center;
@@ -730,10 +738,11 @@
         .admin-toggle-btn {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
-            color: var(--text-muted);
+            color: var(--text-main);
             font-family: 'Share Tech Mono', monospace;
-            font-size: 11px;
-            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 6px 12px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
@@ -745,7 +754,7 @@
 
         .admin-toggle-btn.active {
             border-color: var(--accent-alert);
-            background: rgba(255, 0, 51, 0.1);
+            background: rgba(255, 0, 51, 0.15);
             color: var(--accent-alert);
             font-weight: bold;
         }
@@ -753,50 +762,52 @@
         /* POINTS DE CHAÎNE COMPACTS */
         .points-grid-compact {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-            gap: 8px;
-            margin-top: 12px;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
         }
 
         .points-card-compact {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
-            padding: 8px 10px;
+            padding: 10px 12px;
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            min-height: 48px;
+            min-height: 56px;
             transition: all 0.2s ease;
         }
 
         .points-card-compact:not(.completed):hover {
             border-color: var(--accent-gold);
-            background: rgba(255, 204, 0, 0.03);
+            background: rgba(255, 204, 0, 0.04);
         }
 
         .points-card-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 11px;
+            font-size: 12px;
             color: var(--text-main);
             text-transform: uppercase;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            font-weight: bold;
         }
 
         .points-card-user {
-            font-size: 9px;
+            font-size: 11px;
             color: var(--text-muted);
-            margin-top: 2px;
+            margin-top: 3px;
         }
 
         .points-card-user span {
             color: var(--accent-gold);
+            font-weight: bold;
         }
 
         .points-card-compact.completed {
-            border-color: rgba(255, 0, 51, 0.2);
+            border-color: rgba(255, 0, 51, 0.3);
             overflow: hidden;
         }
 
@@ -808,7 +819,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
             z-index: 5;
             transition: opacity 0.2s ease;
         }
@@ -816,14 +827,14 @@
         .completed-x {
             color: var(--accent-alert);
             font-family: 'VT323', monospace;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
             line-height: 1;
         }
 
         .completed-text {
             color: var(--accent-alert);
-            font-size: 10px;
+            font-size: 11px;
             font-weight: bold;
             letter-spacing: 1px;
         }
@@ -835,7 +846,7 @@
 
         .upcoming-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 15px;
             margin-top: 20px;
             margin-bottom: 20px;
@@ -844,7 +855,7 @@
         .community-card {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
-            padding: 15px;
+            padding: 18px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -874,7 +885,7 @@
 
         .upcoming-game-name {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 14px;
+            font-size: 15px;
             color: var(--text-main);
             text-transform: uppercase;
             padding-right: 25px;
@@ -885,12 +896,12 @@
             justify-content: space-between;
             align-items: flex-end;
             border-top: 1px dashed var(--border-hard);
-            padding-top: 8px;
+            padding-top: 10px;
             z-index: 2;
         }
 
         .proposed-by-box {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--text-muted);
         }
 
@@ -900,7 +911,7 @@
         }
 
         .vote-count-box {
-            font-size: 11px;
+            font-size: 13px;
             color: var(--accent-glitch);
             font-weight: bold;
             display: flex;
@@ -909,14 +920,15 @@
         }
 
         .vote-btn-indicator {
-            font-size: 10px;
-            padding: 2px 6px;
+            font-size: 11px;
+            padding: 3px 8px;
             border: 1px solid var(--border-hard);
             background: var(--bg-dark);
-            color: var(--text-muted);
+            color: var(--text-main);
             border-radius: 2px;
             margin-top: 6px;
             align-self: flex-start;
+            font-weight: bold;
         }
 
         .community-card.voted .vote-btn-indicator {
@@ -926,16 +938,16 @@
 
         .delete-card-btn {
             position: absolute;
-            top: 4px;
-            right: 4px;
+            top: 6px;
+            right: 6px;
             background: rgba(255, 0, 51, 0.2);
             border: 1px solid var(--accent-alert);
             color: var(--accent-alert);
             font-family: 'Share Tech Mono', monospace;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: bold;
-            width: 18px;
-            height: 18px;
+            width: 22px;
+            height: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -958,7 +970,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.25s ease;
@@ -973,14 +985,14 @@
 
         .percentage-display {
             font-family: 'VT323', monospace;
-            font-size: 32px;
+            font-size: 36px;
             color: var(--accent-glitch);
             line-height: 1;
         }
 
         .percentage-bar-bg {
             width: 100%;
-            height: 6px;
+            height: 8px;
             background: var(--border-hard);
             overflow: hidden;
             border-radius: 3px;
@@ -994,21 +1006,22 @@
         }
 
         .percentage-stats {
-            font-size: 10px;
-            color: var(--text-muted);
+            font-size: 11px;
+            color: var(--text-main);
             text-transform: uppercase;
+            font-weight: bold;
         }
 
         .suggest-form-container {
             background: var(--form-bg);
             border: 1px dashed var(--accent-blue);
-            padding: 20px;
+            padding: 24px;
             margin-top: 25px;
         }
 
         .suggest-form-title {
             font-family: 'VT323', monospace;
-            font-size: 20px;
+            font-size: 22px;
             color: var(--accent-blue);
             margin-bottom: 15px;
             text-transform: uppercase;
@@ -1037,9 +1050,10 @@
         }
 
         .form-group label {
-            font-size: 11px;
-            color: var(--text-muted);
+            font-size: 12px;
+            color: var(--text-main);
             text-transform: uppercase;
+            font-weight: bold;
         }
 
         .form-control {
@@ -1047,8 +1061,8 @@
             border: 1px solid var(--border-hard);
             color: var(--text-main);
             font-family: 'Share Tech Mono', monospace;
-            padding: 10px;
-            font-size: 13px;
+            padding: 12px;
+            font-size: 14px;
             outline: none;
         }
 
@@ -1058,7 +1072,7 @@
 
         textarea.form-control {
             resize: vertical;
-            min-height: 80px;
+            min-height: 90px;
         }
 
         .submit-btn {
@@ -1066,8 +1080,9 @@
             border: 1px solid var(--accent-blue);
             color: var(--accent-blue);
             font-family: 'Share Tech Mono', monospace;
-            padding: 10px 20px;
-            font-size: 13px;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: bold;
             text-transform: uppercase;
             cursor: pointer;
             align-self: flex-start;
@@ -1077,7 +1092,6 @@
         .submit-btn:hover {
             background: var(--accent-blue);
             color: #fff;
-            font-weight: bold;
         }
 
         /* TWITCH ONGLET PRINCIPAL */
@@ -1120,7 +1134,7 @@
 
         .pip-header {
             background: var(--bg-dark);
-            padding: 6px 10px;
+            padding: 8px 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -1130,7 +1144,7 @@
         }
 
         .pip-title {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--accent-glitch);
             font-weight: bold;
         }
@@ -1142,9 +1156,10 @@
             color: var(--text-main);
             border: 1px solid var(--border-hard);
             cursor: pointer;
-            font-size: 10px;
-            padding: 2px 6px;
+            font-size: 11px;
+            padding: 3px 8px;
             font-family: inherit;
+            font-weight: bold;
         }
 
         .pip-btn:hover {
@@ -1391,7 +1406,7 @@
         <div class="section-header">> PLAYLISTS // ARCHIVES DE STREAM</div>
         
         <div class="single-category-block">
-            <div style="font-family: 'VT323', monospace; font-size: 22px; color: var(--accent-glitch);">
+            <div style="font-family: 'VT323', monospace; font-size: 24px; color: var(--accent-glitch);">
                 [>] JEUX JOUÉS EN STREAM EN 2026
             </div>
             
@@ -1479,7 +1494,7 @@
         <!-- JEUX POINTS DE CHAÎNE -->
         <div class="single-category-block gold-border-block">
             <div class="upcoming-header-bar">
-                <div style="font-family: 'VT323', monospace; font-size: 18px; color: var(--accent-gold);">
+                <div style="font-family: 'VT323', monospace; font-size: 20px; color: var(--accent-gold);">
                     [★] JEUX POINTS DE CHAÎNE
                 </div>
             </div>
@@ -1489,11 +1504,11 @@
         <!-- JEUX COMMUNAUTÉ -->
         <div class="single-category-block blue-border-block" style="margin-top: 30px;">
             <div class="upcoming-header-bar">
-                <div style="font-family: 'VT323', monospace; font-size: 22px; color: var(--accent-blue);">
+                <div style="font-family: 'VT323', monospace; font-size: 24px; color: var(--accent-blue);">
                     [+] JEUX PROPOSÉS PAR LA COMMUNAUTÉ (CLIQUEZ POUR VOTER)
                 </div>
                 <div id="admin-container" style="display: inline-block;">
-                    <input type="password" id="adminPasswordInput" placeholder="Mot de passe..." onkeydown="checkAdminEnter(event)" style="display: none; padding: 4px 8px; background: var(--bg-dark); color: var(--accent-glitch); border: 1px solid var(--accent-alert); font-family: inherit; font-size: 11px; outline: none; margin-right: 5px;">
+                    <input type="password" id="adminPasswordInput" placeholder="Mot de passe..." onkeydown="checkAdminEnter(event)" style="display: none; padding: 6px 10px; background: var(--bg-dark); color: var(--accent-glitch); border: 1px solid var(--accent-alert); font-family: inherit; font-size: 12px; outline: none; margin-right: 5px;">
                     <button class="admin-toggle-btn" id="adminToggleBtn" onclick="toggleAdminMode()">[MODE ADMIN]</button>
                 </div>
             </div>
@@ -1827,7 +1842,7 @@
         container.innerHTML = '';
 
         if (channelPointsGames.length === 0) {
-            container.innerHTML = `<div style="color:var(--text-muted); font-size:11px;">Aucun jeu en attente.</div>`;
+            container.innerHTML = `<div style="color:var(--text-muted); font-size:12px;">Aucun jeu en attente.</div>`;
             return;
         }
 
