@@ -100,9 +100,10 @@
             display: flex;
             gap: 10px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
-        .nav-tabs { display: flex; gap: 8px; }
+        .nav-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
 
         .tab-btn, .theme-toggle-btn {
             background: var(--panel-bg);
@@ -517,6 +518,65 @@
         .blue-border-block {
             border-color: rgba(0, 204, 255, 0.4);
             background: linear-gradient(180deg, rgba(0, 204, 255, 0.03) 0%, var(--panel-bg) 100%);
+        }
+
+        /* GRILLE DES LIENS (NOUVEL ONGLET) */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .link-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-hard);
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .link-card:hover {
+            border-color: var(--accent-glitch);
+            background: var(--card-hover);
+            transform: translateY(-2px);
+        }
+
+        .link-card-tag {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .link-card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            color: var(--text-main);
+            text-transform: uppercase;
+        }
+
+        .link-card-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .link-card-action {
+            font-size: 11px;
+            color: var(--accent-glitch);
+            font-weight: bold;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         /* PLANNING DE LA SEMAINE */
@@ -1118,6 +1178,7 @@
             <nav class="nav-tabs">
                 <button class="tab-btn active" onclick="openTab('home', this)">// ARCHIVES</button>
                 <button class="tab-btn" onclick="openTab('twitch', this)">// LIVE_FEED</button>
+                <button class="tab-btn" onclick="openTab('links', this)">// LIENS</button>
             </nav>
         </div>
     </header>
@@ -1273,7 +1334,7 @@
             <iframe id="twitch-chat" class="twitch-frame"></iframe>
         </div>
 
-        <!-- SECTION PLANNING DE LA SEMAINE (AVEC IDENTIFIANTS POUR DÉTECTION AUTO DU JOUR) -->
+        <!-- SECTION PLANNING DE LA SEMAINE -->
         <div class="section-header">> PLANNING DE STREAM</div>
         <div class="schedule-grid" id="schedule-grid">
             <div class="schedule-card" data-day="1">
@@ -1464,6 +1525,77 @@
             </div>
         </div>
 
+    </div>
+
+    <!-- NOUVEL ONGLET LIENS -->
+    <div id="links" class="tab-content">
+        <div class="section-header">> NETWORK_HUB // TOUS LES RÉSEAUX & LIENS</div>
+        
+        <div class="links-grid">
+            <!-- Twitch -->
+            <a href="https://www.twitch.tv/ckai" target="_blank" class="link-card">
+                <div class="link-card-tag" style="color: var(--accent-glitch);">Streaming Live</div>
+                <div class="link-card-title">Twitch</div>
+                <div class="link-card-desc">Retrouve les lives, les rediffusions de marathons et interagis sur le chat en direct.</div>
+                <div class="link-card-action">> ACCÉDER AU LIVE</div>
+            </a>
+
+            <!-- Chaîne Principale YouTube -->
+            <a href="https://www.youtube.com/@Ckai" target="_blank" class="link-card">
+                <div class="link-card-tag" style="color: var(--accent-alert);">YouTube Principal</div>
+                <div class="link-card-title">CKAI</div>
+                <div class="link-card-desc">Les vidéos analyses, formats longs et essais approfondis sur le jeu vidéo.</div>
+                <div class="link-card-action">> VOIR LES VIDÉOS</div>
+            </a>
+
+            <!-- C'est le C -->
+            <a href="https://www.youtube.com/@CestleC" target="_blank" class="link-card">
+                <div class="link-card-tag" style="color: var(--accent-blue);">YouTube Secondaire</div>
+                <div class="link-card-title">C'est le C</div>
+                <div class="link-card-desc">La seconde chaîne YouTube dédiée aux formats complémentaires et projets annexes.</div>
+                <div class="link-card-action">> EXPLORER</div>
+            </a>
+
+            <!-- Grosse Galère -->
+            <a href="https://www.youtube.com/@GrosseGalere" target="_blank" class="link-card">
+                <div class="link-card-tag" style="color: var(--accent-gold);">YouTube Alternatif</div>
+                <div class="link-card-title">Grosse Galère</div>
+                <div class="link-card-desc">Espace de création orienté sur d'autres thématiques, idées de vidéos et concepts libres.</div>
+                <div class="link-card-action">> DÉCOUVRIR</div>
+            </a>
+
+            <!-- Patreon -->
+            <a href="https://www.patreon.com/cw/Ckai/membership" target="_blank" class="link-card">
+                <div class="link-card-tag" style="color: var(--accent-patreon);">Soutien Financier</div>
+                <div class="link-card-title">Patreon</div>
+                <div class="link-card-desc">Soutiens la création de contenu, obtiens ton pseudo aux crédits et accède aux coulisses.</div>
+                <div class="link-card-action">> DEVENIR PATRON</div>
+            </a>
+
+            <!-- SensCritique -->
+            <a href="https://www.senscritique.com/Ckai" target="_blank" class="link-card">
+                <div class="link-card-tag" style="color: #ff8800;">Avis & Notes</div>
+                <div class="link-card-title">SensCritique</div>
+                <div class="link-card-desc">Retrouve les listes, notes et critiques détaillées de jeux vidéo et œuvres diverses.</div>
+                <div class="link-card-action">> VOIR LE PROFIL</div>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/ckai_yt/" target="_blank" class="link-card">
+                <div class="link-card-tag" style="color: #e1306c;">Réseau Social</div>
+                <div class="link-card-title">Instagram</div>
+                <div class="link-card-desc">Actualités en photos, stories des coulisses et brèves de la vie de créateur.</div>
+                <div class="link-card-action">> SUIVRE SUR INSTA</div>
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@ckai_yt" target="_blank" class="link-card">
+                <div class="link-card-tag" style="color: #00f2fe;">Format Court</div>
+                <div class="link-card-title">TikTok</div>
+                <div class="link-card-desc">Extraits de lives marquants, anecdotes et formats courts rythmés.</div>
+                <div class="link-card-action">> VOIR LES TIKTOKS</div>
+            </a>
+        </div>
     </div>
 
 </div>
