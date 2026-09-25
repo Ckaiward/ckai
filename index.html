@@ -48,7 +48,7 @@
             justify-content: center;
         }
 
-        /* SCANLINES (uniquement en mode dark pour garder l'effet rétro) */
+        /* SCANLINES (uniquement en mode dark) */
         :root[data-theme="dark"] body::before {
             content: " ";
             display: block;
@@ -511,6 +511,70 @@
             background: linear-gradient(180deg, rgba(0, 204, 255, 0.03) 0%, var(--panel-bg) 100%);
         }
 
+        /* PLANNING DE LA SEMAINE */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+            margin-bottom: 30px;
+        }
+
+        .schedule-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-hard);
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .schedule-card.live-today {
+            border-color: var(--accent-glitch);
+            background: linear-gradient(180deg, rgba(0, 255, 102, 0.04) 0%, var(--panel-bg) 100%);
+        }
+
+        .schedule-day {
+            font-family: 'VT323', monospace;
+            font-size: 18px;
+            color: var(--text-main);
+            text-transform: uppercase;
+            border-bottom: 1px dashed var(--border-hard);
+            padding-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .schedule-status {
+            font-size: 9px;
+            padding: 2px 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .status-live { background: rgba(0, 255, 102, 0.2); color: var(--accent-glitch); border: 1px solid var(--accent-glitch); }
+        .status-planned { background: rgba(0, 204, 255, 0.15); color: var(--accent-blue); border: 1px solid var(--accent-blue); }
+        .status-off { background: rgba(85, 85, 93, 0.15); color: var(--text-muted); border: 1px solid var(--border-hard); }
+
+        .schedule-content {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+
+        .schedule-game-title {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-main);
+            font-size: 11px;
+            font-weight: bold;
+            margin-top: 2px;
+            text-transform: uppercase;
+        }
+
         /* GRILLE DE TOUS LES JEUX JOUÉS */
         .game-grid {
             display: grid;
@@ -947,7 +1011,7 @@
             grid-template-columns: 1fr 300px;
             gap: 15px;
             height: 480px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         @media (max-width: 800px) {
@@ -1200,6 +1264,60 @@
             <iframe id="twitch-chat" class="twitch-frame"></iframe>
         </div>
 
+        <!-- SECTION PLANNING DE LA SEMAINE -->
+        <div class="section-header">> WEEKLY_SCHEDULE // PLANNING DE STREAM</div>
+        <div class="schedule-grid">
+            <div class="schedule-card">
+                <div class="schedule-day">LUN <span class="schedule-status status-off">OFF</span></div>
+                <div class="schedule-content">
+                    Repos / Montage
+                    <div class="schedule-game-title">Aucun live</div>
+                </div>
+            </div>
+            <div class="schedule-card">
+                <div class="schedule-day">MAR <span class="schedule-status status-planned">21H00</span></div>
+                <div class="schedule-content">
+                    Stream Découverte
+                    <div class="schedule-game-title">Jeu Mystère</div>
+                </div>
+            </div>
+            <div class="schedule-card live-today">
+                <div class="schedule-day">MER <span class="schedule-status status-live">EN COURS</span></div>
+                <div class="schedule-content">
+                    Session Principale
+                    <div class="schedule-game-title">FF7 Rebirth</div>
+                </div>
+            </div>
+            <div class="schedule-card">
+                <div class="schedule-day">JEU <span class="schedule-status status-planned">21H00</span></div>
+                <div class="schedule-content">
+                    Chill & Discussion
+                    <div class="schedule-game-title">Rétro Gaming</div>
+                </div>
+            </div>
+            <div class="schedule-card">
+                <div class="schedule-day">VEN <span class="schedule-status status-planned">20H30</span></div>
+                <div class="schedule-content">
+                    Fin de semaine
+                    <div class="schedule-game-title">Communauté / Points</div>
+                </div>
+            </div>
+            <div class="schedule-card">
+                <div class="schedule-day">SAM <span class="schedule-status status-off">OFF</span></div>
+                <div class="schedule-content">
+                    Libre
+                    <div class="schedule-game-title">-</div>
+                </div>
+            </div>
+            <div class="schedule-card">
+                <div class="schedule-day">DIM <span class="schedule-status status-off">OFF</span></div>
+                <div class="schedule-content">
+                    Libre
+                    <div class="schedule-game-title">-</div>
+                </div>
+            </div>
+        </div>
+
         <div class="section-header">> PLAYLISTS // ARCHIVES DE STREAM</div>
         
         <div class="single-category-block">
@@ -1427,8 +1545,7 @@
     }
 
     // --- SYNCHRONISATION CLOUD GLOBALE (JSONBIN) ---
-    // Configuration d'un stockage cloud public partagé (évite les décalages entre PC)
-    const BIN_ID = "661264c3acd3cb34a835b8ea"; // Bin partagé public d'exemple de sauvegarde communautaire
+    const BIN_ID = "661264c3acd3cb34a835b8ea";
     const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}/latest`;
 
     const initialPointsGames = [
@@ -1455,10 +1572,9 @@
     let isAdmin = false;
     const ADMIN_PASSWORD = "giratina";
 
-    // Fonction pour charger depuis le cloud au démarrage
     async function fetchCloudData() {
         try {
-            const response = await fetch(API_URL, { headers: { 'X-Access-Key': '$2a$10$Xb7vNq8... (public key)' } });
+            const response = await fetch(API_URL, { headers: { 'X-Access-Key': '$2a$10$Xb7vNq8...' } });
             if (response.ok) {
                 const data = await response.json();
                 if (data && data.record) {
@@ -1472,7 +1588,6 @@
         }
     }
 
-    // Fonction pour sauvegarder vers le cloud et le local
     async function saveData() {
         localStorage.setItem('ckai_points_games_v5', JSON.stringify(channelPointsGames));
         localStorage.setItem('ckai_community_games_v5', JSON.stringify(communityGames));
@@ -1671,7 +1786,6 @@
         renderCommunityGames();
     }
 
-    // Initialisation et rafraîchissement automatique toutes les 15 secondes pour voir les changements multi-PC en direct
     renderAllGameLists();
     fetchCloudData();
     setInterval(fetchCloudData, 15000);
