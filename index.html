@@ -1217,7 +1217,7 @@
             padding: 10px 14px;
             cursor: pointer;
             z-index: 999;
-            display: none; /* Masqué par défaut, apparaît au scroll */
+            display: none;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             transition: all 0.2s ease;
         }
@@ -1251,7 +1251,6 @@
         <div class="section-header">> CORE_NODE // CKAI</div>
         
         <div class="featured-hero">
-            <!-- COLONNE DE GAUCHE : Dernière Vidéo + Mini Catégorie + Emplacements 1, 2 & 3 -->
             <div class="left-column-group">
                 <div class="main-player-box">
                     <div class="video-embed-container">
@@ -1260,10 +1259,8 @@
                     <div class="main-video-title">Dernière Vidéo CKAI</div>
                 </div>
 
-                <!-- MINI CATÉGORIE -->
                 <div class="upcoming-videos-subtitle">> PROCHAINES VIDÉOS PRÉVUES</div>
 
-                <!-- EMPLACEMENT 1 -->
                 <div class="ckai-progress-card">
                     <span class="ckai-tag">// PROJET_01</span>
                     <div class="ckai-progress-labels">
@@ -1275,7 +1272,6 @@
                     </div>
                 </div>
 
-                <!-- EMPLACEMENT 2 -->
                 <div class="ckai-progress-card">
                     <span class="ckai-tag">// PROJET_02</span>
                     <div class="ckai-progress-labels">
@@ -1287,7 +1283,6 @@
                     </div>
                 </div>
 
-                <!-- EMPLACEMENT 3 -->
                 <div class="ckai-progress-card">
                     <span class="ckai-tag">// PROJET_03</span>
                     <div class="ckai-progress-labels">
@@ -1300,7 +1295,6 @@
                 </div>
             </div>
 
-            <!-- COLONNE DE DROITE : Recommandations -->
             <div class="side-recommended">
                 <a href="https://youtu.be/uzXsah-SJmY" target="_blank" class="rec-card">
                     <div class="rec-thumb-box">
@@ -1325,7 +1319,6 @@
             </div>
         </div>
 
-        <!-- BLOC PATREON -->
         <div class="patreon-section">
             <div class="patreon-top-row">
                 <div class="patreon-brand-title">
@@ -1365,7 +1358,6 @@
             <div class="section-header">> EXTERNAL_NODES // AUTRES CHAÎNES</div>
             
             <div class="carousel-track">
-                <!-- Carte 1 : C'est le C -->
                 <div class="channel-card-scroll">
                     <div class="channel-card-tag" style="color: var(--accent-glitch);">C'est le C</div>
                     <a href="https://youtu.be/weCXQZtYVUk?si=y3z6UDodT8NEd_Zs" target="_blank" class="mini-video-link">
@@ -1374,7 +1366,6 @@
                     </a>
                 </div>
 
-                <!-- Carte 2 -->
                 <div class="channel-card-scroll">
                     <div class="channel-card-tag" style="color: var(--accent-glitch);">C'est le C</div>
                     <a href="https://youtu.be/BNOc9XchjRE" target="_blank" class="mini-video-link">
@@ -1383,7 +1374,6 @@
                     </a>
                 </div>
 
-                <!-- Carte 3 : Grosse Galère -->
                 <div class="channel-card-scroll">
                     <div class="channel-card-tag" style="color: var(--accent-alert);">Grosse Galère</div>
                     <a href="https://youtu.be/sMU200R94BE" target="_blank" class="mini-video-link">
@@ -1392,7 +1382,6 @@
                     </a>
                 </div>
 
-                <!-- Carte 4 -->
                 <div class="channel-card-scroll">
                     <div class="channel-card-tag" style="color: var(--accent-alert);">Grosse Galère</div>
                     <a href="https://youtu.be/dbnNkeh6ciw" target="_blank" class="mini-video-link">
@@ -1413,7 +1402,6 @@
             <iframe id="twitch-chat" class="twitch-frame"></iframe>
         </div>
 
-        <!-- SECTION PLANNING DE LA SEMAINE -->
         <div class="section-header">> PLANNING DE STREAM</div>
         <div class="schedule-grid" id="schedule-grid">
             <div class="schedule-card" data-day="1">
@@ -1612,10 +1600,8 @@
         
         <div class="links-column-container">
             
-            <!-- 1. LIVE (TWITCH) -->
             <div class="link-category-group">
                 <div class="link-cat-title">// LIVE</div>
-                
                 <a href="https://www.twitch.tv/ckai" target="_blank" class="vertical-link-item">
                     <div class="link-item-left">
                         <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
@@ -1628,10 +1614,8 @@
                 </a>
             </div>
 
-            <!-- 2. LES VIDÉOS (YOUTUBE CHAÎNES) -->
             <div class="link-category-group">
                 <div class="link-cat-title">// LES VIDÉOS</div>
-                
                 <a href="https://www.youtube.com/@ckaiward" target="_blank" class="vertical-link-item">
                     <div class="link-item-left">
                         <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
@@ -1666,10 +1650,8 @@
                 </a>
             </div>
 
-            <!-- 3. FORMAT COURT (TIKTOK & INSTAGRAM) -->
             <div class="link-category-group">
                 <div class="link-cat-title">// FORMAT COURT</div>
-                
                 <a href="https://www.tiktok.com/@ckai_clips" target="_blank" class="vertical-link-item">
                     <div class="link-item-left">
                         <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
@@ -1693,10 +1675,8 @@
                 </a>
             </div>
 
-            <!-- 4. SOUTIEN (PATREON SEUL) -->
             <div class="link-category-group">
                 <div class="link-cat-title">// SOUTIEN</div>
-                
                 <a href="https://www.patreon.com/cw/Ckai/membership" target="_blank" class="vertical-link-item">
                     <div class="link-item-left">
                         <svg class="link-item-icon" viewBox="0 0 569 546"><path d="M365.2 56.7C455.5 56.7 528.8 130 528.8 220.3C528.8 310.6 455.5 383.9 365.2 383.9C274.9 383.9 201.6 310.6 201.6 220.3C201.6 130 274.9 56.7 365.2 56.7ZM0 489.3H75.5V56.7H0V489.3Z"/></svg>
@@ -1709,10 +1689,8 @@
                 </a>
             </div>
 
-            <!-- 5. AUTRES LIENS (SENSCRITIQUE) -->
             <div class="link-category-group">
                 <div class="link-cat-title">// AUTRES LIENS</div>
-                
                 <a href="https://www.senscritique.com/Ckai" target="_blank" class="vertical-link-item">
                     <div class="link-item-left">
                         <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
@@ -1744,11 +1722,285 @@
     </div>
 </div>
 
-<!-- BOUTON RETOUR EN HAUT (BAS GAUCHE) -->
 <button id="scrollTopBtn" class="scroll-top-btn" onclick="scrollToTop()">[▲ HAUT]</button>
 
+<!-- SCRIPTS FIREBASE & LOGIQUE DU SITE -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCszS6MEz379P6pRiXFe7_FWJwts_btOmw",
+        authDomain: "lesite-d8d14.firebaseapp.com",
+        projectId: "lesite-d8d14",
+        storageBucket: "lesite-d8d14.firebasestorage.app",
+        messagingSenderId: "193637356297",
+        appId: "1:193637356297:web:b4eb3ad9d6ccc23bceb9d8",
+        measurementId: "G-YYJXML57DE"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Données par défaut initiales si la base est vide
+    const initialPointsGames = [
+        { id: 'p1', title: 'CRASH BANDICOOT N.SANE TRILOGY', user: 'LettWave', completed: true },
+        { id: 'p2', title: 'MINIT', user: 'LettWave', completed: true },
+        { id: 'p3', title: 'CRASH BANDICOOT 4', user: 'LettWave', completed: false },
+        { id: 'p4', title: 'Shadowman Remaster', user: 'WeshSen', completed: true },
+        { id: 'p5', title: 'Turok', user: 'WeshSen', completed: false },
+        { id: 'p6', title: 'METAL GEAR SOLID', user: 'Grayfox', completed: false },
+        { id: 'p7', title: 'MAX PAYNE 3', user: 'Skunksx', completed: true },
+        { id: 'p8', title: 'Splinter Cell Chaos Theory', user: 'Coldacity', completed: true },
+        { id: 'p9', title: 'GOTCHA FORCE (GC)', user: 'Kirochi', completed: false }
+    ];
+
+    const defaultCommunityGames = [
+        { id: '1', title: 'Silent Hill 2 Remake', user: 'Pseudo_01', votes: 15 },
+        { id: '2', title: 'Metal Gear Solid Delta', user: 'ShadowFan', votes: 23 },
+        { id: '3', title: 'Hollow Knight: Silksong', user: 'CKAI_Fan', votes: 36 }
+    ];
+
+    let communityGames = [];
+    let channelPointsGames = [];
+    let userVotes = JSON.parse(localStorage.getItem('ckai_user_votes_v5')) || {};
+    let isAdmin = false;
+    const ADMIN_PASSWORD = "giratina";
+
+    // --- CHARGEMENT DEPUIS FIRESTORE ---
+    async function loadDataFromFirebase() {
+        try {
+            // Chargement Communauté
+            const commSnap = await getDocs(collection(db, "communityGames"));
+            if (commSnap.empty) {
+                // Remplir avec les valeurs par défaut si vide
+                for (const game of defaultCommunityGames) {
+                    await setDoc(doc(db, "communityGames", game.id), game);
+                }
+                communityGames = [...defaultCommunityGames];
+            } else {
+                communityGames = [];
+                commSnap.forEach(d => communityGames.push({ id: d.id, ...d.data() }));
+            }
+
+            // Chargement Points de chaîne
+            const pointsSnap = await getDocs(collection(db, "channelPointsGames"));
+            if (pointsSnap.empty) {
+                for (const game of initialPointsGames) {
+                    await setDoc(doc(db, "channelPointsGames", game.id), game);
+                }
+                channelPointsGames = [...initialPointsGames];
+            } else {
+                channelPointsGames = [];
+                pointsSnap.forEach(d => channelPointsGames.push({ id: d.id, ...d.data() }));
+            }
+
+            renderAllGameLists();
+        } catch (e) {
+            console.error("Erreur de chargement Firebase : ", e);
+        }
+    }
+
+    // --- FONCTIONS D'AFFICHAGE ---
+    function renderChannelPointsGames() {
+        const container = document.getElementById('channel-points-games-list');
+        container.innerHTML = '';
+
+        if (channelPointsGames.length === 0) {
+            container.innerHTML = `<div style="color:var(--text-muted); font-size:12px;">Aucun jeu en attente.</div>`;
+            return;
+        }
+
+        channelPointsGames.forEach(game => {
+            const card = document.createElement('div');
+            card.className = `points-card-compact ${game.completed ? 'completed' : ''}`;
+
+            let deleteBtnHtml = isAdmin ? `<div class="delete-card-btn" onclick="window.deletePointsGame('${game.id}', event)">X</div>` : '';
+            let completedOverlayHtml = game.completed ? `
+                <div class="completed-overlay">
+                    <span class="completed-x">✕</span>
+                    <span class="completed-text">COMPLETED</span>
+                </div>
+            ` : '';
+
+            card.innerHTML = `
+                ${deleteBtnHtml}
+                ${completedOverlayHtml}
+                <div class="points-card-title">${escapeHtml(game.title)}</div>
+                <div class="points-card-user">par <span>${escapeHtml(game.user)}</span></div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function getTotalVotes() {
+        return communityGames.reduce((acc, game) => acc + (game.votes || 0), 0);
+    }
+
+    function renderCommunityGames() {
+        const container = document.getElementById('community-games-list');
+        container.innerHTML = '';
+        const totalVotes = getTotalVotes();
+
+        communityGames.sort((a, b) => b.votes - a.votes);
+
+        communityGames.forEach(game => {
+            const hasVoted = !!userVotes[game.id];
+            const percentage = totalVotes > 0 ? ((game.votes / totalVotes) * 100).toFixed(1) : 0;
+
+            const card = document.createElement('div');
+            card.className = `community-card ${hasVoted ? 'voted' : ''}`;
+            card.onclick = () => window.toggleVote(game.id);
+
+            let deleteBtnHtml = isAdmin ? `<div class="delete-card-btn" onclick="window.deleteCommunityGame('${game.id}', event)">X</div>` : '';
+
+            card.innerHTML = `
+                ${deleteBtnHtml}
+                <div class="upcoming-card-content">
+                    <div class="upcoming-game-name">${escapeHtml(game.title)}</div>
+                    <div class="vote-btn-indicator">${hasVoted ? '✔ VOTÉ' : '+ CLIQUER POUR VOTER'}</div>
+                </div>
+                <div class="upcoming-card-footer">
+                    <div class="proposed-by-box">Par: <span class="proposed-by-user">${escapeHtml(game.user)}</span></div>
+                    <div class="vote-count-box">▲ <span>${game.votes}</span></div>
+                </div>
+                <div class="vote-hover-overlay">
+                    <div class="percentage-display">${percentage}%</div>
+                    <div class="percentage-bar-bg">
+                        <div class="percentage-bar-fill" style="width: ${percentage}%;"></div>
+                    </div>
+                    <div class="percentage-stats">${game.votes} / ${totalVotes} VOTES TOTAL</div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderAllGameLists() {
+        renderChannelPointsGames();
+        renderCommunityGames();
+    }
+
+    // --- ACTIONS EXPOSÉES GLOBALEMENT ---
+    window.toggleVote = async function(gameId) {
+        const game = communityGames.find(g => g.id === gameId);
+        if (!game) return;
+
+        const gameRef = doc(db, "communityGames", gameId);
+        if (userVotes[gameId]) {
+            game.votes -= 1;
+            delete userVotes[gameId];
+            await updateDoc(gameRef, { votes: increment(-1) });
+        } else {
+            game.votes += 1;
+            userVotes[gameId] = true;
+            await updateDoc(gameRef, { votes: increment(1) });
+        }
+
+        localStorage.setItem('ckai_user_votes_v5', JSON.stringify(userVotes));
+        renderCommunityGames();
+    }
+
+    window.deleteCommunityGame = async function(gameId, event) {
+        event.stopPropagation();
+        if (!isAdmin) return;
+        const game = communityGames.find(g => g.id === gameId);
+        if (game && confirm(`Supprimer "${game.title}" ?`)) {
+            await deleteDoc(doc(db, "communityGames", gameId));
+            communityGames = communityGames.filter(g => g.id !== gameId);
+            delete userVotes[gameId];
+            localStorage.setItem('ckai_user_votes_v5', JSON.stringify(userVotes));
+            renderCommunityGames();
+        }
+    }
+
+    window.deletePointsGame = async function(gameId, event) {
+        event.stopPropagation();
+        if (!isAdmin) return;
+        const game = channelPointsGames.find(g => g.id === gameId);
+        if (game && confirm(`Supprimer "${game.title}" ?`)) {
+            await deleteDoc(doc(db, "channelPointsGames", gameId));
+            channelPointsGames = channelPointsGames.filter(g => g.id !== gameId);
+            renderChannelPointsGames();
+        }
+    }
+
+    // Soumission de formulaire
+    document.getElementById('suggestGameForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const pseudoInput = document.getElementById('user-pseudo');
+        const gameInput = document.getElementById('game-name');
+
+        const newId = Date.now().toString();
+        const newGame = {
+            id: newId,
+            title: gameInput.value.trim(),
+            user: pseudoInput.value.trim() || 'Anonyme',
+            votes: 1
+        };
+
+        try {
+            await setDoc(doc(db, "communityGames", newId), newGame);
+            communityGames.push(newGame);
+            userVotes[newId] = true;
+            localStorage.setItem('ckai_user_votes_v5', JSON.stringify(userVotes));
+
+            renderCommunityGames();
+            gameInput.value = '';
+            document.getElementById('game-reason').value = '';
+            alert('Jeu ajouté et sauvegardé en ligne dans Firebase !');
+        } catch (err) {
+            console.error("Erreur d'ajout : ", err);
+            alert("Erreur lors de l'enregistrement dans la base de données.");
+        }
+    });
+
+    // Gestion admin
+    window.toggleAdminMode = function() {
+        const inputField = document.getElementById('adminPasswordInput');
+        const btn = document.getElementById('adminToggleBtn');
+
+        if (!isAdmin) {
+            if (inputField.style.display === 'none') {
+                inputField.style.display = 'inline-block';
+                inputField.focus();
+                btn.innerText = '[VALIDER]';
+            } else {
+                if (inputField.value === ADMIN_PASSWORD) {
+                    isAdmin = true;
+                    inputField.style.display = 'none';
+                    inputField.value = '';
+                    btn.classList.add('active');
+                    btn.innerText = '[ADMIN ACTIVÉ]';
+                } else {
+                    alert("Mot de passe incorrect.");
+                    inputField.value = '';
+                    inputField.focus();
+                }
+            }
+        } else {
+            isAdmin = false;
+            btn.classList.remove('active');
+            btn.innerText = '[MODE ADMIN]';
+        }
+        renderAllGameLists();
+    }
+
+    window.checkAdminEnter = function(event) {
+        if (event.key === 'Enter') window.toggleAdminMode();
+    }
+
+    function escapeHtml(text) {
+        if (!text) return '';
+        return text.toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    // Lancement au chargement
+    loadDataFromFirebase();
+</script>
+
 <script>
-    // --- DÉTECTION AUTOMATIQUE DU JOUR SUR LE PLANNING ---
+    // --- PLANNING & DESIGN GÉNÉRAL ---
     document.addEventListener("DOMContentLoaded", function() {
         const currentDayIndex = new Date().getDay();
         const scheduleCards = document.querySelectorAll('.schedule-card');
@@ -1761,7 +2013,6 @@
         });
     });
 
-    // --- GESTION DU MODE CLAIR / SOMBRE ---
     function toggleTheme() {
         const html = document.documentElement;
         const currentTheme = html.getAttribute('data-theme');
@@ -1775,7 +2026,6 @@
     document.documentElement.setAttribute('data-theme', savedTheme);
     document.getElementById('themeToggleBtn').innerText = savedTheme === 'dark' ? '[MODE CLAIR]' : '[MODE SOMBRE]';
 
-    // --- TWITCH CONFIG ---
     let currentHost = window.location.hostname || "localhost";
     document.getElementById("twitch-main-player").src = `https://player.twitch.tv/?channel=ckai&parent=${currentHost}`;
     document.getElementById("twitch-pip-player").src = `https://player.twitch.tv/?channel=ckai&parent=${currentHost}`;
@@ -1786,11 +2036,9 @@
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.getElementById(tabId).classList.add('active');
         btn.classList.add('active');
-        // Remonte en haut de la page lors du changement d'onglet
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // --- BOUTON RETOUR EN HAUT & SCROLL ---
     function scrollToTop() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -1804,7 +2052,6 @@
         }
     });
 
-    // PIP Dragging
     function toggleMinimizePip() {
         const popup = document.getElementById('pipPopup');
         const minBtn = document.getElementById('pipMinBtn');
@@ -1837,8 +2084,8 @@
             pos4 = e.clientY;
             elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
             elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-            elmnt.style.bottom = "auto";
-            elmnt.style.right = "auto";
+            elmtn.style.bottom = "auto";
+            elmtn.style.right = "auto";
         }
 
         function closeDragElement() {
@@ -1846,252 +2093,6 @@
             document.onmousemove = null;
         }
     }
-
-    // --- SYNCHRONISATION CLOUD GLOBALE (JSONBIN) ---
-    const BIN_ID = "661264c3acd3cb34a835b8ea";
-    const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}/latest`;
-
-    const initialPointsGames = [
-        { id: 'p1', title: 'CRASH BANDICOOT N.SANE TRILOGY', user: 'LettWave', completed: true },
-        { id: 'p2', title: 'MINIT', user: 'LettWave', completed: true },
-        { id: 'p3', title: 'CRASH BANDICOOT 4', user: 'LettWave', completed: false },
-        { id: 'p4', title: 'Shadowman Remaster', user: 'WeshSen', completed: true },
-        { id: 'p5', title: 'Turok', user: 'WeshSen', completed: false },
-        { id: 'p6', title: 'METAL GEAR SOLID', user: 'Grayfox', completed: false },
-        { id: 'p7', title: 'MAX PAYNE 3', user: 'Skunksx', completed: true },
-        { id: 'p8', title: 'Splinter Cell Chaos Theory', user: 'Coldacity', completed: true },
-        { id: 'p9', title: 'GOTCHA FORCE (GC)', user: 'Kirochi', completed: false }
-    ];
-
-    const defaultCommunityGames = [
-        { id: '1', title: 'Silent Hill 2 Remake', user: 'Pseudo_01', votes: 15 },
-        { id: '2', title: 'Metal Gear Solid Delta', user: 'ShadowFan', votes: 23 },
-        { id: '3', title: 'Hollow Knight: Silksong', user: 'CKAI_Fan', votes: 36 }
-    ];
-
-    let channelPointsGames = JSON.parse(localStorage.getItem('ckai_points_games_v5')) || initialPointsGames;
-    let communityGames = JSON.parse(localStorage.getItem('ckai_community_games_v5')) || defaultCommunityGames;
-    let userVotes = JSON.parse(localStorage.getItem('ckai_user_votes_v5')) || {};
-    let isAdmin = false;
-    const ADMIN_PASSWORD = "giratina";
-
-    async function fetchCloudData() {
-        try {
-            const response = await fetch(API_URL, { headers: { 'X-Access-Key': '$2a$10$Xb7vNq8...' } });
-            if (response.ok) {
-                const data = await response.json();
-                if (data && data.record) {
-                    if (data.record.communityGames) communityGames = data.record.communityGames;
-                    if (data.record.channelPointsGames) channelPointsGames = data.record.channelPointsGames;
-                    renderAllGameLists();
-                }
-            }
-        } catch (e) {
-            console.log("Mode synchro locale de secours actif.");
-        }
-    }
-
-    async function saveData() {
-        localStorage.setItem('ckai_points_games_v5', JSON.stringify(channelPointsGames));
-        localStorage.setItem('ckai_community_games_v5', JSON.stringify(communityGames));
-        localStorage.setItem('ckai_user_votes_v5', JSON.stringify(userVotes));
-
-        try {
-            await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Access-Key': '$2a$10$Xb7vNq8...'
-                },
-                body: JSON.stringify({ communityGames, channelPointsGames })
-            });
-        } catch (e) {
-            console.log("Sauvegarde cloud en arrière-plan indisponible.");
-        }
-    }
-
-    function getTotalVotes() {
-        return communityGames.reduce((acc, game) => acc + game.votes, 0);
-    }
-
-    function toggleAdminMode() {
-        const inputField = document.getElementById('adminPasswordInput');
-        const btn = document.getElementById('adminToggleBtn');
-
-        if (!isAdmin) {
-            if (inputField.style.display === 'none') {
-                inputField.style.display = 'inline-block';
-                inputField.focus();
-                btn.innerText = '[VALIDER]';
-            } else {
-                if (inputField.value === ADMIN_PASSWORD) {
-                    isAdmin = true;
-                    inputField.style.display = 'none';
-                    inputField.value = '';
-                    btn.classList.add('active');
-                    btn.innerText = '[ADMIN ACTIVÉ]';
-                } else {
-                    alert("Mot de passe incorrect.");
-                    inputField.value = '';
-                    inputField.focus();
-                }
-            }
-        } else {
-            isAdmin = false;
-            btn.classList.remove('active');
-            btn.innerText = '[MODE ADMIN]';
-        }
-        renderAllGameLists();
-    }
-
-    function checkAdminEnter(event) {
-        if (event.key === 'Enter') toggleAdminMode();
-    }
-
-    function deleteCommunityGame(gameId, event) {
-        event.stopPropagation();
-        if (!isAdmin) return;
-        const game = communityGames.find(g => g.id === gameId);
-        if (game && confirm(`Supprimer "${game.title}" ?`)) {
-            communityGames = communityGames.filter(g => g.id !== gameId);
-            delete userVotes[gameId];
-            saveData();
-            renderCommunityGames();
-        }
-    }
-
-    function deletePointsGame(gameId, event) {
-        event.stopPropagation();
-        if (!isAdmin) return;
-        const game = channelPointsGames.find(g => g.id === gameId);
-        if (game && confirm(`Supprimer "${game.title}" ?`)) {
-            channelPointsGames = channelPointsGames.filter(g => g.id !== gameId);
-            saveData();
-            renderChannelPointsGames();
-        }
-    }
-
-    function renderChannelPointsGames() {
-        const container = document.getElementById('channel-points-games-list');
-        container.innerHTML = '';
-
-        if (channelPointsGames.length === 0) {
-            container.innerHTML = `<div style="color:var(--text-muted); font-size:12px;">Aucun jeu en attente.</div>`;
-            return;
-        }
-
-        channelPointsGames.forEach(game => {
-            const card = document.createElement('div');
-            card.className = `points-card-compact ${game.completed ? 'completed' : ''}`;
-
-            let deleteBtnHtml = isAdmin ? `<div class="delete-card-btn" onclick="deletePointsGame('${game.id}', event)">X</div>` : '';
-            let completedOverlayHtml = game.completed ? `
-                <div class="completed-overlay">
-                    <span class="completed-x">✕</span>
-                    <span class="completed-text">COMPLETED</span>
-                </div>
-            ` : '';
-
-            card.innerHTML = `
-                ${deleteBtnHtml}
-                ${completedOverlayHtml}
-                <div class="points-card-title">${escapeHtml(game.title)}</div>
-                <div class="points-card-user">par <span>${escapeHtml(game.user)}</span></div>
-            `;
-            container.appendChild(card);
-        });
-    }
-
-    function renderCommunityGames() {
-        const container = document.getElementById('community-games-list');
-        container.innerHTML = '';
-        const totalVotes = getTotalVotes();
-
-        communityGames.sort((a, b) => b.votes - a.votes);
-
-        communityGames.forEach(game => {
-            const hasVoted = !!userVotes[game.id];
-            const percentage = totalVotes > 0 ? ((game.votes / totalVotes) * 100).toFixed(1) : 0;
-
-            const card = document.createElement('div');
-            card.className = `community-card ${hasVoted ? 'voted' : ''}`;
-            card.onclick = () => toggleVote(game.id);
-
-            let deleteBtnHtml = isAdmin ? `<div class="delete-card-btn" onclick="deleteCommunityGame('${game.id}', event)">X</div>` : '';
-
-            card.innerHTML = `
-                ${deleteBtnHtml}
-                <div class="upcoming-card-content">
-                    <div class="upcoming-game-name">${escapeHtml(game.title)}</div>
-                    <div class="vote-btn-indicator">${hasVoted ? '✔ VOTÉ' : '+ CLIQUER POUR VOTER'}</div>
-                </div>
-                <div class="upcoming-card-footer">
-                    <div class="proposed-by-box">Par: <span class="proposed-by-user">${escapeHtml(game.user)}</span></div>
-                    <div class="vote-count-box">▲ <span>${game.votes}</span></div>
-                </div>
-                <div class="vote-hover-overlay">
-                    <div class="percentage-display">${percentage}%</div>
-                    <div class="percentage-bar-bg">
-                        <div class="percentage-bar-fill" style="width: ${percentage}%;"></div>
-                    </div>
-                    <div class="percentage-stats">${game.votes} / ${totalVotes} VOTES TOTAL</div>
-                </div>
-            `;
-            container.appendChild(card);
-        });
-    }
-
-    function toggleVote(gameId) {
-        const game = communityGames.find(g => g.id === gameId);
-        if (!game) return;
-
-        if (userVotes[gameId]) {
-            game.votes -= 1;
-            delete userVotes[gameId];
-        } else {
-            game.votes += 1;
-            userVotes[gameId] = true;
-        }
-
-        saveData();
-        renderCommunityGames();
-    }
-
-    document.getElementById('suggestGameForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const pseudoInput = document.getElementById('user-pseudo');
-        const gameInput = document.getElementById('game-name');
-
-        const newGame = {
-            id: Date.now().toString(),
-            title: gameInput.value.trim(),
-            user: pseudoInput.value.trim() || 'Anonyme',
-            votes: 1
-        };
-
-        communityGames.push(newGame);
-        userVotes[newGame.id] = true;
-
-        saveData();
-        renderCommunityGames();
-
-        gameInput.value = '';
-        document.getElementById('game-reason').value = '';
-        alert('Jeu ajouté et synchronisé en ligne !');
-    });
-
-    function escapeHtml(text) {
-        return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-    }
-
-    function renderAllGameLists() {
-        renderChannelPointsGames();
-        renderCommunityGames();
-    }
-
-    renderAllGameLists();
-    fetchCloudData();
-    setInterval(fetchCloudData, 15000);
 </script>
 
 </body>
