@@ -289,66 +289,6 @@
             font-weight: 500;
         }
 
-        /* PROGRESSION */
-        .progress-section {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-hard);
-            padding: 20px;
-            margin-top: 30px;
-            margin-bottom: 30px;
-        }
-
-        .progress-header {
-            font-family: 'VT323', monospace;
-            font-size: 22px;
-            color: var(--accent-blue);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        .progress-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .progress-item {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .progress-info-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            text-transform: uppercase;
-        }
-
-        .progress-title {
-            color: var(--text-main);
-            font-weight: bold;
-        }
-
-        .progress-percentage {
-            font-family: 'VT323', monospace;
-            font-size: 18px;
-        }
-
-        .progress-track {
-            width: 100%;
-            height: 10px;
-            background: var(--bg-dark);
-            border: 1px solid var(--border-hard);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-fill {
-            height: 100%;
-            transition: width 0.4s ease;
-        }
-
         /* PATREON SECTION */
         .patreon-section {
             background: linear-gradient(180deg, rgba(255, 64, 96, 0.08) 0%, var(--panel-bg) 100%);
@@ -562,6 +502,39 @@
             overflow: hidden;
             text-overflow: ellipsis;
             font-weight: 500;
+        }
+
+        /* STYLES POUR EMPLACEMENT 3 & 4 (SOUS LES CARTES DE CHAÎNES) */
+        .sub-progress-card {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-hard);
+            padding: 8px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-top: 4px;
+        }
+
+        .sub-progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: bold;
+        }
+
+        .sub-progress-bar {
+            width: 100%;
+            height: 5px;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-hard);
+            overflow: hidden;
+        }
+
+        .sub-progress-fill {
+            height: 100%;
+            background: var(--accent-blue);
         }
 
         .single-category-block {
@@ -1323,7 +1296,7 @@
                 </div>
             </div>
 
-            <!-- COLONNE DE DROITE : Recommandations -->
+            <!-- COLONNE DE DROITE : Recommandations (3 cases alignées avec la gauche) -->
             <div class="side-recommended">
                 <a href="https://youtu.be/uzXsah-SJmY" target="_blank" class="rec-card">
                     <div class="rec-thumb-box">
@@ -1338,43 +1311,13 @@
                     </div>
                     <div class="rec-title">Quand le vrai jeu commence après la fin</div>
                 </a>
-            </div>
-        </div>
 
-        <!-- PROGRESSION DES VIDÉOS -->
-        <div class="progress-section">
-            <div class="progress-header">[>] PROGRESSION DES VIDÉOS</div>
-            
-            <div class="progress-list">
-                <div class="progress-item">
-                    <div class="progress-info-row">
-                        <span class="progress-title">CKAI // écriture en cours</span>
-                        <span class="progress-percentage" style="color: var(--accent-glitch);">20%</span>
+                <a href="https://youtu.be/KS2ARw2Ctts" target="_blank" class="rec-card">
+                    <div class="rec-thumb-box">
+                        <img src="https://img.youtube.com/vi/KS2ARw2Ctts/hqdefault.jpg" alt="">
                     </div>
-                    <div class="progress-track">
-                        <div class="progress-fill" style="width: 20%; background: var(--accent-glitch);"></div>
-                    </div>
-                </div>
-
-                <div class="progress-item">
-                    <div class="progress-info-row">
-                        <span class="progress-title">C'est le C // ECRITURE EN COURS</span>
-                        <span class="progress-percentage" style="color: var(--accent-blue);">00%</span>
-                    </div>
-                    <div class="progress-track">
-                        <div class="progress-fill" style="width: 00%; background: var(--accent-blue);"></div>
-                    </div>
-                </div>
-
-                <div class="progress-item">
-                    <div class="progress-info-row">
-                        <span class="progress-title">Grosse Galère // recherche d'idée</span>
-                        <span class="progress-percentage" style="color: var(--accent-alert);">00%</span>
-                    </div>
-                    <div class="progress-track">
-                        <div class="progress-fill" style="width: 00%; background: var(--accent-alert);"></div>
-                    </div>
-                </div>
+                    <div class="rec-title">Prochaine analyse / Vidéo bonus</div>
+                </a>
             </div>
         </div>
 
@@ -1418,6 +1361,7 @@
             <div class="section-header">> EXTERNAL_NODES // AUTRES CHAÎNES</div>
             
             <div class="carousel-track">
+                <!-- Carte 1 : C'est le C -->
                 <div class="channel-card-scroll">
                     <div class="channel-card-tag" style="color: var(--accent-glitch);">C'est le C</div>
                     <a href="https://youtu.be/weCXQZtYVUk?si=y3z6UDodT8NEd_Zs" target="_blank" class="mini-video-link">
@@ -1426,14 +1370,26 @@
                     </a>
                 </div>
 
+                <!-- Carte 2 avec EMPLACEMENT 3 -->
                 <div class="channel-card-scroll">
                     <div class="channel-card-tag" style="color: var(--accent-glitch);">C'est le C</div>
                     <a href="https://youtu.be/BNOc9XchjRE" target="_blank" class="mini-video-link">
                         <img src="https://img.youtube.com/vi/BNOc9XchjRE/hqdefault.jpg" class="mini-video-thumb" alt="">
                         <div class="mini-video-title">Fire Emblem (GBA) est INDÉMODABLE</div>
                     </a>
+                    <!-- EMPLACEMENT 3 -->
+                    <div class="sub-progress-card">
+                        <div class="sub-progress-header">
+                            <span>// EMPLACEMENT_03</span>
+                            <span>50%</span>
+                        </div>
+                        <div class="sub-progress-bar">
+                            <div class="sub-progress-fill" style="width: 50%;"></div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- Carte 3 : Grosse Galère -->
                 <div class="channel-card-scroll">
                     <div class="channel-card-tag" style="color: var(--accent-alert);">Grosse Galère</div>
                     <a href="https://youtu.be/sMU200R94BE" target="_blank" class="mini-video-link">
@@ -1442,12 +1398,23 @@
                     </a>
                 </div>
 
+                <!-- Carte 4 avec EMPLACEMENT 4 -->
                 <div class="channel-card-scroll">
                     <div class="channel-card-tag" style="color: var(--accent-alert);">Grosse Galère</div>
                     <a href="https://youtu.be/dbnNkeh6ciw" target="_blank" class="mini-video-link">
                         <img src="https://img.youtube.com/vi/dbnNkeh6ciw/hqdefault.jpg" class="mini-video-thumb" alt="">
                         <div class="mini-video-title">L'histoire des $UICIDEBOYS</div>
                     </a>
+                    <!-- EMPLACEMENT 4 -->
+                    <div class="sub-progress-card">
+                        <div class="sub-progress-header">
+                            <span>// EMPLACEMENT_04</span>
+                            <span>25%</span>
+                        </div>
+                        <div class="sub-progress-bar">
+                            <div class="sub-progress-fill" style="width: 25%; background: var(--accent-alert);"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
