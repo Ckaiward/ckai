@@ -216,7 +216,7 @@
             gap: 8px;
         }
 
-        /* EMPLACEMENT 1 & 2 (Barres de progression de gauche) */
+        /* EMPLACEMENT 1, 2 & 3 (Barres de progression de gauche) */
         .ckai-progress-card {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
@@ -515,39 +515,6 @@
             overflow: hidden;
             text-overflow: ellipsis;
             font-weight: 500;
-        }
-
-        /* STYLES POUR EMPLACEMENT 3 & 4 (SOUS LES CARTES DE CHAÎNES) */
-        .sub-progress-card {
-            background: var(--bg-dark);
-            border: 1px solid var(--border-hard);
-            padding: 8px 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            margin-top: 4px;
-        }
-
-        .sub-progress-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            font-weight: bold;
-        }
-
-        .sub-progress-bar {
-            width: 100%;
-            height: 5px;
-            background: var(--panel-bg);
-            border: 1px solid var(--border-hard);
-            overflow: hidden;
-        }
-
-        .sub-progress-fill {
-            height: 100%;
-            background: var(--accent-blue);
         }
 
         .single-category-block {
@@ -1275,7 +1242,7 @@
         <div class="section-header">> CORE_NODE // CKAI</div>
         
         <div class="featured-hero">
-            <!-- COLONNE DE GAUCHE : Dernière Vidéo + Mini Catégorie + Emplacements 1 & 2 -->
+            <!-- COLONNE DE GAUCHE : Dernière Vidéo + Mini Catégorie + Emplacements 1, 2 & 3 -->
             <div class="left-column-group">
                 <div class="main-player-box">
                     <div class="video-embed-container">
@@ -1284,7 +1251,7 @@
                     <div class="main-video-title">Dernière Vidéo CKAI</div>
                 </div>
 
-                <!-- MINI CATÉGORIE AJOUTÉE -->
+                <!-- MINI CATÉGORIE -->
                 <div class="upcoming-videos-subtitle">> PROCHAINES VIDÉOS PRÉVUES</div>
 
                 <!-- EMPLACEMENT 1 -->
@@ -1310,9 +1277,21 @@
                         <div class="ckai-progress-fill" style="width: 80%;"></div>
                     </div>
                 </div>
+
+                <!-- EMPLACEMENT 3 AJOUTÉ ICI -->
+                <div class="ckai-progress-card">
+                    <span class="ckai-tag">// EMPLACEMENT_03</span>
+                    <div class="ckai-progress-labels">
+                        <span>Projet en cours</span>
+                        <span>50%</span>
+                    </div>
+                    <div class="ckai-progress-bar">
+                        <div class="ckai-progress-fill" style="width: 50%;"></div>
+                    </div>
+                </div>
             </div>
 
-            <!-- COLONNE DE DROITE : Recommandations (3 cases alignées avec la gauche) -->
+            <!-- COLONNE DE DROITE : Recommandations -->
             <div class="side-recommended">
                 <a href="https://youtu.be/uzXsah-SJmY" target="_blank" class="rec-card">
                     <div class="rec-thumb-box">
@@ -1337,7 +1316,7 @@
             </div>
         </div>
 
-        <!-- BLOC PATREON MIS À JOUR -->
+        <!-- BLOC PATREON -->
         <div class="patreon-section">
             <div class="patreon-top-row">
                 <div class="patreon-brand-title">
@@ -1386,23 +1365,13 @@
                     </a>
                 </div>
 
-                <!-- Carte 2 avec EMPLACEMENT 3 -->
+                <!-- Carte 2 -->
                 <div class="channel-card-scroll">
                     <div class="channel-card-tag" style="color: var(--accent-glitch);">C'est le C</div>
                     <a href="https://youtu.be/BNOc9XchjRE" target="_blank" class="mini-video-link">
                         <img src="https://img.youtube.com/vi/BNOc9XchjRE/hqdefault.jpg" class="mini-video-thumb" alt="">
                         <div class="mini-video-title">Fire Emblem (GBA) est INDÉMODABLE</div>
                     </a>
-                    <!-- EMPLACEMENT 3 -->
-                    <div class="sub-progress-card">
-                        <div class="sub-progress-header">
-                            <span>// EMPLACEMENT_03</span>
-                            <span>50%</span>
-                        </div>
-                        <div class="sub-progress-bar">
-                            <div class="sub-progress-fill" style="width: 50%;"></div>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Carte 3 : Grosse Galère -->
@@ -1414,23 +1383,13 @@
                     </a>
                 </div>
 
-                <!-- Carte 4 avec EMPLACEMENT 4 -->
+                <!-- Carte 4 -->
                 <div class="channel-card-scroll">
                     <div class="channel-card-tag" style="color: var(--accent-alert);">Grosse Galère</div>
                     <a href="https://youtu.be/dbnNkeh6ciw" target="_blank" class="mini-video-link">
                         <img src="https://img.youtube.com/vi/dbnNkeh6ciw/hqdefault.jpg" class="mini-video-thumb" alt="">
                         <div class="mini-video-title">L'histoire des $UICIDEBOYS</div>
                     </a>
-                    <!-- EMPLACEMENT 4 -->
-                    <div class="sub-progress-card">
-                        <div class="sub-progress-header">
-                            <span>// EMPLACEMENT_04</span>
-                            <span>25%</span>
-                        </div>
-                        <div class="sub-progress-bar">
-                            <div class="sub-progress-fill" style="width: 25%; background: var(--accent-alert);"></div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1638,7 +1597,7 @@
 
     </div>
 
-    <!-- ONGLET LIENS (REORGANISÉ SELON LA DEMANDE) -->
+    <!-- ONGLET LIENS -->
     <div id="links" class="tab-content">
         <div class="section-header">> NETWORK_HUB // TOUS LES RÉSEAUX & LIENS</div>
         
@@ -1779,7 +1738,7 @@
 <script>
     // --- DÉTECTION AUTOMATIQUE DU JOUR SUR LE PLANNING ---
     document.addEventListener("DOMContentLoaded", function() {
-        const currentDayIndex = new Date().getDay(); // 0 = Dimanche, 1 = Lundi, etc.
+        const currentDayIndex = new Date().getDay();
         const scheduleCards = document.querySelectorAll('.schedule-card');
         
         scheduleCards.forEach(card => {
