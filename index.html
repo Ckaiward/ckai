@@ -527,64 +527,94 @@
             background: linear-gradient(180deg, rgba(0, 204, 255, 0.03) 0%, var(--panel-bg) 100%);
         }
 
-        /* GRILLE DES LIENS (NOUVEL ONGLET) */
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-            margin-bottom: 30px;
-        }
-
-        .link-card {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-hard);
-            padding: 22px;
-            text-decoration: none;
-            color: inherit;
+        /* --- NOUVEAU STYLE POUR L'ONGLET LIENS (COLONNE VERTICALE) --- */
+        .links-column-container {
+            max-width: 700px;
+            margin: 20px auto 40px auto;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            position: relative;
+            gap: 30px;
+        }
+
+        .link-category-group {
+            display: flex;
+            flex-direction: column;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-hard);
             overflow: hidden;
-            transition: all 0.2s ease;
         }
 
-        .link-card:hover {
-            border-color: var(--accent-glitch);
-            background: var(--card-hover);
-            transform: translateY(-2px);
-        }
-
-        .link-card-tag {
-            font-size: 12px;
+        .link-cat-title {
+            font-family: 'VT323', monospace;
+            font-size: 20px;
+            padding: 12px 18px;
+            background: var(--bg-dark);
+            border-bottom: 1px solid var(--border-hard);
             color: var(--text-muted);
-            text-transform: uppercase;
             letter-spacing: 1px;
-            font-weight: bold;
-        }
-
-        .link-card-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 18px;
-            color: var(--text-main);
             text-transform: uppercase;
         }
 
-        .link-card-desc {
-            font-size: 13px;
-            color: var(--text-main);
-            line-height: 1.5;
-        }
-
-        .link-card-action {
-            font-size: 12px;
-            color: var(--accent-glitch);
-            font-weight: bold;
-            margin-top: 5px;
+        .vertical-link-item {
             display: flex;
             align-items: center;
-            gap: 4px;
+            justify-content: space-between;
+            padding: 18px 22px;
+            text-decoration: none;
+            color: inherit;
+            border-bottom: 1px solid var(--border-hard);
+            transition: background 0.2s ease, padding-left 0.2s ease;
+        }
+
+        .link-category-group .vertical-link-item:last-child {
+            border-bottom: none;
+        }
+
+        .vertical-link-item:hover {
+            background: var(--card-hover);
+            padding-left: 26px;
+        }
+
+        .link-item-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .link-item-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-main);
+            flex-shrink: 0;
+        }
+
+        .link-item-texts {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .link-item-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text-main);
+            text-transform: uppercase;
+        }
+
+        .link-item-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .link-item-arrow {
+            font-family: 'VT323', monospace;
+            font-size: 20px;
+            color: var(--text-muted);
+        }
+
+        .vertical-link-item:hover .link-item-arrow {
+            color: var(--accent-glitch);
         }
 
         /* PLANNING DE LA SEMAINE */
@@ -1542,74 +1572,115 @@
 
     </div>
 
-    <!-- NOUVEL ONGLET LIENS -->
+    <!-- NOUVEL ONGLET LIENS (COLONNE VERTICALE) -->
     <div id="links" class="tab-content">
         <div class="section-header">> NETWORK_HUB // TOUS LES RÉSEAUX & LIENS</div>
         
-        <div class="links-grid">
-            <!-- Twitch -->
-            <a href="https://www.twitch.tv/ckai" target="_blank" class="link-card">
-                <div class="link-card-tag" style="color: var(--accent-glitch);">Streaming Live</div>
-                <div class="link-card-title">Twitch</div>
-                <div class="link-card-desc">Retrouve moi en live (presque) tous les matins sur divers jeux. Tu verras qu'on se fend bien la poire.</div>
-                <div class="link-card-action">> ACCÉDER AU LIVE</div>
-            </a>
+        <div class="links-column-container">
+            
+            <!-- GROUPE LIVE -->
+            <div class="link-category-group">
+                <div class="link-cat-title">// LIVE</div>
+                
+                <a href="https://www.twitch.tv/ckai" target="_blank" class="vertical-link-item">
+                    <div class="link-item-left">
+                        <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                        <div class="link-item-texts">
+                            <div class="link-item-name">Twitch</div>
+                            <div class="link-item-desc">Live presque tous les matins sur divers jeux</div>
+                        </div>
+                    </div>
+                    <div class="link-item-arrow">></div>
+                </a>
+            </div>
 
-            <!-- Chaîne Principale YouTube -->
-            <a href="https://www.youtube.com/@ckaiward" target="_blank" class="link-card">
-                <div class="link-card-tag" style="color: var(--accent-alert);">YouTube Principal</div>
-                <div class="link-card-title">CKAI</div>
-                <div class="link-card-desc">La chaine principale où je raconte ma découverte et mon analyse sur des jeux en format (plus ou moins) longs.</div>
-                <div class="link-card-action">> VOIR LES VIDÉOS</div>
-            </a>
+            <!-- GROUPE VIDÉOS (CHAÎNES YT) -->
+            <div class="link-category-group">
+                <div class="link-cat-title">// LES VIDÉOS</div>
+                
+                <a href="https://www.youtube.com/@ckaiward" target="_blank" class="vertical-link-item">
+                    <div class="link-item-left">
+                        <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        <div class="link-item-texts">
+                            <div class="link-item-name">YouTube (CKAI)</div>
+                            <div class="link-item-desc">Chaîne principale : formats longs, découvertes et analyses</div>
+                        </div>
+                    </div>
+                    <div class="link-item-arrow">></div>
+                </a>
 
-            <!-- C'est le C -->
-            <a href="https://www.youtube.com/@clevraickai" target="_blank" class="link-card">
-                <div class="link-card-tag" style="color: var(--accent-blue);">YouTube Secondaire</div>
-                <div class="link-card-title">C'est le C</div>
-                <div class="link-card-desc">La seconde chaîne YouTube dédiée aux formats complémentaires et projets annexes.</div>
-                <div class="link-card-action">> EXPLORER</div>
-            </a>
+                <a href="https://www.youtube.com/@clevraickai" target="_blank" class="vertical-link-item">
+                    <div class="link-item-left">
+                        <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        <div class="link-item-texts">
+                            <div class="link-item-name">C'est le C</div>
+                            <div class="link-item-desc">Seconde chaîne YouTube dédiée aux projets annexes</div>
+                        </div>
+                    </div>
+                    <div class="link-item-arrow">></div>
+                </a>
 
-            <!-- Grosse Galère -->
-            <a href="https://www.youtube.com/@Grossegal%C3%A8reckai" target="_blank" class="link-card">
-                <div class="link-card-tag" style="color: var(--accent-gold);">YouTube Alternatif</div>
-                <div class="link-card-title">Grosse Galère</div>
-                <div class="link-card-desc">Chaine orientée sur d'autres thématiques comme les mangas, la musique...</div>
-                <div class="link-card-action">> DÉCOUVRIR</div>
-            </a>
+                <a href="https://www.youtube.com/@Grossegal%C3%A8reckai" target="_blank" class="vertical-link-item">
+                    <div class="link-item-left">
+                        <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        <div class="link-item-texts">
+                            <div class="link-item-name">Grosse Galère</div>
+                            <div class="link-item-desc">Chaîne alternative orientée mangas, musique, etc.</div>
+                        </div>
+                    </div>
+                    <div class="link-item-arrow">></div>
+                </a>
+            </div>
 
-            <!-- Patreon -->
-            <a href="https://www.patreon.com/cw/Ckai/membership" target="_blank" class="link-card">
-                <div class="link-card-tag" style="color: var(--accent-patreon);">Soutien Financier</div>
-                <div class="link-card-title">Patreon</div>
-                <div class="link-card-desc">Soutiens l'ensemble de mes projets sur internet à partir de 2 petits euros par mois.</div>
-                <div class="link-card-action">> DEVENIR PATRON</div>
-            </a>
+            <!-- GROUPE AUTRES -->
+            <div class="link-category-group">
+                <div class="link-cat-title">// AUTRES RÉSEAUX & SOUTIEN</div>
+                
+                <a href="https://www.patreon.com/cw/Ckai/membership" target="_blank" class="vertical-link-item">
+                    <div class="link-item-left">
+                        <svg class="link-item-icon" viewBox="0 0 569 546"><path d="M365.2 56.7C455.5 56.7 528.8 130 528.8 220.3C528.8 310.6 455.5 383.9 365.2 383.9C274.9 383.9 201.6 310.6 201.6 220.3C201.6 130 274.9 56.7 365.2 56.7ZM0 489.3H75.5V56.7H0V489.3Z"/></svg>
+                        <div class="link-item-texts">
+                            <div class="link-item-name">Patreon</div>
+                            <div class="link-item-desc">Soutenir directement l'ensemble des projets</div>
+                        </div>
+                    </div>
+                    <div class="link-item-arrow">></div>
+                </a>
 
-            <!-- SensCritique -->
-            <a href="https://www.senscritique.com/Ckai" target="_blank" class="link-card">
-                <div class="link-card-tag" style="color: #ff8800;">Avis & Notes</div>
-                <div class="link-card-title">SensCritique</div>
-                <div class="link-card-desc">Je suis actif sur ce site depuis plus de 8 ans, tu peux voir mes différents avis/notes sur pas mal d'oeuvres.</div>
-                <div class="link-card-action">> VOIR LE PROFIL</div>
-            </a>
+                <a href="https://www.senscritique.com/Ckai" target="_blank" class="vertical-link-item">
+                    <div class="link-item-left">
+                        <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        <div class="link-item-texts">
+                            <div class="link-item-name">SensCritique</div>
+                            <div class="link-item-desc">Avis et notes sur pas mal d'œuvres</div>
+                        </div>
+                    </div>
+                    <div class="link-item-arrow">></div>
+                </a>
 
-            <!-- Instagram -->
-            <a href="https://www.instagram.com/ckaiwardd//" target="_blank" class="link-card">
-                <div class="link-card-tag" style="color: #e1306c;">Réseau Social</div>
-                <div class="link-card-title">Instagram</div>
-                <div class="link-card-desc">Des storys, des photos, des reels... un réseau un peu plus perso.</div>
-                <div class="link-card-action">> SUIVRE SUR INSTA</div>
-            </a>
+                <a href="https://www.instagram.com/ckaiwardd//" target="_blank" class="vertical-link-item">
+                    <div class="link-item-left">
+                        <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        <div class="link-item-texts">
+                            <div class="link-item-name">Instagram</div>
+                            <div class="link-item-desc">Photos, storys et contenu plus perso</div>
+                        </div>
+                    </div>
+                    <div class="link-item-arrow">></div>
+                </a>
 
-            <!-- TikTok -->
-            <a href="https://www.tiktok.com/@ckai_clips" target="_blank" class="link-card">
-                <div class="link-card-tag" style="color: #00f2fe;">Format Court</div>
-                <div class="link-card-title">TikTok</div>
-                <div class="link-card-desc">Des clips drôles / avis surtout tirés des lives Twitch.</div>
-                <div class="link-card-action">> VOIR LES TIKTOKS</div>
-            </a>
+                <a href="https://www.tiktok.com/@ckai_clips" target="_blank" class="vertical-link-item">
+                    <div class="link-item-left">
+                        <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                        <div class="link-item-texts">
+                            <div class="link-item-name">TikTok</div>
+                            <div class="link-item-desc">Clips drôles et formats courts tirés des lives</div>
+                        </div>
+                    </div>
+                    <div class="link-item-arrow">></div>
+                </a>
+            </div>
+
         </div>
     </div>
 
