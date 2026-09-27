@@ -75,11 +75,17 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding-bottom: 20px;
+            padding: 15px 0; /* Ajusté légèrement pour le rendu sticky */
             margin-bottom: 30px;
             border-bottom: 2px solid var(--border-hard);
             flex-wrap: wrap;
             gap: 15px;
+            
+            /* --- AJOUT DU STICKY --- */
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-dark); /* S'assure qu'on ne voit pas traverser le contenu en dessous */
+            z-index: 1000;
         }
 
         .brand {
