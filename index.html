@@ -203,6 +203,19 @@
             text-transform: uppercase;
         }
 
+        /* MINI CATEGORIE PROCHAINES VIDÉOS PRÉVUES */
+        .upcoming-videos-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 18px;
+            color: var(--accent-glitch);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         /* EMPLACEMENT 1 & 2 (Barres de progression de gauche) */
         .ckai-progress-card {
             background: var(--panel-bg);
@@ -1262,7 +1275,7 @@
         <div class="section-header">> CORE_NODE // CKAI</div>
         
         <div class="featured-hero">
-            <!-- COLONNE DE GAUCHE : Dernière Vidéo + Emplacements 1 & 2 -->
+            <!-- COLONNE DE GAUCHE : Dernière Vidéo + Mini Catégorie + Emplacements 1 & 2 -->
             <div class="left-column-group">
                 <div class="main-player-box">
                     <div class="video-embed-container">
@@ -1270,6 +1283,9 @@
                     </div>
                     <div class="main-video-title">Dernière Vidéo CKAI</div>
                 </div>
+
+                <!-- MINI CATÉGORIE AJOUTÉE -->
+                <div class="upcoming-videos-subtitle">> PROCHAINES VIDÉOS PRÉVUES</div>
 
                 <!-- EMPLACEMENT 1 -->
                 <div class="ckai-progress-card">
