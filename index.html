@@ -75,16 +75,15 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px 0; /* Ajusté légèrement pour le rendu sticky */
+            padding: 15px 0;
             margin-bottom: 30px;
             border-bottom: 2px solid var(--border-hard);
             flex-wrap: wrap;
             gap: 15px;
             
-            /* --- AJOUT DU STICKY --- */
             position: sticky;
             top: 0;
-            background-color: var(--bg-dark); /* S'assure qu'on ne voit pas traverser le contenu en dessous */
+            background-color: var(--bg-dark);
             z-index: 1000;
         }
 
@@ -163,10 +162,17 @@
             grid-template-columns: 1.8fr 1fr;
             gap: 15px;
             margin-bottom: 40px;
+            align-items: start;
         }
 
         @media (max-width: 850px) {
             .featured-hero { grid-template-columns: 1fr; }
+        }
+
+        .left-column-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .main-player-box {
@@ -195,6 +201,49 @@
             font-size: 16px;
             color: var(--text-main);
             text-transform: uppercase;
+        }
+
+        /* EMPLACEMENT 1 & 2 (Barres de progression de gauche) */
+        .ckai-progress-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-hard);
+            padding: 12px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .ckai-tag {
+            font-size: 11px;
+            color: var(--accent-glitch);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        .ckai-progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--text-main);
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .ckai-progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-hard);
+            overflow: hidden;
+            position: relative;
+            margin-top: 4px;
+        }
+
+        .ckai-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-glitch), var(--accent-blue));
+            box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
         }
 
         .side-recommended {
@@ -1240,13 +1289,41 @@
         <div class="section-header">> CORE_NODE // CKAI</div>
         
         <div class="featured-hero">
-            <div class="main-player-box">
-                <div class="video-embed-container">
-                    <iframe src="https://www.youtube.com/embed/KS2ARw2Ctts" allowfullscreen></iframe>
+            <!-- COLONNE DE GAUCHE : Dernière Vidéo + Emplacements 1 & 2 -->
+            <div class="left-column-group">
+                <div class="main-player-box">
+                    <div class="video-embed-container">
+                        <iframe src="https://www.youtube.com/embed/KS2ARw2Ctts" allowfullscreen></iframe>
+                    </div>
+                    <div class="main-video-title">Dernière Vidéo CKAI</div>
                 </div>
-                <div class="main-video-title">Dernière Vidéo CKAI</div>
+
+                <!-- EMPLACEMENT 1 -->
+                <div class="ckai-progress-card">
+                    <span class="ckai-tag">// EMPLACEMENT_01</span>
+                    <div class="ckai-progress-labels">
+                        <span>Trilogie mystère</span>
+                        <span>40%</span>
+                    </div>
+                    <div class="ckai-progress-bar">
+                        <div class="ckai-progress-fill" style="width: 40%;"></div>
+                    </div>
+                </div>
+
+                <!-- EMPLACEMENT 2 -->
+                <div class="ckai-progress-card">
+                    <span class="ckai-tag">// EMPLACEMENT_02</span>
+                    <div class="ckai-progress-labels">
+                        <span>Shin Megami Tensei III</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="ckai-progress-bar">
+                        <div class="ckai-progress-fill" style="width: 80%;"></div>
+                    </div>
+                </div>
             </div>
 
+            <!-- COLONNE DE DROITE : Recommandations -->
             <div class="side-recommended">
                 <a href="https://youtu.be/uzXsah-SJmY" target="_blank" class="rec-card">
                     <div class="rec-thumb-box">
