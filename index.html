@@ -203,7 +203,6 @@
             text-transform: uppercase;
         }
 
-        /* MINI CATEGORIE PROCHAINES VIDÉOS PRÉVUES */
         .upcoming-videos-subtitle {
             font-family: 'VT323', monospace;
             font-size: 18px;
@@ -216,7 +215,6 @@
             gap: 8px;
         }
 
-        /* EMPLACEMENT 1, 2 & 3 (Barres de progression de gauche) */
         .ckai-progress-card {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
@@ -868,7 +866,7 @@
 
         .upcoming-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 15px;
             margin-top: 20px;
             margin-bottom: 20px;
@@ -901,7 +899,7 @@
         .upcoming-card-content {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             z-index: 2;
         }
 
@@ -911,6 +909,18 @@
             color: var(--text-main);
             text-transform: uppercase;
             padding-right: 25px;
+        }
+
+        /* MESSAGE / RAISON DU JEU */
+        .upcoming-game-reason {
+            font-size: 12px;
+            color: var(--text-muted);
+            background: var(--bg-dark);
+            border: 1px solid var(--border-hard);
+            padding: 8px 10px;
+            border-radius: 2px;
+            line-height: 1.4;
+            font-style: italic;
         }
 
         .upcoming-card-footer {
@@ -1742,7 +1752,6 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // Données par défaut initiales si la base est vide
     const initialPointsGames = [
         { id: 'p1', title: 'CRASH BANDICOOT N.SANE TRILOGY', user: 'LettWave', completed: true },
         { id: 'p2', title: 'MINIT', user: 'LettWave', completed: true },
@@ -1756,9 +1765,9 @@
     ];
 
     const defaultCommunityGames = [
-        { id: '1', title: 'Silent Hill 2 Remake', user: 'Pseudo_01', votes: 15 },
-        { id: '2', title: 'Metal Gear Solid Delta', user: 'ShadowFan', votes: 23 },
-        { id: '3', title: 'Hollow Knight: Silksong', user: 'CKAI_Fan', votes: 36 }
+        { id: '1', title: 'Silent Hill 2 Remake', user: 'Pseudo_01', reason: 'Une ambiance incroyable à découvrir en live avec le chat !', votes: 15 },
+        { id: '2', title: 'Metal Gear Solid Delta', user: 'ShadowFan', reason: 'Le remake qu on attend tous, parfait pour un long format.', votes: 23 },
+        { id: '3', title: 'Hollow Knight: Silksong', user: 'CKAI_Fan', reason: 'Parce qu il sortira bien un jour (ou pas).', votes: 36 }
     ];
 
     let communityGames = [];
@@ -1770,10 +1779,8 @@
     // --- CHARGEMENT DEPUIS FIRESTORE ---
     async function loadDataFromFirebase() {
         try {
-            // Chargement Communauté
             const commSnap = await getDocs(collection(db, "communityGames"));
             if (commSnap.empty) {
-                // Remplir avec les valeurs par défaut si vide
                 for (const game of defaultCommunityGames) {
                     await setDoc(doc(db, "communityGames", game.id), game);
                 }
@@ -1783,7 +1790,6 @@
                 commSnap.forEach(d => communityGames.push({ id: d.id, ...d.data() }));
             }
 
-            // Chargement Points de chaîne
             const pointsSnap = await getDocs(collection(db, "channelPointsGames"));
             if (pointsSnap.empty) {
                 for (const game of initialPointsGames) {
@@ -1801,7 +1807,6 @@
         }
     }
 
-    // --- FONCTIONS D'AFFICHAGE ---
     function renderChannelPointsGames() {
         const container = document.getElementById('channel-points-games-list');
         container.innerHTML = '';
@@ -1853,11 +1858,13 @@
             card.onclick = () => window.toggleVote(game.id);
 
             let deleteBtnHtml = isAdmin ? `<div class="delete-card-btn" onclick="window.deleteCommunityGame('${game.id}', event)">X</div>` : '';
+            let reasonHtml = game.reason ? `<div class="upcoming-game-reason">"${escapeHtml(game.reason)}"</div>` : '';
 
             card.innerHTML = `
                 ${deleteBtnHtml}
                 <div class="upcoming-card-content">
                     <div class="upcoming-game-name">${escapeHtml(game.title)}</div>
+                    ${reasonHtml}
                     <div class="vote-btn-indicator">${hasVoted ? '✔ VOTÉ' : '+ CLIQUER POUR VOTER'}</div>
                 </div>
                 <div class="upcoming-card-footer">
@@ -1881,7 +1888,6 @@
         renderCommunityGames();
     }
 
-    // --- ACTIONS EXPOSÉES GLOBALEMENT ---
     window.toggleVote = async function(gameId) {
         const game = communityGames.find(g => g.id === gameId);
         if (!game) return;
@@ -1925,17 +1931,19 @@
         }
     }
 
-    // Soumission de formulaire
+    // Soumission du formulaire incluant le message/raison
     document.getElementById('suggestGameForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const pseudoInput = document.getElementById('user-pseudo');
         const gameInput = document.getElementById('game-name');
+        const reasonInput = document.getElementById('game-reason');
 
         const newId = Date.now().toString();
         const newGame = {
             id: newId,
             title: gameInput.value.trim(),
             user: pseudoInput.value.trim() || 'Anonyme',
+            reason: reasonInput.value.trim(),
             votes: 1
         };
 
@@ -1947,15 +1955,15 @@
 
             renderCommunityGames();
             gameInput.value = '';
-            document.getElementById('game-reason').value = '';
-            alert('Jeu ajouté et sauvegardé en ligne dans Firebase !');
+            reasonInput.value = '';
+            pseudoInput.value = '';
+            alert('Jeu ajouté et sauvegardé en ligne avec succès !');
         } catch (err) {
             console.error("Erreur d'ajout : ", err);
             alert("Erreur lors de l'enregistrement dans la base de données.");
         }
     });
 
-    // Gestion admin
     window.toggleAdminMode = function() {
         const inputField = document.getElementById('adminPasswordInput');
         const btn = document.getElementById('adminToggleBtn');
@@ -1995,12 +2003,10 @@
         return text.toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
 
-    // Lancement au chargement
     loadDataFromFirebase();
 </script>
 
 <script>
-    // --- PLANNING & DESIGN GÉNÉRAL ---
     document.addEventListener("DOMContentLoaded", function() {
         const currentDayIndex = new Date().getDay();
         const scheduleCards = document.querySelectorAll('.schedule-card');
@@ -2084,8 +2090,8 @@
             pos4 = e.clientY;
             elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
             elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-            elmtn.style.bottom = "auto";
-            elmtn.style.right = "auto";
+            elmnt.style.bottom = "auto";
+            elmnt.style.right = "auto";
         }
 
         function closeDragElement() {
