@@ -1092,6 +1092,123 @@
             font-weight: bold;
         }
 
+        /* --- NOUVELLE SECTION : PROPOSITION DE VIDÉOS (ARCHIVES) --- */
+        .video-suggestions-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+            margin-bottom: 40px;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .video-suggestions-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .suggest-video-box {
+            background: var(--form-bg);
+            border: 1px dashed var(--accent-glitch);
+            padding: 24px;
+        }
+
+        .suggest-video-title {
+            font-family: 'VT323', monospace;
+            font-size: 22px;
+            color: var(--accent-glitch);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .suggest-video-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .suggestions-list-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-hard);
+            padding: 24px;
+        }
+
+        .suggestions-list-title {
+            font-family: 'VT323', monospace;
+            font-size: 22px;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .video-suggestions-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .video-suggestion-card {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-hard);
+            padding: 12px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            position: relative;
+        }
+
+        /* Codes couleurs par chaîne */
+        .video-suggestion-card.channel-ckai {
+            border-left: 4px solid var(--accent-blue);
+        }
+        .video-suggestion-card.channel-cestlec {
+            border-left: 4px solid var(--accent-glitch);
+        }
+        .video-suggestion-card.channel-grossegalere {
+            border-left: 4px solid var(--accent-alert);
+        }
+
+        .vid-sugg-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .vid-sugg-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--text-main);
+            text-transform: uppercase;
+        }
+
+        .vid-sugg-badge {
+            font-size: 10px;
+            font-family: 'Share Tech Mono', monospace;
+            padding: 2px 6px;
+            border-radius: 2px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .channel-ckai .vid-sugg-badge { background: rgba(0, 204, 255, 0.15); color: var(--accent-blue); }
+        .channel-cestlec .vid-sugg-badge { background: rgba(0, 255, 102, 0.15); color: var(--accent-glitch); }
+        .channel-grossegalere .vid-sugg-badge { background: rgba(255, 0, 51, 0.15); color: var(--accent-alert); }
+
+        .vid-sugg-reason {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
         .suggest-form-container {
             background: var(--form-bg);
             border: 1px dashed var(--accent-blue);
@@ -1148,6 +1265,10 @@
 
         .form-control:focus {
             border-color: var(--accent-blue);
+        }
+
+        select.form-control {
+            cursor: pointer;
         }
 
         textarea.form-control {
@@ -1458,6 +1579,48 @@
                     <a href="https://www.youtube.com/@Grossegal%C3%A8reckai" target="_blank" class="channel-action-btn">
                         > Aller sur Grosse Galère
                     </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION AJOUTÉE : PROPOSITION D'IDÉE DE VIDÉO (Formulaire à gauche, Liste colorée à droite) -->
+        <div class="section-header">> VIDEO_IDEAS // PROPOSER UNE IDÉE DE VIDÉO</div>
+        
+        <div class="video-suggestions-layout">
+            <!-- Formulaire à gauche -->
+            <div class="suggest-video-box">
+                <div class="suggest-video-title">[+] Soumettre un projet</div>
+                <form class="suggest-video-form" id="suggestVideoIdeaForm">
+                    <div class="form-group">
+                        <label for="vid-project-name">Nom du jeu ou projet</label>
+                        <input type="text" id="vid-project-name" class="form-control" placeholder="ex: Silent Hill 2, Analyse Manga..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vid-channel-choice">Choisir la chaîne</label>
+                        <select id="vid-channel-choice" class="form-control" required>
+                            <option value="Ckai">Ckai (Principal)</option>
+                            <option value="C'est le C">C'est le C</option>
+                            <option value="Grosse Galère">Grosse Galère</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vid-reason">Pourquoi ce serait intéressant ?</label>
+                        <textarea id="vid-reason" class="form-control" placeholder="Explique ton idée de concept ou d'angle pour la vidéo..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">> ENVOYER LA PROPOSITION</button>
+                </form>
+            </div>
+
+            <!-- Liste à droite avec code couleur -->
+            <div class="suggestions-list-box">
+                <div class="suggestions-list-title">
+                    <span>[>] Idées proposées</span>
+                </div>
+                <div class="video-suggestions-container" id="video-suggestions-list">
+                    <!-- Rempli dynamiquement par JS -->
                 </div>
             </div>
         </div>
@@ -1855,8 +2018,15 @@
         { id: '3', title: 'Hollow Knight: Silksong', user: 'CKAI_Fan', reason: 'Parce qu il sortira bien un jour (ou pas).', votes: 36 }
     ];
 
+    const defaultVideoSuggestions = [
+        { id: 'v1', title: 'Rétrospective complète de la saga Silent Hill', channel: 'Ckai', reason: 'Format long idéal pour creuser l évolution psychologique.' },
+        { id: 'v2', title: 'Les pires adaptations de jeux en anime', channel: 'C\'est le C', reason: 'Parfait pour un format annexe décalé et humoristique.' },
+        { id: 'v3', title: 'L influence de Junji Ito dans le jeu vidéo', channel: 'Grosse Galère', reason: 'Mélange parfait entre culture manga et horreur.' }
+    ];
+
     let communityGames = [];
     let channelPointsGames = [];
+    let videoSuggestions = [];
     let userVotes = JSON.parse(localStorage.getItem('ckai_user_votes_v5')) || {};
     let isAdmin = false;
     const ADMIN_PASSWORD = "giratina";
@@ -1886,7 +2056,19 @@
                 pointsSnap.forEach(d => channelPointsGames.push({ id: d.id, ...d.data() }));
             }
 
+            const suggSnap = await getDocs(collection(db, "videoSuggestions"));
+            if (suggSnap.empty) {
+                for (const item of defaultVideoSuggestions) {
+                    await setDoc(doc(db, "videoSuggestions", item.id), item);
+                }
+                videoSuggestions = [...defaultVideoSuggestions];
+            } else {
+                videoSuggestions = [];
+                suggSnap.forEach(d => videoSuggestions.push({ id: d.id, ...d.data() }));
+            }
+
             renderAllGameLists();
+            renderVideoSuggestions();
         } catch (e) {
             console.error("Erreur de chargement Firebase : ", e);
         }
@@ -1968,9 +2150,41 @@
         });
     }
 
+    function renderVideoSuggestions() {
+        const container = document.getElementById('video-suggestions-list');
+        if (!container) return;
+        container.innerHTML = '';
+
+        if (videoSuggestions.length === 0) {
+            container.innerHTML = `<div style="color:var(--text-muted); font-size:12px;">Aucune suggestion de vidéo pour le moment.</div>`;
+            return;
+        }
+
+        videoSuggestions.forEach(item => {
+            const card = document.createElement('div');
+            
+            // Attribution d'une classe CSS selon la chaîne choisie pour le code couleur
+            let channelClass = 'channel-ckai';
+            if (item.channel === "C'est le C") channelClass = 'channel-cestlec';
+            if (item.channel === "Grosse Galère") channelClass = 'channel-grossegalere';
+
+            card.className = `video-suggestion-card ${channelClass}`;
+
+            card.innerHTML = `
+                <div class="vid-sugg-header">
+                    <span class="vid-sugg-name">${escapeHtml(item.title)}</span>
+                    <span class="vid-sugg-badge">${escapeHtml(item.channel)}</span>
+                </div>
+                <div class="vid-sugg-reason">"${escapeHtml(item.reason)}"</div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
     function renderAllGameLists() {
         renderChannelPointsGames();
         renderCommunityGames();
+        renderVideoSuggestions();
     }
 
     window.toggleVote = async function(gameId) {
@@ -2016,7 +2230,7 @@
         }
     }
 
-    // Soumission du formulaire incluant le message/raison
+    // Soumission du formulaire des jeux (communauté)
     document.getElementById('suggestGameForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const pseudoInput = document.getElementById('user-pseudo');
@@ -2046,6 +2260,36 @@
         } catch (err) {
             console.error("Erreur d'ajout : ", err);
             alert("Erreur lors de l'enregistrement dans la base de données.");
+        }
+    });
+
+    // Soumission du formulaire d'idées de vidéos (Archives)
+    document.getElementById('suggestVideoIdeaForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const projectInput = document.getElementById('vid-project-name');
+        const channelSelect = document.getElementById('vid-channel-choice');
+        const reasonInput = document.getElementById('vid-reason');
+
+        const newId = 'vid_' + Date.now();
+        const newSuggestion = {
+            id: newId,
+            title: projectInput.value.trim(),
+            channel: channelSelect.value,
+            reason: reasonInput.value.trim()
+        };
+
+        try {
+            await setDoc(doc(db, "videoSuggestions", newId), newSuggestion);
+            videoSuggestions.unshift(newSuggestion); // Ajoute en haut de liste
+            renderVideoSuggestions();
+
+            projectInput.value = '';
+            reasonInput.value = '';
+            channelSelect.selectedIndex = 0;
+            alert('Idée de vidéo proposée avec succès !');
+        } catch (err) {
+            console.error("Erreur d'ajout suggestion vidéo : ", err);
+            alert("Erreur lors de l'enregistrement de l'idée.");
         }
     });
 
