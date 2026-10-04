@@ -1224,6 +1224,17 @@
             line-height: 1.4;
         }
 
+        .vid-sugg-author {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .vid-sugg-author span {
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
         .suggest-form-container {
             background: var(--form-bg);
             border: 1px dashed var(--accent-blue);
@@ -1598,7 +1609,7 @@
             </div>
         </div>
 
-        <!-- SECTION AJOUTÉE : PROPOSITION D'IDÉE DE VIDÉO (Formulaire à gauche, Liste colorée à droite) -->
+        <!-- SECTION : PROPOSITION D'IDÉE DE VIDÉO (Formulaire mis à jour avec le champ Pseudo) -->
         <div class="section-header">> VIDEO_IDEAS // PROPOSER UNE IDÉE DE VIDÉO</div>
         
         <div class="video-suggestions-layout">
@@ -1606,18 +1617,24 @@
             <div class="suggest-video-box">
                 <div class="suggest-video-title">[+] Soumettre un projet</div>
                 <form class="suggest-video-form" id="suggestVideoIdeaForm">
-                    <div class="form-group">
-                        <label for="vid-project-name">Nom du jeu ou projet</label>
-                        <input type="text" id="vid-project-name" class="form-control" placeholder="ex: Silent Hill 2, Analyse Manga..." required>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="vid-user-pseudo">Votre Pseudo</label>
+                            <input type="text" id="vid-user-pseudo" class="form-control" placeholder="ex: User_99" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="vid-channel-choice">Choisir la chaîne</label>
+                            <select id="vid-channel-choice" class="form-control" required>
+                                <option value="Ckai">Ckai (Principal)</option>
+                                <option value="C'est le C">C'est le C</option>
+                                <option value="Grosse Galère">Grosse Galère</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="vid-channel-choice">Choisir la chaîne</label>
-                        <select id="vid-channel-choice" class="form-control" required>
-                            <option value="Ckai">Ckai (Principal)</option>
-                            <option value="C'est le C">C'est le C</option>
-                            <option value="Grosse Galère">Grosse Galère</option>
-                        </select>
+                        <label for="vid-project-name">Nom du jeu ou projet</label>
+                        <input type="text" id="vid-project-name" class="form-control" placeholder="ex: Silent Hill 2, Analyse Manga..." required>
                     </div>
 
                     <div class="form-group">
@@ -2034,9 +2051,9 @@
     ];
 
     const defaultVideoSuggestions = [
-        { id: 'v1', title: 'Rétrospective complète de la saga Silent Hill', channel: 'Ckai', reason: 'Format long idéal pour creuser l évolution psychologique.' },
-        { id: 'v2', title: 'Les pires adaptations de jeux en anime', channel: 'C\'est le C', reason: 'Parfait pour un format annexe décalé et humoristique.' },
-        { id: 'v3', title: 'L influence de Junji Ito dans le jeu vidéo', channel: 'Grosse Galère', reason: 'Mélange parfait entre culture manga et horreur.' }
+        { id: 'v1', title: 'Rétrospective complète de la saga Silent Hill', channel: 'Ckai', user: 'CineGeek', reason: 'Format long idéal pour creuser l évolution psychologique.' },
+        { id: 'v2', title: 'Les pires adaptations de jeux en anime', channel: 'C\'est le C', user: 'Otaku99', reason: 'Parfait pour un format annexe décalé et humoristique.' },
+        { id: 'v3', title: 'L influence de Junji Ito dans le jeu vidéo', channel: 'Grosse Galère', user: 'HorrorFan', reason: 'Mélange parfait entre culture manga et horreur.' }
     ];
 
     let communityGames = [];
@@ -2199,6 +2216,7 @@
                     <span class="vid-sugg-badge">${escapeHtml(item.channel)}</span>
                 </div>
                 <div class="vid-sugg-reason">"${escapeHtml(item.reason)}"</div>
+                <div class="vid-sugg-author">Proposé par <span>${escapeHtml(item.user || 'Anonyme')}</span></div>
             `;
             container.appendChild(card);
         });
@@ -2314,9 +2332,10 @@
         }
     });
 
-    // Soumission du formulaire d'idées de vidéos (Archives)
+    // Soumission du formulaire d'idées de vidéos (Archives) avec le champ Pseudo
     document.getElementById('suggestVideoIdeaForm').addEventListener('submit', async function(e) {
         e.preventDefault();
+        const pseudoInput = document.getElementById('vid-user-pseudo');
         const projectInput = document.getElementById('vid-project-name');
         const channelSelect = document.getElementById('vid-channel-choice');
         const reasonInput = document.getElementById('vid-reason');
@@ -2326,6 +2345,7 @@
             id: newId,
             title: projectInput.value.trim(),
             channel: channelSelect.value,
+            user: pseudoInput.value.trim() || 'Anonyme',
             reason: reasonInput.value.trim()
         };
 
@@ -2336,6 +2356,7 @@
 
             projectInput.value = '';
             reasonInput.value = '';
+            pseudoInput.value = '';
             channelSelect.selectedIndex = 0;
             alert('Idée de vidéo proposée avec succès !');
         } catch (err) {
@@ -2453,7 +2474,7 @@
 
         function dragMouseDown(e) {
             e = e || window.event;
-            e.target.tagName === 'BUTTON' && (e.target.tagName = e.target.tagName); // Éviter bug clic bouton
+            e.target.tagName === 'BUTTON' && (e.target.tagName = e.target.tagName);
             if (e.target.tagName === 'BUTTON') return;
             e.preventDefault();
             pos3 = e.clientX;
