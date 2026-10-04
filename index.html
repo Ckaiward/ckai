@@ -1107,7 +1107,7 @@
             font-weight: bold;
         }
 
-        /* --- NOUVELLE SECTION : PROPOSITION DE VIDÉOS (ARCHIVES) --- */
+        /* --- SECTION : PROPOSITION DE VIDÉOS --- */
         .video-suggestions-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1203,6 +1203,7 @@
             font-weight: bold;
             color: var(--text-main);
             text-transform: uppercase;
+            padding-right: 25px;
         }
 
         .vid-sugg-badge {
@@ -1609,8 +1610,10 @@
             </div>
         </div>
 
-        <!-- SECTION : PROPOSITION D'IDÉE DE VIDÉO (Formulaire mis à jour avec le champ Pseudo) -->
-        <div class="section-header">> VIDEO_IDEAS // PROPOSER UNE IDÉE DE VIDÉO</div>
+        <!-- SECTION : PROPOSITION D'IDÉE DE VIDÉO -->
+        <div class="upcoming-header-bar" style="margin-top: 30px;">
+            <div class="section-header" style="margin-top: 0; margin-bottom: 0; border-bottom: none; flex-grow: 1;">> VIDEO_IDEAS // PROPOSER UNE IDÉE DE VIDÉO</div>
+        </div>
         
         <div class="video-suggestions-layout">
             <!-- Formulaire à gauche -->
@@ -2210,7 +2213,18 @@
 
             card.className = `video-suggestion-card ${channelClass}`;
 
+            let adminButtonsHtml = '';
+            if (isAdmin) {
+                adminButtonsHtml = `
+                    <div class="admin-action-buttons">
+                        <div class="admin-card-btn edit" title="Modifier" onclick="window.editVideoSuggestion('${item.id}', event)">✎</div>
+                        <div class="admin-card-btn" title="Supprimer" onclick="window.deleteVideoSuggestion('${item.id}', event)">X</div>
+                    </div>
+                `;
+            }
+
             card.innerHTML = `
+                ${adminButtonsHtml}
                 <div class="vid-sugg-header">
                     <span class="vid-sugg-name">${escapeHtml(item.title)}</span>
                     <span class="vid-sugg-badge">${escapeHtml(item.channel)}</span>
@@ -2288,6 +2302,47 @@
         alert("Proposition modifiée avec succès !");
     }
 
+    // Gestion de la suppression d'une proposition de vidéo en mode Admin
+    window.deleteVideoSuggestion = async function(id, event) {
+        event.stopPropagation();
+        if (!isAdmin) return;
+        const item = videoSuggestions.find(v => v.id === id);
+        if (item && confirm(`Supprimer l'idée de vidéo "${item.title}" ?`)) {
+            await deleteDoc(doc(db, "videoSuggestions", id));
+            videoSuggestions = videoSuggestions.filter(v => v.id !== id);
+            renderVideoSuggestions();
+        }
+    }
+
+    // Gestion de la modification d'une proposition de vidéo en mode Admin
+    window.editVideoSuggestion = async function(id, event) {
+        event.stopPropagation();
+        if (!isAdmin) return;
+        const item = videoSuggestions.find(v => v.id === id);
+        if (!item) return;
+
+        const newTitle = prompt("Modifier le nom du projet/jeu :", item.title);
+        if (newTitle === null) return;
+        const newUser = prompt("Modifier le pseudo :", item.user);
+        if (newUser === null) return;
+        const newReason = prompt("Modifier la raison / description :", item.reason || "");
+        if (newReason === null) return;
+
+        item.title = newTitle.trim();
+        item.user = newUser.trim() || 'Anonyme';
+        item.reason = newReason.trim();
+
+        const itemRef = doc(db, "videoSuggestions", id);
+        await updateDoc(itemRef, {
+            title: item.title,
+            user: item.user,
+            reason: item.reason
+        });
+
+        renderVideoSuggestions();
+        alert("Idée de vidéo modifiée avec succès !");
+    }
+
     window.deletePointsGame = async function(gameId, event) {
         event.stopPropagation();
         if (!isAdmin) return;
@@ -2299,7 +2354,7 @@
         }
     }
 
-    // Soumission du formulaire des jeux (communauté) avec le champ Pseudo inclus
+    // Soumission du formulaire des jeux (communauté)
     document.getElementById('suggestGameForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const pseudoInput = document.getElementById('user-pseudo');
@@ -2332,7 +2387,7 @@
         }
     });
 
-    // Soumission du formulaire d'idées de vidéos (Archives) avec le champ Pseudo
+    // Soumission du formulaire d'idées de vidéos (Archives) synchronisé sur Firestore
     document.getElementById('suggestVideoIdeaForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const pseudoInput = document.getElementById('vid-user-pseudo');
@@ -2358,7 +2413,7 @@
             reasonInput.value = '';
             pseudoInput.value = '';
             channelSelect.selectedIndex = 0;
-            alert('Idée de vidéo proposée avec succès !');
+            alert('Idée de vidéo proposée et sauvegardée en ligne avec succès !');
         } catch (err) {
             console.error("Erreur d'ajout suggestion vidéo : ", err);
             alert("Erreur lors de l'enregistrement de l'idée.");
