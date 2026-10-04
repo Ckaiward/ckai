@@ -1016,10 +1016,16 @@
             color: var(--accent-glitch);
         }
 
-        .delete-card-btn {
+        .admin-action-buttons {
             position: absolute;
             top: 6px;
             right: 6px;
+            display: flex;
+            gap: 4px;
+            z-index: 20;
+        }
+
+        .admin-card-btn {
             background: rgba(255, 0, 51, 0.2);
             border: 1px solid var(--accent-alert);
             color: var(--accent-alert);
@@ -1032,12 +1038,21 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            z-index: 20;
             transition: all 0.2s ease;
         }
 
-        .delete-card-btn:hover {
+        .admin-card-btn.edit {
+            background: rgba(0, 204, 255, 0.2);
+            border: 1px solid var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .admin-card-btn:hover {
             background: var(--accent-alert);
+            color: #fff;
+        }
+        .admin-card-btn.edit:hover {
+            background: var(--accent-blue);
             color: #fff;
         }
 
@@ -2027,7 +2042,7 @@
     let communityGames = [];
     let channelPointsGames = [];
     let videoSuggestions = [];
-    let userVotes = JSON.parse(localStorage.getItem('ckai_user_votes_v5')) || {};
+    let userVotes = JSON.parse(localStorage.getItem('ckai_user_votes_v6')) || {};
     let isAdmin = false;
     const ADMIN_PASSWORD = "giratina";
 
@@ -2124,18 +2139,27 @@
             card.className = `community-card ${hasVoted ? 'voted' : ''}`;
             card.onclick = () => window.toggleVote(game.id);
 
-            let deleteBtnHtml = isAdmin ? `<div class="delete-card-btn" onclick="window.deleteCommunityGame('${game.id}', event)">X</div>` : '';
+            let adminButtonsHtml = '';
+            if (isAdmin) {
+                adminButtonsHtml = `
+                    <div class="admin-action-buttons">
+                        <div class="admin-card-btn edit" title="Modifier" onclick="window.editCommunityGame('${game.id}', event)">✎</div>
+                        <div class="admin-card-btn" title="Supprimer" onclick="window.deleteCommunityGame('${game.id}', event)">X</div>
+                    </div>
+                `;
+            }
+
             let reasonHtml = game.reason ? `<div class="upcoming-game-reason">"${escapeHtml(game.reason)}"</div>` : '';
 
             card.innerHTML = `
-                ${deleteBtnHtml}
+                ${adminButtonsHtml}
                 <div class="upcoming-card-content">
                     <div class="upcoming-game-name">${escapeHtml(game.title)}</div>
                     ${reasonHtml}
                     <div class="vote-btn-indicator">${hasVoted ? '✔ VOTÉ' : '+ CLIQUER POUR VOTER'}</div>
                 </div>
                 <div class="upcoming-card-footer">
-                    <div class="proposed-by-box">Par: <span class="proposed-by-user">${escapeHtml(game.user)}</span></div>
+                    <div class="proposed-by-box">Proposé par: <span class="proposed-by-user">${escapeHtml(game.user)}</span></div>
                     <div class="vote-count-box">▲ <span>${game.votes}</span></div>
                 </div>
                 <div class="vote-hover-overlay">
@@ -2163,7 +2187,6 @@
         videoSuggestions.forEach(item => {
             const card = document.createElement('div');
             
-            // Attribution d'une classe CSS selon la chaîne choisie pour le code couleur
             let channelClass = 'channel-ckai';
             if (item.channel === "C'est le C") channelClass = 'channel-cestlec';
             if (item.channel === "Grosse Galère") channelClass = 'channel-grossegalere';
@@ -2202,7 +2225,7 @@
             await updateDoc(gameRef, { votes: increment(1) });
         }
 
-        localStorage.setItem('ckai_user_votes_v5', JSON.stringify(userVotes));
+        localStorage.setItem('ckai_user_votes_v6', JSON.stringify(userVotes));
         renderCommunityGames();
     }
 
@@ -2214,9 +2237,37 @@
             await deleteDoc(doc(db, "communityGames", gameId));
             communityGames = communityGames.filter(g => g.id !== gameId);
             delete userVotes[gameId];
-            localStorage.setItem('ckai_user_votes_v5', JSON.stringify(userVotes));
+            localStorage.setItem('ckai_user_votes_v6', JSON.stringify(userVotes));
             renderCommunityGames();
         }
+    }
+
+    window.editCommunityGame = async function(gameId, event) {
+        event.stopPropagation();
+        if (!isAdmin) return;
+        const game = communityGames.find(g => g.id === gameId);
+        if (!game) return;
+
+        const newTitle = prompt("Modifier le nom du jeu :", game.title);
+        if (newTitle === null) return;
+        const newUser = prompt("Modifier le pseudo de la personne qui propose :", game.user);
+        if (newUser === null) return;
+        const newReason = prompt("Modifier la raison :", game.reason || "");
+        if (newReason === null) return;
+
+        game.title = newTitle.trim();
+        game.user = newUser.trim() || 'Anonyme';
+        game.reason = newReason.trim();
+
+        const gameRef = doc(db, "communityGames", gameId);
+        await updateDoc(gameRef, {
+            title: game.title,
+            user: game.user,
+            reason: game.reason
+        });
+
+        renderCommunityGames();
+        alert("Proposition modifiée avec succès !");
     }
 
     window.deletePointsGame = async function(gameId, event) {
@@ -2230,7 +2281,7 @@
         }
     }
 
-    // Soumission du formulaire des jeux (communauté)
+    // Soumission du formulaire des jeux (communauté) avec le champ Pseudo inclus
     document.getElementById('suggestGameForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const pseudoInput = document.getElementById('user-pseudo');
@@ -2250,13 +2301,13 @@
             await setDoc(doc(db, "communityGames", newId), newGame);
             communityGames.push(newGame);
             userVotes[newId] = true;
-            localStorage.setItem('ckai_user_votes_v5', JSON.stringify(userVotes));
+            localStorage.setItem('ckai_user_votes_v6', JSON.stringify(userVotes));
 
             renderCommunityGames();
             gameInput.value = '';
             reasonInput.value = '';
             pseudoInput.value = '';
-            alert('Jeu ajouté et sauvegardé en ligne avec succès !');
+            alert('Jeu ajouté, voté et sauvegardé en ligne avec succès !');
         } catch (err) {
             console.error("Erreur d'ajout : ", err);
             alert("Erreur lors de l'enregistrement dans la base de données.");
@@ -2280,7 +2331,7 @@
 
         try {
             await setDoc(doc(db, "videoSuggestions", newId), newSuggestion);
-            videoSuggestions.unshift(newSuggestion); // Ajoute en haut de liste
+            videoSuggestions.unshift(newSuggestion);
             renderVideoSuggestions();
 
             projectInput.value = '';
@@ -2402,6 +2453,7 @@
 
         function dragMouseDown(e) {
             e = e || window.event;
+            e.target.tagName === 'BUTTON' && (e.target.tagName = e.target.tagName); // Éviter bug clic bouton
             if (e.target.tagName === 'BUTTON') return;
             e.preventDefault();
             pos3 = e.clientX;
