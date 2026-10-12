@@ -87,6 +87,12 @@
             z-index: 1000;
         }
 
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
         .brand {
             font-family: 'VT323', monospace;
             font-size: 42px;
@@ -103,16 +109,32 @@
             font-family: 'Share Tech Mono', monospace;
         }
 
-        .header-controls {
-            display: flex;
-            gap: 10px;
+        /* BOUTON CARRÉ THÈME */
+        .theme-toggle-btn {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-hard);
+            color: var(--text-main);
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
             align-items: center;
-            flex-wrap: wrap;
+            justify-content: center;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
         }
 
-        .nav-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+        .theme-toggle-btn:hover { color: var(--accent-glitch); border-color: var(--accent-glitch); }
 
-        .tab-btn, .theme-toggle-btn {
+        .nav-tabs { 
+            display: flex; 
+            gap: 8px; 
+            flex-wrap: wrap; 
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        .tab-btn {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
             color: var(--text-main);
@@ -124,13 +146,37 @@
             cursor: pointer;
         }
 
-        .tab-btn:hover, .theme-toggle-btn:hover { color: var(--accent-glitch); border-color: var(--text-muted); }
+        .tab-btn:hover { color: var(--accent-glitch); border-color: var(--text-muted); }
 
         .tab-btn.active {
             background: var(--text-main);
             color: var(--bg-dark);
             border-color: var(--text-main);
             font-weight: bold;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-btn {
+            background: var(--panel-bg);
+            border: 1px solid var(--accent-glitch);
+            color: var(--accent-glitch);
+            padding: 10px 18px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .auth-btn:hover {
+            background: var(--accent-glitch);
+            color: var(--bg-dark);
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
         }
 
         .tab-content { display: none; }
@@ -1440,14 +1486,19 @@
 <div class="main-wrapper">
 
     <header>
-        <a href="#" class="brand">CKAI</a>
-        <div class="header-controls">
-            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">[MODE CLAIR]</button>
-            <nav class="nav-tabs">
-                <button class="tab-btn active" onclick="openTab('home', this)">// ARCHIVES</button>
-                <button class="tab-btn" onclick="openTab('twitch', this)">// LIVE_FEED</button>
-                <button class="tab-btn" onclick="openTab('links', this)">// LIENS</button>
-            </nav>
+        <div class="header-left">
+            <a href="#" class="brand">CKAI</a>
+            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Changer le thème">🌙</button>
+        </div>
+        
+        <nav class="nav-tabs">
+            <button class="tab-btn active" onclick="openTab('home', this)">// ARCHIVES</button>
+            <button class="tab-btn" onclick="openTab('twitch', this)">// LIVE_FEED</button>
+            <button class="tab-btn" onclick="openTab('links', this)">// LIENS</button>
+        </nav>
+
+        <div class="header-right">
+            <button class="auth-btn" id="authBtn" onclick="alert('Module d\'authentification en cours de configuration...')">[SE CONNECTER / CRÉER UN COMPTE]</button>
         </div>
     </header>
 
@@ -2504,12 +2555,12 @@
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         html.setAttribute('data-theme', newTheme);
         localStorage.setItem('ckai_theme', newTheme);
-        document.getElementById('themeToggleBtn').innerText = newTheme === 'dark' ? '[MODE CLAIR]' : '[MODE SOMBRE]';
+        document.getElementById('themeToggleBtn').innerText = newTheme === 'dark' ? '🌙' : '☀️';
     }
 
     const savedTheme = localStorage.getItem('ckai_theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
-    document.getElementById('themeToggleBtn').innerText = savedTheme === 'dark' ? '[MODE CLAIR]' : '[MODE SOMBRE]';
+    document.getElementById('themeToggleBtn').innerText = savedTheme === 'dark' ? '🌙' : '☀️';
 
     let currentHost = window.location.hostname || "localhost";
     document.getElementById("twitch-main-player").src = `https://player.twitch.tv/?channel=ckai&parent=${currentHost}`;
