@@ -1915,8 +1915,8 @@
     const auth = getAuth(app);
 
     const TWITCH_CLIENT_ID = "kl43v8tbe1vq6tehfaoqou47yfmfs6";
-    const YOUTUBE_CLIENT_ID = "1005665921039-ludemj8vup29vrcn2gljrvo2uvic73f8.apps.googleusercontent.com"; // ID client Google intégré !
-    const PATREON_CLIENT_ID = "TON_PATREON_CLIENT_ID"; // À remplacer par ton ID Patreon
+    const YOUTUBE_CLIENT_ID = "1005665921039-ludemj8vup29vrcn2gljrvo2uvic73f8.apps.googleusercontent.com";
+    const PATREON_CLIENT_ID = "TON_PATREON_CLIENT_ID";
 
     let communityGames = [];
     let channelPointsGames = [];
@@ -1939,6 +1939,7 @@
     // OAuth Twitch
     window.handleTwitchButton = function() {
         if (!currentUserData.twitch) {
+            localStorage.setItem('oauth_pending_platform', 'twitch');
             const REDIRECT_URI = window.location.origin + window.location.pathname;
             const SCOPE = "user:read:subscriptions"; 
             window.location.href = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=${encodeURIComponent(SCOPE)}`;
@@ -1950,6 +1951,7 @@
     // OAuth Patreon
     window.handlePatreonButton = function() {
         if (!currentUserData.patreon) {
+            localStorage.setItem('oauth_pending_platform', 'patreon');
             const REDIRECT_URI = window.location.origin + window.location.pathname;
             window.location.href = `https://www.patreon.com/oauth2/authorize?response_type=token&client_id=${PATREON_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=identity campaigns`;
         } else {
@@ -1967,8 +1969,9 @@
         };
         const dbField = fieldMap[channelKey];
         if (!currentUserData[dbField]) {
-            const REDIRECT_URI = window.location.origin + window.location.pathname;
+            localStorage.setItem('oauth_pending_platform', 'youtube');
             localStorage.setItem('youtube_pending_target', dbField);
+            const REDIRECT_URI = window.location.origin + window.location.pathname;
             window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${YOUTUBE_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=${encodeURIComponent('https://www.googleapis.com/auth/youtube.readonly')}`;
         } else {
             togglePlatformLink(dbField, 100);
@@ -2009,37 +2012,39 @@
             if (profileDisplay) profileDisplay.innerText = `[PROFIL : ${escapeHtml(pseudo)}]`;
             updateProfileUI();
 
-            // Gestion des retours d'authentification OAuth (Hash)
+            // Interception précise des retours OAuth
             const hash = window.location.hash;
             if (hash && hash.includes('access_token')) {
                 const params = new URLSearchParams(hash.substring(1));
                 const accessToken = params.get('access_token');
-                if (accessToken) {
-                    // Si Twitch
-                    if (!currentUserData.twitch && window.location.href.includes('twitch.tv')) {
+                const pendingPlatform = localStorage.getItem('oauth_pending_platform');
+
+                if (accessToken && pendingPlatform) {
+                    if (pendingPlatform === 'twitch' && !currentUserData.twitch) {
                         currentUserData.twitch = true;
                         currentUserData.tokens += 100;
                         await updateDoc(userRef, { twitch: true, tokens: currentUserData.tokens });
                         alert("Compte Twitch vérifié et lié ! +100 jetons.");
-                    }
-                    // Si Patreon
-                    else if (!currentUserData.patreon && window.location.href.includes('patreon.com')) {
+                    } 
+                    else if (pendingPlatform === 'patreon' && !currentUserData.patreon) {
                         currentUserData.patreon = true;
                         currentUserData.tokens += 500;
                         await updateDoc(userRef, { patreon: true, tokens: currentUserData.tokens });
                         alert("Statut Patron vérifié et lié ! +500 jetons.");
-                    }
-                    // Si YouTube
-                    else {
+                    } 
+                    else if (pendingPlatform === 'youtube') {
                         const pendingYt = localStorage.getItem('youtube_pending_target');
                         if (pendingYt && !currentUserData[pendingYt]) {
                             currentUserData[pendingYt] = true;
                             currentUserData.tokens += 100;
                             await updateDoc(userRef, { [pendingYt]: true, tokens: currentUserData.tokens });
-                            localStorage.removeItem('youtube_pending_target');
                             alert("Abonnement YouTube vérifié ! +100 jetons.");
                         }
                     }
+
+                    // Nettoyage des temporaires et du hash dans l'URL
+                    localStorage.removeItem('oauth_pending_platform');
+                    localStorage.removeItem('youtube_pending_target');
                     window.history.replaceState({}, document.title, window.location.pathname);
                     updateProfileUI();
                 }
@@ -2161,28 +2166,19 @@
     async function loadDataFromFirebase() {
         try {
             const commSnap = await getDocs(collection(db, "communityGames"));
-            if (commSnap.empty) {
-                for (const game of defaultCommunityGames) { await setDoc(doc(db, "communityGames", game.id), game); }
-                communityGames = [...defaultCommunityGames];
-            } else {
+            if (!commSnap.empty) {
                 communityGames = [];
                 commSnap.forEach(d => communityGames.push({ id: d.id, ...d.data() }));
             }
 
             const pointsSnap = await getDocs(collection(db, "channelPointsGames"));
-            if (pointsSnap.empty) {
-                for (const game of initialPointsGames) { await setDoc(doc(db, "channelPointsGames", game.id), game); }
-                channelPointsGames = [...initialPointsGames];
-            } else {
+            if (!pointsSnap.empty) {
                 channelPointsGames = [];
                 pointsSnap.forEach(d => channelPointsGames.push({ id: d.id, ...d.data() }));
             }
 
             const suggSnap = await getDocs(collection(db, "videoSuggestions"));
-            if (suggSnap.empty) {
-                for (const item of defaultVideoSuggestions) { await setDoc(doc(db, "videoSuggestions", item.id), item); }
-                videoSuggestions = [...defaultVideoSuggestions];
-            } else {
+            if (!suggSnap.empty) {
                 videoSuggestions = [];
                 suggSnap.forEach(d => videoSuggestions.push({ id: d.id, ...d.data() }));
             }
