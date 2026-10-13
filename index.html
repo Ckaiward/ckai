@@ -158,33 +158,22 @@
         .header-right {
             display: flex;
             align-items: center;
-            gap: 8px;
         }
 
         .auth-btn {
             background: var(--panel-bg);
-            border: 1px solid var(--border-hard);
-            color: var(--text-main);
-            padding: 10px 14px;
+            border: 1px solid var(--accent-glitch);
+            color: var(--accent-glitch);
+            padding: 10px 18px;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: bold;
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
-        .auth-btn.primary {
-            border-color: var(--accent-glitch);
-            color: var(--accent-glitch);
-        }
-
         .auth-btn:hover {
-            background: var(--card-hover);
-            border-color: var(--text-main);
-        }
-
-        .auth-btn.primary:hover {
             background: var(--accent-glitch);
             color: var(--bg-dark);
             box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
@@ -1379,124 +1368,6 @@
             color: #fff;
         }
 
-        /* STYLES DE LA PAGE PROFIL */
-        .profile-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        @media (max-width: 900px) {
-            .profile-container { grid-template-columns: 1fr; }
-        }
-
-        .profile-card {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-hard);
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .profile-card-title {
-            font-family: 'VT323', monospace;
-            font-size: 22px;
-            color: var(--accent-glitch);
-            text-transform: uppercase;
-            border-bottom: 1px solid var(--border-hard);
-            padding-bottom: 8px;
-        }
-
-        .link-account-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--bg-dark);
-            border: 1px solid var(--border-hard);
-            padding: 12px 16px;
-        }
-
-        .link-account-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .link-account-name {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: bold;
-            font-size: 14px;
-            text-transform: uppercase;
-        }
-
-        .link-account-status {
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
-        .link-account-status.linked {
-            color: var(--accent-glitch);
-            font-weight: bold;
-        }
-
-        .link-action-btn {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-hard);
-            color: var(--text-main);
-            padding: 6px 12px;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 12px;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-
-        .link-action-btn.linked {
-            border-color: var(--accent-alert);
-            color: var(--accent-alert);
-        }
-
-        .link-action-btn:hover {
-            border-color: var(--accent-glitch);
-            color: var(--accent-glitch);
-        }
-
-        .rewards-showcase-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
-
-        .reward-item-card {
-            background: var(--bg-dark);
-            border: 1px solid var(--border-hard);
-            padding: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .reward-info h4 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 13px;
-            color: var(--text-main);
-            text-transform: uppercase;
-        }
-
-        .reward-info p {
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
-        .reward-tokens-badge {
-            font-family: 'VT323', monospace;
-            font-size: 18px;
-            color: var(--accent-gold);
-            background: rgba(255, 204, 0, 0.1);
-            border: 1px solid rgba(255, 204, 0, 0.3);
-            padding: 4px 10px;
-        }
-
         /* TWITCH ONGLET PRINCIPAL */
         .twitch-container {
             display: grid;
@@ -1626,9 +1497,8 @@
             <button class="tab-btn" onclick="openTab('links', this)">// LIENS</button>
         </nav>
 
-        <div class="header-right" id="authHeaderContainer">
-            <button class="auth-btn" onclick="openTab('login', this)">[CONNEXION]</button>
-            <button class="auth-btn primary" onclick="openTab('register', this)">[CRÉER UN COMPTE]</button>
+        <div class="header-right">
+            <button class="auth-btn" id="authBtn" onclick="alert('Module d\'authentification en cours de configuration...')">[SE CONNECTER / CRÉER UN COMPTE]</button>
         </div>
     </header>
 
@@ -1843,137 +1713,239 @@
 
     </div>
 
-    <!-- ONGLET CONNEXION -->
-    <div id="login" class="tab-content">
-        <div class="section-header">> USER_LOGIN // SE CONNECTER</div>
-        <div class="links-column-container">
-            <div class="link-category-group" style="padding: 24px;">
-                <form id="loginForm" class="suggest-form">
-                    <div class="form-group">
-                        <label for="login-pseudo">Votre Pseudo</label>
-                        <input type="text" id="login-pseudo" class="form-control" placeholder="ex: User_99" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="login-password">Mot de passe</label>
-                        <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
-                    </div>
-                    <button type="submit" class="submit-btn">> SE CONNECTER</button>
-                </form>
-            </div>
+    <!-- ONGLET TWITCH -->
+    <div id="twitch" class="tab-content">
+        
+        <div class="twitch-container">
+            <iframe id="twitch-main-player" class="twitch-frame" allowfullscreen></iframe>
+            <iframe id="twitch-chat" class="twitch-frame"></iframe>
         </div>
-    </div>
 
-    <!-- ONGLET CRÉATION DE COMPTE -->
-    <div id="register" class="tab-content">
-        <div class="section-header">> USER_REGISTER // CRÉER UN COMPTE</div>
-        <div class="links-column-container">
-            <div class="link-category-group" style="padding: 24px;">
-                <form id="registerForm" class="suggest-form">
-                    <div class="form-group">
-                        <label for="reg-pseudo">Choisir un Pseudo</label>
-                        <input type="text" id="reg-pseudo" class="form-control" placeholder="ex: User_99" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="reg-password">Choisir un Mot de passe</label>
-                        <input type="password" id="reg-password" class="form-control" placeholder="••••••••" required>
-                    </div>
-                    <button type="submit" class="submit-btn">> CRÉER MON COMPTE</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- ONGLET PROFIL -->
-    <div id="profile" class="tab-content">
-        <div class="section-header">> USER_PROFILE // ESPACE PERSONNEL</div>
-        <div class="links-column-container" style="max-width: 900px;">
-            <div class="profile-container">
-                <!-- Colonne de gauche : Liaisons et Sécurité -->
-                <div style="display: flex; flex-direction: column; gap: 20px;">
-                    <div class="profile-card">
-                        <div class="profile-card-title" id="profileUsernameDisplay">[ESPACE MEMBRE]</div>
-                        <div style="font-size: 13px; color: var(--text-muted);">
-                            Solde actuel : <strong style="color: var(--accent-gold);" id="userTokensBalance">0 Jetons</strong>
-                        </div>
-
-                        <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 10px;">
-                            <div class="link-account-row">
-                                <div class="link-account-info">
-                                    <div class="link-account-name">Twitch</div>
-                                    <div class="link-account-status" id="statusTwitch">Non lié</div>
-                                </div>
-                                <button class="link-action-btn" id="btnTwitch" onclick="toggleLink('Twitch')">Lier</button>
-                            </div>
-
-                            <div class="link-account-row">
-                                <div class="link-account-info">
-                                    <div class="link-account-name">YouTube</div>
-                                    <div class="link-account-status" id="statusYoutube">Non lié</div>
-                                </div>
-                                <button class="link-action-btn" id="btnYoutube" onclick="toggleLink('Youtube')">Lier</button>
-                            </div>
-
-                            <div class="link-account-row">
-                                <div class="link-account-info">
-                                    <div class="link-account-name">Patreon</div>
-                                    <div class="link-account-status" id="statusPatreon">Non lié</div>
-                                </div>
-                                <button class="link-action-btn" id="btnPatreon" onclick="toggleLink('Patreon')">Lier</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="profile-card">
-                        <div class="profile-card-title">Sécurité</div>
-                        <form id="changePasswordForm" class="suggest-form" style="gap: 10px;">
-                            <div class="form-group">
-                                <label for="new-password">Nouveau mot de passe</label>
-                                <input type="password" id="new-password" class="form-control" placeholder="••••••••" required>
-                            </div>
-                            <button type="submit" class="submit-btn" style="border-color: var(--accent-blue); color: var(--accent-blue);">> MODIFIER LE MOT DE PASSE</button>
-                        </form>
-                    </div>
-
-                    <button class="submit-btn" onclick="logoutUser()" style="border-color: var(--accent-alert); color: var(--accent-alert); width: 100%; text-align: center; justify-content: center;">
-                        > SE DÉCONNECTER
-                    </button>
+        <div class="section-header">> PLANNING DE STREAM</div>
+        <div class="schedule-grid" id="schedule-grid">
+            <div class="schedule-card" data-day="1">
+                <div class="schedule-day">LUN</div>
+                <div class="schedule-content">
+                    8h - 12h
+                    <div class="schedule-game-title">MARATHON KINGDOM HEARTS</div>
                 </div>
-
-                <!-- Colonne de droite : Vitrine des récompenses -->
-                <div class="profile-card">
-                    <div class="profile-card-title">Vitrine des Récompenses</div>
-                    <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px;">
-                        Gagne des jetons en connectant tes comptes et en soutenant les chaînes !
-                    </div>
-
-                    <div class="rewards-showcase-grid">
-                        <div class="reward-item-card">
-                            <div class="reward-info">
-                                <h4>Abonnement YouTube (Ckai)</h4>
-                                <p>Lier ton compte YouTube officiel</p>
-                            </div>
-                            <div class="reward-tokens-badge">+100 Jetons</div>
-                        </div>
-
-                        <div class="reward-item-card">
-                            <div class="reward-info">
-                                <h4>Abonnement Twitch / Follow</h4>
-                                <p>Lier ton compte Twitch</p>
-                            </div>
-                            <div class="reward-tokens-badge">+100 Jetons</div>
-                        </div>
-
-                        <div class="reward-item-card">
-                            <div class="reward-info">
-                                <h4>Statut Patron</h4>
-                                <p>Lier ton compte Patreon actif</p>
-                            </div>
-                            <div class="reward-tokens-badge">+500 Jetons</div>
-                        </div>
-                    </div>
+            </div>
+            <div class="schedule-card" data-day="2">
+                <div class="schedule-day">MAR</div>
+                <div class="schedule-content">
+                    REPOS
+                    <div class="schedule-game-title">-</div>
+                </div>
+            </div>
+            <div class="schedule-card" data-day="3">
+                <div class="schedule-day">MER</div>
+                <div class="schedule-content">
+                   8H - 12H
+                    <div class="schedule-game-title">MARATHON KINGDOM HEARTS</div>
+                </div>
+            </div>
+            <div class="schedule-card" data-day="4">
+                <div class="schedule-day">JEU</div>
+                <div class="schedule-content">
+                    8H - 12H
+                    <div class="schedule-game-title">MARATHON KINGDOM HEARTS</div>
+                </div>
+            </div>
+            <div class="schedule-card" data-day="5">
+                <div class="schedule-day">VEN</div>
+                <div class="schedule-content">
+                    8H - 12H
+                    <div class="schedule-game-title">MARATHON KINGDOM HEARTS</div>
+                </div>
+            </div>
+            <div class="schedule-card" data-day="6">
+                <div class="schedule-day">SAM</div>
+                <div class="schedule-content">
+                    REPOS
+                    <div class="schedule-game-title">-</div>
+                </div>
+            </div>
+            <div class="schedule-card" data-day="0">
+                <div class="schedule-day">DIM</div>
+                <div class="schedule-content">
+                    REPOS
+                    <div class="schedule-game-title">-</div>
                 </div>
             </div>
         </div>
+
+        <div class="section-header">> PLAYLISTS // ARCHIVES DE STREAM</div>
+        
+        <div class="single-category-block">
+            <div style="font-family: 'VT323', monospace; font-size: 24px; color: var(--accent-glitch);">
+                [>] JEUX JOUÉS EN STREAM EN 2026
+            </div>
+            
+            <div class="game-grid">
+                <a href="https://www.youtube.com/watch?v=QyPCW9CUkhE&list=PLeaKN15x3GXIFGhljOHJuPhi2ss-bmll-" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/JRnBqW36/007-FIRST-LIGHT.jpg" alt="007 First Light" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">007 FIRST LIGHT</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&list=PLNcyDCaofkHY" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/r2wftb9N/FF7-rebirth.jpg" alt="FF VII Rebirth" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">FF7 Rebirth</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=FNUDMWKVa-w&list=PLeaKN15x3GXLmQ9j5jQse_G5oCNB3ncYX" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/LD4z5tzf/ff7-remake.jpg" alt="FF VII Remake" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">FF7 Remake</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=lBpxUooGIhM&list=PLeaKN15x3GXKWbnohpX-aMRaxmSna0LhI" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/zT6BzL61/FIRE-EMBLEM.jpg" alt="Fire Emblem" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">FIRE EMBLEM</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=VrpmlWSg5ZU&list=PLeaKN15x3GXImBy0mLy8d94ocz_sXjGhP" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/S4VP8P2K/kenshi.jpg" alt="Kenshi" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kenshi</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=1Xs7jUmwClA&list=PLeaKN15x3GXLnVahTm5gzuQOK4vmUk1Wn" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/nswkHvGR/Kingdom-come-delivrance.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Come Deliverance</div>
+                </a>
+                  <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/Ldn8tP4r/KH-FINAL-MIX.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts I Final Mix</div>
+                </a>
+                  <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/chCffCMs/KH-COM.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts Re: Chain of Memories</div>
+                </a>
+                  <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/1GzJ6JpG/KH-2.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts II Final Mix</div>
+                </a>
+                  <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/9kVHyjN4/KH-358-d.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts 358/2 Days</div>
+                </a>
+                  <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/GfQL9YB8/KH-BBS.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts Birth by Sleep</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/cXZ7GQHW/kh-recoded.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts Re:Coded</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/p63W61mg/KH-3D.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts Dream Drop Distance HD</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=UBzpaYjw2og&list=PLeaKN15x3GXK1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/PvqTCqff/MAX-PAYNE-3.jpg" alt="Max Payne 3" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">MAX PAYNE 3</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&list=PLNcyDCaofkHY" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/Y4KG5C6Q/minnit.jpg" alt="Minit" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Minit</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/JRky9Wfw/morrowind.jpg" alt="Morrowind" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Morrowind</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=C0VcqE2K75A&list=PLeaKN15x3GXIRhsxDX5KTs-LqiQNp7y8O" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/gMZjdPX2/MOUSE-PI-FOR-HIRE.jpg" alt="Mouse PI for Hire" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">MOUSE PI FOR HIRE</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=CyQYS8oNcXw&list=PLeaKN15x3GXItlfhnhL0t3HJg1NPZIqKa" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/7dkm2gGP/replaced.jpg" alt="Replaced" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Replaced</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=hyyNmbsxJPE&list=PLeaKN15x3GXLBVUOM96o1HqXpC1B_RXhd" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/VpLDfXCP/shadow-man.jpg" alt="Shadow Man" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Shadow Man</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=5TmXx08-Ju8&list=PLeaKN15x3GXIDWmIa4stA_5YMlnwAHfO0" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/ym0phSGC/sol-cesto.jpg" alt="Sol Cesto" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Sol Cesto</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/13570/header.jpg" alt="Splinter Cell Chaos Theory" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Splinter Cell Chaos Theory</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=47lZhJA_1Hg&list=PLJjQWj1aVnf0" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/LdszVfKr/tunic.jpg" alt="Tunic" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Tunic</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="section-header">> UPCOMING_QUEUE // JEUX À VENIR</div>
+
+        <!-- JEUX POINTS DE CHAÎNE -->
+        <div class="single-category-block gold-border-block">
+            <div class="upcoming-header-bar">
+                <div style="font-family: 'VT323', monospace; font-size: 20px; color: var(--accent-gold);">
+                    [★] JEUX POINTS DE CHAÎNE
+                </div>
+            </div>
+            <div class="points-grid-compact" id="channel-points-games-list"></div>
+        </div>
+
+        <!-- JEUX COMMUNAUTÉ -->
+        <div class="single-category-block blue-border-block" style="margin-top: 30px;">
+            <div class="upcoming-header-bar">
+                <div style="font-family: 'VT323', monospace; font-size: 24px; color: var(--accent-blue);">
+                    [+] JEUX PROPOSÉS PAR LA COMMUNAUTÉ (CLIQUEZ POUR VOTER)
+                </div>
+                <div id="admin-container" style="display: inline-block;">
+                    <input type="password" id="adminPasswordInput" placeholder="Mot de passe..." onkeydown="checkAdminEnter(event)" style="display: none; padding: 6px 10px; background: var(--bg-dark); color: var(--accent-glitch); border: 1px solid var(--accent-alert); font-family: inherit; font-size: 12px; outline: none; margin-right: 5px;">
+                    <button class="admin-toggle-btn" id="adminToggleBtn" onclick="toggleAdminMode()">[MODE ADMIN]</button>
+                </div>
+            </div>
+
+            <div class="upcoming-grid" id="community-games-list"></div>
+
+            <div class="suggest-form-container">
+                <div class="suggest-form-title">[+] PROPOSER UN JEU À FAIRE EN STREAM</div>
+                
+                <form class="suggest-form" id="suggestGameForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="user-pseudo">Votre Pseudo</label>
+                            <input type="text" id="user-pseudo" class="form-control" placeholder="ex: User_99" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="game-name">Nom du jeu</label>
+                            <input type="text" id="game-name" class="form-control" placeholder="ex: Resident Evil 4 Remake" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="game-reason">Pourquoi ce serait sympa d'y jouer en stream ?</label>
+                        <textarea id="game-reason" class="form-control" placeholder="Explique en quelques mots pourquoi ce jeu serait cool en live..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">> ENVOYER ET VOTER</button>
+                </form>
+            </div>
+        </div>
+
     </div>
 
     <!-- ONGLET LIENS -->
@@ -2120,8 +2092,7 @@
 <!-- SCRIPTS FIREBASE & LOGIQUE DU SITE -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc, updateDoc, increment, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updatePassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyCszS6MEz379P6pRiXFe7_FWJwts_btOmw",
@@ -2135,7 +2106,6 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    const auth = getAuth(app);
 
     const initialPointsGames = [
         { id: 'p1', title: 'CRASH BANDICOOT N.SANE TRILOGY', user: 'LettWave', completed: true },
@@ -2169,170 +2139,6 @@
     let userVotes = JSON.parse(localStorage.getItem('ckai_user_votes_v6')) || {};
     let isAdmin = false;
     const ADMIN_PASSWORD = "giratina";
-
-    let currentUserData = {
-        pseudo: '',
-        tokens: 0,
-        twitch: false,
-        youtube: false,
-        patreon: false
-    };
-
-    // --- GESTION DE L'AUTHENTIFICATION & PROFIL ---
-    onAuthStateChanged(auth, async (user) => {
-        const headerContainer = document.getElementById('authHeaderContainer');
-        const profileDisplay = document.getElementById('profileUsernameDisplay');
-        
-        if (user) {
-            let pseudo = user.email.split('@')[0];
-            try {
-                const userRef = doc(db, "users", user.uid);
-                const userDoc = await getDoc(userRef);
-                if (userDoc.exists()) {
-                    const data = userDoc.data();
-                    pseudo = data.pseudo || pseudo;
-                    currentUserData = {
-                        pseudo: pseudo,
-                        tokens: data.tokens || 0,
-                        twitch: data.twitch || false,
-                        youtube: data.youtube || false,
-                        patreon: data.patreon || false
-                    };
-                } else {
-                    currentUserData = { pseudo, tokens: 0, twitch: false, youtube: false, patreon: false };
-                    await setDoc(userRef, currentUserData);
-                }
-            } catch (e) {
-                console.error("Erreur chargement profil", e);
-            }
-
-            headerContainer.innerHTML = `
-                <button class="auth-btn primary" onclick="openTab('profile', this)">[PROFIL : ${escapeHtml(pseudo)}]</button>
-            `;
-            if (profileDisplay) {
-                profileDisplay.innerText = `[PROFIL : ${escapeHtml(pseudo)}]`;
-            }
-            updateProfileUI();
-        } else {
-            headerContainer.innerHTML = `
-                <button class="auth-btn" onclick="openTab('login', this)">[CONNEXION]</button>
-                <button class="auth-btn primary" onclick="openTab('register', this)">[CRÉER UN COMPTE]</button>
-            `;
-        }
-    });
-
-    function updateProfileUI() {
-        document.getElementById('userTokensBalance').innerText = `${currentUserData.tokens} Jetons`;
-
-        updateLinkStatus('Twitch', currentUserData.twitch);
-        updateLinkStatus('Youtube', currentUserData.youtube);
-        updateLinkStatus('Patreon', currentUserData.patreon);
-    }
-
-    function updateLinkStatus(platform, isLinked) {
-        const statusEl = document.getElementById(`status${platform}`);
-        const btnEl = document.getElementById(`btn${platform}`);
-
-        if (isLinked) {
-            statusEl.innerText = 'Lié (Vérifié)';
-            statusEl.className = 'link-account-status linked';
-            btnEl.innerText = 'Délier';
-            btnEl.className = 'link-action-btn linked';
-        } else {
-            statusEl.innerText = 'Non lié';
-            statusEl.className = 'link-account-status';
-            btnEl.innerText = 'Lier';
-            btnEl.className = 'link-action-btn';
-        }
-    }
-
-    window.toggleLink = async function(platform) {
-        const user = auth.currentUser;
-        if (!user) return;
-
-        const key = platform.toLowerCase();
-        const currentlyLinked = currentUserData[key];
-        const rewardAmount = (key === 'patreon') ? 500 : 100;
-
-        if (!currentlyLinked) {
-            currentUserData[key] = true;
-            currentUserData.tokens += rewardAmount;
-            alert(`Compte ${platform} lié avec succès ! +${rewardAmount} jetons ajoutés.`);
-        } else {
-            currentUserData[key] = false;
-            currentUserData.tokens = Math.max(0, currentUserData.tokens - rewardAmount);
-            alert(`Compte ${platform} délié.`);
-        }
-
-        try {
-            await updateDoc(doc(db, "users", user.uid), {
-                [key]: currentUserData[key],
-                tokens: currentUserData.tokens
-            });
-            updateProfileUI();
-        } catch (e) {
-            console.error("Erreur mise à jour liaison", e);
-        }
-    }
-
-    // Modification du mot de passe
-    document.getElementById('changePasswordForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const user = auth.currentUser;
-        const newPass = document.getElementById('new-password').value;
-
-        if (!user) return;
-
-        try {
-            await updatePassword(user, newPass);
-            alert("Mot de passe modifié avec succès !");
-            document.getElementById('new-password').value = '';
-        } catch (error) {
-            console.error("Erreur mdp", error);
-            alert("Erreur : Pour des raisons de sécurité, veuillez vous reconnecter avant de changer de mot de passe.");
-        }
-    });
-
-    document.getElementById('registerForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const pseudo = document.getElementById('reg-pseudo').value.trim();
-        const password = document.getElementById('reg-password').value;
-        const fakeEmail = `${pseudo.toLowerCase().replace(/[^a-z0-9]/g, '')}@ckai-system.local`;
-
-        try {
-            const userCredential = await createUserWithEmailAndPassword(auth, fakeEmail, password);
-            const user = userCredential.user;
-            await setDoc(doc(db, "users", user.uid), { pseudo: pseudo, tokens: 0, twitch: false, youtube: false, patreon: false, createdAt: new Date() });
-            alert(`Compte créé avec succès ! Bienvenue ${pseudo}.`);
-            openTab('profile');
-        } catch (error) {
-            console.error("Erreur d'inscription", error);
-            alert("Erreur lors de la création : " + error.message);
-        }
-    });
-
-    document.getElementById('loginForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const pseudo = document.getElementById('login-pseudo').value.trim();
-        const password = document.getElementById('login-password').value;
-        const fakeEmail = `${pseudo.toLowerCase().replace(/[^a-z0-9]/g, '')}@ckai-system.local`;
-
-        try {
-            await signInWithEmailAndPassword(auth, fakeEmail, password);
-            alert(`Bon retour, ${pseudo} !`);
-            openTab('profile');
-        } catch (error) {
-            console.error("Erreur de connexion", error);
-            alert("Identifiants incorrects ou compte introuvable.");
-        }
-    });
-
-    window.logoutUser = function() {
-        signOut(auth).then(() => {
-            alert("Déconnexion réussie.");
-            openTab('home');
-        });
-    }
 
     // --- CHARGEMENT DEPUIS FIRESTORE ---
     async function loadDataFromFirebase() {
@@ -2570,6 +2376,7 @@
         alert("Proposition modifiée avec succès !");
     }
 
+    // Gestion de la suppression d'une proposition de vidéo en mode Admin
     window.deleteVideoSuggestion = async function(id, event) {
         event.stopPropagation();
         if (!isAdmin) return;
@@ -2581,6 +2388,7 @@
         }
     }
 
+    // Gestion de la modification d'une proposition de vidéo en mode Admin
     window.editVideoSuggestion = async function(id, event) {
         event.stopPropagation();
         if (!isAdmin) return;
@@ -2620,6 +2428,7 @@
         }
     }
 
+    // Soumission du formulaire des jeux (communauté)
     document.getElementById('suggestGameForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const pseudoInput = document.getElementById('user-pseudo');
@@ -2652,6 +2461,7 @@
         }
     });
 
+    // Soumission du formulaire d'idées de vidéos (Archives) synchronisé sur Firestore
     document.getElementById('suggestVideoIdeaForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const pseudoInput = document.getElementById('vid-user-pseudo');
@@ -2760,9 +2570,8 @@
     function openTab(tabId, btn) {
         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        const targetTab = document.getElementById(tabId);
-        if (targetTab) targetTab.classList.add('active');
-        if (btn) btn.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -2779,7 +2588,7 @@
         }
     });
 
-    window.toggleMinimizePip = function() {
+    function toggleMinimizePip() {
         const popup = document.getElementById('pipPopup');
         const minBtn = document.getElementById('pipMinBtn');
         popup.classList.toggle('minimized');
@@ -2794,6 +2603,7 @@
 
         function dragMouseDown(e) {
             e = e || window.event;
+            e.target.tagName === 'BUTTON' && (e.target.tagName = e.target.tagName);
             if (e.target.tagName === 'BUTTON') return;
             e.preventDefault();
             pos3 = e.clientX;
