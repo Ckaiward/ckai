@@ -158,22 +158,33 @@
         .header-right {
             display: flex;
             align-items: center;
+            gap: 8px;
         }
 
         .auth-btn {
             background: var(--panel-bg);
-            border: 1px solid var(--accent-glitch);
-            color: var(--accent-glitch);
-            padding: 10px 18px;
+            border: 1px solid var(--border-hard);
+            color: var(--text-main);
+            padding: 10px 14px;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
+        .auth-btn.primary {
+            border-color: var(--accent-glitch);
+            color: var(--accent-glitch);
+        }
+
         .auth-btn:hover {
+            background: var(--card-hover);
+            border-color: var(--text-main);
+        }
+
+        .auth-btn.primary:hover {
             background: var(--accent-glitch);
             color: var(--bg-dark);
             box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
@@ -1498,7 +1509,8 @@
         </nav>
 
         <div class="header-right">
-            <button class="auth-btn" id="authBtn" onclick="alert('Module d\'authentification en cours de configuration...')">[SE CONNECTER / CRÉER UN COMPTE]</button>
+            <button class="auth-btn" onclick="openTab('login', this)">[CONNEXION]</button>
+            <button class="auth-btn primary" onclick="openTab('register', this)">[CRÉER UN COMPTE]</button>
         </div>
     </header>
 
@@ -1948,6 +1960,46 @@
 
     </div>
 
+    <!-- ONGLET CONNEXION -->
+    <div id="login" class="tab-content">
+        <div class="section-header">> USER_LOGIN // SE CONNECTER</div>
+        <div class="links-column-container">
+            <div class="link-category-group" style="padding: 24px;">
+                <form id="loginForm" class="suggest-form">
+                    <div class="form-group">
+                        <label for="login-pseudo">Votre Pseudo</label>
+                        <input type="text" id="login-pseudo" class="form-control" placeholder="ex: User_99" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Mot de passe</label>
+                        <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="submit-btn">> SE CONNECTER</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ONGLET CRÉATION DE COMPTE -->
+    <div id="register" class="tab-content">
+        <div class="section-header">> USER_REGISTER // CRÉER UN COMPTE</div>
+        <div class="links-column-container">
+            <div class="link-category-group" style="padding: 24px;">
+                <form id="registerForm" class="suggest-form">
+                    <div class="form-group">
+                        <label for="reg-pseudo">Choisir un Pseudo</label>
+                        <input type="text" id="reg-pseudo" class="form-control" placeholder="ex: User_99" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">Choisir un Mot de passe</label>
+                        <input type="password" id="reg-password" class="form-control" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="submit-btn">> CRÉER MON COMPTE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- ONGLET LIENS -->
     <div id="links" class="tab-content">
         <div class="section-header">> NETWORK_HUB // TOUS LES RÉSEAUX & LIENS</div>
@@ -2376,7 +2428,6 @@
         alert("Proposition modifiée avec succès !");
     }
 
-    // Gestion de la suppression d'une proposition de vidéo en mode Admin
     window.deleteVideoSuggestion = async function(id, event) {
         event.stopPropagation();
         if (!isAdmin) return;
@@ -2388,7 +2439,6 @@
         }
     }
 
-    // Gestion de la modification d'une proposition de vidéo en mode Admin
     window.editVideoSuggestion = async function(id, event) {
         event.stopPropagation();
         if (!isAdmin) return;
@@ -2428,7 +2478,6 @@
         }
     }
 
-    // Soumission du formulaire des jeux (communauté)
     document.getElementById('suggestGameForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const pseudoInput = document.getElementById('user-pseudo');
@@ -2461,7 +2510,6 @@
         }
     });
 
-    // Soumission du formulaire d'idées de vidéos (Archives) synchronisé sur Firestore
     document.getElementById('suggestVideoIdeaForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const pseudoInput = document.getElementById('vid-user-pseudo');
@@ -2492,6 +2540,19 @@
             console.error("Erreur d'ajout suggestion vidéo : ", err);
             alert("Erreur lors de l'enregistrement de l'idée.");
         }
+    });
+
+    // Événements temporaires pour les formulaires de connexion / inscription
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const pseudo = document.getElementById('reg-pseudo').value.trim();
+        alert(`Simulation : Compte créé pour "${pseudo}" ! (Connexion Firebase Auth à brancher ensuite)`);
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const pseudo = document.getElementById('login-pseudo').value.trim();
+        alert(`Simulation : Bon retour "${pseudo}" ! (Connexion Firebase Auth à brancher ensuite)`);
     });
 
     window.toggleAdminMode = function() {
@@ -2570,8 +2631,9 @@
     function openTab(tabId, btn) {
         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
-        btn.classList.add('active');
+        const targetTab = document.getElementById(tabId);
+        if (targetTab) targetTab.classList.add('active');
+        if (btn) btn.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -2603,7 +2665,6 @@
 
         function dragMouseDown(e) {
             e = e || window.event;
-            e.target.tagName === 'BUTTON' && (e.target.tagName = e.target.tagName);
             if (e.target.tagName === 'BUTTON') return;
             e.preventDefault();
             pos3 = e.clientX;
