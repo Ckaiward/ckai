@@ -1379,6 +1379,124 @@
             color: #fff;
         }
 
+        /* STYLES DE LA PAGE PROFIL */
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .profile-container { grid-template-columns: 1fr; }
+        }
+
+        .profile-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-hard);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .profile-card-title {
+            font-family: 'VT323', monospace;
+            font-size: 22px;
+            color: var(--accent-glitch);
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-hard);
+            padding-bottom: 8px;
+        }
+
+        .link-account-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-hard);
+            padding: 12px 16px;
+        }
+
+        .link-account-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .link-account-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .link-account-status {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .link-account-status.linked {
+            color: var(--accent-glitch);
+            font-weight: bold;
+        }
+
+        .link-action-btn {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-hard);
+            color: var(--text-main);
+            padding: 6px 12px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .link-action-btn.linked {
+            border-color: var(--accent-alert);
+            color: var(--accent-alert);
+        }
+
+        .link-action-btn:hover {
+            border-color: var(--accent-glitch);
+            color: var(--accent-glitch);
+        }
+
+        .rewards-showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .reward-item-card {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-hard);
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .reward-info h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 13px;
+            color: var(--text-main);
+            text-transform: uppercase;
+        }
+
+        .reward-info p {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .reward-tokens-badge {
+            font-family: 'VT323', monospace;
+            font-size: 18px;
+            color: var(--accent-gold);
+            background: rgba(255, 204, 0, 0.1);
+            border: 1px solid rgba(255, 204, 0, 0.3);
+            padding: 4px 10px;
+        }
+
         /* TWITCH ONGLET PRINCIPAL */
         .twitch-container {
             display: grid;
@@ -1765,20 +1883,95 @@
         </div>
     </div>
 
-    <!-- ONGLET PROFIL (Affiché une fois connecté) -->
+    <!-- ONGLET PROFIL -->
     <div id="profile" class="tab-content">
         <div class="section-header">> USER_PROFILE // ESPACE PERSONNEL</div>
-        <div class="links-column-container">
-            <div class="link-category-group" style="padding: 24px; display: flex; flex-direction: column; gap: 20px;">
-                <div style="font-family: 'VT323', monospace; font-size: 22px; color: var(--accent-glitch);" id="profileUsernameDisplay">
-                    [CONNECTÉ EN TANT QUE : ...]
+        <div class="links-column-container" style="max-width: 900px;">
+            <div class="profile-container">
+                <!-- Colonne de gauche : Liaisons et Sécurité -->
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <div class="profile-card">
+                        <div class="profile-card-title" id="profileUsernameDisplay">[ESPACE MEMBRE]</div>
+                        <div style="font-size: 13px; color: var(--text-muted);">
+                            Solde actuel : <strong style="color: var(--accent-gold);" id="userTokensBalance">0 Jetons</strong>
+                        </div>
+
+                        <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 10px;">
+                            <div class="link-account-row">
+                                <div class="link-account-info">
+                                    <div class="link-account-name">Twitch</div>
+                                    <div class="link-account-status" id="statusTwitch">Non lié</div>
+                                </div>
+                                <button class="link-action-btn" id="btnTwitch" onclick="toggleLink('Twitch')">Lier</button>
+                            </div>
+
+                            <div class="link-account-row">
+                                <div class="link-account-info">
+                                    <div class="link-account-name">YouTube</div>
+                                    <div class="link-account-status" id="statusYoutube">Non lié</div>
+                                </div>
+                                <button class="link-action-btn" id="btnYoutube" onclick="toggleLink('Youtube')">Lier</button>
+                            </div>
+
+                            <div class="link-account-row">
+                                <div class="link-account-info">
+                                    <div class="link-account-name">Patreon</div>
+                                    <div class="link-account-status" id="statusPatreon">Non lié</div>
+                                </div>
+                                <button class="link-action-btn" id="btnPatreon" onclick="toggleLink('Patreon')">Lier</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-card-title">Sécurité</div>
+                        <form id="changePasswordForm" class="suggest-form" style="gap: 10px;">
+                            <div class="form-group">
+                                <label for="new-password">Nouveau mot de passe</label>
+                                <input type="password" id="new-password" class="form-control" placeholder="••••••••" required>
+                            </div>
+                            <button type="submit" class="submit-btn" style="border-color: var(--accent-blue); color: var(--accent-blue);">> MODIFIER LE MOT DE PASSE</button>
+                        </form>
+                    </div>
+
+                    <button class="submit-btn" onclick="logoutUser()" style="border-color: var(--accent-alert); color: var(--accent-alert); width: 100%; text-align: center; justify-content: center;">
+                        > SE DÉCONNECTER
+                    </button>
                 </div>
-                <div style="font-size: 13px; color: var(--text-muted);">
-                    Ici, tu pourras bientôt lier tes comptes Twitch, YouTube et Patreon pour automatiser tes avantages et points !
+
+                <!-- Colonne de droite : Vitrine des récompenses -->
+                <div class="profile-card">
+                    <div class="profile-card-title">Vitrine des Récompenses</div>
+                    <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px;">
+                        Gagne des jetons en connectant tes comptes et en soutenant les chaînes !
+                    </div>
+
+                    <div class="rewards-showcase-grid">
+                        <div class="reward-item-card">
+                            <div class="reward-info">
+                                <h4>Abonnement YouTube (Ckai)</h4>
+                                <p>Lier ton compte YouTube officiel</p>
+                            </div>
+                            <div class="reward-tokens-badge">+100 Jetons</div>
+                        </div>
+
+                        <div class="reward-item-card">
+                            <div class="reward-info">
+                                <h4>Abonnement Twitch / Follow</h4>
+                                <p>Lier ton compte Twitch</p>
+                            </div>
+                            <div class="reward-tokens-badge">+100 Jetons</div>
+                        </div>
+
+                        <div class="reward-item-card">
+                            <div class="reward-info">
+                                <h4>Statut Patron</h4>
+                                <p>Lier ton compte Patreon actif</p>
+                            </div>
+                            <div class="reward-tokens-badge">+500 Jetons</div>
+                        </div>
+                    </div>
                 </div>
-                <button class="submit-btn" onclick="logoutUser()" style="border-color: var(--accent-alert); color: var(--accent-alert);">
-                    > SE DÉCONNECTER
-                </button>
             </div>
         </div>
     </div>
@@ -1928,7 +2121,7 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc, updateDoc, increment, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updatePassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyCszS6MEz379P6pRiXFe7_FWJwts_btOmw",
@@ -1977,29 +2170,49 @@
     let isAdmin = false;
     const ADMIN_PASSWORD = "giratina";
 
-    // --- GESTION DE L'AUTHENTIFICATION FIREBASE ---
+    let currentUserData = {
+        pseudo: '',
+        tokens: 0,
+        twitch: false,
+        youtube: false,
+        patreon: false
+    };
+
+    // --- GESTION DE L'AUTHENTIFICATION & PROFIL ---
     onAuthStateChanged(auth, async (user) => {
         const headerContainer = document.getElementById('authHeaderContainer');
         const profileDisplay = document.getElementById('profileUsernameDisplay');
         
         if (user) {
-            // Utilisateur connecté : récupérer son pseudo depuis Firestore ou l'email
             let pseudo = user.email.split('@')[0];
             try {
-                const userDoc = await getDoc(doc(db, "users", user.uid));
-                if (userDoc.exists() && userDoc.data().pseudo) {
-                    pseudo = userDoc.data().pseudo;
+                const userRef = doc(db, "users", user.uid);
+                const userDoc = await getDoc(userRef);
+                if (userDoc.exists()) {
+                    const data = userDoc.data();
+                    pseudo = data.pseudo || pseudo;
+                    currentUserData = {
+                        pseudo: pseudo,
+                        tokens: data.tokens || 0,
+                        twitch: data.twitch || false,
+                        youtube: data.youtube || false,
+                        patreon: data.patreon || false
+                    };
+                } else {
+                    currentUserData = { pseudo, tokens: 0, twitch: false, youtube: false, patreon: false };
+                    await setDoc(userRef, currentUserData);
                 }
             } catch (e) {
-                console.error("Erreur lecture profil utilisateur", e);
+                console.error("Erreur chargement profil", e);
             }
 
             headerContainer.innerHTML = `
                 <button class="auth-btn primary" onclick="openTab('profile', this)">[PROFIL : ${escapeHtml(pseudo)}]</button>
             `;
             if (profileDisplay) {
-                profileDisplay.innerText = `[CONNECTÉ EN TANT QUE : ${escapeHtml(pseudo)}]`;
+                profileDisplay.innerText = `[PROFIL : ${escapeHtml(pseudo)}]`;
             }
+            updateProfileUI();
         } else {
             headerContainer.innerHTML = `
                 <button class="auth-btn" onclick="openTab('login', this)">[CONNEXION]</button>
@@ -2008,7 +2221,78 @@
         }
     });
 
-    // Inscription sans mail de validation
+    function updateProfileUI() {
+        document.getElementById('userTokensBalance').innerText = `${currentUserData.tokens} Jetons`;
+
+        updateLinkStatus('Twitch', currentUserData.twitch);
+        updateLinkStatus('Youtube', currentUserData.youtube);
+        updateLinkStatus('Patreon', currentUserData.patreon);
+    }
+
+    function updateLinkStatus(platform, isLinked) {
+        const statusEl = document.getElementById(`status${platform}`);
+        const btnEl = document.getElementById(`btn${platform}`);
+
+        if (isLinked) {
+            statusEl.innerText = 'Lié (Vérifié)';
+            statusEl.className = 'link-account-status linked';
+            btnEl.innerText = 'Délier';
+            btnEl.className = 'link-action-btn linked';
+        } else {
+            statusEl.innerText = 'Non lié';
+            statusEl.className = 'link-account-status';
+            btnEl.innerText = 'Lier';
+            btnEl.className = 'link-action-btn';
+        }
+    }
+
+    window.toggleLink = async function(platform) {
+        const user = auth.currentUser;
+        if (!user) return;
+
+        const key = platform.toLowerCase();
+        const currentlyLinked = currentUserData[key];
+        const rewardAmount = (key === 'patreon') ? 500 : 100;
+
+        if (!currentlyLinked) {
+            currentUserData[key] = true;
+            currentUserData.tokens += rewardAmount;
+            alert(`Compte ${platform} lié avec succès ! +${rewardAmount} jetons ajoutés.`);
+        } else {
+            currentUserData[key] = false;
+            currentUserData.tokens = Math.max(0, currentUserData.tokens - rewardAmount);
+            alert(`Compte ${platform} délié.`);
+        }
+
+        try {
+            await updateDoc(doc(db, "users", user.uid), {
+                [key]: currentUserData[key],
+                tokens: currentUserData.tokens
+            });
+            updateProfileUI();
+        } catch (e) {
+            console.error("Erreur mise à jour liaison", e);
+        }
+    }
+
+    // Modification du mot de passe
+    document.getElementById('changePasswordForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const user = auth.currentUser;
+        const newPass = document.getElementById('new-password').value;
+
+        if (!user) return;
+
+        try {
+            await updatePassword(user, newPass);
+            alert("Mot de passe modifié avec succès !");
+            document.getElementById('new-password').value = '';
+        } catch (error) {
+            console.error("Erreur mdp", error);
+            alert("Erreur : Pour des raisons de sécurité, veuillez vous reconnecter avant de changer de mot de passe.");
+        }
+    });
+
     document.getElementById('registerForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const pseudo = document.getElementById('reg-pseudo').value.trim();
@@ -2018,8 +2302,7 @@
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, fakeEmail, password);
             const user = userCredential.user;
-            // Enregistrer le pseudo dans Firestore
-            await setDoc(doc(db, "users", user.uid), { pseudo: pseudo, createdAt: new Date() });
+            await setDoc(doc(db, "users", user.uid), { pseudo: pseudo, tokens: 0, twitch: false, youtube: false, patreon: false, createdAt: new Date() });
             alert(`Compte créé avec succès ! Bienvenue ${pseudo}.`);
             openTab('profile');
         } catch (error) {
@@ -2028,7 +2311,6 @@
         }
     });
 
-    // Connexion
     document.getElementById('loginForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const pseudo = document.getElementById('login-pseudo').value.trim();
@@ -2497,7 +2779,7 @@
         }
     });
 
-    function toggleMinimizePip() {
+    window.toggleMinimizePip = function() {
         const popup = document.getElementById('pipPopup');
         const minBtn = document.getElementById('pipMinBtn');
         popup.classList.toggle('minimized');
