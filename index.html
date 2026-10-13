@@ -620,24 +620,6 @@
             font-weight: 500;
         }
 
-        .single-category-block {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-hard);
-            padding: 24px;
-            margin-top: 20px;
-        }
-
-        .gold-border-block {
-            border-color: rgba(255, 204, 0, 0.4);
-            background: linear-gradient(180deg, rgba(255, 204, 0, 0.02) 0%, var(--panel-bg) 100%);
-            padding: 20px;
-        }
-
-        .blue-border-block {
-            border-color: rgba(0, 204, 255, 0.4);
-            background: linear-gradient(180deg, rgba(0, 204, 255, 0.03) 0%, var(--panel-bg) 100%);
-        }
-
         /* --- STYLE ONGLET LIENS REORGANISÉ --- */
         .links-column-container {
             max-width: 700px;
@@ -728,442 +710,6 @@
             color: var(--accent-glitch);
         }
 
-        /* PLANNING DE LA SEMAINE */
-        .schedule-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 12px;
-            margin-top: 15px;
-            margin-bottom: 30px;
-        }
-
-        .schedule-card {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-hard);
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.2s ease;
-        }
-
-        .schedule-card.auto-today {
-            border-color: var(--accent-patreon);
-            background: linear-gradient(180deg, rgba(255, 64, 96, 0.06) 0%, var(--panel-bg) 100%);
-            transform: scale(1.02);
-            box-shadow: 0 0 10px rgba(255, 64, 96, 0.2);
-        }
-
-        .schedule-day {
-            font-family: 'VT323', monospace;
-            font-size: 20px;
-            color: var(--text-main);
-            text-transform: uppercase;
-            border-bottom: 1px dashed var(--border-hard);
-            padding-bottom: 6px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .schedule-content {
-            font-size: 12px;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
-
-        .schedule-game-title {
-            font-family: 'Space Grotesk', sans-serif;
-            color: var(--text-main);
-            font-size: 12px;
-            font-weight: bold;
-            margin-top: 4px;
-            text-transform: uppercase;
-        }
-
-        /* GRILLE DE TOUS LES JEUX JOUÉS */
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .game-card-square {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            background-color: #000;
-            border: 1px solid var(--border-hard);
-            overflow: hidden;
-            text-decoration: none;
-            display: flex;
-            align-items: flex-end;
-            transition: all 0.25s ease;
-        }
-
-        .game-card-bg {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            filter: brightness(0.8) contrast(1.1);
-            transition: transform 0.3s ease, filter 0.3s ease;
-        }
-
-        .game-card-overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%);
-            z-index: 1;
-        }
-
-        .game-card-title {
-            position: relative;
-            z-index: 2;
-            padding: 10px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 12px;
-            font-weight: bold;
-            color: #fff;
-            text-transform: uppercase;
-            line-height: 1.3;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
-            width: 100%;
-            text-align: center;
-        }
-
-        .game-card-square:hover {
-            border-color: var(--accent-glitch);
-            box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .game-card-square:hover .game-card-bg {
-            transform: scale(1.08);
-            filter: brightness(0.95) contrast(1.1);
-        }
-
-        .game-card-square:hover .game-card-title {
-            color: var(--accent-glitch);
-        }
-
-        /* UPCOMING & VOTES */
-        .upcoming-header-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .admin-toggle-btn {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-hard);
-            color: var(--text-main);
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 12px;
-            font-weight: bold;
-            padding: 6px 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .admin-toggle-btn:hover {
-            border-color: var(--accent-alert);
-            color: var(--accent-alert);
-        }
-
-        .admin-toggle-btn.active {
-            border-color: var(--accent-alert);
-            background: rgba(255, 0, 51, 0.15);
-            color: var(--accent-alert);
-            font-weight: bold;
-        }
-
-        /* POINTS DE CHAÎNE COMPACTS */
-        .points-grid-compact {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .points-card-compact {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-hard);
-            padding: 10px 12px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 56px;
-            transition: all 0.2s ease;
-        }
-
-        .points-card-compact:not(.completed):hover {
-            border-color: var(--accent-gold);
-            background: rgba(255, 204, 0, 0.04);
-        }
-
-        .points-card-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 12px;
-            color: var(--text-main);
-            text-transform: uppercase;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-weight: bold;
-        }
-
-        .points-card-user {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 3px;
-        }
-
-        .points-card-user span {
-            color: var(--accent-gold);
-            font-weight: bold;
-        }
-
-        .points-card-compact.completed {
-            border-color: rgba(255, 0, 51, 0.3);
-            overflow: hidden;
-        }
-
-        .completed-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: var(--panel-bg);
-            opacity: 0.95;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            z-index: 5;
-            transition: opacity 0.2s ease;
-        }
-
-        .completed-x {
-            color: var(--accent-alert);
-            font-family: 'VT323', monospace;
-            font-size: 22px;
-            font-weight: bold;
-            line-height: 1;
-        }
-
-        .completed-text {
-            color: var(--accent-alert);
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .points-card-compact.completed:hover .completed-overlay {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .upcoming-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        .community-card {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-hard);
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 12px;
-            position: relative;
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.2s ease;
-            overflow: hidden;
-        }
-
-        .community-card:hover {
-            border-color: var(--accent-blue);
-            transform: translateY(-2px);
-        }
-
-        .community-card.voted {
-            border-color: var(--accent-glitch);
-        }
-
-        .upcoming-card-content {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            z-index: 2;
-        }
-
-        .upcoming-game-name {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 15px;
-            color: var(--text-main);
-            text-transform: uppercase;
-            padding-right: 25px;
-        }
-
-        /* MESSAGE / RAISON DU JEU */
-        .upcoming-game-reason {
-            font-size: 12px;
-            color: var(--text-muted);
-            background: var(--bg-dark);
-            border: 1px solid var(--border-hard);
-            padding: 8px 10px;
-            border-radius: 2px;
-            line-height: 1.4;
-            font-style: italic;
-        }
-
-        .upcoming-card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            border-top: 1px dashed var(--border-hard);
-            padding-top: 10px;
-            z-index: 2;
-        }
-
-        .proposed-by-box {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        .proposed-by-user {
-            color: var(--accent-blue);
-            font-weight: bold;
-        }
-
-        .vote-count-box {
-            font-size: 13px;
-            color: var(--accent-glitch);
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .vote-btn-indicator {
-            font-size: 11px;
-            padding: 3px 8px;
-            border: 1px solid var(--border-hard);
-            background: var(--bg-dark);
-            color: var(--text-main);
-            border-radius: 2px;
-            margin-top: 6px;
-            align-self: flex-start;
-            font-weight: bold;
-        }
-
-        .community-card.voted .vote-btn-indicator {
-            border-color: var(--accent-glitch);
-            color: var(--accent-glitch);
-        }
-
-        .admin-action-buttons {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            display: flex;
-            gap: 4px;
-            z-index: 20;
-        }
-
-        .admin-card-btn {
-            background: rgba(255, 0, 51, 0.2);
-            border: 1px solid var(--accent-alert);
-            color: var(--accent-alert);
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 11px;
-            font-weight: bold;
-            width: 22px;
-            height: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .admin-card-btn.edit {
-            background: rgba(0, 204, 255, 0.2);
-            border: 1px solid var(--accent-blue);
-            color: var(--accent-blue);
-        }
-
-        .admin-card-btn:hover {
-            background: var(--accent-alert);
-            color: #fff;
-        }
-        .admin-card-btn.edit:hover {
-            background: var(--accent-blue);
-            color: #fff;
-        }
-
-        .vote-hover-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: var(--panel-bg);
-            opacity: 0.95;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.25s ease;
-            z-index: 10;
-            padding: 15px;
-            border: 1px solid var(--accent-blue);
-        }
-
-        .community-card:hover .vote-hover-overlay {
-            opacity: 0.97;
-        }
-
-        .percentage-display {
-            font-family: 'VT323', monospace;
-            font-size: 36px;
-            color: var(--accent-glitch);
-            line-height: 1;
-        }
-
-        .percentage-bar-bg {
-            width: 100%;
-            height: 8px;
-            background: var(--border-hard);
-            overflow: hidden;
-            border-radius: 3px;
-        }
-
-        .percentage-bar-fill {
-            height: 100%;
-            background: var(--accent-glitch);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .percentage-stats {
-            font-size: 11px;
-            color: var(--text-main);
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
         /* --- SECTION : PROPOSITION DE VIDÉOS --- */
         .video-suggestions-layout {
             display: grid;
@@ -1236,16 +782,9 @@
             position: relative;
         }
 
-        /* Codes couleurs par chaîne */
-        .video-suggestion-card.channel-ckai {
-            border-left: 4px solid var(--accent-blue);
-        }
-        .video-suggestion-card.channel-cestlec {
-            border-left: 4px solid var(--accent-glitch);
-        }
-        .video-suggestion-card.channel-grossegalere {
-            border-left: 4px solid var(--accent-alert);
-        }
+        .video-suggestion-card.channel-ckai { border-left: 4px solid var(--accent-blue); }
+        .video-suggestion-card.channel-cestlec { border-left: 4px solid var(--accent-glitch); }
+        .video-suggestion-card.channel-grossegalere { border-left: 4px solid var(--accent-alert); }
 
         .vid-sugg-header {
             display: flex;
@@ -1293,21 +832,6 @@
             font-weight: bold;
         }
 
-        .suggest-form-container {
-            background: var(--form-bg);
-            border: 1px dashed var(--accent-blue);
-            padding: 24px;
-            margin-top: 25px;
-        }
-
-        .suggest-form-title {
-            font-family: 'VT323', monospace;
-            font-size: 22px;
-            color: var(--accent-blue);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
         .suggest-form {
             display: flex;
             flex-direction: column;
@@ -1351,14 +875,8 @@
             border-color: var(--accent-blue);
         }
 
-        select.form-control {
-            cursor: pointer;
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 90px;
-        }
+        select.form-control { cursor: pointer; }
+        textarea.form-control { resize: vertical; min-height: 90px; }
 
         .submit-btn {
             background: var(--panel-bg);
@@ -1497,31 +1015,7 @@
             padding: 4px 10px;
         }
 
-        /* TWITCH ONGLET PRINCIPAL */
-        .twitch-container {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 15px;
-            height: 480px;
-            margin-bottom: 20px;
-        }
-
-        @media (max-width: 800px) {
-            .twitch-container {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
-            .twitch-frame { height: 350px; }
-        }
-
-        .twitch-frame {
-            width: 100%;
-            height: 100%;
-            border: 1px solid var(--border-hard);
-            background: #000;
-        }
-
-        /* TWITCH POPUP PIP */
+        /* PIP TWITCH */
         .pip-popup {
             position: fixed;
             bottom: 20px;
@@ -1584,7 +1078,6 @@
 
         .pip-popup.minimized .pip-video { display: none; }
 
-        /* BOUTON RETOUR EN HAUT (BAS GAUCHE) */
         .scroll-top-btn {
             position: fixed;
             bottom: 20px;
@@ -1658,28 +1151,6 @@
                         <div class="ckai-progress-fill" style="width: 30%;"></div>
                     </div>
                 </div>
-
-                <div class="ckai-progress-card">
-                    <span class="ckai-tag">// PROJET_02</span>
-                    <div class="ckai-progress-labels">
-                        <span>Shin Megami Tensei III</span>
-                        <span>05%</span>
-                    </div>
-                    <div class="ckai-progress-bar">
-                        <div class="ckai-progress-fill" style="width: 5%;"></div>
-                    </div>
-                </div>
-
-                <div class="ckai-progress-card">
-                    <span class="ckai-tag">// PROJET_03</span>
-                    <div class="ckai-progress-labels">
-                        <span>NMH</span>
-                        <span>0%</span>
-                    </div>
-                    <div class="ckai-progress-bar">
-                        <div class="ckai-progress-fill" style="width: 0%;"></div>
-                    </div>
-                </div>
             </div>
 
             <div class="side-recommended">
@@ -1696,98 +1167,6 @@
                     </div>
                     <div class="rec-title">Quand le vrai jeu commence après la fin</div>
                 </a>
-
-                <a href="https://youtu.be/thClXFZ17Pk?si=myMIwBu9FvAXxEfI" target="_blank" class="rec-card">
-                    <div class="rec-thumb-box">
-                        <img src="https://i.ibb.co/Q3PhWqQ1/maxresdefault.jpg" alt="">
-                    </div>
-                    <div class="rec-title">3 Jours pour comprendre Fear & Hunger 2</div>
-                </a>
-            </div>
-        </div>
-
-        <div class="patreon-section">
-            <div class="patreon-top-row">
-                <div class="patreon-brand-title">
-                    <svg class="patreon-logo-svg" viewBox="0 0 569 546" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M365.2 56.7C455.5 56.7 528.8 130 528.8 220.3C528.8 310.6 455.5 383.9 365.2 383.9C274.9 383.9 201.6 310.6 201.6 220.3C201.6 130 274.9 56.7 365.2 56.7ZM0 489.3H75.5V56.7H0V489.3Z"/>
-                    </svg>
-                    <h3>PATREON // ZONE DE SOUTIEN</h3>
-                </div>
-                <a href="https://www.patreon.com/cw/Ckai/membership" target="_blank" class="patreon-btn">
-                    > DEVENIR PATRON
-                </a>
-            </div>
-
-            <div class="patreon-content-grid">
-                <div class="patreon-desc">
-                    <p>Tu peux soutenir directement l'ensemble de mes projets (CKAI, C'est le C, Grosse Galère).</p>
-                    <div class="patreon-perks">
-                        <div>> <span>Avantage 01:</span> Ton pseudo écrit à la fin de chacune de mes vidéos</div>
-                        <div>> <span>Avantage 02:</span> Accès aux coulisses / retours de mes vidéos</div>
-                    </div>
-                </div>
-
-                <div class="patreon-feed-container">
-                    <div class="patreon-feed-header">[PUBLICATIONS DU PATREON]</div>
-                    <div class="patreon-feed-list">
-                        <a href="https://www.patreon.com/cw/Ckai" target="_blank" class="patreon-feed-item">
-                            <div class="patreon-post-date"> </div>
-                            <div class="patreon-post-title">Fil d'actualité Patreon</div>
-                            <div class="patreon-post-snippet">Clique ici pour consulter toutes les dernières publications directement sur le Patreon.</div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="other-channels-section">
-            <div class="section-header">> EXTERNAL_NODES // AUTRES CHAÎNES</div>
-            
-            <div class="external-nodes-container">
-                <div class="carousel-track">
-                    <div class="channel-card-scroll">
-                        <div class="channel-card-tag" style="color: var(--accent-glitch);">C'est le C</div>
-                        <a href="https://youtu.be/weCXQZtYVUk?si=y3z6UDodT8NEd_Zs" target="_blank" class="mini-video-link">
-                            <img src="https://i.ibb.co/ym256h4S/SHADOW-MEUUN-MEUN-MEUUUN.jpg" class="mini-video-thumb" alt="">
-                            <div class="mini-video-title">Le jeu le plus MALSAIN de la Nintendo 64</div>
-                        </a>
-                    </div>
-
-                    <div class="channel-card-scroll">
-                        <div class="channel-card-tag" style="color: var(--accent-glitch);">C'est le C</div>
-                        <a href="https://youtu.be/BNOc9XchjRE" target="_blank" class="mini-video-link">
-                            <img src="https://img.youtube.com/vi/BNOc9XchjRE/hqdefault.jpg" class="mini-video-thumb" alt="">
-                            <div class="mini-video-title">Fire Emblem (GBA) est INDÉMODABLE</div>
-                        </a>
-                    </div>
-
-                    <div class="channel-card-scroll">
-                        <div class="channel-card-tag" style="color: var(--accent-alert);">Grosse Galère</div>
-                        <a href="https://youtu.be/sMU200R94BE" target="_blank" class="mini-video-link">
-                            <img src="https://img.youtube.com/vi/sMU200R94BE/hqdefault.jpg" class="mini-video-thumb" alt="">
-                            <div class="mini-video-title">Le mangaka qui m'a fait aimer l'horreur</div>
-                        </a>
-                    </div>
-
-                    <div class="channel-card-scroll">
-                        <div class="channel-card-tag" style="color: var(--accent-alert);">Grosse Galère</div>
-                        <a href="https://youtu.be/dbnNkeh6ciw" target="_blank" class="mini-video-link">
-                            <img src="https://img.youtube.com/vi/dbnNkeh6ciw/hqdefault.jpg" class="mini-video-thumb" alt="">
-                            <div class="mini-video-title">L'histoire des $UICIDEBOYS</div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Boutons superposés à droite des vidéos dans le même cadre -->
-                <div class="channel-buttons-column">
-                    <a href="https://www.youtube.com/@clevraickai" target="_blank" class="channel-action-btn">
-                        > Aller sur C'est le C
-                    </a>
-                    <a href="https://www.youtube.com/@Grossegal%C3%A8reckai" target="_blank" class="channel-action-btn">
-                        > Aller sur Grosse Galère
-                    </a>
-                </div>
             </div>
         </div>
 
@@ -1797,7 +1176,6 @@
         </div>
         
         <div class="video-suggestions-layout">
-            <!-- Formulaire à gauche -->
             <div class="suggest-video-box">
                 <div class="suggest-video-title">[+] Soumettre un projet</div>
                 <form class="suggest-video-form" id="suggestVideoIdeaForm">
@@ -1830,13 +1208,12 @@
                 </form>
             </div>
 
-            <!-- Liste à droite avec code couleur -->
             <div class="suggestions-list-box">
                 <div class="suggestions-list-title">
                     <span>[>] Idées proposées</span>
                 </div>
                 <div class="video-suggestions-container" id="video-suggestions-list">
-                    <!-- Rempli dynamiquement par JS -->
+                    <!-- Rempli dynamiquement -->
                 </div>
             </div>
         </div>
@@ -1888,7 +1265,6 @@
         <div class="section-header">> USER_PROFILE // ESPACE PERSONNEL</div>
         <div class="links-column-container" style="max-width: 900px;">
             <div class="profile-container">
-                <!-- Colonne de gauche : Liaisons et Sécurité -->
                 <div style="display: flex; flex-direction: column; gap: 20px;">
                     <div class="profile-card">
                         <div class="profile-card-title" id="profileUsernameDisplay">[ESPACE MEMBRE]</div>
@@ -1897,12 +1273,13 @@
                         </div>
 
                         <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 10px;">
+                            <!-- LIAISON TWITCH VIA VRAI OAUTH -->
                             <div class="link-account-row">
                                 <div class="link-account-info">
-                                    <div class="link-account-name">Twitch</div>
+                                    <div class="link-account-name">Twitch (OAuth)</div>
                                     <div class="link-account-status" id="statusTwitch">Non lié</div>
                                 </div>
-                                <button class="link-action-btn" id="btnTwitch" onclick="toggleLink('Twitch')">Lier</button>
+                                <button class="link-action-btn" id="btnTwitch" onclick="linkTwitchAccount()">Lier</button>
                             </div>
 
                             <div class="link-account-row">
@@ -1939,7 +1316,6 @@
                     </button>
                 </div>
 
-                <!-- Colonne de droite : Vitrine des récompenses -->
                 <div class="profile-card">
                     <div class="profile-card-title">Vitrine des Récompenses</div>
                     <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px;">
@@ -1957,8 +1333,8 @@
 
                         <div class="reward-item-card">
                             <div class="reward-info">
-                                <h4>Abonnement Twitch / Follow</h4>
-                                <p>Lier ton compte Twitch</p>
+                                <h4>Abonnement Twitch (OAuth)</h4>
+                                <p>Lier ton compte Twitch officiel</p>
                             </div>
                             <div class="reward-tokens-badge">+100 Jetons</div>
                         </div>
@@ -1979,123 +1355,16 @@
     <!-- ONGLET LIENS -->
     <div id="links" class="tab-content">
         <div class="section-header">> NETWORK_HUB // TOUS LES RÉSEAUX & LIENS</div>
-        
         <div class="links-column-container">
-            
             <div class="link-category-group">
                 <div class="link-cat-title">// LIVE</div>
                 <a href="https://www.twitch.tv/ckai" target="_blank" class="vertical-link-item">
                     <div class="link-item-left">
-                        <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
-                        <div class="link-item-texts">
-                            <div class="link-item-name">Twitch</div>
-                            <div class="link-item-desc">Live presque tous les matins sur divers jeux</div>
-                        </div>
+                        <div class="link-item-name">Twitch</div>
                     </div>
                     <div class="link-item-arrow">></div>
                 </a>
             </div>
-
-            <div class="link-category-group">
-                <div class="link-cat-title">// LES VIDÉOS</div>
-                <a href="https://www.youtube.com/@ckaiward" target="_blank" class="vertical-link-item">
-                    <div class="link-item-left">
-                        <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                        <div class="link-item-texts">
-                            <div class="link-item-name">YouTube (CKAI)</div>
-                            <div class="link-item-desc">Chaîne principale : formats longs, découvertes et analyses</div>
-                        </div>
-                    </div>
-                    <div class="link-item-arrow">></div>
-                </a>
-
-                <a href="https://www.youtube.com/@clevraickai" target="_blank" class="vertical-link-item">
-                    <div class="link-item-left">
-                        <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                        <div class="link-item-texts">
-                            <div class="link-item-name">C'est le C</div>
-                            <div class="link-item-desc">Seconde chaîne YouTube dédiée aux projets annexes</div>
-                        </div>
-                    </div>
-                    <div class="link-item-arrow">></div>
-                </a>
-
-                <a href="https://www.youtube.com/@Grossegal%C3%A8reckai" target="_blank" class="vertical-link-item">
-                    <div class="link-item-left">
-                        <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                        <div class="link-item-texts">
-                            <div class="link-item-name">Grosse Galère</div>
-                            <div class="link-item-desc">Chaîne alternative orientée mangas, musique, etc.</div>
-                        </div>
-                    </div>
-                    <div class="link-item-arrow">></div>
-                </a>
-            </div>
-
-            <div class="link-category-group">
-                <div class="link-cat-title">// FORMAT COURT</div>
-                <a href="https://www.tiktok.com/@ckai_clips" target="_blank" class="vertical-link-item">
-                    <div class="link-item-left">
-                        <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
-                        <div class="link-item-texts">
-                            <div class="link-item-name">TikTok</div>
-                            <div class="link-item-desc">Clips drôles et formats courts tirés des lives</div>
-                        </div>
-                    </div>
-                    <div class="link-item-arrow">></div>
-                </a>
-
-                <a href="https://www.instagram.com/ckaiwardd//" target="_blank" class="vertical-link-item">
-                    <div class="link-item-left">
-                        <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                        <div class="link-item-texts">
-                            <div class="link-item-name">Instagram</div>
-                            <div class="link-item-desc">Photos, storys et contenu plus perso</div>
-                        </div>
-                    </div>
-                    <div class="link-item-arrow">></div>
-                </a>
-            </div>
-
-            <div class="link-category-group">
-                <div class="link-cat-title">// SOUTIEN</div>
-                <a href="https://www.patreon.com/cw/Ckai/membership" target="_blank" class="vertical-link-item">
-                    <div class="link-item-left">
-                        <svg class="link-item-icon" viewBox="0 0 569 546"><path d="M365.2 56.7C455.5 56.7 528.8 130 528.8 220.3C528.8 310.6 455.5 383.9 365.2 383.9C274.9 383.9 201.6 310.6 201.6 220.3C201.6 130 274.9 56.7 365.2 56.7ZM0 489.3H75.5V56.7H0V489.3Z"/></svg>
-                        <div class="link-item-texts">
-                            <div class="link-item-name">Patreon</div>
-                            <div class="link-item-desc">Soutenir directement l'ensemble des projets</div>
-                        </div>
-                    </div>
-                    <div class="link-item-arrow">></div>
-                </a>
-            </div>
-
-            <div class="link-category-group">
-                <div class="link-cat-title">// AUTRES LIENS</div>
-                <a href="https://discord.gg/kUpuTrrQQh" target="_blank" class="vertical-link-item">
-                    <div class="link-item-left">
-                        <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-                        <div class="link-item-texts">
-                            <div class="link-item-name">Discord</div>
-                            <div class="link-item-desc">Rejoindre la communauté et échanger en direct</div>
-                        </div>
-                    </div>
-                    <div class="link-item-arrow">></div>
-                </a>
-
-                <a href="https://www.senscritique.com/Ckai" target="_blank" class="vertical-link-item">
-                    <div class="link-item-left">
-                        <svg class="link-item-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-                        <div class="link-item-texts">
-                            <div class="link-item-name">SensCritique</div>
-                            <div class="link-item-desc">Avis et notes sur pas mal d'œuvres</div>
-                        </div>
-                    </div>
-                    <div class="link-item-arrow">></div>
-                </a>
-            </div>
-
         </div>
     </div>
 
@@ -2120,7 +1389,7 @@
 <!-- SCRIPTS FIREBASE & LOGIQUE DU SITE -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc, updateDoc, increment, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getFirestore, collection, getDocs, setDoc, doc, updateDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updatePassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
     const firebaseConfig = {
@@ -2137,45 +1406,23 @@
     const db = getFirestore(app);
     const auth = getAuth(app);
 
-    const initialPointsGames = [
-        { id: 'p1', title: 'CRASH BANDICOOT N.SANE TRILOGY', user: 'LettWave', completed: true },
-        { id: 'p2', title: 'MINIT', user: 'LettWave', completed: true },
-        { id: 'p3', title: 'CRASH BANDICOOT 4', user: 'LettWave', completed: false },
-        { id: 'p4', title: 'Shadowman Remaster', user: 'WeshSen', completed: true },
-        { id: 'p5', title: 'Turok', user: 'WeshSen', completed: false },
-        { id: 'p6', title: 'METAL GEAR SOLID', user: 'Grayfox', completed: false },
-        { id: 'p7', title: 'MAX PAYNE 3', user: 'Skunksx', completed: true },
-        { id: 'p8', title: 'Splinter Cell Chaos Theory', user: 'Coldacity', completed: true },
-        { id: 'p9', title: 'GOTCHA FORCE (GC)', user: 'Kirochi', completed: false },
-        { id: 'p10', title: 'DRAGON QUEST I & II HD', user: 'Gon_la_chèvre', completed: false },
-    ];
-
-    const defaultCommunityGames = [
-        { id: '1', title: 'Silent Hill 2 Remake', user: 'Pseudo_01', reason: 'Une ambiance incroyable à découvrir en live avec le chat !', votes: 15 },
-        { id: '2', title: 'Metal Gear Solid Delta', user: 'ShadowFan', reason: 'Le remake qu on attend tous, parfait pour un long format.', votes: 23 },
-        { id: '3', title: 'Hollow Knight: Silksong', user: 'CKAI_Fan', reason: 'Parce qu il sortira bien un jour (ou pas).', votes: 36 },
-        { id: '4', title: 'DRAGON QUEST I & II HD', user: 'Gon_la_chèvre', reason: 'Un grand classique du JRPG réinventé en HD-2D.', votes: 1 }
-    ];
-
-    const defaultVideoSuggestions = [
-        { id: 'v1', title: 'Rétrospective complète de la saga Silent Hill', channel: 'Ckai', user: 'CineGeek', reason: 'Format long idéal pour creuser l évolution psychologique.' },
-        { id: 'v2', title: 'Les pires adaptations de jeux en anime', channel: 'C\'est le C', user: 'Otaku99', reason: 'Parfait pour un format annexe décalé et humoristique.' },
-        { id: 'v3', title: 'L influence de Junji Ito dans le jeu vidéo', channel: 'Grosse Galère', user: 'HorrorFan', reason: 'Mélange parfait entre culture manga et horreur.' }
-    ];
-
-    let communityGames = [];
-    let channelPointsGames = [];
     let videoSuggestions = [];
-    let userVotes = JSON.parse(localStorage.getItem('ckai_user_votes_v6')) || {};
-    let isAdmin = false;
-    const ADMIN_PASSWORD = "giratina";
-
     let currentUserData = {
         pseudo: '',
         tokens: 0,
         twitch: false,
         youtube: false,
         patreon: false
+    };
+
+    // --- CONFIG TWITCH OAUTH ---
+    const TWITCH_CLIENT_ID = "kl43v8tbe1vq6tehfaoqou47yfmfs6"; // Remplace ici par ton Client ID Twitch Developer
+
+    window.linkTwitchAccount = function() {
+        const REDIRECT_URI = window.location.origin + window.location.pathname;
+        const SCOPE = "user:read:subscriptions"; 
+        const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=${encodeURIComponent(SCOPE)}`;
+        window.location.href = twitchAuthUrl;
     };
 
     // --- GESTION DE L'AUTHENTIFICATION & PROFIL ---
@@ -2213,6 +1460,25 @@
                 profileDisplay.innerText = `[PROFIL : ${escapeHtml(pseudo)}]`;
             }
             updateProfileUI();
+
+            // Interception du jeton Twitch OAuth si présent dans l'URL après redirection
+            const hash = window.location.hash;
+            if (hash && hash.includes('access_token')) {
+                const params = new URLSearchParams(hash.substring(1));
+                const accessToken = params.get('access_token');
+                if (accessToken && !currentUserData.twitch) {
+                    currentUserData.twitch = true;
+                    currentUserData.tokens += 100;
+                    await updateDoc(userRef, {
+                        twitch: true,
+                        tokens: currentUserData.tokens
+                    });
+                    alert("Compte Twitch lié via OAuth avec succès ! +100 jetons ajoutés.");
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                    updateProfileUI();
+                }
+            }
+
         } else {
             headerContainer.innerHTML = `
                 <button class="auth-btn" onclick="openTab('login', this)">[CONNEXION]</button>
@@ -2223,7 +1489,6 @@
 
     function updateProfileUI() {
         document.getElementById('userTokensBalance').innerText = `${currentUserData.tokens} Jetons`;
-
         updateLinkStatus('Twitch', currentUserData.twitch);
         updateLinkStatus('Youtube', currentUserData.youtube);
         updateLinkStatus('Patreon', currentUserData.patreon);
@@ -2232,9 +1497,10 @@
     function updateLinkStatus(platform, isLinked) {
         const statusEl = document.getElementById(`status${platform}`);
         const btnEl = document.getElementById(`btn${platform}`);
+        if (!statusEl || !btnEl) return;
 
         if (isLinked) {
-            statusEl.innerText = 'Lié (Vérifié)';
+            statusEl.innerText = 'Lié (OAuth)';
             statusEl.className = 'link-account-status linked';
             btnEl.innerText = 'Délier';
             btnEl.className = 'link-action-btn linked';
@@ -2257,7 +1523,7 @@
         if (!currentlyLinked) {
             currentUserData[key] = true;
             currentUserData.tokens += rewardAmount;
-            alert(`Compte ${platform} lié avec succès ! +${rewardAmount} jetons ajoutés.`);
+            alert(`Compte ${platform} lié ! +${rewardAmount} jetons.`);
         } else {
             currentUserData[key] = false;
             currentUserData.tokens = Math.max(0, currentUserData.tokens - rewardAmount);
@@ -2271,16 +1537,14 @@
             });
             updateProfileUI();
         } catch (e) {
-            console.error("Erreur mise à jour liaison", e);
+            console.error("Erreur liaison", e);
         }
     }
 
-    // Modification du mot de passe
     document.getElementById('changePasswordForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const user = auth.currentUser;
         const newPass = document.getElementById('new-password').value;
-
         if (!user) return;
 
         try {
@@ -2288,8 +1552,7 @@
             alert("Mot de passe modifié avec succès !");
             document.getElementById('new-password').value = '';
         } catch (error) {
-            console.error("Erreur mdp", error);
-            alert("Erreur : Pour des raisons de sécurité, veuillez vous reconnecter avant de changer de mot de passe.");
+            alert("Erreur : Veuillez vous reconnecter avant de changer de mot de passe.");
         }
     });
 
@@ -2301,12 +1564,10 @@
 
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, fakeEmail, password);
-            const user = userCredential.user;
-            await setDoc(doc(db, "users", user.uid), { pseudo: pseudo, tokens: 0, twitch: false, youtube: false, patreon: false, createdAt: new Date() });
+            await setDoc(doc(db, "users", userCredential.user.uid), { pseudo: pseudo, tokens: 0, twitch: false, youtube: false, patreon: false, createdAt: new Date() });
             alert(`Compte créé avec succès ! Bienvenue ${pseudo}.`);
             openTab('profile');
         } catch (error) {
-            console.error("Erreur d'inscription", error);
             alert("Erreur lors de la création : " + error.message);
         }
     });
@@ -2322,7 +1583,6 @@
             alert(`Bon retour, ${pseudo} !`);
             openTab('profile');
         } catch (error) {
-            console.error("Erreur de connexion", error);
             alert("Identifiants incorrects ou compte introuvable.");
         }
     });
@@ -2334,411 +1594,13 @@
         });
     }
 
-    // --- CHARGEMENT DEPUIS FIRESTORE ---
-    async function loadDataFromFirebase() {
-        try {
-            const commSnap = await getDocs(collection(db, "communityGames"));
-            if (commSnap.empty) {
-                for (const game of defaultCommunityGames) {
-                    await setDoc(doc(db, "communityGames", game.id), game);
-                }
-                communityGames = [...defaultCommunityGames];
-            } else {
-                communityGames = [];
-                commSnap.forEach(d => communityGames.push({ id: d.id, ...d.data() }));
-            }
-
-            const pointsSnap = await getDocs(collection(db, "channelPointsGames"));
-            if (pointsSnap.empty) {
-                for (const game of initialPointsGames) {
-                    await setDoc(doc(db, "channelPointsGames", game.id), game);
-                }
-                channelPointsGames = [...initialPointsGames];
-            } else {
-                channelPointsGames = [];
-                pointsSnap.forEach(d => channelPointsGames.push({ id: d.id, ...d.data() }));
-            }
-
-            const suggSnap = await getDocs(collection(db, "videoSuggestions"));
-            if (suggSnap.empty) {
-                for (const item of defaultVideoSuggestions) {
-                    await setDoc(doc(db, "videoSuggestions", item.id), item);
-                }
-                videoSuggestions = [...defaultVideoSuggestions];
-            } else {
-                videoSuggestions = [];
-                suggSnap.forEach(d => videoSuggestions.push({ id: d.id, ...d.data() }));
-            }
-
-            renderAllGameLists();
-            renderVideoSuggestions();
-        } catch (e) {
-            console.error("Erreur de chargement Firebase : ", e);
-        }
-    }
-
-    function renderChannelPointsGames() {
-        const container = document.getElementById('channel-points-games-list');
-        container.innerHTML = '';
-
-        if (channelPointsGames.length === 0) {
-            container.innerHTML = `<div style="color:var(--text-muted); font-size:12px;">Aucun jeu en attente.</div>`;
-            return;
-        }
-
-        channelPointsGames.forEach(game => {
-            const card = document.createElement('div');
-            card.className = `points-card-compact ${game.completed ? 'completed' : ''}`;
-
-            let deleteBtnHtml = isAdmin ? `<div class="delete-card-btn" onclick="window.deletePointsGame('${game.id}', event)">X</div>` : '';
-            let completedOverlayHtml = game.completed ? `
-                <div class="completed-overlay">
-                    <span class="completed-x">✕</span>
-                    <span class="completed-text">COMPLETED</span>
-                </div>
-            ` : '';
-
-            card.innerHTML = `
-                ${deleteBtnHtml}
-                ${completedOverlayHtml}
-                <div class="points-card-title">${escapeHtml(game.title)}</div>
-                <div class="points-card-user">par <span>${escapeHtml(game.user)}</span></div>
-            `;
-            container.appendChild(card);
-        });
-    }
-
-    function getTotalVotes() {
-        return communityGames.reduce((acc, game) => acc + (game.votes || 0), 0);
-    }
-
-    function renderCommunityGames() {
-        const container = document.getElementById('community-games-list');
-        container.innerHTML = '';
-        const totalVotes = getTotalVotes();
-
-        communityGames.sort((a, b) => b.votes - a.votes);
-
-        communityGames.forEach(game => {
-            const hasVoted = !!userVotes[game.id];
-            const percentage = totalVotes > 0 ? ((game.votes / totalVotes) * 100).toFixed(1) : 0;
-
-            const card = document.createElement('div');
-            card.className = `community-card ${hasVoted ? 'voted' : ''}`;
-            card.onclick = () => window.toggleVote(game.id);
-
-            let adminButtonsHtml = '';
-            if (isAdmin) {
-                adminButtonsHtml = `
-                    <div class="admin-action-buttons">
-                        <div class="admin-card-btn edit" title="Modifier" onclick="window.editCommunityGame('${game.id}', event)">✎</div>
-                        <div class="admin-card-btn" title="Supprimer" onclick="window.deleteCommunityGame('${game.id}', event)">X</div>
-                    </div>
-                `;
-            }
-
-            let reasonHtml = game.reason ? `<div class="upcoming-game-reason">"${escapeHtml(game.reason)}"</div>` : '';
-
-            card.innerHTML = `
-                ${adminButtonsHtml}
-                <div class="upcoming-card-content">
-                    <div class="upcoming-game-name">${escapeHtml(game.title)}</div>
-                    ${reasonHtml}
-                    <div class="vote-btn-indicator">${hasVoted ? '✔ VOTÉ' : '+ CLIQUER POUR VOTER'}</div>
-                </div>
-                <div class="upcoming-card-footer">
-                    <div class="proposed-by-box">Proposé par: <span class="proposed-by-user">${escapeHtml(game.user)}</span></div>
-                    <div class="vote-count-box">▲ <span>${game.votes}</span></div>
-                </div>
-                <div class="vote-hover-overlay">
-                    <div class="percentage-display">${percentage}%</div>
-                    <div class="percentage-bar-bg">
-                        <div class="percentage-bar-fill" style="width: ${percentage}%;"></div>
-                    </div>
-                    <div class="percentage-stats">${game.votes} / ${totalVotes} VOTES TOTAL</div>
-                </div>
-            `;
-            container.appendChild(card);
-        });
-    }
-
-    function renderVideoSuggestions() {
-        const container = document.getElementById('video-suggestions-list');
-        if (!container) return;
-        container.innerHTML = '';
-
-        if (videoSuggestions.length === 0) {
-            container.innerHTML = `<div style="color:var(--text-muted); font-size:12px;">Aucune suggestion de vidéo pour le moment.</div>`;
-            return;
-        }
-
-        videoSuggestions.forEach(item => {
-            const card = document.createElement('div');
-            
-            let channelClass = 'channel-ckai';
-            if (item.channel === "C'est le C") channelClass = 'channel-cestlec';
-            if (item.channel === "Grosse Galère") channelClass = 'channel-grossegalere';
-
-            card.className = `video-suggestion-card ${channelClass}`;
-
-            let adminButtonsHtml = '';
-            if (isAdmin) {
-                adminButtonsHtml = `
-                    <div class="admin-action-buttons">
-                        <div class="admin-card-btn edit" title="Modifier" onclick="window.editVideoSuggestion('${item.id}', event)">✎</div>
-                        <div class="admin-card-btn" title="Supprimer" onclick="window.deleteVideoSuggestion('${item.id}', event)">X</div>
-                    </div>
-                `;
-            }
-
-            card.innerHTML = `
-                ${adminButtonsHtml}
-                <div class="vid-sugg-header">
-                    <span class="vid-sugg-name">${escapeHtml(item.title)}</span>
-                    <span class="vid-sugg-badge">${escapeHtml(item.channel)}</span>
-                </div>
-                <div class="vid-sugg-reason">"${escapeHtml(item.reason)}"</div>
-                <div class="vid-sugg-author">Proposé par <span>${escapeHtml(item.user || 'Anonyme')}</span></div>
-            `;
-            container.appendChild(card);
-        });
-    }
-
-    function renderAllGameLists() {
-        renderChannelPointsGames();
-        renderCommunityGames();
-        renderVideoSuggestions();
-    }
-
-    window.toggleVote = async function(gameId) {
-        const game = communityGames.find(g => g.id === gameId);
-        if (!game) return;
-
-        const gameRef = doc(db, "communityGames", gameId);
-        if (userVotes[gameId]) {
-            game.votes -= 1;
-            delete userVotes[gameId];
-            await updateDoc(gameRef, { votes: increment(-1) });
-        } else {
-            game.votes += 1;
-            userVotes[gameId] = true;
-            await updateDoc(gameRef, { votes: increment(1) });
-        }
-
-        localStorage.setItem('ckai_user_votes_v6', JSON.stringify(userVotes));
-        renderCommunityGames();
-    }
-
-    window.deleteCommunityGame = async function(gameId, event) {
-        event.stopPropagation();
-        if (!isAdmin) return;
-        const game = communityGames.find(g => g.id === gameId);
-        if (game && confirm(`Supprimer "${game.title}" ?`)) {
-            await deleteDoc(doc(db, "communityGames", gameId));
-            communityGames = communityGames.filter(g => g.id !== gameId);
-            delete userVotes[gameId];
-            localStorage.setItem('ckai_user_votes_v6', JSON.stringify(userVotes));
-            renderCommunityGames();
-        }
-    }
-
-    window.editCommunityGame = async function(gameId, event) {
-        event.stopPropagation();
-        if (!isAdmin) return;
-        const game = communityGames.find(g => g.id === gameId);
-        if (!game) return;
-
-        const newTitle = prompt("Modifier le nom du jeu :", game.title);
-        if (newTitle === null) return;
-        const newUser = prompt("Modifier le pseudo de la personne qui propose :", game.user);
-        if (newUser === null) return;
-        const newReason = prompt("Modifier la raison :", game.reason || "");
-        if (newReason === null) return;
-
-        game.title = newTitle.trim();
-        game.user = newUser.trim() || 'Anonyme';
-        game.reason = newReason.trim();
-
-        const gameRef = doc(db, "communityGames", gameId);
-        await updateDoc(gameRef, {
-            title: game.title,
-            user: game.user,
-            reason: game.reason
-        });
-
-        renderCommunityGames();
-        alert("Proposition modifiée avec succès !");
-    }
-
-    window.deleteVideoSuggestion = async function(id, event) {
-        event.stopPropagation();
-        if (!isAdmin) return;
-        const item = videoSuggestions.find(v => v.id === id);
-        if (item && confirm(`Supprimer l'idée de vidéo "${item.title}" ?`)) {
-            await deleteDoc(doc(db, "videoSuggestions", id));
-            videoSuggestions = videoSuggestions.filter(v => v.id !== id);
-            renderVideoSuggestions();
-        }
-    }
-
-    window.editVideoSuggestion = async function(id, event) {
-        event.stopPropagation();
-        if (!isAdmin) return;
-        const item = videoSuggestions.find(v => v.id === id);
-        if (!item) return;
-
-        const newTitle = prompt("Modifier le nom du projet/jeu :", item.title);
-        if (newTitle === null) return;
-        const newUser = prompt("Modifier le pseudo :", item.user);
-        if (newUser === null) return;
-        const newReason = prompt("Modifier la raison / description :", item.reason || "");
-        if (newReason === null) return;
-
-        item.title = newTitle.trim();
-        item.user = newUser.trim() || 'Anonyme';
-        item.reason = newReason.trim();
-
-        const itemRef = doc(db, "videoSuggestions", id);
-        await updateDoc(itemRef, {
-            title: item.title,
-            user: item.user,
-            reason: item.reason
-        });
-
-        renderVideoSuggestions();
-        alert("Idée de vidéo modifiée avec succès !");
-    }
-
-    window.deletePointsGame = async function(gameId, event) {
-        event.stopPropagation();
-        if (!isAdmin) return;
-        const game = channelPointsGames.find(g => g.id === gameId);
-        if (game && confirm(`Supprimer "${game.title}" ?`)) {
-            await deleteDoc(doc(db, "channelPointsGames", gameId));
-            channelPointsGames = channelPointsGames.filter(g => g.id !== gameId);
-            renderChannelPointsGames();
-        }
-    }
-
-    document.getElementById('suggestGameForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const pseudoInput = document.getElementById('user-pseudo');
-        const gameInput = document.getElementById('game-name');
-        const reasonInput = document.getElementById('game-reason');
-
-        const newId = Date.now().toString();
-        const newGame = {
-            id: newId,
-            title: gameInput.value.trim(),
-            user: pseudoInput.value.trim() || 'Anonyme',
-            reason: reasonInput.value.trim(),
-            votes: 1
-        };
-
-        try {
-            await setDoc(doc(db, "communityGames", newId), newGame);
-            communityGames.push(newGame);
-            userVotes[newId] = true;
-            localStorage.setItem('ckai_user_votes_v6', JSON.stringify(userVotes));
-
-            renderCommunityGames();
-            gameInput.value = '';
-            reasonInput.value = '';
-            pseudoInput.value = '';
-            alert('Jeu ajouté, voté et sauvegardé en ligne avec succès !');
-        } catch (err) {
-            console.error("Erreur d'ajout : ", err);
-            alert("Erreur lors de l'enregistrement dans la base de données.");
-        }
-    });
-
-    document.getElementById('suggestVideoIdeaForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const pseudoInput = document.getElementById('vid-user-pseudo');
-        const projectInput = document.getElementById('vid-project-name');
-        const channelSelect = document.getElementById('vid-channel-choice');
-        const reasonInput = document.getElementById('vid-reason');
-
-        const newId = 'vid_' + Date.now();
-        const newSuggestion = {
-            id: newId,
-            title: projectInput.value.trim(),
-            channel: channelSelect.value,
-            user: pseudoInput.value.trim() || 'Anonyme',
-            reason: reasonInput.value.trim()
-        };
-
-        try {
-            await setDoc(doc(db, "videoSuggestions", newId), newSuggestion);
-            videoSuggestions.unshift(newSuggestion);
-            renderVideoSuggestions();
-
-            projectInput.value = '';
-            reasonInput.value = '';
-            pseudoInput.value = '';
-            channelSelect.selectedIndex = 0;
-            alert('Idée de vidéo proposée et sauvegardée en ligne avec succès !');
-        } catch (err) {
-            console.error("Erreur d'ajout suggestion vidéo : ", err);
-            alert("Erreur lors de l'enregistrement de l'idée.");
-        }
-    });
-
-    window.toggleAdminMode = function() {
-        const inputField = document.getElementById('adminPasswordInput');
-        const btn = document.getElementById('adminToggleBtn');
-
-        if (!isAdmin) {
-            if (inputField.style.display === 'none') {
-                inputField.style.display = 'inline-block';
-                inputField.focus();
-                btn.innerText = '[VALIDER]';
-            } else {
-                if (inputField.value === ADMIN_PASSWORD) {
-                    isAdmin = true;
-                    inputField.style.display = 'none';
-                    inputField.value = '';
-                    btn.classList.add('active');
-                    btn.innerText = '[ADMIN ACTIVÉ]';
-                } else {
-                    alert("Mot de passe incorrect.");
-                    inputField.value = '';
-                    inputField.focus();
-                }
-            }
-        } else {
-            isAdmin = false;
-            btn.classList.remove('active');
-            btn.innerText = '[MODE ADMIN]';
-        }
-        renderAllGameLists();
-    }
-
-    window.checkAdminEnter = function(event) {
-        if (event.key === 'Enter') window.toggleAdminMode();
-    }
-
     function escapeHtml(text) {
         if (!text) return '';
         return text.toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
-
-    loadDataFromFirebase();
 </script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const currentDayIndex = new Date().getDay();
-        const scheduleCards = document.querySelectorAll('.schedule-card');
-        
-        scheduleCards.forEach(card => {
-            const cardDay = parseInt(card.getAttribute('data-day'));
-            if (cardDay === currentDayIndex) {
-                card.classList.add('auto-today');
-            }
-        });
-    });
-
     function toggleTheme() {
         const html = document.documentElement;
         const currentTheme = html.getAttribute('data-theme');
@@ -2753,9 +1615,7 @@
     document.getElementById('themeToggleBtn').innerText = savedTheme === 'dark' ? '🌙' : '☀️';
 
     let currentHost = window.location.hostname || "localhost";
-    document.getElementById("twitch-main-player").src = `https://player.twitch.tv/?channel=ckai&parent=${currentHost}`;
     document.getElementById("twitch-pip-player").src = `https://player.twitch.tv/?channel=ckai&parent=${currentHost}`;
-    document.getElementById("twitch-chat").src = `https://www.twitch.tv/embed/ckai/chat?parent=${currentHost}&darkpopout`;
 
     function openTab(tabId, btn) {
         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -2784,41 +1644,6 @@
         const minBtn = document.getElementById('pipMinBtn');
         popup.classList.toggle('minimized');
         minBtn.innerText = popup.classList.contains('minimized') ? '[+]' : '[-]';
-    }
-
-    dragElement(document.getElementById("pipPopup"));
-    function dragElement(elmnt) {
-        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-        const header = document.getElementById("pipHeader");
-        if (header) header.onmousedown = dragMouseDown;
-
-        function dragMouseDown(e) {
-            e = e || window.event;
-            if (e.target.tagName === 'BUTTON') return;
-            e.preventDefault();
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            document.onmouseup = closeDragElement;
-            document.onmousemove = elementDrag;
-        }
-
-        function elementDrag(e) {
-            e = e || window.event;
-            e.preventDefault();
-            pos1 = pos3 - e.clientX;
-            pos2 = pos4 - e.clientY;
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-            elmnt.style.bottom = "auto";
-            elmnt.style.right = "auto";
-        }
-
-        function closeDragElement() {
-            document.onmouseup = null;
-            document.onmousemove = null;
-        }
     }
 </script>
 
