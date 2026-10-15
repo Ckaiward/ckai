@@ -1289,7 +1289,16 @@
             color: #fff;
         }
 
-        /* STYLES PROFIL NETTOYÉ */
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .profile-container { grid-template-columns: 1fr; }
+        }
+
         .profile-card {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
@@ -1340,13 +1349,6 @@
             font-weight: bold;
         }
 
-        .reward-tag-inline {
-            font-size: 11px;
-            color: var(--accent-gold);
-            font-family: 'Share Tech Mono', monospace;
-            margin-top: 2px;
-        }
-
         .link-action-btn {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
@@ -1366,6 +1368,42 @@
         .link-action-btn:hover {
             border-color: var(--accent-glitch);
             color: var(--accent-glitch);
+        }
+
+        .rewards-showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .reward-item-card {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-hard);
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .reward-info h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 13px;
+            color: var(--text-main);
+            text-transform: uppercase;
+        }
+
+        .reward-info p {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .reward-tokens-badge {
+            font-family: 'VT323', monospace;
+            font-size: 18px;
+            color: var(--accent-gold);
+            background: rgba(255, 204, 0, 0.1);
+            border: 1px solid rgba(255, 204, 0, 0.3);
+            padding: 4px 10px;
         }
 
         .twitch-container {
@@ -1813,51 +1851,63 @@
     <!-- ONGLET PROFIL -->
     <div id="profile" class="tab-content">
         <div class="section-header">> USER_PROFILE // ESPACE PERSONNEL</div>
-        <div class="links-column-container" style="max-width: 650px;">
-            <div style="display: flex; flex-direction: column; gap: 20px;">
-                <div class="profile-card">
-                    <div class="profile-card-title" id="profileUsernameDisplay">[ESPACE MEMBRE]</div>
-                    <div style="font-size: 13px; color: var(--text-muted);">Solde actuel : <strong style="color: var(--accent-gold);" id="userTokensBalance">0 Jetons</strong></div>
+        <div class="links-column-container" style="max-width: 900px;">
+            <div class="profile-container">
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <div class="profile-card">
+                        <div class="profile-card-title" id="profileUsernameDisplay">[ESPACE MEMBRE]</div>
+                        <div style="font-size: 13px; color: var(--text-muted);">Solde actuel : <strong style="color: var(--accent-gold);" id="userTokensBalance">0 Jetons</strong></div>
 
-                    <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 12px;">
-                        <div class="link-account-row">
-                            <div class="link-account-info">
-                                <div class="link-account-name">Twitch (OAuth)</div>
-                                <div class="link-account-status" id="statusTwitch">Non lié</div>
-                                <div class="reward-tag-inline" id="rewardTwitch">Récompense : 0/100 jetons</div>
+                        <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 10px;">
+                            <div class="link-account-row">
+                                <div class="link-account-info"><div class="link-account-name">Twitch (OAuth)</div><div class="link-account-status" id="statusTwitch">Non lié</div></div>
+                                <button class="link-action-btn" id="btnTwitch" onclick="handleTwitchButton()">Lier</button>
                             </div>
-                            <button class="link-action-btn" id="btnTwitch" onclick="handleTwitchButton()">Lier</button>
-                        </div>
-                        <div class="link-account-row">
-                            <div class="link-account-info">
-                                <div class="link-account-name">Patreon (OAuth)</div>
-                                <div class="link-account-status" id="statusPatreon">Non lié</div>
-                                <div class="reward-tag-inline" id="rewardPatreon">Récompense : 0/500 jetons</div>
+                            <div class="link-account-row">
+                                <div class="link-account-info"><div class="link-account-name">Patreon (OAuth)</div><div class="link-account-status" id="statusPatreon">Non lié</div></div>
+                                <button class="link-action-btn" id="btnPatreon" onclick="handlePatreonButton()">Lier (+500 jetons)</button>
                             </div>
-                            <button class="link-action-btn" id="btnPatreon" onclick="handlePatreonButton()">Lier</button>
-                        </div>
-                        <div class="link-account-row">
-                            <div class="link-account-info">
-                                <div class="link-account-name">YouTube (OAuth)</div>
-                                <div class="link-account-status" id="statusYoutube">Non lié</div>
-                                <div class="reward-tag-inline" id="rewardYoutube">Récompense : 0/100 jetons</div>
+                            <div class="link-account-row">
+                                <div class="link-account-info"><div class="link-account-name">YouTube - Ckai</div><div class="link-account-status" id="statusYtCkai">Non lié</div></div>
+                                <button class="link-action-btn" id="btnYtCkai" onclick="handleYoutubeButton('ckai')">Lier (+100)</button>
                             </div>
-                            <button class="link-action-btn" id="btnYoutube" onclick="handleYoutubeButton()">Lier</button>
+                            <div class="link-account-row">
+                                <div class="link-account-info"><div class="link-account-name">YouTube - Grosse Galère</div><div class="link-account-status" id="statusYtGrosseGalere">Non lié</div></div>
+                                <button class="link-action-btn" id="btnYtGrosseGalere" onclick="handleYoutubeButton('grossegalere')">Lier (+100)</button>
+                            </div>
+                            <div class="link-account-row">
+                                <div class="link-account-info"><div class="link-account-name">YouTube - C'est le C</div><div class="link-account-status" id="statusYtCestlec">Non lié</div></div>
+                                <button class="link-action-btn" id="btnYtCestlec" onclick="handleYoutubeButton('cestlec')">Lier (+100)</button>
+                            </div>
+                            <div class="link-account-row">
+                                <div class="link-account-info"><div class="link-account-name">YouTube - Ckai:STREAM</div><div class="link-account-status" id="statusYtStream">Non lié</div></div>
+                                <button class="link-action-btn" id="btnYtStream" onclick="handleYoutubeButton('stream')">Lier (+100)</button>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="profile-card">
+                        <div class="profile-card-title">Sécurité</div>
+                        <form id="changePasswordForm" class="suggest-form" style="gap: 10px;">
+                            <div class="form-group"><label for="new-password">Nouveau mot de passe</label><input type="password" id="new-password" class="form-control" placeholder="••••••••" required></div>
+                            <button type="submit" class="submit-btn" style="border-color: var(--accent-blue); color: var(--accent-blue);">> MODIFIER LE MOT DE PASSE</button>
+                        </form>
+                    </div>
+
+                    <button class="submit-btn" onclick="logoutUser()" style="border-color: var(--accent-alert); color: var(--accent-alert); width: 100%; text-align: center; justify-content: center;">
+                        > SE DÉCONNECTER
+                    </button>
                 </div>
 
                 <div class="profile-card">
-                    <div class="profile-card-title">Sécurité</div>
-                    <form id="changePasswordForm" class="suggest-form" style="gap: 10px;">
-                        <div class="form-group"><label for="new-password">Nouveau mot de passe</label><input type="password" id="new-password" class="form-control" placeholder="••••••••" required></div>
-                        <button type="submit" class="submit-btn" style="border-color: var(--accent-blue); color: var(--accent-blue);">> MODIFIER LE MOT DE PASSE</button>
-                    </form>
+                    <div class="profile-card-title">Vitrine des Récompenses</div>
+                    <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px;">Gagne des jetons en connectant tes comptes et abonnements !</div>
+                    <div class="rewards-showcase-grid">
+                        <div class="reward-item-card"><div class="reward-info"><h4>Abonnement YouTube (par chaîne)</h4><p>Vérification d'abonnement aux 4 chaînes</p></div><div class="reward-tokens-badge">+100 Jetons / chaîne</div></div>
+                        <div class="reward-item-card"><div class="reward-info"><h4>Abonnement Twitch</h4><p>Lier ton compte Twitch</p></div><div class="reward-tokens-badge">+100 Jetons</div></div>
+                        <div class="reward-item-card"><div class="reward-info"><h4>Statut Patron</h4><p>Membre actif Patreon</p></div><div class="reward-tokens-badge">+500 Jetons / mois</div></div>
+                    </div>
                 </div>
-
-                <button class="submit-btn" onclick="logoutUser()" style="border-color: var(--accent-alert); color: var(--accent-alert); width: 100%; text-align: center; justify-content: center;">
-                    > SE DÉCONNECTER
-                </button>
             </div>
         </div>
     </div>
@@ -1993,7 +2043,10 @@
         tokens: 0,
         twitch: false,
         patreon: false,
-        youtube: false
+        ytCkai: false,
+        ytGrosseGalere: false,
+        ytCestlec: false,
+        ytStream: false
     };
 
     window.handleTwitchButton = function() {
@@ -2017,13 +2070,21 @@
         }
     };
 
-    window.handleYoutubeButton = function() {
-        if (!currentUserData.youtube) {
+    window.handleYoutubeButton = function(channelKey) {
+        const fieldMap = {
+            'ckai': 'ytCkai',
+            'grossegalere': 'ytGrosseGalere',
+            'cestlec': 'ytCestlec',
+            'stream': 'ytStream'
+        };
+        const dbField = fieldMap[channelKey];
+        if (!currentUserData[dbField]) {
             localStorage.setItem('oauth_pending_platform', 'youtube');
+            localStorage.setItem('youtube_pending_target', dbField);
             const REDIRECT_URI = window.location.origin + window.location.pathname;
             window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${YOUTUBE_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=${encodeURIComponent('https://www.googleapis.com/auth/youtube.readonly')}`;
         } else {
-            togglePlatformLink('youtube', 100);
+            togglePlatformLink(dbField, 100);
         }
     };
 
@@ -2044,10 +2105,13 @@
                         tokens: data.tokens || 0,
                         twitch: data.twitch || false,
                         patreon: data.patreon || false,
-                        youtube: data.youtube || false
+                        ytCkai: data.ytCkai || false,
+                        ytGrosseGalere: data.ytGrosseGalere || false,
+                        ytCestlec: data.ytCestlec || false,
+                        ytStream: data.ytStream || false
                     };
                 } else {
-                    currentUserData = { pseudo, tokens: 0, twitch: false, patreon: false, youtube: false };
+                    currentUserData = { pseudo, tokens: 0, twitch: false, patreon: false, ytCkai: false, ytGrosseGalere: false, ytCestlec: false, ytStream: false };
                     await setDoc(userRef, currentUserData);
                 }
             } catch (e) {
@@ -2077,14 +2141,18 @@
                         await updateDoc(userRef, { patreon: true, tokens: currentUserData.tokens });
                         alert("Statut Patron vérifié et lié ! +500 jetons.");
                     } 
-                    else if (pendingPlatform === 'youtube' && !currentUserData.youtube) {
-                        currentUserData.youtube = true;
-                        currentUserData.tokens += 100;
-                        await updateDoc(userRef, { youtube: true, tokens: currentUserData.tokens });
-                        alert("Compte YouTube vérifié et lié ! +100 jetons.");
+                    else if (pendingPlatform === 'youtube') {
+                        const pendingYt = localStorage.getItem('youtube_pending_target');
+                        if (pendingYt && !currentUserData[pendingYt]) {
+                            currentUserData[pendingYt] = true;
+                            currentUserData.tokens += 100;
+                            await updateDoc(userRef, { [pendingYt]: true, tokens: currentUserData.tokens });
+                            alert("Abonnement YouTube vérifié ! +100 jetons.");
+                        }
                     }
 
                     localStorage.removeItem('oauth_pending_platform');
+                    localStorage.removeItem('youtube_pending_target');
                     window.history.replaceState({}, document.title, window.location.pathname);
                     updateProfileUI();
                 }
@@ -2101,15 +2169,17 @@
     function updateProfileUI() {
         const balanceEl = document.getElementById('userTokensBalance');
         if (balanceEl) balanceEl.innerText = `${currentUserData.tokens} Jetons`;
-        updateLinkStatus('Twitch', currentUserData.twitch, 100);
-        updateLinkStatus('Patreon', currentUserData.patreon, 500);
-        updateLinkStatus('Youtube', currentUserData.youtube, 100);
+        updateLinkStatus('Twitch', currentUserData.twitch);
+        updateLinkStatus('Patreon', currentUserData.patreon);
+        updateLinkStatus('YtCkai', currentUserData.ytCkai);
+        updateLinkStatus('YtGrosseGalere', currentUserData.ytGrosseGalere);
+        updateLinkStatus('YtCestlec', currentUserData.ytCestlec);
+        updateLinkStatus('YtStream', currentUserData.ytStream);
     }
 
-    function updateLinkStatus(elementId, isLinked, maxReward) {
+    function updateLinkStatus(elementId, isLinked) {
         const statusEl = document.getElementById(`status${elementId}`);
         const btnEl = document.getElementById(`btn${elementId}`);
-        const rewardEl = document.getElementById(`reward${elementId}`);
         if (!statusEl || !btnEl) return;
 
         if (isLinked) {
@@ -2117,13 +2187,11 @@
             statusEl.className = 'link-account-status linked';
             btnEl.innerText = 'Délier';
             btnEl.className = 'link-action-btn linked';
-            if (rewardEl) rewardEl.innerText = `Récompense : ${maxReward}/${maxReward} jetons`;
         } else {
             statusEl.innerText = 'Non lié';
             statusEl.className = 'link-account-status';
             btnEl.innerText = 'Lier';
             btnEl.className = 'link-action-btn';
-            if (rewardEl) rewardEl.innerText = `Récompense : 0/${maxReward} jetons`;
         }
     }
 
@@ -2174,7 +2242,7 @@
         const fakeEmail = `${pseudo.toLowerCase().replace(/[^a-z0-9]/g, '')}@ckai-system.local`;
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, fakeEmail, password);
-            await setDoc(doc(db, "users", userCredential.user.uid), { pseudo: pseudo, tokens: 0, twitch: false, patreon: false, youtube: false, createdAt: new Date() });
+            await setDoc(doc(db, "users", userCredential.user.uid), { pseudo: pseudo, tokens: 0, twitch: false, patreon: false, ytCkai: false, ytGrosseGalere: false, ytCestlec: false, ytStream: false, createdAt: new Date() });
             alert(`Compte créé avec succès ! Bienvenue ${pseudo}.`);
             openTab('profile');
         } catch (error) {
