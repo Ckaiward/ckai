@@ -1475,15 +1475,109 @@
             box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
         }
 
-        /* STYLES ONGLET GAME EMBED */
+        /* STYLES MINI-JEUX // LISTE MOTS CROISÉS */
         .game-embed-wrapper {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
-            padding: 30px;
+            padding: 24px;
             margin-top: 20px;
+        }
+
+        .crossword-nav-list {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .crossword-item-row {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-hard);
+            padding: 14px 18px;
+        }
+
+        .crossword-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .crossword-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 15px;
+            font-weight: bold;
+            color: var(--text-main);
+            text-transform: uppercase;
+        }
+
+        .crossword-status {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+
+        .status-pending { background: var(--border-hard); color: var(--text-muted); }
+        .status-success { background: rgba(0, 255, 102, 0.15); color: var(--accent-glitch); border: 1px solid var(--accent-glitch); }
+        .status-failed { background: rgba(255, 0, 51, 0.15); color: var(--accent-alert); border: 1px solid var(--accent-alert); }
+
+        .play-crossword-btn {
+            background: var(--panel-bg);
+            border: 1px solid var(--accent-blue);
+            color: var(--accent-blue);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 8px 16px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .play-crossword-btn:hover {
+            background: var(--accent-blue);
+            color: #fff;
+        }
+
+        .rules-banner {
+            background: rgba(0, 204, 255, 0.05);
+            border: 1px dashed var(--accent-blue);
+            padding: 15px;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .rules-banner span {
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        .active-crossword-container {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .back-to-list-btn {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-hard);
+            color: var(--text-main);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
+            padding: 8px 12px;
+            cursor: pointer;
+            align-self: flex-start;
+        }
+
+        .back-to-list-btn:hover {
+            border-color: var(--accent-glitch);
+            color: var(--accent-glitch);
         }
     </style>
 </head>
@@ -2075,18 +2169,35 @@
 
     <!-- ONGLET MINI GAME -->
     <div id="minigame" class="tab-content">
-        <div class="section-header">> MINI_GAME // MOTS CROISÉS ELDEN RING</div>
+        <div class="section-header">> MINI_GAME // SÉRIE DE MOTS CROISÉS (ELDEN RING)</div>
         
-        <div class="game-embed-wrapper">
-            <iframe width="600" height="600" style="border:2px solid var(--accent-glitch); margin:auto; display:block; background:#fff;" frameborder="0" src="https://crosswordlabs.com/embed/elden-ring-30"></iframe>
+        <div class="rules-banner">
+            > <span>RÈGLES OFFICIELLES :</span> Pour sauvegarder votre progression et vos scores selon votre profil, vous devez impérativement vous connecter à votre compte. Chaque grille dispose de 5 chances maximum pour vérifier vos réponses. Si vous dépassez les 5 erreurs/vérifications sans résoudre la grille, celle-ci basculera automatiquement en statut <span>"RATÉ"</span>.
+        </div>
+
+        <div class="game-embed-wrapper" id="crossword-menu-view">
+            <div style="font-family: 'VT323', monospace; font-size: 22px; color: var(--accent-glitch); margin-bottom: 15px;">
+                [>] SÉLECTIONNEZ UNE GRILLE (1 À 10)
+            </div>
+            <div class="crossword-nav-list" id="crossword-list-container">
+                <!-- Généré dynamiquement en JS -->
+            </div>
+        </div>
+
+        <div class="game-embed-wrapper active-crossword-container" id="crossword-player-view">
+            <button class="back-to-list-btn" onclick="backToCrosswordList()">[← RETOUR À LA LISTE]</button>
+            <div id="active-crossword-header" style="font-family: 'VT323', monospace; font-size: 20px; color: var(--text-main);"></div>
+            <div id="chances-counter" style="font-family: 'Share Tech Mono', monospace; font-size: 13px; color: var(--accent-alert);"></div>
+            
+            <div id="iframe-slot" style="width:100%; display:flex; justify-content:center; margin-top:10px;"></div>
         </div>
     </div>
 
     <!-- ONGLET PROFIL -->
     <div id="profile" class="tab-content">
         <div class="section-header">> USER_PROFILE // PARAMÈTRES & COMPTE</div>
-        <div style="padding: 40px; text-align: center; color: var(--text-muted); font-family: 'Share Tech Mono', monospace;">
-            [ MODULE EN COURS DE DÉVELOPPEMENT ]
+        <div id="profile-content-box" style="padding: 30px; text-align: center; color: var(--text-main); font-family: 'Share Tech Mono', monospace;">
+            [ CONNECTEZ-VOUS POUR VOIR VOTRE PROFIL ]
         </div>
     </div>
 
@@ -2546,18 +2657,188 @@
 </script>
 
 <script>
-    function escapeHtml(text) {
-        if (!text) return '';
-        return text.toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    // --- GESTION DES 10 MOTS CROISÉS, PROFIL & CHANCES ---
+    let currentUser = JSON.parse(localStorage.getItem('ckai_current_user')) || null;
+    let crosswordProgress = JSON.parse(localStorage.getItem('ckai_crossword_progress')) || {};
+
+    const crosswordUrls = [
+        "https://crosswordlabs.com/embed/elden-ring-30",
+        "https://crosswordlabs.com/embed/elden-ring-30",
+        "https://crosswordlabs.com/embed/elden-ring-30",
+        "https://crosswordlabs.com/embed/elden-ring-30",
+        "https://crosswordlabs.com/embed/elden-ring-30",
+        "https://crosswordlabs.com/embed/elden-ring-30",
+        "https://crosswordlabs.com/embed/elden-ring-30",
+        "https://crosswordlabs.com/embed/elden-ring-30",
+        "https://crosswordlabs.com/embed/elden-ring-30",
+        "https://crosswordlabs.com/embed/elden-ring-30"
+    ];
+
+    function renderCrosswordList() {
+        const container = document.getElementById('crossword-list-container');
+        if (!container) return;
+        container.innerHTML = '';
+
+        for (let i = 0; i < 10; i++) {
+            const gridId = i + 1;
+            const userKey = currentUser ? currentUser.username : 'guest';
+            if (!crosswordProgress[userKey]) crosswordProgress[userKey] = {};
+            if (!crosswordProgress[userKey][gridId]) {
+                crosswordProgress[userKey][gridId] = { status: 'PENDING', chances: 5 };
+            }
+
+            const data = crosswordProgress[userKey][gridId];
+            let statusClass = 'status-pending';
+            let statusText = 'NON FAIT';
+            if (data.status === 'SUCCESS') {
+                statusClass = 'status-success';
+                statusText = 'RÉUSSI';
+            } else if (data.status === 'FAILED') {
+                statusClass = 'status-failed';
+                statusText = 'RATÉ';
+            }
+
+            const row = document.createElement('div');
+            row.className = 'crossword-item-row';
+            row.innerHTML = `
+                <div class="crossword-info">
+                    <span class="crossword-title">Grille de Mots Croisés #${gridId} (Elden Ring)</span>
+                    <span class="crossword-status ${statusClass}">${statusText}</span>
+                </div>
+                <button class="play-crossword-btn" onclick="openCrosswordGrid(${gridId})">[JOUER / VÉRIFIER]</button>
+            `;
+            container.appendChild(row);
+        }
     }
 
-    function loginSimulation() {
-        const container = document.getElementById('authRightContainer');
-        container.innerHTML = `<button class="auth-btn" onclick="openTab('profile', document.querySelector('.nav-tabs'))">[PROFIL]</button>`;
-        alert('Connexion réussie ! Le bouton de profil est maintenant disponible.');
+    window.openCrosswordGrid = function(gridId) {
+        if (!currentUser) {
+            alert("Attention : Vous n'êtes pas connecté ! Votre progression ne sera pas sauvegardée sur votre profil.");
+        }
+
+        const userKey = currentUser ? currentUser.username : 'guest';
+        const data = crosswordProgress[userKey][gridId];
+
+        if (data.status === 'FAILED') {
+            alert("Vous avez épuisé vos 5 chances sur cette grille. Elle est définitivement verrouillée en mode RATÉ.");
+            return;
+        }
+        if (data.status === 'SUCCESS') {
+            alert("Cette grille a déjà été RÉUSSIE !");
+            return;
+        }
+
+        document.getElementById('crossword-menu-view').style.display = 'none';
+        document.getElementById('crossword-player-view').style.display = 'flex';
+        document.getElementById('active-crossword-header').innerText = `GRILLE DE MOTS CROISÉS #${gridId}`;
+        
+        updateChancesDisplay(gridId);
+
+        const iframeSlot = document.getElementById('iframe-slot');
+        const targetUrl = crosswordUrls[gridId - 1];
+        iframeSlot.innerHTML = `
+            <div style="display:flex; flex-direction:column; align-items:center; width:100%; gap:15px;">
+                <iframe width="550" height="500" style="border:2px solid var(--accent-glitch); background:#fff;" frameborder="0" src="${targetUrl}"></iframe>
+                <div style="display:flex; gap:10px;">
+                    <button class="submit-btn" onclick="window.verifyCrossword(${gridId}, 'SUCCESS')">[VALIDER COMME RÉUSSI]</button>
+                    <button class="admin-card-btn" style="width:auto; padding:10px 15px;" onclick="window.verifyCrossword(${gridId}, 'CHECK_MISTAKE')">[VÉRIFIER UNE TENTATIVE (-1 CHANCE)]</button>
+                </div>
+            </div>
+        `;
+    }
+
+    function updateChancesDisplay(gridId) {
+        const userKey = currentUser ? currentUser.username : 'guest';
+        const data = crosswordProgress[userKey][gridId];
+        document.getElementById('chances-counter').innerText = `CHANCES RESTANTES : ${data.chances} / 5`;
+    }
+
+    window.verifyCrossword = function(gridId, action) {
+        if (!currentUser) {
+            alert("Veuillez vous connecter pour que votre score soit enregistré !");
+            return;
+        }
+
+        const userKey = currentUser.username;
+        let data = crosswordProgress[userKey][gridId];
+
+        if (action === 'SUCCESS') {
+            data.status = 'SUCCESS';
+            saveProgress();
+            alert("Félicitations ! Grille validée : RÉUSSI !");
+            backToCrosswordList();
+        } else if (action === 'CHECK_MISTAKE') {
+            data.chances -= 1;
+            if (data.chances <= 0) {
+                data.status = 'FAILED';
+                data.chances = 0;
+                saveProgress();
+                alert("Erreur de trop ! Vous avez épuisé vos 5 chances. La grille est marquée RATÉE.");
+                backToCrosswordList();
+            } else {
+                saveProgress();
+                alert(`Il vous reste ${data.chances} chance(s) avant de perdre définitivement la grille.`);
+                updateChancesDisplay(gridId);
+            }
+        }
+    }
+
+    function saveProgress() {
+        localStorage.setItem('ckai_crossword_progress', JSON.stringify(crosswordProgress));
+    }
+
+    window.backToCrosswordList = function() {
+        document.getElementById('crossword-player-view').style.display = 'none';
+        document.getElementById('crossword-menu-view').style.display = 'block';
+        renderCrosswordList();
+    }
+
+    window.loginSimulation = function() {
+        const usernameInput = prompt("Entrez votre nom d'utilisateur pour vous connecter :");
+        if (!usernameInput || usernameInput.trim() === "") return;
+
+        currentUser = { username: usernameInput.trim() };
+        localStorage.setItem('ckai_current_user', JSON.stringify(currentUser));
+
+        updateAuthUI();
+        renderCrosswordList();
+        alert(`Connexion réussie ! Bienvenue, ${currentUser.username}.`);
+    }
+
+    function updateAuthUI() {
+        const authContainer = document.getElementById('authRightContainer');
+        const profileBox = document.getElementById('profile-content-box');
+
+        if (currentUser) {
+            authContainer.innerHTML = `
+                <button class="auth-btn" onclick="openTab('profile', document.querySelector('.nav-tabs'))">[👤 ${escapeHtml(currentUser.username)}]</button>
+                <button class="auth-btn register" onclick="logoutUser()">[DÉCO]</button>
+            `;
+            profileBox.innerHTML = `
+                <div style="font-size: 20px; color: var(--accent-glitch); margin-bottom: 10px;">PROFIL ACTIF : ${escapeHtml(currentUser.username)}</div>
+                <div style="font-size: 13px; color: var(--text-muted);">Vos progressions de mots croisés et scores de grilles sont enregistrés sur ce profil.</div>
+            `;
+        } else {
+            authContainer.innerHTML = `
+                <button class="auth-btn" id="loginBtn" onclick="loginSimulation()">[SE CONNECTER]</button>
+                <button class="auth-btn register" id="registerBtn" onclick="alert('Module de création de compte en cours de configuration...')">[CRÉER UN COMPTE]</button>
+            `;
+            profileBox.innerHTML = `[ CONNECTEZ-VOUS POUR VOIR VOTRE PROFIL ]`;
+        }
+    }
+
+    window.logoutUser = function() {
+        currentUser = null;
+        localStorage.removeItem('ckai_current_user');
+        updateAuthUI();
+        renderCrosswordList();
+        alert("Vous avez été déconnecté.");
     }
 
     document.addEventListener("DOMContentLoaded", function() {
+        updateAuthUI();
+        renderCrosswordList();
+
         const currentDayIndex = new Date().getDay();
         const scheduleCards = document.querySelectorAll('.schedule-card');
         
@@ -2568,6 +2849,13 @@
             }
         });
     });
+</script>
+
+<script>
+    function escapeHtml(text) {
+        if (!text) return '';
+        return text.toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
 
     function toggleTheme() {
         const html = document.documentElement;
