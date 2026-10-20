@@ -1491,6 +1491,116 @@
             color: var(--accent-glitch);
             box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
         }
+
+        /* --- STYLES MINI-JEU MOTS CROISÉS ELDEN RING --- */
+        .crossword-layout {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 25px;
+            margin-top: 20px;
+            align-items: start;
+        }
+        @media(max-width: 1000px) {
+            .crossword-layout { grid-template-columns: 1fr; }
+        }
+        .crossword-grid-container {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-hard);
+            padding: 20px;
+            display: inline-block;
+            overflow-x: auto;
+            max-width: 100%;
+        }
+        .cw-grid {
+            display: grid;
+            grid-template-columns: repeat(15, 34px);
+            grid-template-rows: repeat(15, 34px);
+            gap: 2px;
+            background: var(--border-hard);
+            border: 2px solid var(--border-hard);
+        }
+        .cw-cell {
+            background: var(--bg-dark);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cw-cell.empty {
+            background: #09090b;
+            border: none;
+        }
+        .cw-cell input {
+            width: 100%;
+            height: 100%;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-hard);
+            color: var(--text-main);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            outline: none;
+        }
+        .cw-cell input:focus {
+            border-color: var(--accent-blue);
+            background: var(--card-hover);
+        }
+        .cw-cell .cell-number {
+            position: absolute;
+            top: 1px;
+            left: 2px;
+            font-size: 9px;
+            color: var(--accent-gold);
+            font-family: 'Share Tech Mono', monospace;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .crossword-clues-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-hard);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-height: 560px;
+            overflow-y: auto;
+        }
+        .clues-column h4 {
+            font-family: 'VT323', monospace;
+            font-size: 20px;
+            color: var(--accent-glitch);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            border-bottom: 1px dashed var(--border-hard);
+            padding-bottom: 4px;
+        }
+        .clues-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .clues-list li {
+            font-size: 13px;
+            color: var(--text-main);
+            padding: 8px 10px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-hard);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .clues-list li:hover {
+            border-color: var(--accent-blue);
+            background: var(--card-hover);
+            color: var(--accent-blue);
+        }
+        .cw-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
     </style>
 </head>
 <body>
@@ -1962,6 +2072,476 @@
 
     </div>
 
+    <!-- ONGLET TWITCH -->
+    <div id="twitch" class="tab-content">
+        
+        <div class="twitch-container">
+            <iframe id="twitch-main-player" class="twitch-frame" allowfullscreen></iframe>
+            <iframe id="twitch-chat" class="twitch-frame"></iframe>
+        </div>
+
+        <div class="section-header">> PLANNING DE STREAM</div>
+        <div class="schedule-grid" id="schedule-grid">
+            <div class="schedule-card" data-day="1">
+                <div class="schedule-day">LUN</div>
+                <div class="schedule-content">
+                    8h - 12h
+                    <div class="schedule-game-title">MARATHON KINGDOM HEARTS</div>
+                </div>
+            </div>
+            <div class="schedule-card" data-day="2">
+                <div class="schedule-day">MAR</div>
+                <div class="schedule-content">
+                    REPOS
+                    <div class="schedule-game-title">-</div>
+                </div>
+            </div>
+            <div class="schedule-card" data-day="3">
+                <div class="schedule-day">MER</div>
+                <div class="schedule-content">
+                   8H - 12H
+                    <div class="schedule-game-title">MARATHON KINGDOM HEARTS</div>
+                </div>
+            </div>
+            <div class="schedule-card" data-day="4">
+                <div class="schedule-day">JEU</div>
+                <div class="schedule-content">
+                    8H - 12H
+                    <div class="schedule-game-title">MARATHON KINGDOM HEARTS</div>
+                </div>
+            </div>
+            <div class="schedule-card" data-day="5">
+                <div class="schedule-day">VEN</div>
+                <div class="schedule-content">
+                    8H - 12H
+                    <div class="schedule-game-title">MARATHON KINGDOM HEARTS</div>
+                </div>
+            </div>
+            <div class="schedule-card" data-day="6">
+                <div class="schedule-day">SAM</div>
+                <div class="schedule-content">
+                    REPOS
+                    <div class="schedule-game-title">-</div>
+                </div>
+            </div>
+            <div class="schedule-card" data-day="0">
+                <div class="schedule-day">DIM</div>
+                <div class="schedule-content">
+                    REPOS
+                    <div class="schedule-game-title">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-header">> PLAYLISTS // ARCHIVES DE STREAM</div>
+        
+        <div class="single-category-block">
+            <div style="font-family: 'VT323', monospace; font-size: 24px; color: var(--accent-glitch);">
+                [>] JEUX JOUÉS EN STREAM EN 2026
+            </div>
+            
+            <div class="game-grid">
+                <a href="https://www.youtube.com/watch?v=QyPCW9CUkhE&list=PLeaKN15x3GXIFGhljOHJuPhi2ss-bmll-" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/JRnBqW36/007-FIRST-LIGHT.jpg" alt="007 First Light" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">007 FIRST LIGHT</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&list=PLNcyDCaofkHY" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/r2wftb9N/FF7-rebirth.jpg" alt="FF VII Rebirth" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">FF7 Rebirth</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=FNUDMWKVa-w&list=PLeaKN15x3GXLmQ9j5jQse_G5oCNB3ncYX" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/LD4z5tzf/ff7-remake.jpg" alt="FF VII Remake" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">FF7 Remake</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=lBpxUooGIhM&list=PLeaKN15x3GXKWbnohpX-aMRaxmSna0LhI" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/zT6BzL61/FIRE-EMBLEM.jpg" alt="Fire Emblem" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">FIRE EMBLEM</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=VrpmlWSg5ZU&list=PLeaKN15x3GXImBy0mLy8d94ocz_sXjGhP" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/S4VP8P2K/kenshi.jpg" alt="Kenshi" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kenshi</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=1Xs7jUmwClA&list=PLeaKN15x3GXLnVahTm5gzuQOK4vmUk1Wn" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/nswkHvGR/Kingdom-come-delivrance.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Come Deliverance</div>
+                </a>
+                  <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/Ldn8tP4r/KH-FINAL-MIX.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts I Final Mix</div>
+                </a>
+                  <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/chCffCMs/KH-COM.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts Re: Chain of Memories</div>
+                </a>
+                  <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/1GzJ6JpG/KH-2.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts II Final Mix</div>
+                </a>
+                  <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/9kVHyjN4/KH-358-d.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts 358/2 Days</div>
+                </a>
+                  <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/GfQL9YB8/KH-BBS.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts Birth by Sleep</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/cXZ7GQHW/kh-recoded.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts Re:Coded</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/p63W61mg/KH-3D.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts Dream Drop Distance HD</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=UBzpaYjw2og&list=PLeaKN15x3GXK1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/PvqTCqff/MAX-PAYNE-3.jpg" alt="Max Payne 3" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">MAX PAYNE 3</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&list=PLNcyDCaofkHY" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/Y4KG5C6Q/minnit.jpg" alt="Minit" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Minit</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/JRky9Wfw/morrowind.jpg" alt="Morrowind" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Morrowind</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=C0VcqE2K75A&list=PLeaKN15x3GXIRhsxDX5KTs-LqiQNp7y8O" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/gMZjdPX2/MOUSE-PI-FOR-HIRE.jpg" alt="Mouse PI for Hire" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">MOUSE PI FOR HIRE</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=CyQYS8oNcXw&list=PLeaKN15x3GXItlfhnhL0t3HJg1NPZIqKa" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/7dkm2gGP/replaced.jpg" alt="Replaced" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Replaced</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=hyyNmbsxJPE&list=PLeaKN15x3GXLBVUOM96o1HqXpC1B_RXhd" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/VpLDfXCP/shadow-man.jpg" alt="Shadow Man" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Shadow Man</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=5TmXx08-Ju8&list=PLeaKN15x3GXIDWmIa4stA_5YMlnwAHfO0" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/ym0phSGC/sol-cesto.jpg" alt="Sol Cesto" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Sol Cesto</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/13570/header.jpg" alt="Splinter Cell Chaos Theory" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Splinter Cell Chaos Theory</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=47lZhJA_1Hg&list=PLJjQWj1aVnf0" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/LdszVfKr/tunic.jpg" alt="Tunic" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Tunic</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="section-header">> UPCOMING_QUEUE // JEUX À VENIR</div>
+
+        <!-- JEUX POINTS DE CHAÎNE -->
+        <div class="single-category-block gold-border-block">
+            <div class="upcoming-header-bar">
+                <div style="font-family: 'VT323', monospace; font-size: 20px; color: var(--accent-gold);">
+                    [★] JEUX POINTS DE CHAÎNE
+                </div>
+            </div>
+            <div class="points-grid-compact" id="channel-points-games-list"></div>
+        </div>
+
+        <!-- JEUX COMMUNAUTÉ -->
+        <div class="single-category-block blue-border-block" style="margin-top: 30px;">
+            <div class="upcoming-header-bar">
+                <div style="font-family: 'VT323', monospace; font-size: 24px; color: var(--accent-blue);">
+                    [+] JEUX PROPOSÉS PAR LA COMMUNAUTÉ (CLIQUEZ POUR VOTER)
+                </div>
+                <div id="admin-container" style="display: inline-block;">
+                    <input type="password" id="adminPasswordInput" placeholder="Mot de passe..." onkeydown="checkAdminEnter(event)" style="display: none; padding: 6px 10px; background: var(--bg-dark); color: var(--accent-glitch); border: 1px solid var(--accent-alert); font-family: inherit; font-size: 12px; outline: none; margin-right: 5px;">
+                    <button class="admin-toggle-btn" id="adminToggleBtn" onclick="toggleAdminMode()">[MODE ADMIN]</button>
+                </div>
+            </div>
+
+            <div class="upcoming-grid" id="community-games-list"></div>
+
+            <div class="suggest-form-container">
+                <div class="suggest-form-title">[+] PROPOSER UN JEU À FAIRE EN STREAM</div>
+                
+                <form class="suggest-form" id="suggestGameForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="user-pseudo">Votre Pseudo</label>
+                            <input type="text" id="user-pseudo" class="form-control" placeholder="ex: User_99" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="game-name">Nom du jeu</label>
+                            <input type="text" id="game-name" class="form-control" placeholder="ex: Resident Evil 4 Remake" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="game-reason">Pourquoi ce serait sympa d'y jouer en stream ?</label>
+                        <textarea id="game-reason" class="form-control" placeholder="Explique en quelques mots pourquoi ce jeu serait cool en live..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">> ENVOYER ET VOTER</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ONGLET TWITCH -->
+    <div id="twitch" class="tab-content">
+        
+        <div class="twitch-container">
+            <iframe id="twitch-main-player" class="twitch-frame" allowfullscreen></iframe>
+            <iframe id="twitch-chat" class="twitch-frame"></iframe>
+        </div>
+
+        <div class="section-header">> PLANNING DE STREAM</div>
+        <div class="schedule-grid" id="schedule-grid">
+            <div class="schedule-card" data-day="1">
+                <div class="schedule-day">LUN</div>
+                <div class="schedule-content">
+                    8h - 12h
+                    <div class="schedule-game-title">MARATHON KINGDOM HEARTS</div>
+                </div>
+            </div>
+            <div class="schedule-card" data-day="2">
+                <div class="schedule-day">MAR</div>
+                <div class="schedule-content">
+                    REPOS
+                    <div class="schedule-game-title">-</div>
+                </div>
+            </div>
+            <div class="schedule-card" data-day="3">
+                <div class="schedule-day">MER</div>
+                <div class="schedule-content">
+                   8H - 12H
+                    <div class="schedule-game-title">MARATHON KINGDOM HEARTS</div>
+                </div>
+            </div>
+            <div class="schedule-card" data-day="4">
+                <div class="schedule-day">JEU</div>
+                <div class="schedule-content">
+                    8H - 12H
+                    <div class="schedule-game-title">MARATHON KINGDOM HEARTS</div>
+                </div>
+            </div>
+            <div class="schedule-card" data-day="5">
+                <div class="schedule-day">VEN</div>
+                <div class="schedule-content">
+                    8H - 12H
+                    <div class="schedule-game-title">MARATHON KINGDOM HEARTS</div>
+                </div>
+            </div>
+            <div class="schedule-card" data-day="6">
+                <div class="schedule-day">SAM</div>
+                <div class="schedule-content">
+                    REPOS
+                    <div class="schedule-game-title">-</div>
+                </div>
+            </div>
+            <div class="schedule-card" data-day="0">
+                <div class="schedule-day">DIM</div>
+                <div class="schedule-content">
+                    REPOS
+                    <div class="schedule-game-title">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-header">> PLAYLISTS // ARCHIVES DE STREAM</div>
+        
+        <div class="single-category-block">
+            <div style="font-family: 'VT323', monospace; font-size: 24px; color: var(--accent-glitch);">
+                [>] JEUX JOUÉS EN STREAM EN 2026
+            </div>
+            
+            <div class="game-grid">
+                <a href="https://www.youtube.com/watch?v=QyPCW9CUkhE&list=PLeaKN15x3GXIFGhljOHJuPhi2ss-bmll-" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/JRnBqW36/007-FIRST-LIGHT.jpg" alt="007 First Light" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">007 FIRST LIGHT</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&list=PLNcyDCaofkHY" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/r2wftb9N/FF7-rebirth.jpg" alt="FF VII Rebirth" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">FF7 Rebirth</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=FNUDMWKVa-w&list=PLeaKN15x3GXLmQ9j5jQse_G5oCNB3ncYX" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/LD4z5tzf/ff7-remake.jpg" alt="FF VII Remake" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">FF7 Remake</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=lBpxUooGIhM&list=PLeaKN15x3GXKWbnohpX-aMRaxmSna0LhI" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/zT6BzL61/FIRE-EMBLEM.jpg" alt="Fire Emblem" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">FIRE EMBLEM</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=VrpmlWSg5ZU&list=PLeaKN15x3GXImBy0mLy8d94ocz_sXjGhP" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/S4VP8P2K/kenshi.jpg" alt="Kenshi" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kenshi</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=1Xs7jUmwClA&list=PLeaKN15x3GXLnVahTm5gzuQOK4vmUk1Wn" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/nswkHvGR/Kingdom-come-delivrance.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Come Deliverance</div>
+                </a>
+                  <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/Ldn8tP4r/KH-FINAL-MIX.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts I Final Mix</div>
+                </a>
+                  <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/chCffCMs/KH-COM.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts Re: Chain of Memories</div>
+                </a>
+                  <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/1GzJ6JpG/KH-2.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts II Final Mix</div>
+                </a>
+                  <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/9kVHyjN4/KH-358-d.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts 358/2 Days</div>
+                </a>
+                  <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/GfQL9YB8/KH-BBS.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts Birth by Sleep</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/cXZ7GQHW/kh-recoded.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts Re:Coded</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/p63W61mg/KH-3D.jpg" alt="Kingdom Come Deliverance" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Kingdom Hearts Dream Drop Distance HD</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=UBzpaYjw2og&list=PLeaKN15x3GXK1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/PvqTCqff/MAX-PAYNE-3.jpg" alt="Max Payne 3" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">MAX PAYNE 3</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&list=PLNcyDCaofkHY" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/Y4KG5C6Q/minnit.jpg" alt="Minit" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Minit</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/JRky9Wfw/morrowind.jpg" alt="Morrowind" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Morrowind</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=C0VcqE2K75A&list=PLeaKN15x3GXIRhsxDX5KTs-LqiQNp7y8O" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/gMZjdPX2/MOUSE-PI-FOR-HIRE.jpg" alt="Mouse PI for Hire" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">MOUSE PI FOR HIRE</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=CyQYS8oNcXw&list=PLeaKN15x3GXItlfhnhL0t3HJg1NPZIqKa" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/7dkm2gGP/replaced.jpg" alt="Replaced" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Replaced</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=hyyNmbsxJPE&list=PLeaKN15x3GXLBVUOM96o1HqXpC1B_RXhd" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/VpLDfXCP/shadow-man.jpg" alt="Shadow Man" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Shadow Man</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=5TmXx08-Ju8&list=PLeaKN15x3GXIDWmIa4stA_5YMlnwAHfO0" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/ym0phSGC/sol-cesto.jpg" alt="Sol Cesto" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Sol Cesto</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
+                    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/13570/header.jpg" alt="Splinter Cell Chaos Theory" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Splinter Cell Chaos Theory</div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=47lZhJA_1Hg&list=PLJjQWj1aVnf0" target="_blank" class="game-card-square">
+                    <img src="https://i.ibb.co/LdszVfKr/tunic.jpg" alt="Tunic" class="game-card-bg">
+                    <div class="game-card-overlay"></div>
+                    <div class="game-card-title">Tunic</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="section-header">> UPCOMING_QUEUE // JEUX À VENIR</div>
+
+        <!-- JEUX POINTS DE CHAÎNE -->
+        <div class="single-category-block gold-border-block">
+            <div class="upcoming-header-bar">
+                <div style="font-family: 'VT323', monospace; font-size: 20px; color: var(--accent-gold);">
+                    [★] JEUX POINTS DE CHAÎNE
+                </div>
+            </div>
+            <div class="points-grid-compact" id="channel-points-games-list"></div>
+        </div>
+
+        <!-- JEUX COMMUNAUTÉ -->
+        <div class="single-category-block blue-border-block" style="margin-top: 30px;">
+            <div class="upcoming-header-bar">
+                <div style="font-family: 'VT323', monospace; font-size: 24px; color: var(--accent-blue);">
+                    [+] JEUX PROPOSÉS PAR LA COMMUNAUTÉ (CLIQUEZ POUR VOTER)
+                </div>
+                <div id="admin-container" style="display: inline-block;">
+                    <input type="password" id="adminPasswordInput" placeholder="Mot de passe..." onkeydown="checkAdminEnter(event)" style="display: none; padding: 6px 10px; background: var(--bg-dark); color: var(--accent-glitch); border: 1px solid var(--accent-alert); font-family: inherit; font-size: 12px; outline: none; margin-right: 5px;">
+                    <button class="admin-toggle-btn" id="adminToggleBtn" onclick="toggleAdminMode()">[MODE ADMIN]</button>
+                </div>
+            </div>
+
+            <div class="upcoming-grid" id="community-games-list"></div>
+
+            <div class="suggest-form-container">
+                <div class="suggest-form-title">[+] PROPOSER UN JEU À FAIRE EN STREAM</div>
+                
+                <form class="suggest-form" id="suggestGameForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="user-pseudo">Votre Pseudo</label>
+                            <input type="text" id="user-pseudo" class="form-control" placeholder="ex: User_99" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="game-name">Nom du jeu</label>
+                            <input type="text" id="game-name" class="form-control" placeholder="ex: Resident Evil 4 Remake" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="game-reason">Pourquoi ce serait sympa d'y jouer en stream ?</label>
+                        <textarea id="game-reason" class="form-control" placeholder="Explique en quelques mots pourquoi ce jeu serait cool en live..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">> ENVOYER ET VOTER</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
     <!-- ONGLET LIENS -->
     <div id="links" class="tab-content">
         <div class="section-header">> NETWORK_HUB // TOUS LES RÉSEAUX & LIENS</div>
@@ -2085,11 +2665,32 @@
         </div>
     </div>
 
-    <!-- ONGLET MINI GAME (VIDE POUR LE MOMENT) -->
+    <!-- ONGLET MINI GAME (MOTS CROISÉS ELDEN RING) -->
     <div id="minigame" class="tab-content">
-        <div class="section-header">> MINI_GAME // ZONE DE JEU</div>
-        <div style="padding: 40px; text-align: center; color: var(--text-muted); font-family: 'Share Tech Mono', monospace;">
-            [ MODULE EN COURS DE DÉVELOPPEMENT ]
+        <div class="section-header">> MINI_GAME // MOTS CROISÉS ELDEN RING</div>
+        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">
+            Clique sur un indice dans la liste pour cibler le mot et écrire directement ses lettres dans la grille interactive !
+        </div>
+        
+        <div class="crossword-layout">
+            <div class="crossword-grid-container">
+                <div class="cw-grid" id="cwGrid"></div>
+                <div class="cw-actions">
+                    <button class="submit-btn" onclick="checkCrossword()">[ VÉRIFIER LES MOTS ]</button>
+                    <button class="submit-btn" style="border-color: var(--accent-alert); color: var(--accent-alert);" onclick="resetCrossword()">[ RÉINITIALISER ]</button>
+                </div>
+            </div>
+
+            <div class="crossword-clues-box">
+                <div class="clues-column">
+                    <h4>// HORIZONTALEMENT</h4>
+                    <ul class="clues-list" id="horizontalClues"></ul>
+                </div>
+                <div class="clues-column">
+                    <h4>// VERTICALEMENT</h4>
+                    <ul class="clues-list" id="verticalClues"></ul>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -2516,7 +3117,7 @@
             alert('Idée de vidéo proposée et sauvegardée en ligne avec succès !');
         } catch (err) {
             console.error("Erreur d'ajout suggestion vidéo : ", err);
-            alert("Erreur lors de l'enregistrement de l'idée.");
+            alert("Erreur lors de l'enregistrement de l'idea.");
         }
     });
 
@@ -2560,6 +3161,161 @@
     }
 
     loadDataFromFirebase();
+</script>
+
+<script>
+    // --- LOGIQUE DU MINI-JEU DE MOTS CROISÉS ELDEN RING (20 mots) ---
+    const crosswordData = [
+        { id: 1, word: "MALENIA", clue: "Épée de Miquella, déesse de la putréfaction", r: 1, c: 1, dir: "H" },
+        { id: 2, word: "GODWIN", clue: "Le premier des demis-dieux à mourir", r: 1, c: 7, dir: "V" },
+        { id: 3, word: "RADAHN", clue: "Le Général au fléau stellaire", r: 3, c: 4, dir: "H" },
+        { id: 4, word: "TORRENT", clue: "Le fidèle destrier spectral", r: 1, c: 13, dir: "V" },
+        { id: 5, word: "MARIKA", clue: "Déesse reine de l'Entre-Terre", r: 5, c: 1, dir: "H" },
+        { id: 6, word: "MELINA", clue: "La jeune femme qui vous sert de guide et lie les runes", r: 5, c: 1, dir: "V" },
+        { id: 7, word: "RENNA", clue: "Pseudonyme initial de la sorcière Ranni", r: 7, c: 8, dir: "H" },
+        { id: 8, word: "GODFREY", clue: "Premier Seigneur d'Elden", r: 7, c: 2, dir: "V" },
+        { id: 9, word: "MOHG", clue: "Seigneur du Sang dans son palais souterrain", r: 9, c: 6, dir: "H" },
+        { id: 10, word: "MORGOTT", clue: "Le roi voilé protégeant Leyndell", r: 9, c: 11, dir: "V" },
+        { id: 11, word: "RANI", clue: "Princesse lunaire commandant le Sceau sombre (variante courte)", r: 11, c: 4, dir: "H" },
+        { id: 12, word: "GODRICK", clue: "Le greffé du Château Voileorage", r: 2, c: 10, dir: "V" },
+        { id: 13, word: "PLACIDAX", clue: "Seigneur Draconique ancien au cœur de Farum Azula", r: 13, c: 2, dir: "H" },
+        { id: 14, word: "MALIKETH", clue: "La Lame Noire protégeant la Destinée", r: 4, c: 14, dir: "V" },
+        { id: 15, word: "SELUI", clue: "Le professeur magicien adepte des marionnettes", r: 6, c: 11, dir: "H" },
+        { id: 16, word: "RODERIKA", clue: "La jeune fille de la Cabane de l'Orage transformant vos cendres", r: 1, c: 15, dir: "V" },
+        { id: 17, word: "PAT", clue: "L'infâme fripouille qui vous pousse dans un ravin", r: 12, c: 9, dir: "H" },
+        { id: 18, word: "BOC", clue: "Le couturier demi-humain au grand cœur", r: 14, c: 5, dir: "H" },
+        { id: 19, word: "ALINA", clue: "Marchande nomade égarée", r: 10, c: 3, dir: "V" },
+        { id: 20, word: "RADAGON", clue: "L'autre moitié de la souveraine", r: 15, c: 1, dir: "H" }
+    ];
+
+    function initCrossword() {
+        const gridEl = document.getElementById('cwGrid');
+        const hCluesEl = document.getElementById('horizontalClues');
+        const vCluesEl = document.getElementById('verticalClues');
+        gridEl.innerHTML = '';
+        hCluesEl.innerHTML = '';
+        vCluesEl.innerHTML = '';
+
+        // Créer grille 15x15 de cellules vides
+        let board = Array(16).fill(null).map(() => Array(16).fill(null));
+        let cellMeta = Array(16).fill(null).map(() => Array(16).fill(null));
+
+        crosswordData.forEach(item => {
+            let r = item.r, c = item.c;
+            for (let i = 0; i < item.word.length; i++) {
+                let currR = item.dir === 'V' ? r + i : r;
+                let currC = item.dir === 'H' ? c + i : c;
+                if (currR <= 15 && currC <= 15) {
+                    board[currR][currC] = "";
+                    if (!cellMeta[currR][currC]) {
+                        cellMeta[currR][currC] = { num: item.id, letters: {} };
+                    }
+                    cellMeta[currR][currC].letters[item.id] = item.word[i];
+                }
+            }
+        });
+
+        for (let r = 1; r <= 15; r++) {
+            for (let c = 1; c <= 15; c++) {
+                const cellDiv = document.createElement('div');
+                cellDiv.className = "cw-cell";
+                if (board[r][c] !== null) {
+                    const input = document.createElement('input');
+                    input.maxLength = 1;
+                    input.dataset.r = r;
+                    input.dataset.c = c;
+                    
+                    if (cellMeta[r][c] && cellMeta[r][c].num) {
+                        const numSpan = document.createElement('span');
+                        numSpan.className = "cell-number";
+                        numSpan.innerText = cellMeta[r][c].num;
+                        cellDiv.appendChild(numSpan);
+                    }
+                    cellDiv.appendChild(input);
+                } else {
+                    cellDiv.classList.add('empty');
+                }
+                gridEl.appendChild(cellDiv);
+            }
+        }
+
+        // Remplir les indices
+        crosswordData.forEach(item => {
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>[${item.id}]</strong> ${escapeHtml(item.clue)} (${item.word.length} lettres)`;
+            li.onclick = () => focusWord(item);
+            if (item.dir === 'H') {
+                hCluesEl.appendChild(li);
+            } else {
+                vCluesEl.appendChild(li);
+            }
+        });
+    }
+
+    function focusWord(item) {
+        let r = item.r, c = item.c;
+        let firstInput = null;
+        for (let i = 0; i < item.word.length; i++) {
+            let currR = item.dir === 'V' ? r + i : r;
+            let currC = item.dir === 'H' ? c + i : c;
+            const input = document.querySelector(`input[data-r="${currR}"][data-c="${currC}"]`);
+            if (input) {
+                if (!firstInput) firstInput = input;
+                input.style.borderColor = "var(--accent-glitch)";
+                setTimeout(() => { input.style.borderColor = ""; }, 1500);
+            }
+        }
+        if (firstInput) {
+            firstInput.focus();
+            firstInput.select();
+        }
+    }
+
+    window.checkCrossword = function() {
+        let allCorrect = true;
+        let countFilled = 0;
+
+        crosswordData.forEach(item => {
+            let r = item.r, c = item.c;
+            let currentWord = "";
+            let wordInputs = [];
+            for (let i = 0; i < item.word.length; i++) {
+                let currR = item.dir === 'V' ? r + i : r;
+                let currC = item.dir === 'H' ? c + i : c;
+                const input = document.querySelector(`input[data-r="${currR}"][data-c="${currC}"]`);
+                if (input) {
+                    currentWord += (input.value || "").toUpperCase();
+                    wordInputs.push(input);
+                    if (input.value) countFilled++;
+                }
+            }
+            if (currentWord === item.word) {
+                wordInputs.forEach(inp => inp.style.borderColor = "var(--accent-glitch)");
+            } else {
+                allCorrect = false;
+                wordInputs.forEach(inp => {
+                    if (inp.value) inp.style.borderColor = "var(--accent-alert)";
+                });
+            }
+        });
+
+        if (allCorrect && countFilled > 0) {
+            alert("Félicitations ! Tous les mots d'Elden Ring sont corrects !");
+        } else {
+            alert("Certains mots sont incorrects ou la grille est incomplète. Les erreurs sont surlignées en rouge.");
+        }
+    }
+
+    window.resetCrossword = function() {
+        document.querySelectorAll('.cw-cell input').forEach(input => {
+            input.value = '';
+            input.style.borderColor = '';
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        initCrossword();
+    });
 </script>
 
 <script>
