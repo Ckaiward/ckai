@@ -1475,7 +1475,7 @@
             box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
         }
 
-        /* STYLES MINI-JEUX // LISTE MOTS CROISÉS */
+        /* --- NOUVEAU DESIGN ULTRA PROPRE POUR LES MOTS CROISÉS --- */
         .game-embed-wrapper {
             background: var(--panel-bg);
             border: 1px solid var(--border-hard);
@@ -1486,17 +1486,23 @@
         .crossword-nav-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-top: 15px;
         }
 
         .crossword-item-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--bg-dark);
+            background: var(--form-bg);
             border: 1px solid var(--border-hard);
             padding: 14px 18px;
+            transition: all 0.2s ease;
+        }
+
+        .crossword-item-row:hover {
+            border-color: var(--accent-blue);
+            background: var(--card-hover);
         }
 
         .crossword-info {
@@ -1507,7 +1513,7 @@
 
         .crossword-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
             color: var(--text-main);
             text-transform: uppercase;
@@ -1515,16 +1521,17 @@
 
         .crossword-status {
             font-family: 'Share Tech Mono', monospace;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
-            padding: 3px 8px;
+            padding: 4px 8px;
+            letter-spacing: 1px;
             border-radius: 2px;
             text-transform: uppercase;
         }
 
-        .status-pending { background: var(--border-hard); color: var(--text-muted); }
-        .status-success { background: rgba(0, 255, 102, 0.15); color: var(--accent-glitch); border: 1px solid var(--accent-glitch); }
-        .status-failed { background: rgba(255, 0, 51, 0.15); color: var(--accent-alert); border: 1px solid var(--accent-alert); }
+        .status-pending { background: var(--bg-dark); color: var(--text-muted); border: 1px solid var(--border-hard); }
+        .status-success { background: rgba(0, 255, 102, 0.1); color: var(--accent-glitch); border: 1px solid var(--accent-glitch); box-shadow: 0 0 8px rgba(0,255,102,0.15); }
+        .status-failed { background: rgba(255, 0, 51, 0.1); color: var(--accent-alert); border: 1px solid var(--accent-alert); box-shadow: 0 0 8px rgba(255,0,51,0.15); }
 
         .play-crossword-btn {
             background: var(--panel-bg);
@@ -1536,21 +1543,24 @@
             padding: 8px 16px;
             cursor: pointer;
             text-transform: uppercase;
+            transition: all 0.2s;
         }
 
         .play-crossword-btn:hover {
             background: var(--accent-blue);
             color: #fff;
+            box-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
         }
 
         .rules-banner {
-            background: rgba(0, 204, 255, 0.05);
+            background: linear-gradient(135deg, rgba(0, 204, 255, 0.05) 0%, rgba(0, 255, 102, 0.03) 100%);
             border: 1px dashed var(--accent-blue);
-            padding: 15px;
+            padding: 16px 20px;
             font-size: 13px;
             color: var(--text-muted);
-            margin-bottom: 20px;
-            line-height: 1.5;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-family: 'Share Tech Mono', monospace;
         }
 
         .rules-banner span {
@@ -1561,7 +1571,59 @@
         .active-crossword-container {
             display: none;
             flex-direction: column;
+            gap: 20px;
+        }
+
+        .crossword-active-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--form-bg);
+            border: 1px solid var(--border-hard);
+            padding: 15px 20px;
+            flex-wrap: wrap;
             gap: 15px;
+        }
+
+        .crossword-hud-title {
+            font-family: 'VT323', monospace;
+            font-size: 26px;
+            color: var(--accent-glitch);
+            letter-spacing: 1px;
+        }
+
+        .chances-badge {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            background: rgba(255, 0, 51, 0.1);
+            border: 1px solid var(--accent-alert);
+            color: var(--accent-alert);
+            padding: 6px 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .crossword-frame-box {
+            display: flex;
+            justify-content: center;
+            background: var(--form-bg);
+            border: 1px solid var(--border-hard);
+            padding: 20px;
+        }
+
+        .crossword-frame-box iframe {
+            width: 100%;
+            max-width: 650px;
+            height: 520px;
+            border: 1px solid var(--border-hard);
+            background: #fff;
+        }
+
+        .crossword-action-bar {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .back-to-list-btn {
@@ -1570,14 +1632,54 @@
             color: var(--text-main);
             font-family: 'Share Tech Mono', monospace;
             font-size: 12px;
-            padding: 8px 12px;
+            font-weight: bold;
+            padding: 10px 16px;
             cursor: pointer;
-            align-self: flex-start;
+            text-transform: uppercase;
+            transition: all 0.2s;
         }
 
         .back-to-list-btn:hover {
             border-color: var(--accent-glitch);
             color: var(--accent-glitch);
+        }
+
+        .verify-action-btn {
+            background: var(--panel-bg);
+            border: 1px solid var(--accent-glitch);
+            color: var(--accent-glitch);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            font-weight: bold;
+            padding: 12px 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+
+        .verify-action-btn:hover {
+            background: var(--accent-glitch);
+            color: var(--bg-dark);
+            box-shadow: 0 0 12px rgba(0, 255, 102, 0.3);
+        }
+
+        .mistake-action-btn {
+            background: var(--panel-bg);
+            border: 1px solid var(--accent-alert);
+            color: var(--accent-alert);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            font-weight: bold;
+            padding: 12px 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+
+        .mistake-action-btn:hover {
+            background: var(--accent-alert);
+            color: #fff;
+            box-shadow: 0 0 12px rgba(255, 0, 51, 0.3);
         }
     </style>
 </head>
@@ -2176,7 +2278,7 @@
         </div>
 
         <div class="game-embed-wrapper" id="crossword-menu-view">
-            <div style="font-family: 'VT323', monospace; font-size: 22px; color: var(--accent-glitch); margin-bottom: 15px;">
+            <div style="font-family: 'VT323', monospace; font-size: 22px; color: var(--accent-glitch); margin-bottom: 5px;">
                 [>] SÉLECTIONNEZ UNE GRILLE (1 À 10)
             </div>
             <div class="crossword-nav-list" id="crossword-list-container">
@@ -2185,11 +2287,20 @@
         </div>
 
         <div class="game-embed-wrapper active-crossword-container" id="crossword-player-view">
-            <button class="back-to-list-btn" onclick="backToCrosswordList()">[← RETOUR À LA LISTE]</button>
-            <div id="active-crossword-header" style="font-family: 'VT323', monospace; font-size: 20px; color: var(--text-main);"></div>
-            <div id="chances-counter" style="font-family: 'Share Tech Mono', monospace; font-size: 13px; color: var(--accent-alert);"></div>
-            
-            <div id="iframe-slot" style="width:100%; display:flex; justify-content:center; margin-top:10px;"></div>
+            <div class="crossword-active-header-bar">
+                <div id="active-crossword-header" class="crossword-hud-title"></div>
+                <div id="chances-counter" class="chances-badge"></div>
+            </div>
+
+            <div class="crossword-frame-box" id="iframe-slot">
+                <!-- Intégration iframe injectée dynamiquement -->
+            </div>
+
+            <div class="crossword-action-bar">
+                <button class="back-to-list-btn" onclick="backToCrosswordList()">[← RETOUR À LA LISTE]</button>
+                <button class="verify-action-btn" onclick="window.verifyCrosswordActive('SUCCESS')">[VALIDER COMME RÉUSSI]</button>
+                <button class="mistake-action-btn" onclick="window.verifyCrosswordActive('CHECK_MISTAKE')">[VÉRIFIER UNE TENTATIVE (-1 CHANCE)]</button>
+            </div>
         </div>
     </div>
 
@@ -2660,6 +2771,7 @@
     // --- GESTION DES 10 MOTS CROISÉS, PROFIL & CHANCES ---
     let currentUser = JSON.parse(localStorage.getItem('ckai_current_user')) || null;
     let crosswordProgress = JSON.parse(localStorage.getItem('ckai_crossword_progress')) || {};
+    let activeGridId = null;
 
     const crosswordUrls = [
         "https://crosswordlabs.com/embed/elden-ring-30",
@@ -2702,7 +2814,7 @@
             row.className = 'crossword-item-row';
             row.innerHTML = `
                 <div class="crossword-info">
-                    <span class="crossword-title">Grille de Mots Croisés #${gridId} (Elden Ring)</span>
+                    <span class="crossword-title">Grille de Mots Croisés #${gridId} // ELDEN RING</span>
                     <span class="crossword-status ${statusClass}">${statusText}</span>
                 </div>
                 <button class="play-crossword-btn" onclick="openCrosswordGrid(${gridId})">[JOUER / VÉRIFIER]</button>
@@ -2728,6 +2840,7 @@
             return;
         }
 
+        activeGridId = gridId;
         document.getElementById('crossword-menu-view').style.display = 'none';
         document.getElementById('crossword-player-view').style.display = 'flex';
         document.getElementById('active-crossword-header').innerText = `GRILLE DE MOTS CROISÉS #${gridId}`;
@@ -2736,15 +2849,7 @@
 
         const iframeSlot = document.getElementById('iframe-slot');
         const targetUrl = crosswordUrls[gridId - 1];
-        iframeSlot.innerHTML = `
-            <div style="display:flex; flex-direction:column; align-items:center; width:100%; gap:15px;">
-                <iframe width="550" height="500" style="border:2px solid var(--accent-glitch); background:#fff;" frameborder="0" src="${targetUrl}"></iframe>
-                <div style="display:flex; gap:10px;">
-                    <button class="submit-btn" onclick="window.verifyCrossword(${gridId}, 'SUCCESS')">[VALIDER COMME RÉUSSI]</button>
-                    <button class="admin-card-btn" style="width:auto; padding:10px 15px;" onclick="window.verifyCrossword(${gridId}, 'CHECK_MISTAKE')">[VÉRIFIER UNE TENTATIVE (-1 CHANCE)]</button>
-                </div>
-            </div>
-        `;
+        iframeSlot.innerHTML = `<iframe src="${targetUrl}"></iframe>`;
     }
 
     function updateChancesDisplay(gridId) {
@@ -2753,14 +2858,15 @@
         document.getElementById('chances-counter').innerText = `CHANCES RESTANTES : ${data.chances} / 5`;
     }
 
-    window.verifyCrossword = function(gridId, action) {
+    window.verifyCrosswordActive = function(action) {
+        if (!activeGridId) return;
         if (!currentUser) {
             alert("Veuillez vous connecter pour que votre score soit enregistré !");
             return;
         }
 
         const userKey = currentUser.username;
-        let data = crosswordProgress[userKey][gridId];
+        let data = crosswordProgress[userKey][activeGridId];
 
         if (action === 'SUCCESS') {
             data.status = 'SUCCESS';
@@ -2778,7 +2884,7 @@
             } else {
                 saveProgress();
                 alert(`Il vous reste ${data.chances} chance(s) avant de perdre définitivement la grille.`);
-                updateChancesDisplay(gridId);
+                updateChancesDisplay(activeGridId);
             }
         }
     }
@@ -2788,6 +2894,7 @@
     }
 
     window.backToCrosswordList = function() {
+        activeGridId = null;
         document.getElementById('crossword-player-view').style.display = 'none';
         document.getElementById('crossword-menu-view').style.display = 'block';
         renderCrosswordList();
