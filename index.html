@@ -2706,28 +2706,27 @@
         return text.toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
 
-    // --- LOGIQUE DU MINI-JEU DE MOTS CROISÉS ELDEN RING CORRIGÉE ET CONNECTÉE ---
-    const crosswordData = [
-        { id: 1, word: "MARIKA", clue: "Déesse reine de l'Entre-Terre", r: 1, c: 1, dir: "H" },
-        { id: 2, word: "MALENIA", clue: "Épée de Miquella, déesse de la putréfaction", r: 1, c: 1, dir: "V" },
-        { id: 3, word: "GODWYN", clue: "Le premier des demis-dieux à mourir", r: 3, c: 6, dir: "H" },
-        { id: 4, word: "TORRENT", clue: "Le fidèle destrier spectral", r: 3, c: 12, dir: "V" },
-        { id: 5, word: "RADAHN", clue: "Le Général au fléau stellaire", r: 5, c: 4, dir: "H" },
-        { id: 6, word: "MELINA", clue: "La jeune femme qui vous sert de guide", r: 5, c: 9, dir: "V" },
-        { id: 7, word: "RANNI", clue: "La sorcière à quatre bras", r: 7, c: 6, dir: "H" },
-        { id: 8, word: "GODFREY", clue: "Premier Seigneur d'Elden", r: 7, c: 1, dir: "V" },
-        { id: 9, word: "MOHG", clue: "Seigneur du Sang dans son palais souterrain", r: 7, c: 11, dir: "H" },
-        { id: 10, word: "MORGOTT", clue: "Le roi voilé protégeant Leyndell", r: 7, c: 15, dir: "V" },
-        { id: 11, word: "GODRICK", clue: "Le greffé du Château Voileorage", r: 2, c: 6, dir: "V" },
-        { id: 12, word: "PLACIDAX", clue: "Seigneur Draconique ancien à Farum Azula", r: 11, c: 2, dir: "H" },
-        { id: 13, word: "MALIKETH", clue: "La Lame Noire protégeant la Destinée", r: 4, c: 12, dir: "V" },
-        { id: 14, word: "SELUVIS", clue: "Le professeur magicien adepte des marionnettes", r: 13, c: 5, dir: "H" },
-        { id: 15, word: "RODERIKA", clue: "La jeune fille de la Cabane de l'Orage", r: 1, c: 12, dir: "V" },
-        { id: 16, word: "PAT", clue: "L'infâme fripouille qui vous pousse dans un ravin", r: 15, c: 8, dir: "H" },
-        { id: 17, word: "BOC", clue: "Le couturier demi-humain au grand cœur", r: 9, c: 1, dir: "V" },
-        { id: 18, word: "RADAGON", clue: "L'autre moitié de la souveraine", r: 15, c: 1, dir: "H" }
-    ];
-
+   // --- Remplacer uniquement crosswordData par ceci ---
+const crosswordData = [
+    { id: 1, word: "MARIKA", clue: "Déesse reine de l'Entre-Terre", r: 1, c: 1, dir: "H" },
+    { id: 2, word: "MALENIA", clue: "Épée de Miquella, déesse de la putréfaction", r: 1, c: 1, dir: "V" },
+    { id: 3, word: "GODWYN", clue: "Le premier des demis-dieux à mourir", r: 3, c: 6, dir: "H" },
+    { id: 4, word: "TORRENT", clue: "Le fidèle destrier spectral", r: 1, c: 12, dir: "V" },
+    { id: 5, word: "RADAHN", clue: "Le Général au fléau stellaire", r: 5, c: 4, dir: "H" },
+    { id: 6, word: "MELINA", clue: "La jeune femme qui vous sert de guide", r: 5, c: 9, dir: "V" },
+    { id: 7, word: "RANNI", clue: "La sorcière à quatre bras", r: 7, c: 6, dir: "H" },
+    { id: 8, word: "GODFREY", clue: "Premier Seigneur d'Elden", r: 7, c: 1, dir: "V" },
+    { id: 9, word: "MOHG", clue: "Seigneur du Sang dans son palais souterrain", r: 7, c: 11, dir: "H" },
+    { id: 10, word: "MORGOTT", clue: "Le roi voilé protégeant Leyndell", r: 7, c: 14, dir: "V" },
+    { id: 11, word: "GODRICK", clue: "Le greffé du Château Voileorage", r: 3, c: 6, dir: "V" },
+    { id: 12, word: "PLACIDUSAX", clue: "Seigneur Draconique ancien à Farum Azula", r: 11, c: 2, dir: "H" },
+    { id: 13, word: "MALIKETH", clue: "La Lame Noire protégeant la Destinée", r: 4, c: 12, dir: "V" },
+    { id: 14, word: "SELUVIS", clue: "Le professeur magicien adepte des marionnettes", r: 13, c: 5, dir: "H" },
+    { id: 15, word: "RODERIKA", clue: "La jeune fille de la Cabane de l'Orage", r: 1, c: 10, dir: "V" },
+    { id: 16, word: "PATCHES", clue: "L'infâme fripouille qui vous pousse dans un ravin", r: 15, c: 8, dir: "H" },
+    { id: 17, word: "BOC", clue: "Le couturier demi-humain au grand cœur", r: 9, c: 1, dir: "V" },
+    { id: 18, word: "RADAGON", clue: "L'autre moitié de la souveraine", r: 15, c: 1, dir: "H" }
+];
     let selectedClueItem = null;
     let gridUserAnswers = {};
 
