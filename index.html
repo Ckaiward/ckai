@@ -1167,6 +1167,58 @@
             margin-bottom: 10px;
             display: none;
         }
+
+        /* ===== MINI JEU : MOTS CROISÉS ===== */
+        #minigame .cw-intro { color: var(--text-muted); font-size: 13px; margin-bottom: 16px; }
+        #minigame .cw-top { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 16px; font-family: 'Share Tech Mono', monospace; font-size: 13px; color: var(--text-muted); }
+        #minigame .cw-btn, #minigame .cw-bar button, #minigame #cw-pl-btn { background: var(--panel-bg); border: 1px solid var(--border-hard); color: var(--text-main); padding: 8px 14px; font-family: 'Share Tech Mono', monospace; font-size: 12px; text-transform: uppercase; cursor: pointer; }
+        #minigame .cw-btn:hover, #minigame .cw-bar button:hover:not(:disabled), #minigame #cw-pl-btn:hover { color: var(--accent-glitch); border-color: var(--accent-glitch); }
+        #minigame .cw-bar button:disabled { opacity: .4; cursor: not-allowed; }
+        #minigame .cw-lh { margin: 40px 0 14px; text-align: center; font-family: 'Share Tech Mono', monospace; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-glitch); }
+        #minigame .cw-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 1040px; margin: 0 auto; }
+        #minigame .cw-tile { flex: 0 1 240px; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 12px; background: var(--panel-bg); border: 1px solid var(--border-hard); border-radius: 8px; color: var(--text-main); cursor: pointer; font: inherit; text-align: center; }
+        #minigame .cw-tile:hover:not(:disabled) { border-color: var(--accent-glitch); }
+        #minigame .cw-tile.on { border-color: var(--accent-glitch); background: var(--card-hover); }
+        #minigame .cw-tile:disabled { opacity: .5; cursor: not-allowed; }
+        #minigame .cw-tile .h { font-family: 'Share Tech Mono', monospace; font-weight: 700; font-size: 16px; }
+        #minigame .cw-tile .st.new { color: var(--text-main); }
+        #minigame .cw-tile .t { font-size: 12px; font-weight: 600; color: var(--accent-gold); line-height: 1.3; }
+        #minigame .cw-tile .d { font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--text-muted); }
+        @media (max-width: 560px) { #minigame .cw-tile { flex: 1 1 calc(50% - 10px); } }
+        #minigame #cw-guest { margin-top: 6px; font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--text-muted); }
+        #minigame .cw-bd { display: inline-block; padding: 1px 6px; border: 1px solid currentColor; font-family: 'Share Tech Mono', monospace; font-size: 11px; text-transform: uppercase; white-space: nowrap; }
+        #minigame .ok { color: var(--accent-glitch); }
+        #minigame .ko { color: var(--accent-alert); }
+        #minigame .wip { color: var(--accent-gold); }
+        #minigame .new, #minigame .lock { color: var(--text-muted); }
+        #minigame .cw-head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 6px; font-family: 'Share Tech Mono', monospace; font-size: 15px; color: var(--text-main); }
+        #minigame .cw-cnt { font-family: 'Share Tech Mono', monospace; font-size: 12px; color: var(--text-muted); margin-bottom: 14px; }
+        #minigame .cw-game { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; }
+        #minigame #cw-b { display: grid; gap: 2px; --s: 34px; }
+        #minigame .cw-cell { position: relative; width: var(--s); height: var(--s); border: 1px solid var(--border-hard); background: color-mix(in srgb, var(--text-muted) 14%, transparent); }
+        #minigame .cw-void { width: var(--s); height: var(--s); }
+        #minigame .cw-cell input { width: 100%; height: 100%; border: 0; background: transparent; text-align: center; font-family: 'Share Tech Mono', monospace; font-weight: 700; font-size: calc(var(--s) * .52); line-height: 1; color: var(--text-main); text-transform: uppercase; caret-color: transparent; padding: 0; outline: 0; cursor: pointer; }
+        #minigame .cw-cell .n { position: absolute; top: 1px; left: 3px; font-family: 'Share Tech Mono', monospace; font-size: calc(var(--s) * .27); line-height: 1; pointer-events: none; color: var(--text-muted); }
+        #minigame .cw-cell.hl { background: color-mix(in srgb, var(--accent-glitch) 22%, transparent); }
+        #minigame .cw-cell.cur { background: color-mix(in srgb, var(--accent-glitch) 50%, transparent); border-color: var(--accent-glitch); }
+        #minigame .cw-cell.bad input { color: var(--accent-alert); }
+        #minigame .cw-cell.sol input { color: var(--accent-gold); }
+        #minigame .cw-side { flex: 1 1 300px; min-width: 240px; }
+        #minigame .cw-side h3 { margin-bottom: 8px; font-family: 'Share Tech Mono', monospace; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-glitch); }
+        #minigame .cw-side ul { list-style: none; margin: 0 0 16px; padding: 0; }
+        #minigame .cw-side li { padding: 4px 8px; cursor: pointer; border-left: 2px solid transparent; }
+        #minigame .cw-side li b { display: inline-block; min-width: 1.8em; font-family: 'Share Tech Mono', monospace; color: var(--accent-glitch); }
+        #minigame .cw-side li:hover { background: var(--card-hover); }
+        #minigame .cw-side li.on { background: color-mix(in srgb, var(--accent-glitch) 14%, transparent); border-left-color: var(--accent-glitch); }
+        #minigame .cw-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+        #minigame #cw-m { min-height: 1.6em; margin-top: 12px; font-family: 'Share Tech Mono', monospace; font-size: 13px; color: var(--accent-gold); }
+        #minigame #cw-admin { margin-top: 34px; padding-top: 18px; border-top: 1px dashed var(--border-hard); }
+        #minigame #cw-admin h3 { margin-bottom: 10px; font-family: 'Share Tech Mono', monospace; font-size: 13px; text-transform: uppercase; color: var(--accent-gold); }
+        #minigame .cw-scroll { overflow-x: auto; margin-top: 12px; }
+        #minigame .cw-tb { border-collapse: collapse; font-family: 'Share Tech Mono', monospace; font-size: 12px; }
+        #minigame .cw-tb th, #minigame .cw-tb td { border: 1px solid var(--border-hard); padding: 6px 10px; white-space: nowrap; }
+        #minigame .cw-rs { background: transparent; border: 0; color: var(--text-muted); cursor: pointer; font-size: 13px; }
+        #minigame .cw-rs:hover { color: var(--accent-alert); }
     </style>
 </head>
 <body>
@@ -1183,6 +1235,7 @@
             <button class="tab-btn active" onclick="openTab('home', this)">// ARCHIVES</button>
             <button class="tab-btn" onclick="openTab('twitch', this)">// LIVE_FEED</button>
             <button class="tab-btn" onclick="openTab('links', this)">// LIENS</button>
+            <button class="tab-btn" onclick="openTab('minigame', this)">// MINI JEU</button>
         </nav>
 
         <div class="header-right" id="authRightContainer">
@@ -1670,6 +1723,42 @@
         </div>
     </div>
 
+    <!-- ONGLET MINI JEU -->
+    <div id="minigame" class="tab-content">
+        <div class="section-header">> MINI_GAME // MOTS CROISÉS</div>
+        <p class="cw-intro">Une nouvelle grille chaque jour. Vous avez 5 vérifications par grille : réussissez avant la 5ᵉ pour passer en « Réussi », sinon la grille passe en « Raté ». Flèches pour se déplacer, espace ou second clic pour changer de sens. Les accents sont ignorés.</p>
+        <div class="cw-top" id="cw-top"></div>
+        <div id="cw-play" style="display:none;">
+            <div class="cw-head"><span id="cw-title"></span><span id="cw-stat" class="cw-bd"></span></div>
+            <div class="cw-cnt" id="cw-cnt"></div>
+            <div class="cw-game" id="cw-g">
+                <div id="cw-b"></div>
+                <div class="cw-side">
+                    <h3>Horizontalement</h3><ul id="cw-la"></ul>
+                    <h3>Verticalement</h3><ul id="cw-ld"></ul>
+                    <div class="cw-bar">
+                        <button id="cw-bc">Vérifier</button>
+                        <span id="cw-adm" style="display:none;">
+                            <button id="cw-bl">Révéler la lettre</button>
+                            <button id="cw-bw">Révéler le mot</button>
+                            <button id="cw-ba">Tout révéler</button>
+                            <button id="cw-bx">Tout effacer</button>
+                        </span>
+                    </div>
+                    <div id="cw-m" aria-live="polite"></div>
+                    <div id="cw-guest"></div>
+                </div>
+            </div>
+        </div>
+        <h3 class="cw-lh">> TOUTES LES GRILLES</h3>
+        <div class="cw-list" id="cw-list"></div>
+        <div id="cw-admin" style="display:none;">
+            <h3>> ADMIN // Résultats des joueurs</h3>
+            <button id="cw-pl-btn">Charger les résultats</button>
+            <div id="cw-players"></div>
+        </div>
+    </div>
+
     <!-- ONGLET PROFIL -->
     <div id="profile" class="tab-content">
         <div class="section-header">> USER_PROFILE // PARAMÈTRES & COMPTE</div>
@@ -2027,5 +2116,511 @@
     }
 </script>
 
+<!-- SCRIPT MINI JEU : MOTS CROISÉS -->
+<script type="module">
+import { getApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, getDocs, collection, updateDoc, deleteField } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+/* ================= RÉGLAGES ================= */
+const START_DATE = "2026-10-20";   // jour de la grille n°1 (AAAA-MM-JJ). Une nouvelle grille se débloque chaque jour.
+const MAX_CHECKS = 5;              // nombre de vérifications autorisées par grille
+const SHOW_WRONG_CELLS = true;     // true : les lettres fausses passent en rouge lors d'une vérification
+const ADMIN_UIDS = [
+  // Collez ici votre "ID Utilisateur" (visible dans l’onglet profil quand vous êtes connecté), entre guillemets :
+  // "abcDEF123..."
+];
+
+/* ================= LES GRILLES =================
+   Ne tapez pas ces blocs à la main : utilisez l’outil « editeur-grilles.html ».
+   Il génère la grille, vous laisse choisir la disposition, puis vous copiez le bloc ici.
+   Format d’un mot : ["RÉPONSE", "Définition", ligne, colonne, "H" ou "V"]
+   (H = horizontal, V = vertical ; la ligne et la colonne placent la 1re lettre).
+   - id : unique, ne jamais le modifier une fois la grille publiée (les résultats des joueurs y sont liés)
+   - icon : petit emoji affiché dans la liste
+   La grille n°1 sort à START_DATE, la n°2 le lendemain, etc. (ordre du tableau). */
+const GRIDS = [
+{ id:"g1", title:"Spécial FromSoftware", icon:"🗡️", words:[
+["CHASSEUR","Bloodborne : votre rôle dans la ville maudite",7,2,"H"],
+["GRACE","Elden Ring : les sites de … servent de points de repos",16,0,"H"],
+["ESTUS","Dark Souls : la fiole qui soigne porte ce nom",8,14,"V"],
+["SEKIRO","Titre du jeu de 2019 avec le « loup à un bras »",19,5,"H"],
+["SHINOBI","Guerrier de l’ombre dans le Japon d’Ashina",9,10,"V"],
+["YHARNAM","Cité gothique infestée de bêtes (Bloodborne)",2,8,"H"],
+["LOTHRIC","Royaume des deux princes dans Dark Souls III",9,5,"V"],
+["DRANGLEIC","Royaume en ruine de Dark Souls II",9,0,"H"],
+["MALENIA","« Lame de Miquella », déesse de la putréfaction",4,7,"V"],
+["RADAHN","Généraldont le festival attire les guerriers",5,6,"H"],
+["GODRICK","Le Greffé, maître du château de Voilevent",11,3,"V"],
+["MARGIT","Le déchu, premier grand obstacle d’Elden Ring",11,0,"H"],
+["ELDEN","___ Ring, jeu de 2022",4,11,"H"],
+["NEXUS","Demon’s Souls : le refuge central de Boletaria",4,15,"V"],
+["RUBICON","Armored Core VI : la planète où l’on se dispute le Coral",13,5,"H"],
+["RUNES","Monnaie récoltée dans l'entre-terre",8,11,"H"],
+["AMES","Dark Souls : monnaie et expérience des morts-vivants",11,1,"V"],
+["MIYAZAKI","Hidetaka …, le père des jeux Souls",12,8,"V"],
+["TORRENT","Fidèle monture spectrale du Sans-éclat",0,11,"V"],
+["SOLAIRE","Chevalier d’Astora qui vénère le soleil",17,5,"H"],
+["PATCHES","Le traitre chauve (nom anglais)",0,9,"H"]
+]},
+{ id:"g6", title:"Spécial Pokémon", icon:"🧩", words:[
+["PIKACHU","Souris électrique et mascotte emblématique de la franchise.",5,13,"V"],
+["METAMORPH","Pokémon capable de se transformer en n'importe quel adversaire.",10,4,"V"],
+["LUGIA","Gardien des mers apparaissant sur la pochette de la version Argent.",4,16,"V"],
+["ARCEUS","Créature légendaire considérée comme le dieu créateur de l'univers.",1,8,"H"],
+["RAYQUAZA","Dragon céleste qui apaise le conflit entre Groudon et Kyogre.",11,9,"H"],
+["ARCKO","Starter de type Plante de la région d'Hoenn.",15,0,"H"],
+["CARCHACROK","Dragon de type Sol et Dragon redoutable de la maîtresse Cynthia.",17,10,"H"],
+["LAVANVILLE","Village célèbre pour sa musique sombre et sa tour funéraire.",13,3,"H"],
+["SACHA","Jeune dresseur originaire du Bourg Palette dans la série télévisée.",8,12,"H"],
+["ONDINE","Championne de l'arène d'Azuria spécialisée dans le type Eau.",3,8,"H"],
+["REGICE","Un des trois colosses de la troisième génération fait de glace.",0,6,"V"],
+["CHEN","Professeur de Kanto qui remet le tout premier Pokémon au joueur.",15,2,"V"],
+["TALENT","Aptitude passive propre à chaque espèce introduite en troisième génération.",14,0,"V"],
+["CLONAGE","Capacité stratégique créant un leurre en sacrifiant un quart de ses PV.",2,3,"V"],
+["NUZLOCKE","Défi de jeu où tout Pokémon mis K.O. est considéré comme définitivement perdu.",0,1,"V"],
+["CENTRE","Établissement médical où l'on soigne gratuitement son équipe.",5,1,"H"],
+["CELEBI","Pokémon fabuleux voyageur du temps et gardien des forêts de Johto.",6,8,"H"],
+["RONFLEX","Gigantesque Pokémon bloquant souvent les routes en dormant.",1,9,"V"],
+["MEWTWO","Pokémon fabuleux puissant issu de manipulations génétiques.",8,2,"H"],
+["DEOXYS","Pokémon ADN venu de l'espace possédant quatre formes distinctes.",19,10,"H"],
+["PORYGON","Pokémon synthétique entièrement constitué de code informatique.",7,7,"V"],
+["QUEULORIOR","Pokémon artiste capable d'apprendre presque toutes les attaques grâce à Gribouille.",11,12,"V"],
+["VOLCANION","Seul Pokémon possédant le double type unique Eau et Feu.",15,10,"H"],
+["ABRI","Attaque prioritaire protégeant le lanceur de la plupart des coups du tour.",0,4,"H"]
+]},
+{ id:"g7", title:"Les jeux Zelda", icon:"🧩", words:[
+["CELESTIA","Cité volante mythique habitée par le peuple Oocca dans Twilight Princess.",8,7,"H"],
+["CELESTIN","Ami d'enfance de Link passionné d'haltérophilie dans Skyward Sword.",4,11,"V"],
+["COCOLINT","Île éphémère surgie des rêves du Poisson-Rêve.",8,7,"V"],
+["LIONROUGE","Bateau parlant guidant le héros à travers la Grande Mer.",0,8,"V"],
+["COCORICO","Village emblématique abritant traditionnellement le peuple Sheikah.",11,0,"H"],
+["STALFOS","Guerrier squelette maniant le bouclier et l'épée dans les donjons.",6,1,"V"],
+["XANTO","Usurpateur du trône du Crépuscule au service de Ganon.",4,3,"V"],
+["BELLUM","Spectre maléfique et parasite des mers dans Phantom Hourglass.",0,5,"H"],
+["LYNEL","Créature centaure redoutable armée d'un arc et d'une épée.",8,9,"V"],
+["ORACLE","Titre donné à Din, Nayru et Farore dans les opus Game Boy.",2,6,"V"],
+["FAY","Esprit résidant dans l'Épée de Légende qui guide le héros.",5,2,"H"],
+["TERMINA","Monde parallèle voué à la destruction par la chute de la Lune.",4,13,"V"],
+["VALOO","Grand dragon protecteur vénéré par le peuple Piaf.",8,0,"H"],
+["KOROGU","Petit esprit de la forêt portant un masque en feuille d'arbre.",2,5,"H"],
+["RAURU","Sage de la Lumière et fondateur du Temple du Temps.",4,5,"H"],
+["LITHOROK","Golem de pierre géant se fondant parmi les rochers.",15,5,"H"]
+]},
+{ id:"gni", title:"Spécial Wii", icon:"🧩", words:[
+["MII","Avatar personnalisé créable dans la chaîne dédiée de la console.",6,0,"H"],
+["WIIMOTE","Télécommande principale à détection de mouvement de la console.",1,16,"V"],
+["NUNCHUK","Extension dotée d'un stick analogique qui se branche à la manette.",11,13,"V"],
+["MOTIONPLUS","Accessoire à brancher sous la manette pour améliorer la précision 1/1.",2,8,"V"],
+["GALAXY","Aventure spatiale culte de Mario récompensée pour sa gravité unique.",0,5,"V"],
+["ZACK","Jeune pirate explorateur cherchant le trésor dans ___ et Wiki.",12,2,"H"],
+["PUNCHOUT","Jeu de boxe au style arcade opposant Little Mac aux champions.",5,11,"H"],
+["STRIKERS","Jeu de football survolté et agressif opposant les équipes Mario.",8,5,"V"],
+["XENOBLADE","RPG monumental se déroulant sur le corps de deux géants immobiles.",7,6,"H"],
+["MURAMASA","Superbe jeu d'action en deux dimensions plongé dans le Japon médiéval.",4,12,"V"],
+["PANDORA","Tour ou citadelle à escalader dans le jeu de rôle Pandora's Tower.",11,11,"H"],
+["MADWORLD","Jeu d'action ultra violent et stylisé entièrement en noir, blanc et rouge.",3,4,"H"],
+["REDSTEEL","Jeu de tir et de combat au sabre en vue à la première personne.",9,1,"H"],
+["DISASTER","Le jeu d'action catastrophe sous-titré Day of Crisis.",9,3,"V"],
+["TRAVIS","Le héros déjanté muni d'un sabre laser dans No More Heroes.",2,12,"H"],
+["TRI","Premier volet de la série Monster Hunter sorti sur une console Nintendo.",5,18,"V"],
+["WIIWARE","Boutique en ligne dédiée au téléchargement de jeux indépendants sur la console.",4,1,"V"]
+]},
+{ id:"gnig", title:"Des protas & des lieux", icon:"🧩", words:[
+["RACCOONCITY","Ville plongée dans le chaos lors d’une épidémie de zombies dans Resident Evil",6,10,"V"],
+["ATREUS","Fils de Kratos",15,15,"H"],
+["PYRA","Lame légendaire de Xenoblade Chronicles 2",3,13,"H"],
+["MALTHAEL","Ange de la Mort dans Diablo III",7,5,"V"],
+["HOLLOWKNIGHT","Chevalier silencieux explorant un royaume souterrain",14,2,"H"],
+["SEPHIROTH","Antagoniste emblématique de Final Fantasy VII",5,17,"V"],
+["PALKIA","Pokémon légendaire associé à l’espace",4,8,"H"],
+["GERALT","Sorceleur aux cheveux blancs dans The Witcher",19,0,"H"],
+["REDSTONE","Ressource permettant de créer des mécanismes dans Minecraft",9,0,"V"],
+["ENDERMAN","Créature de Minecraft qui se téléporte et déteste l’eau",16,0,"H"],
+["LANCER","Petit prince sombre et farceur de Deltarune",3,2,"V"],
+["JOEL","Survivant protégeant Ellie dans The Last of Us",18,10,"H"],
+["MAXPAYNE","Policier hanté par son passé dans la série du même nom",0,13,"V"],
+["GORDONFREEMAN","Scientifique devenu héros de Half-Life",6,8,"H"],
+["MAJIMA","Personnage imprévisible surnommé le Chien fou de Shimano dans Yakuza",0,9,"H"],
+["BAYONETTA","Sorcière combattant les anges avec ses pistolets",11,3,"V"],
+["ARTHURMORGAN","Hors-la-loi au cœur de Red Dead Redemption 2",5,15,"V"],
+["SILENTHILL","Ville brumeuse hantée par des créatures cauchemardesques",9,13,"V"],
+["ARKHAM","Ville sombre associée à Batman dans plusieurs jeux",8,1,"H"],
+["MORROWIND","Région volcanique et terre natale des Dunmers dans The Elder Scrolls",9,7,"V"],
+["CITADELLE","Station spatiale centrale de Mass Effect",3,19,"V"]
+]},
+{ id:"gigin", title:"Culture gaming", icon:"🧩", words:[
+["SILKSONG","Deuxième volet du chevalier creux.",3,7,"H"],
+["MISSILE","Nom du chien dans Ghost Trick.",12,5,"H"],
+["VAAS","Méchant emblématique de Far Cry 3",4,3,"H"],
+["BLAZKOVICZ","Protagoniste de la série de jeux vidéo Wolfenstein. B.J. _____",8,6,"H"],
+["QUAKE","Célèbre série de jeux vidéo de tir à la première personne (FPS) développée par le studio id Software.",2,4,"V"],
+["MATERIA","Objet fait de Mako cristallisée (FF7).",5,2,"V"],
+["FEES","Il y en a 20 à trouver dans Tunic.",15,10,"H"],
+["ZENYATTA","héros de soutien omniaque emblématique du jeu vidéo Overwatch.",5,7,"H"],
+["BASTION","Redoutable ennemi de type ARC dans ARC Raiders, reconnaissable à son blindage lourd et à sa puissance de feu.",8,6,"V"],
+["PICTOS","Les ___ fonctionnent comme des talents ou des équipements passifs (Clair Obscur)",10,1,"H"],
+["PLAGE","Dans Death Stranding, espace métaphysique liminal, une sorte de salle d'attente entre le monde des vivants et l'au-delà.",6,0,"H"],
+["PEAK","Jeu d'escalade en coopération, où le moindre faux pas peut être fatal.",0,10,"V"],
+["TRICEPHALE","Le premier boss principal d'Elden Ring: Nightreign est Gladius, également connu sous le nom de ____.",1,8,"V"],
+["OSMUND","____ Saddler, grand méchant de Resident Evil 4.",14,2,"H"],
+["DREDGE","Jeu solo, aventure de pêche en eau trouble.",10,11,"V"],
+["DANWTRAIL","Extension de FFXIV sortie en 2024.",1,13,"V"]
+]},
+{ id:"vivid", title:"Spécial vidéo", icon:"🧩", words:[
+["DEATHLESS","Premier défi réalisé en vidéo sur Elden Ring : ____ randomizer.",0,11,"V"],
+["HAUREDARDE","Nom du personnage qui a combattu aux cotés de Le'garde et Miku.",17,3,"H"],
+["BRESON","Nom du domaine dans la vidéo sur Darkest Dungeon.",12,3,"H"],
+["BLASPHEMOUS","100% hors DLC réalisé sur la chaine youtube.",8,1,"H"],
+["OLALALA","Nom du personnage de la run niveau 1 sur Elden Ring : NIVEAU 1 _____.",5,2,"V"],
+["TERRARIA","Dans les profondeurs de ____.",2,7,"H"],
+["TELECTROPUSOCTOPCOP","\"Ca se prononce _____ ! 🤓\"",10,0,"H"],
+["DAEMONOLOGIE","Ce jeu est immoral.",6,7,"V"],
+["SYMPHONIA","Vidéo sur mon jeu préféré de tous les temps. Tales of _____.",5,14,"V"],
+["VOID","Etat après avoir mangé le fruit offert par la bouboule démoniaque.",0,13,"V"],
+["PLASMA","En équipant le bouclier ____ j'ai atteint un labyrinthe (ESA).",8,14,"H"],
+["MOKU","Prénom du personne dans \"L'horreur ABSOLUE d'une usine d'organes humains\".",7,9,"V"],
+["PATREON","Pour me soutenir directement.",8,5,"V"],
+["ZENCORP","Mystérieuse multinationale fictive qui vous a embauché en tant que chauffeur-livreur.",14,3,"H"]
+]},
+];
+
+/* ================= OUTILS ================= */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const nameOf = u => u.displayName || (u.email || "").split("@")[0] || "Joueur";
+let auth = null, db = null;
+try { const app = getApp(); auth = getAuth(app); db = getFirestore(app); } catch (e) { console.error("Firebase indisponible", e); }
+
+/* ================= GÉNÉRATION DE GRILLE (déterministe) ================= */
+const N = 25;
+function rng(s){return()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function fits(g,dm,w,r,c,d){
+  const dr=d?1:0,dc=d?0:1,n=w.length;
+  if(r<0||c<0||r+dr*(n-1)>=N||c+dc*(n-1)>=N)return 0;
+  if((g[r-dr]&&g[r-dr][c-dc])||(g[r+dr*n]&&g[r+dr*n][c+dc*n]))return 0;
+  let x=0;
+  for(let k=0;k<n;k++){
+    const y=r+dr*k,z=c+dc*k,e=g[y][z];
+    if(e){if(e!==w[k]||((dm[y][z]>>d)&1))return 0;x++}
+    else{
+      const p=d?g[y][z-1]:(g[y-1]&&g[y-1][z]),q=d?g[y][z+1]:(g[y+1]&&g[y+1][z]);
+      if(p||q)return 0;
+    }
+  }
+  return x;
+}
+function layout(words,seed){
+  let best=null;
+  for(let a=0;a<250;a++){
+    const r=rng(seed+a);
+    const order=words.slice().sort((x,y)=>(y.w.length-x.w.length)+(r()-.5)*5);
+    const g=Array.from({length:N},()=>Array(N).fill("")),dm=Array.from({length:N},()=>Array(N).fill(0)),pl=[];
+    const put=(o,rr,cc,d)=>{for(let k=0;k<o.w.length;k++){const y=rr+(d?k:0),x=cc+(d?0:k);g[y][x]=o.w[k];dm[y][x]|=1<<d}pl.push({w:o.w,c:o.c,r:rr,cc:cc,d:d})};
+    put(order[0],12,Math.floor((N-order[0].w.length)/2),0);
+    for(const o of order.slice(1)){
+      const cand=[];
+      for(let y=0;y<N;y++)for(let x=0;x<N;x++){
+        const L=g[y][x];if(!L)continue;
+        for(let i=0;i<o.w.length;i++)if(o.w[i]===L)for(const d of[0,1]){
+          const rr=d?y-i:y,cc=d?x:x-i,n=fits(g,dm,o.w,rr,cc,d);
+          if(n)cand.push({rr,cc,d,n});
+        }
+      }
+      if(cand.length){cand.sort((p,q)=>(q.n-p.n)+(r()-.5)*2);const p=cand[0];put(o,p.rr,p.cc,p.d)}
+    }
+    let r0=N,r1=0,c0=N,c1=0;
+    pl.forEach(p=>{const er=p.r+(p.d?p.w.length-1:0),ec=p.cc+(p.d?0:p.w.length-1);r0=Math.min(r0,p.r);c0=Math.min(c0,p.cc);r1=Math.max(r1,er);c1=Math.max(c1,ec)});
+    const area=(r1-r0+1)*(c1-c0+1);
+    if(!best||pl.length>best.pl.length||(pl.length===best.pl.length&&area<best.area))best={pl,area};
+    if(pl.length===words.length&&area<=196)break;
+  }
+  return best.pl;
+}
+const built = {};
+function build(gi){
+  if(built[gi])return built[gi];
+  const g=GRIDS[gi];
+  const fixed=g.words.every(x=>x.length>=5);
+  const pl=fixed?g.words.map(([w,c,r,cc,d])=>({w,c,r,cc,d:d==="V"?1:0}))
+               :layout(g.words.map(([w,c])=>({w,c})),1234+gi*7919);
+  let R0=N,R1=0,C0=N,C1=0;
+  pl.forEach(p=>{const er=p.r+(p.d?p.w.length-1:0),ec=p.cc+(p.d?0:p.w.length-1);R0=Math.min(R0,p.r);C0=Math.min(C0,p.cc);R1=Math.max(R1,er);C1=Math.max(C1,ec)});
+  pl.forEach(p=>{p.x=p.cc-C0;p.r-=R0});
+  const H=R1-R0+1,W=C1-C0+1,cells={};
+  pl.forEach(p=>{for(let k=0;k<p.w.length;k++){
+    const y=p.r+(p.d?k:0),x=p.x+(p.d?0:k),key=y+","+x;
+    const cc=(cells[key]=cells[key]||{y:y,x:x,a:p.w[k],w:[]});
+    if(cc.a!==p.w[k])console.warn("Conflit de lettres dans la grille "+g.id+" : "+p.w);
+    cc.w[p.d]=p;
+  }});
+  let num=0;
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){const ws=pl.filter(p=>p.r===y&&p.x===x);if(ws.length){num++;ws.forEach(p=>p.n=num)}}
+  const keys=[];
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++)if(cells[y+","+x])keys.push(y+","+x);
+  return built[gi]={pl,cells,H,W,keys};
+}
+
+/* ================= ÉTAT ================= */
+const S = {user:null,admin:false,prog:{},gi:-1,B:null,cur:null,dir:0,locked:true,t:0};
+const rec = i => S.prog[GRIDS[i].id] || null;
+const isDone = r => !!(r && (r.status==="success" || r.status==="failed"));
+function dateOf(i){const [y,m,d]=START_DATE.split("-").map(Number);const t=new Date(y,m-1,d+i);return String(t.getDate()).padStart(2,"0")+"/"+String(t.getMonth()+1).padStart(2,"0")}
+function unlockedCount(){
+  const [y,m,d]=START_DATE.split("-").map(Number),s=new Date(y,m-1,d),n=new Date(),t=new Date(n.getFullYear(),n.getMonth(),n.getDate());
+  return Math.max(0,Math.min(GRIDS.length,Math.round((t-s)/864e5)+1));
+}
+function label(i){
+  const r=rec(i);
+  if(r&&r.status==="success")return["Réussi","ok"];
+  if(r&&r.status==="failed")return["Raté","ko"];
+  if(r&&((r.checks||0)>0||/[A-Z]/.test(r.fill||"")))return["En cours","wip"];
+  return["Non joué","new"];
+}
+const setMsg = t => { $("cw-m").textContent = t || ""; };
+
+/* ================= AFFICHAGE : liste, bandeau ================= */
+function renderTop(){
+  const t=$("cw-top");
+  if(!S.user){
+    t.innerHTML='<span>> Mode invité : vous pouvez jouer sans compte. Connectez-vous pour sauvegarder votre progression.</span> <button class="cw-btn" onclick="window.openAuthModal&&window.openAuthModal(\'login\')">[SE CONNECTER]</button>';
+  }else{
+    const v=GRIDS.map(g=>(S.prog[g.id]||{}).status);
+    const ok=v.filter(x=>x==="success").length,ko=v.filter(x=>x==="failed").length;
+    t.innerHTML='<span>> Joueur : '+esc(nameOf(S.user))+'</span>'+
+      (S.admin?'<span class="cw-bd wip">ADMIN</span><span>Mode test : rien n’est enregistré, vérifications illimitées.</span>'
+              :'<span>Réussies : '+ok+' · Ratées : '+ko+'</span>');
+  }
+  $("cw-admin").style.display=S.admin?"":"none";
+}
+function renderList(){
+  const un=unlockedCount();
+  $("cw-list").innerHTML=GRIDS.map((g,i)=>{
+    const open=S.admin||i<un;
+    const b=!open?["Bientôt","lock"]:S.admin?["Test","wip"]:label(i);
+    return '<button class="cw-tile'+(i===S.gi?' on':'')+'" data-i="'+i+'"'+(open?'':' disabled')+'>'+
+      '<span class="h"><span class="no">#'+(i+1)+' :</span> <span class="st '+b[1]+'">'+b[0]+'</span></span>'+
+      '<span class="t">'+(g.icon||"🧩")+' '+esc(g.title)+'</span>'+
+      '<span class="d">'+dateOf(i)+'</span></button>';
+  }).join("");
+}
+function refresh(){
+  const r=S.admin?null:rec(S.gi);
+  const st=S.admin?["Mode test","wip"]:label(S.gi);
+  $("cw-stat").className="cw-bd "+st[1];$("cw-stat").textContent=st[0];
+  $("cw-cnt").textContent=S.admin?"Vérifications illimitées (test)":"Vérifications : "+(r?(r.checks||0):0)+" / "+MAX_CHECKS;
+  $("cw-bc").disabled=S.locked;
+  $("cw-adm").style.display=S.admin?"contents":"none";
+  if(r&&r.status==="success")setMsg("Grille réussie !");
+  else if(r&&r.status==="failed")setMsg("Grille ratée : voici la solution.");
+  $("cw-guest").textContent=S.user?"":"Mode invité : votre progression n’est pas sauvegardée.";
+  renderList();renderTop();
+}
+
+/* ================= SAUVEGARDE (Firestore : crosswordProgress/{uid}) ================= */
+async function loadProg(){
+  S.prog={};
+  if(!db||!S.user)return;
+  try{const s=await getDoc(doc(db,"crosswordProgress",S.user.uid));if(s.exists())S.prog=s.data().results||{}}
+  catch(e){console.error(e);S.loadErr=e.code||e.message}
+}
+async function save(gid){
+  if(S.admin||!S.user||!db)return true;
+  try{await setDoc(doc(db,"crosswordProgress",S.user.uid),{name:nameOf(S.user),results:{[gid]:S.prog[gid]}},{merge:true});return true}
+  catch(e){setMsg("Enregistrement impossible ("+(e.code||e.message)+") : vérifiez les règles Firestore.");return false}
+}
+const fillStr = () => S.B.keys.map(k=>S.B.cells[k].i.value||".").join("");
+function ensureRec(gid){return S.prog[gid]||(S.prog[gid]={status:"playing",checks:0,fill:""})}
+function persistFill(){const gid=GRIDS[S.gi].id,r=ensureRec(gid);r.fill=fillStr();save(gid)}
+function queueSave(){if(S.admin||S.locked)return;if(!S.user){ensureRec(GRIDS[S.gi].id).fill=fillStr();return}clearTimeout(S.t);S.t=setTimeout(()=>{S.t=0;persistFill()},700)}
+function flush(){if(!S.t)return;clearTimeout(S.t);S.t=0;persistFill()}
+
+/* ================= ÉDITION DE LA GRILLE ================= */
+const cellAt=(y,x)=>S.B.cells[y+","+x];
+const cellsOf=p=>{const a=[];for(let k=0;k<p.w.length;k++)a.push(cellAt(p.r+(p.d?k:0),p.x+(p.d?0:k)));return a};
+function paint(){
+  S.B.keys.forEach(k=>S.B.cells[k].el.classList.remove("hl","cur"));
+  S.B.pl.forEach(p=>p.li&&p.li.classList.remove("on"));
+  const w=S.cur.w[S.dir];
+  cellsOf(w).forEach(c=>c.el.classList.add("hl"));
+  S.cur.el.classList.add("cur");if(w.li)w.li.classList.add("on");
+}
+function sel(y,x,d){
+  const c=cellAt(y,x);if(!c)return;
+  if(d===undefined)d=S.dir;
+  if(!c.w[d])d=1-d;
+  S.dir=d;S.cur=c;paint();c.i.focus({preventScroll:true});
+}
+function step(dy,dx){
+  let y=S.cur.y+dy,x=S.cur.x+dx;
+  while(y>=0&&x>=0&&y<S.B.H&&x<S.B.W){if(cellAt(y,x)){sel(y,x,dy?1:0);return}y+=dy;x+=dx}
+}
+function adv(s){
+  const w=S.cur.w[S.dir],i=(S.dir?S.cur.y-w.r:S.cur.x-w.x)+s;
+  if(i>=0&&i<w.w.length){const c=cellAt(w.r+(S.dir?i:0),w.x+(S.dir?0:i));sel(c.y,c.x,S.dir)}
+}
+function lockBoard(){S.locked=true;S.B.keys.forEach(k=>S.B.cells[k].i.readOnly=true);$("cw-bc").disabled=true}
+function showSolution(){S.B.keys.forEach(k=>{const c=S.B.cells[k];c.i.value=c.a;c.el.classList.remove("bad");c.el.classList.add("sol")})}
+
+function mkClues(B,d){
+  const ul=$(d?"cw-ld":"cw-la");ul.innerHTML="";
+  B.pl.filter(p=>p.d===d).sort((a,b)=>a.n-b.n).forEach(p=>{
+    const li=document.createElement("li");
+    li.innerHTML="<b>"+p.n+"</b>";
+    li.appendChild(document.createTextNode(p.c+" ("+p.w.length+")"));
+    li.onclick=()=>{
+      let t=null;
+      for(const c of cellsOf(p))if(!c.i.value){t=c;break}
+      t=t||cellAt(p.r,p.x);sel(t.y,t.x,p.d);
+    };
+    p.li=li;ul.appendChild(li);
+  });
+}
+function size(){
+  if(!S.B)return;
+  const avail=$("cw-g").clientWidth||window.innerWidth;
+  const s=Math.max(22,Math.min(38,Math.floor((avail-2*S.B.W)/S.B.W)));
+  $("cw-b").style.setProperty("--s",s+"px");
+}
+
+function openGrid(i){
+  if(!S.admin&&i>=unlockedCount()){S.gi=-1;openFirst();return}
+  flush();
+  const B=build(i);S.gi=i;S.B=B;S.cur=null;
+  const r=S.admin?null:rec(i);
+  S.locked=isDone(r);
+  $("cw-play").style.display="";
+  $("cw-title").textContent="Grille n°"+(i+1)+" · "+GRIDS[i].title+" · "+dateOf(i);
+  setMsg("");
+  const bd=$("cw-b");bd.innerHTML="";bd.style.gridTemplateColumns="repeat("+B.W+",var(--s))";
+  for(let y=0;y<B.H;y++)for(let x=0;x<B.W;x++){
+    const c=B.cells[y+","+x];
+    if(!c){const v=document.createElement("div");v.className="cw-void";bd.appendChild(v);continue}
+    const el=document.createElement("div");el.className="cw-cell";
+    const st=B.pl.find(p=>p.r===y&&p.x===x);
+    if(st){const n=document.createElement("span");n.className="n";n.textContent=st.n;el.appendChild(n)}
+    const inp=document.createElement("input");
+    inp.maxLength=2;inp.autocomplete="off";inp.autocapitalize="characters";inp.spellcheck=false;inp.readOnly=S.locked;
+    inp.setAttribute("aria-label","Ligne "+(y+1)+", colonne "+(x+1));
+    el.appendChild(inp);bd.appendChild(el);c.el=el;c.i=inp;
+    inp.addEventListener("click",()=>{if(S.cur===c)sel(y,x,1-S.dir);else sel(y,x)});
+    inp.addEventListener("input",()=>{
+      if(S.locked){inp.value="";return}
+      const v=inp.value.normalize("NFD").replace(/[^A-Za-z]/g,"").toUpperCase().slice(-1);
+      inp.value=v;el.classList.remove("bad");
+      if(v){S.cur=c;adv(1)}
+      queueSave();
+    });
+    inp.addEventListener("keydown",e=>{
+      const k=e.key;
+      if(k==="ArrowRight")step(0,1);
+      else if(k==="ArrowLeft")step(0,-1);
+      else if(k==="ArrowDown")step(1,0);
+      else if(k==="ArrowUp")step(-1,0);
+      else if(k===" "||k==="Enter")sel(c.y,c.x,1-S.dir);
+      else if(k==="Backspace"){
+        if(S.locked){}
+        else if(inp.value){inp.value="";el.classList.remove("bad");queueSave()}
+        else{adv(-1);S.cur.i.value="";S.cur.el.classList.remove("bad");queueSave()}
+      }else return;
+      e.preventDefault();
+    });
+  }
+  const fill=(r&&r.fill&&r.fill.length===B.keys.length)?r.fill:"";
+  B.keys.forEach((k,j)=>{const ch=fill[j];if(ch&&ch!==".")B.cells[k].i.value=ch});
+  if(r&&r.status==="failed")showSolution();
+  if(r&&r.status==="success")B.keys.forEach(k=>{B.cells[k].i.value=B.cells[k].a});
+  mkClues(B,0);mkClues(B,1);size();
+  const f=B.pl.filter(p=>p.d===0).sort((a,b)=>a.n-b.n)[0]||B.pl[0];
+  S.cur=B.cells[f.r+","+f.x];S.dir=f.d;paint();
+  refresh();
+}
+function openFirst(){
+  const un=unlockedCount();
+  if(S.admin||un>0)openGrid(Math.max(0,un-1));
+  else $("cw-play").style.display="none";
+}
+
+/* ================= VÉRIFICATION ================= */
+async function check(){
+  if(S.locked)return;
+  const B=S.B,list=B.keys.map(k=>B.cells[k]);
+  if(list.some(c=>!c.i.value)){setMsg("Remplissez toute la grille avant de vérifier : une vérification ne compte que sur une grille complète.");return}
+  const bad=list.filter(c=>c.i.value!==c.a);
+  list.forEach(c=>c.el.classList.toggle("bad",SHOW_WRONG_CELLS&&bad.includes(c)));
+  if(S.admin){setMsg(bad.length?bad.length+" lettre(s) incorrecte(s) (test, non compté).":"Grille correcte (test).");return}
+  clearTimeout(S.t);S.t=0;
+  const gid=GRIDS[S.gi].id,r=ensureRec(gid);
+  r.checks=(r.checks||0)+1;r.fill=fillStr();
+  if(!bad.length){
+    r.status="success";lockBoard();
+    setMsg("Bravo, grille réussie en "+r.checks+" vérification"+(r.checks>1?"s":"")+" !");
+  }else if(r.checks>=MAX_CHECKS){
+    r.status="failed";showSolution();r.fill=fillStr();lockBoard();
+    setMsg("Raté : "+MAX_CHECKS+" vérifications utilisées. Voici la solution.");
+  }else{
+    const left=MAX_CHECKS-r.checks;
+    setMsg(bad.length+" lettre"+(bad.length>1?"s":"")+" incorrecte"+(bad.length>1?"s":"")+". Il vous reste "+left+" vérification"+(left>1?"s":"")+".");
+  }
+  const ok=await save(gid);
+  const m=$("cw-m").textContent;refresh();if(!ok||!isDone(r))setMsg(m);
+}
+
+/* ================= ADMIN : résultats des joueurs ================= */
+async function loadPlayers(){
+  const box=$("cw-players");box.textContent="Chargement…";
+  try{
+    const snap=await getDocs(collection(db,"crosswordProgress"));
+    const rows=[];snap.forEach(d=>rows.push(Object.assign({uid:d.id},d.data())));
+    rows.sort((a,b)=>String(a.name||"").localeCompare(String(b.name||"")));
+    if(!rows.length){box.textContent="Aucun résultat pour l’instant.";return}
+    box.innerHTML='<div class="cw-scroll"><table class="cw-tb"><thead><tr><th>Joueur</th>'+GRIDS.map((g,i)=>'<th>N°'+(i+1)+'</th>').join("")+'</tr></thead><tbody>'+
+      rows.map(r=>'<tr><td>'+esc(r.name||r.uid)+'</td>'+GRIDS.map(g=>{
+        const x=(r.results||{})[g.id];
+        if(!x)return'<td class="new">—</td>';
+        const s=x.status==="success"?["Réussi","ok"]:x.status==="failed"?["Raté","ko"]:["En cours ("+(x.checks||0)+")","wip"];
+        return'<td class="'+s[1]+'">'+s[0]+' <button class="cw-rs" data-u="'+esc(r.uid)+'" data-g="'+g.id+'" title="Réinitialiser">↺</button></td>';
+      }).join("")+'</tr>').join("")+'</tbody></table></div>';
+  }catch(e){box.textContent="Lecture impossible ("+(e.code||e.message)+"). Vérifiez les règles Firestore.";}
+}
+
+/* ================= INITIALISATION ================= */
+$("cw-list").addEventListener("click",e=>{const b=e.target.closest(".cw-tile");if(b&&!b.disabled){openGrid(+b.dataset.i);const p=$("cw-play");if(p.scrollIntoView)p.scrollIntoView({behavior:"smooth",block:"start"})}});
+$("cw-bc").onclick=check;
+$("cw-bl").onclick=()=>{if(!S.admin||S.locked)return;S.cur.i.value=S.cur.a;S.cur.el.classList.remove("bad")};
+$("cw-bw").onclick=()=>{if(!S.admin||S.locked)return;cellsOf(S.cur.w[S.dir]).forEach(c=>{c.i.value=c.a;c.el.classList.remove("bad")})};
+$("cw-ba").onclick=()=>{if(!S.admin||S.locked)return;S.B.keys.forEach(k=>{S.B.cells[k].i.value=S.B.cells[k].a;S.B.cells[k].el.classList.remove("bad")})};
+$("cw-bx").onclick=()=>{if(!S.admin||S.locked)return;S.B.keys.forEach(k=>{S.B.cells[k].i.value="";S.B.cells[k].el.classList.remove("bad")});setMsg("")};
+$("cw-pl-btn").onclick=loadPlayers;
+$("cw-players").addEventListener("click",async e=>{
+  const b=e.target.closest(".cw-rs");if(!b||!S.admin)return;
+  if(!confirm("Réinitialiser ce résultat pour ce joueur ?"))return;
+  try{await updateDoc(doc(db,"crosswordProgress",b.dataset.u),{["results."+b.dataset.g]:deleteField()});loadPlayers()}
+  catch(er){alert("Impossible de réinitialiser : "+(er.code||er.message))}
+});
+window.addEventListener("resize",size);
+if(window.ResizeObserver)new ResizeObserver(size).observe($("cw-g"));
+window.addEventListener("pagehide",flush);
+
+renderTop();renderList();
+if(auth){
+  onAuthStateChanged(auth,async u=>{
+    const carry=(!S.user&&u)?S.prog:null;
+    S.user=u||null;S.admin=!!(u&&ADMIN_UIDS.includes(u.uid));
+    const pd=$("profileDetails");
+    if(S.admin&&pd)pd.insertAdjacentHTML("beforeend",'<div style="margin-top:10px;color:var(--accent-gold);">> RÔLE : ADMINISTRATEUR</div>');
+    S.loadErr=null;await loadProg();
+    if(carry&&!S.admin&&!S.loadErr){
+      for(const gid of Object.keys(carry)){
+        const r=carry[gid];
+        if(!S.prog[gid]&&r&&(isDone(r)||(r.checks||0)>0||/[A-Z]/.test(r.fill||""))){S.prog[gid]=r;await save(gid)}
+      }
+    }
+    if(S.gi>=0)openGrid(S.gi);else openFirst();
+    renderTop();renderList();
+    if(S.loadErr)setMsg("Impossible de lire votre progression ("+S.loadErr+") : vérifiez les règles Firestore.");
+  });
+}else openFirst();
+</script>
 </body>
 </html>
