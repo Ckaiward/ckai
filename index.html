@@ -1839,6 +1839,7 @@
                         </span>
                     </div>
                     <div id="cw-m" aria-live="polite"></div>
+                    <button type="button" class="cw-btn" id="cw-claim" style="display:none;margin-top:8px">[RÉCLAMER +10 ◈]</button>
                     <div id="cw-guest"></div>
                 </div>
             </div>
@@ -3279,6 +3280,18 @@ function label(i){
 const setMsg = t => { $("cw-m").textContent = t || ""; };
 
 /* ================= AFFICHAGE : liste, bandeau ================= */
+const CLAIM=10, ckey=gid=>"crossword_"+gid;
+const claimable=()=>(S.admin||!S.user||!window.ckaiWalletReady||!window.ckaiWalletReady())?[]:GRIDS.filter(g=>(S.prog[g.id]||{}).status==="success"&&!window.ckaiClaimed(ckey(g.id))).map(g=>g.id);
+function updateClaimBtn(){
+  const b=$("cw-claim");if(!b)return;
+  b.style.display=(!S.admin&&S.gi>=0&&GRIDS[S.gi]&&claimable().includes(GRIDS[S.gi].id))?"":"none";
+}
+async function claim(ids){
+  if(!ids.length||!window.ckaiAward)return;
+  const r=await window.ckaiAward(ids.map(ckey),CLAIM);
+  setMsg(r.given?"+"+r.given+" jetons ◈ récupérés !":r.err?"Réclamation impossible ("+r.err+") : vérifiez les règles Firestore.":"Jetons déjà récupérés.");
+  renderTop();updateClaimBtn();
+}
 function renderTop(){
   const t=$("cw-top");
   if(!S.user){
@@ -3288,7 +3301,8 @@ function renderTop(){
     const ok=v.filter(x=>x==="success").length,ko=v.filter(x=>x==="failed").length;
     t.innerHTML='<span>> Joueur : '+esc(nameOf(S.user))+'</span>'+
       (S.admin?'<span class="cw-bd wip">ADMIN</span><span>Mode test : rien n’est enregistré, vérifications illimitées.</span>'
-              :'<span>Réussies : '+ok+' · Ratées : '+ko+'</span>');
+              :'<span>Réussies : '+ok+' · Ratées : '+ko+'</span>')+
+      (claimable().length?' <button class="cw-btn" id="cw-claimall">[RÉCLAMER +'+claimable().length*CLAIM+' ◈ · '+claimable().length+' grille'+(claimable().length>1?'s':'')+']</button>':'');
   }
   $("cw-admin").style.display=S.admin?"":"none";
 }
@@ -3303,7 +3317,7 @@ function renderList(){
       '<span class="d">'+dateOf(i)+'</span></button>';
   }).join("");
 }
-function refresh(){
+function refresh(){updateClaimBtn();
   const r=S.admin?null:rec(S.gi);
   const st=S.admin?["Mode test","wip"]:label(S.gi);
   $("cw-stat").className="cw-bd "+st[1];$("cw-stat").textContent=st[0];
@@ -3454,7 +3468,7 @@ async function check(){
   if(!bad.length){
     r.status="success";lockBoard();
     setMsg("Bravo, grille réussie en "+r.checks+" vérification"+(r.checks>1?"s":"")+" !");
-    if(window.ckaiAward)window.ckaiAward("crossword_"+gid,10).then(x=>{if(x&&x.given)setMsg("Bravo, grille réussie en "+r.checks+" vérification"+(r.checks>1?"s":"")+" ! +10 jetons ◈")}).catch(()=>{});
+    renderTop();updateClaimBtn();
   }else if(r.checks>=MAX_CHECKS){
     r.status="failed";showSolution();r.fill=fillStr();lockBoard();
     setMsg("Raté : "+MAX_CHECKS+" vérifications utilisées. Voici la solution.");
@@ -3502,6 +3516,9 @@ window.addEventListener("resize",size);
 if(window.ResizeObserver)new ResizeObserver(size).observe($("cw-g"));
 window.addEventListener("pagehide",flush);
 
+$("cw-top").addEventListener("click",e=>{if(e.target.closest("#cw-claimall"))claim(claimable())});
+$("cw-claim").addEventListener("click",()=>{if(S.gi>=0)claim([GRIDS[S.gi].id])});
+window.addEventListener("ckai-wallet",()=>{renderTop();updateClaimBtn()});
 renderTop();renderList();
 if(auth){
   onAuthStateChanged(auth,async u=>{
@@ -4145,7 +4162,7 @@ let frame = null, opened = false, pending = null, saveTimer = 0;
 const nameOf = u => u.displayName || (u.email || '').split('@')[0];
 const fmtTok = n => n == null ? '…' : Number(n).toLocaleString('fr-FR');
 window.ckaiTokenText = () => fmtTok(tokens);
-function paint() { document.querySelectorAll('.tk-val').forEach(e => { e.textContent = fmtTok(tokens); }); }
+function paint() { document.querySelectorAll('.tk-val').forEach(e => { e.textContent = fmtTok(tokens); }); window.dispatchEvent(new Event('ckai-wallet')); }
 function say(t) { const m = $('tw-msg'); if (m) m.textContent = t || ''; }
 const sendFrame = m => { try { frame && frame.contentWindow && frame.contentWindow.postMessage(Object.assign({ tw: 1 }, m), '*'); } catch (e) {} };
 
@@ -4177,18 +4194,23 @@ async function claim(kind) {
     return { given: r.given };
   } catch (e) { console.error(e); return { given: 0, err: e.code || e.message }; }
 }
-window.ckaiAward = async function (key, amt) {
+window.ckaiClaimed = key => !!(wallet.rewards && wallet.rewards[key]);
+window.ckaiWalletReady = () => tokens !== null && !loadErr;
+window.ckaiAward = async function (keys, amt) {
+  keys = [].concat(keys);
   if (!user || !db) return { guest: true, given: 0 };
   const ref = doc(db, "userTokens", user.uid);
   try {
     const r = await runTransaction(db, async tx => {
       const sn = await tx.get(ref), d = sn.exists() ? sn.data() : {}, rw = d.rewards || {};
-      if (rw[key]) return { given: 0, tokens: d.tokens || 0 };
-      const t = (d.tokens || 0) + amt;
-      tx.set(ref, { name: nameOf(user), tokens: t, rewards: Object.assign({}, rw, { [key]: true }) }, { merge: true });
-      return { given: amt, tokens: t };
+      const fresh = keys.filter(k => !rw[k]);
+      if (!fresh.length) return { given: 0, tokens: d.tokens || 0, rw };
+      const t = (d.tokens || 0) + amt * fresh.length, nrw = Object.assign({}, rw);
+      fresh.forEach(k => { nrw[k] = true; });
+      tx.set(ref, { name: nameOf(user), tokens: t, rewards: nrw }, { merge: true });
+      return { given: amt * fresh.length, tokens: t, rw: nrw };
     });
-    tokens = r.tokens; wallet.rewards = Object.assign({}, wallet.rewards, { [key]: true }); paint();
+    tokens = r.tokens; wallet.rewards = r.rw; paint();
     return { given: r.given };
   } catch (e) { console.error(e); return { given: 0, err: e.code || e.message }; }
 };
