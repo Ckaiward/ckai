@@ -1466,7 +1466,7 @@
 
         <div class="section-header">> IDEA_BOX // PROPOSER UNE VIDÉO</div>
         <div class="idea-box" id="idea-box-video" data-kind="video">
-            <p class="idea-intro">Une idée de vidéo pour l’une des chaînes ? Explique en quelques mots pourquoi ce serait bien, puis vote pour celles que tu veux voir. Les idées apparaissent après validation.</p>
+            <p class="idea-intro">Une idée de vidéo pour l’une des chaînes ? Explique en quelques mots pourquoi ce serait bien, puis vote pour celles que tu veux voir.</p>
             <div class="idea-form"></div>
             <div class="idea-msg" role="status" aria-live="polite"></div>
             <div class="idea-list"></div>
@@ -1670,7 +1670,7 @@
 
         <div class="section-header">> IDEA_BOX // PROPOSER UN JEU À STREAMER</div>
         <div class="idea-box" id="idea-box-game" data-kind="game">
-            <p class="idea-intro">Un jeu que tu aimerais voir en live ? Dis pourquoi il mérite sa place. Les idées apparaissent après validation.</p>
+            <p class="idea-intro">Un jeu que tu aimerais voir en live ? Dis pourquoi il mérite sa place, puis vote pour tes préférés.</p>
             <div class="idea-form"></div>
             <div class="idea-msg" role="status" aria-live="polite"></div>
             <div class="idea-list"></div>
@@ -1856,7 +1856,7 @@
     </div>
 
     <footer class="site-footer">
-        <span>© CKAI</span>
+        <span>© Ckai</span>
         <a href="https://www.twitch.tv/ckai" target="_blank" rel="noopener">Twitch</a>
         <a href="https://www.youtube.com/@clevraickai" target="_blank" rel="noopener">C’est le C</a>
         <a href="https://www.youtube.com/@Grossegal%C3%A8reckai" target="_blank" rel="noopener">Grosse Galère</a>
@@ -3366,8 +3366,8 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 const IDEAS_ADMIN_UIDS = [
   // "abcDEF123...",
 ];
-const CHANNELS = ["CKAI", "C'est le C", "Grosse Galère"];
-const STAT = { pending: "EN ATTENTE DE VALIDATION", open: "OUVERT", retained: "RETENU", planned: "PLANIFIÉ", done: "FAIT" };
+const CHANNELS = ["Ckai", "C'est le C", "Grosse Galère"];
+const STAT = { open: "OUVERT", retained: "RETENU", planned: "PLANIFIÉ", done: "FAIT" };
 const PUBLIC = ["open", "retained", "planned", "done"];
 
 let db, auth, user = null, ideas = [], loadErr = "";
@@ -3399,7 +3399,7 @@ function renderList(kind) {
     const admin = isAdmin() ? '<div class="idea-admin"><select data-status data-id="' + i.id + '" aria-label="Statut">' +
       Object.keys(STAT).map(s => '<option value="' + s + '"' + (s === i.status ? " selected" : "") + ">" + STAT[s] + "</option>").join("") +
       '</select><button type="button" data-act="del" data-id="' + i.id + '">Supprimer</button></div>'
-      : (mine && pend ? '<div class="idea-admin"><button type="button" data-act="del" data-id="' + i.id + '">Retirer mon idée</button></div>' : "");
+      : (mine ? '<div class="idea-admin"><button type="button" data-act="del" data-id="' + i.id + '">Retirer mon idée</button></div>' : "");
     return '<article class="idea-card st-' + esc(i.status) + '"><button type="button" class="idea-vote' + (voted ? " on" : "") + '" data-act="vote" data-id="' + i.id + '" aria-pressed="' + !!voted + '" aria-label="Voter pour cette idée"' + (pend ? " disabled" : "") + ">▲<b>" + (i.votes || 0) + "</b></button>" +
       '<div class="idea-main"><div class="idea-title">' + esc(i.title) + '</div><div class="idea-meta">' + (i.channel ? "[" + esc(i.channel) + "] " : "") + "par " + esc(i.name || "Anonyme") + " · " + (STAT[i.status] || "") + "</div><p>" + esc(i.why) + "</p>" + admin + "</div></article>";
   }).join("");
@@ -3409,9 +3409,7 @@ const renderLists = () => { renderList("video"); renderList("game"); };
 async function load() {
   if (!db) return;
   const map = new Map(); loadErr = "";
-  const qs = [query(collection(db, "ideas"), where("status", "in", PUBLIC))];
-  if (user) qs.push(query(collection(db, "ideas"), where("uid", "==", user.uid)));
-  if (isAdmin()) qs.push(query(collection(db, "ideas"), where("status", "==", "pending")));
+  const qs = [collection(db, "ideas")];
   for (const q of qs) { try { (await getDocs(q)).forEach(d => map.set(d.id, { id: d.id, ...d.data() })); } catch (e) { console.error(e); loadErr = e.code || e.message; } }
   ideas = [...map.values()]; renderLists();
 }
@@ -3423,8 +3421,8 @@ document.addEventListener("submit", async e => {
   const fd = new FormData(f), title = fd.get("title").trim(), why = fd.get("why").trim();
   if (title.length < 3 || why.length < 10) { say(kind, "Titre (3 caractères min.) et explication (10 caractères min.) requis."); return; }
   try {
-    await addDoc(collection(db, "ideas"), { kind, channel: kind === "video" ? fd.get("channel") : "", title, why, uid: user.uid, name: user.displayName || "Anonyme", status: "pending", votes: 0, voters: [], ts: Date.now() });
-    f.reset(); say(kind, "Idée envoyée : elle sera visible de tous après validation."); load();
+    await addDoc(collection(db, "ideas"), { kind, channel: kind === "video" ? fd.get("channel") : "", title, why, uid: user.uid, name: user.displayName || "Anonyme", status: "open", votes: 0, voters: [], ts: Date.now() });
+    f.reset(); say(kind, "Idée publiée : tout le monde peut maintenant voter pour elle."); load();
   } catch (err) { console.error(err); say(kind, "Envoi impossible (" + (err.code || err.message) + ") : vérifiez les règles Firestore."); }
 });
 
