@@ -1274,6 +1274,8 @@
         .site-footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--border-hard);display:flex;flex-wrap:wrap;gap:8px 20px;font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--text-muted)}
         .site-footer a{color:var(--accent-glitch);text-decoration:none}
         .site-footer a:hover{text-decoration:underline}
+        .profile-link-btn{background:none;border:0;padding:0;color:inherit;font:inherit;cursor:pointer}
+        .profile-link-btn:hover,.profile-link-btn:focus-visible{text-decoration:underline;color:var(--accent-glitch)}
         .auth-privacy{margin:14px 0 0;font-size:12px;line-height:1.5;color:var(--text-muted);font-family:'Share Tech Mono',monospace}
     </style>
 </head>
@@ -1951,7 +1953,7 @@
             rightContainer.innerHTML = `
                 <div class="user-display-badge">
                     <span class="token-badge" title="Vos jetons">◈ <span class="tk-val">${window.ckaiTokenText ? window.ckaiTokenText() : '…'}</span></span>
-                    <span>[CONNECTED: ${escapeHtml(displayName)}]</span>
+                    <button type="button" class="profile-link-btn" onclick="openTab('profile')" title="Ouvrir mon profil">[CONNECTED: ${escapeHtml(displayName)}]</button>
                     <button class="logout-btn" onclick="window.logoutUser()">[DÉCONNEXION]</button>
                 </div>
             `;
@@ -3364,7 +3366,7 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 
 // Collez ici votre "ID Utilisateur" (onglet profil) pour modérer les idées :
 const IDEAS_ADMIN_UIDS = [
-  // "abcDEF123...",
+  "3dYGvad71JSCUKVhCAu6RrQ3Imo2", // compte Ckai
 ];
 const CHANNELS = ["Ckai", "C'est le C", "Grosse Galère"];
 const STAT = { open: "OUVERT", retained: "RETENU", planned: "PLANIFIÉ", done: "FAIT" };
