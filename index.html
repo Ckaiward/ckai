@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CKAI // CORE_SYSTEM</title>
+    <meta name="description" content="Site officiel de CKAI : vidéos YouTube, archives de streams, planning Twitch, mini-jeux et boîte à idées pour la communauté.">
+    <meta name="theme-color" content="#121215">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="CKAI">
+    <meta property="og:title" content="CKAI // CORE_SYSTEM">
+    <meta property="og:description" content="Vidéos, archives de streams, planning Twitch, mini-jeux et boîte à idées.">
+    <meta property="og:locale" content="fr_FR">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23121215'/%3E%3Ctext x='32' y='47' font-family='monospace' font-size='44' font-weight='700' text-anchor='middle' fill='%2300ff66'%3EC%3C/text%3E%3C/svg%3E">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Share+Tech+Mono&family=VT323&family=Space+Grotesk:wght@700&display=swap');
 
@@ -1234,7 +1243,39 @@
         #towergame .tw-info b { color: var(--accent-gold); }
         #towergame .tw-frame { display: block; width: 100%; height: calc(100vh - 210px); min-height: 560px; border: 1px solid var(--border-hard); background: #000; }
         #towergame #tw-msg { min-height: 1.4em; margin-top: 10px; font-family: 'Share Tech Mono', monospace; font-size: 12px; color: var(--accent-gold); }
-</style>
+        /* ===== BOÎTE À IDÉES ===== */
+        .idea-box{background:var(--panel-bg);border:1px solid var(--border-hard);padding:24px;margin-top:20px}
+        .idea-intro{color:var(--text-muted);font-size:14px;margin:0 0 16px;line-height:1.5}
+        .idea-form form{display:grid;gap:12px;max-width:640px}
+        .idea-form label{display:grid;gap:6px;font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--text-muted)}
+        .idea-form input,.idea-form select,.idea-form textarea{background:var(--form-bg);border:1px solid var(--border-hard);color:var(--text-main);padding:10px;font:14px 'Inter',sans-serif;border-radius:0;width:100%;box-sizing:border-box}
+        .idea-form textarea{resize:vertical}
+        .idea-form :is(input,select,textarea):focus-visible,.idea-btn:focus-visible,.idea-vote:focus-visible{outline:2px solid var(--accent-glitch);outline-offset:2px}
+        .idea-btn{justify-self:start;background:transparent;border:1px solid var(--accent-glitch);color:var(--accent-glitch);padding:9px 16px;font-family:'Share Tech Mono',monospace;font-size:13px;cursor:pointer}
+        .idea-btn:hover{background:var(--accent-glitch);color:var(--bg-dark)}
+        .idea-msg{min-height:1.3em;margin-top:10px;font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--accent-gold)}
+        .idea-list{display:grid;gap:10px;margin-top:18px}
+        .idea-empty{color:var(--text-muted);font-size:14px}
+        .idea-card{display:flex;gap:14px;border:1px solid var(--border-hard);padding:14px;background:var(--form-bg)}
+        .idea-card.st-pending{border-style:dashed}
+        .idea-card.st-retained,.idea-card.st-planned{border-color:var(--accent-gold)}
+        .idea-card.st-done{border-color:var(--accent-glitch);opacity:.75}
+        .idea-vote{flex:none;width:54px;display:grid;place-items:center;align-content:center;background:transparent;border:1px solid var(--border-hard);color:var(--text-muted);cursor:pointer;padding:6px 0;font-size:12px}
+        .idea-vote b{font-size:16px;color:var(--text-main)}
+        .idea-vote.on{border-color:var(--accent-glitch);color:var(--accent-glitch)}
+        .idea-vote:disabled{cursor:default;opacity:.5}
+        .idea-main{min-width:0}
+        .idea-title{font-weight:600;overflow-wrap:anywhere}
+        .idea-meta{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text-muted);margin:2px 0 6px}
+        .idea-card p{margin:0;font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+        .idea-admin{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
+        .idea-admin select,.idea-admin button{background:var(--panel-bg);color:var(--text-main);border:1px solid var(--border-hard);padding:4px 8px;font-size:12px;cursor:pointer}
+        /* ===== PIED DE PAGE ===== */
+        .site-footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--border-hard);display:flex;flex-wrap:wrap;gap:8px 20px;font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--text-muted)}
+        .site-footer a{color:var(--accent-glitch);text-decoration:none}
+        .site-footer a:hover{text-decoration:underline}
+        .auth-privacy{margin:14px 0 0;font-size:12px;line-height:1.5;color:var(--text-muted);font-family:'Share Tech Mono',monospace}
+    </style>
 </head>
 <body>
 
@@ -1421,6 +1462,14 @@
                     </a>
                 </div>
             </div>
+        </div>
+
+        <div class="section-header">> IDEA_BOX // PROPOSER UNE VIDÉO</div>
+        <div class="idea-box" id="idea-box-video" data-kind="video">
+            <p class="idea-intro">Une idée de vidéo pour l’une des chaînes ? Explique en quelques mots pourquoi ce serait bien, puis vote pour celles que tu veux voir. Les idées apparaissent après validation.</p>
+            <div class="idea-form"></div>
+            <div class="idea-msg" role="status" aria-live="polite"></div>
+            <div class="idea-list"></div>
         </div>
 
     </div>
@@ -1619,6 +1668,14 @@
             <div class="points-grid-compact" id="channel-points-games-list"></div>
         </div>
 
+        <div class="section-header">> IDEA_BOX // PROPOSER UN JEU À STREAMER</div>
+        <div class="idea-box" id="idea-box-game" data-kind="game">
+            <p class="idea-intro">Un jeu que tu aimerais voir en live ? Dis pourquoi il mérite sa place. Les idées apparaissent après validation.</p>
+            <div class="idea-form"></div>
+            <div class="idea-msg" role="status" aria-live="polite"></div>
+            <div class="idea-list"></div>
+        </div>
+
     </div>
 
     <!-- ONGLET LIENS -->
@@ -1798,6 +1855,13 @@
         </div>
     </div>
 
+    <footer class="site-footer">
+        <span>© CKAI</span>
+        <a href="https://www.twitch.tv/ckai" target="_blank" rel="noopener">Twitch</a>
+        <a href="https://www.youtube.com/@clevraickai" target="_blank" rel="noopener">C’est le C</a>
+        <a href="https://www.youtube.com/@Grossegal%C3%A8reckai" target="_blank" rel="noopener">Grosse Galère</a>
+    </footer>
+
 </div>
 
 <!-- PIP TWITCH -->
@@ -1841,6 +1905,7 @@
             </div>
 
             <button type="submit" class="submit-btn" id="authSubmitBtn">> VALIDER</button>
+            <p class="auth-privacy" id="authPrivacyNote" style="display:none">Ton compte sert uniquement à sauvegarder ta progression, tes votes et tes idées (stockage Firebase). Aucune donnée n’est revendue.</p>
         </form>
     </div>
 </div>
@@ -1924,10 +1989,12 @@
             title.innerText = '[CRÉATION DE COMPTE]';
             usernameGroup.style.display = 'flex';
             submitBtn.innerText = '> CRÉER MON COMPTE';
+            document.getElementById('authPrivacyNote').style.display = 'block';
         } else {
             title.innerText = '[CONNEXION]';
             usernameGroup.style.display = 'none';
             submitBtn.innerText = '> SE CONNECTER';
+            document.getElementById('authPrivacyNote').style.display = 'none';
         }
 
         overlay.classList.add('active');
@@ -3287,6 +3354,105 @@ if(auth){
     if(S.loadErr)setMsg("Impossible de lire votre progression ("+S.loadErr+") : vérifiez les règles Firestore.");
   });
 }else openFirst();
+</script>
+
+<!-- BOÎTE À IDÉES (Firestore : collection ideas) -->
+<script type="module">
+import { getApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, query, where, doc, updateDoc, deleteDoc, arrayUnion, arrayRemove, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+// Collez ici votre "ID Utilisateur" (onglet profil) pour modérer les idées :
+const IDEAS_ADMIN_UIDS = [
+  // "abcDEF123...",
+];
+const CHANNELS = ["CKAI", "C'est le C", "Grosse Galère"];
+const STAT = { pending: "EN ATTENTE DE VALIDATION", open: "OUVERT", retained: "RETENU", planned: "PLANIFIÉ", done: "FAIT" };
+const PUBLIC = ["open", "retained", "planned", "done"];
+
+let db, auth, user = null, ideas = [], loadErr = "";
+try { const app = getApp(); db = getFirestore(app); auth = getAuth(app); } catch (e) { console.error("Firebase indisponible", e); }
+
+const $ = (s, r = document) => r.querySelector(s);
+const esc = t => String(t == null ? "" : t).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const isAdmin = () => !!(user && IDEAS_ADMIN_UIDS.includes(user.uid));
+const say = (kind, m) => { const el = $("#idea-box-" + kind + " .idea-msg"); if (el) el.textContent = m || ""; };
+
+function renderForm(kind) {
+  const el = $("#idea-box-" + kind + " .idea-form"); if (!el) return;
+  if (!user) { el.innerHTML = '<button type="button" class="idea-btn" data-act="login">[SE CONNECTER POUR PROPOSER OU VOTER]</button>'; return; }
+  const ch = kind === "video" ? '<label>Chaîne concernée<select name="channel">' + CHANNELS.map(c => "<option>" + esc(c) + "</option>").join("") + "</select></label>" : "";
+  el.innerHTML = '<form data-kind="' + kind + '" autocomplete="off">' + ch +
+    "<label>" + (kind === "video" ? "Ton idée de vidéo" : "Le jeu à streamer") + '<input name="title" minlength="3" maxlength="80" required></label>' +
+    '<label>Pourquoi ce serait bien ? (10 à 300 caractères)<textarea name="why" rows="3" minlength="10" maxlength="300" required></textarea></label>' +
+    '<button class="idea-btn" type="submit">> ENVOYER L’IDÉE</button></form>';
+}
+
+function renderList(kind) {
+  const el = $("#idea-box-" + kind + " .idea-list"); if (!el) return;
+  if (loadErr) { el.innerHTML = '<div class="idea-empty">Lecture impossible (' + esc(loadErr) + ") : vérifiez les règles Firestore.</div>"; return; }
+  const rank = { pending: 0 };
+  const list = ideas.filter(i => i.kind === kind).sort((a, b) => (rank[a.status] ?? 1) - (rank[b.status] ?? 1) || (b.votes || 0) - (a.votes || 0) || (b.ts || 0) - (a.ts || 0));
+  if (!list.length) { el.innerHTML = '<div class="idea-empty">Aucune idée pour le moment. Lance la première !</div>'; return; }
+  el.innerHTML = list.map(i => {
+    const voted = user && (i.voters || []).includes(user.uid), pend = i.status === "pending", mine = user && i.uid === user.uid;
+    const admin = isAdmin() ? '<div class="idea-admin"><select data-status data-id="' + i.id + '" aria-label="Statut">' +
+      Object.keys(STAT).map(s => '<option value="' + s + '"' + (s === i.status ? " selected" : "") + ">" + STAT[s] + "</option>").join("") +
+      '</select><button type="button" data-act="del" data-id="' + i.id + '">Supprimer</button></div>'
+      : (mine && pend ? '<div class="idea-admin"><button type="button" data-act="del" data-id="' + i.id + '">Retirer mon idée</button></div>' : "");
+    return '<article class="idea-card st-' + esc(i.status) + '"><button type="button" class="idea-vote' + (voted ? " on" : "") + '" data-act="vote" data-id="' + i.id + '" aria-pressed="' + !!voted + '" aria-label="Voter pour cette idée"' + (pend ? " disabled" : "") + ">▲<b>" + (i.votes || 0) + "</b></button>" +
+      '<div class="idea-main"><div class="idea-title">' + esc(i.title) + '</div><div class="idea-meta">' + (i.channel ? "[" + esc(i.channel) + "] " : "") + "par " + esc(i.name || "Anonyme") + " · " + (STAT[i.status] || "") + "</div><p>" + esc(i.why) + "</p>" + admin + "</div></article>";
+  }).join("");
+}
+const renderLists = () => { renderList("video"); renderList("game"); };
+
+async function load() {
+  if (!db) return;
+  const map = new Map(); loadErr = "";
+  const qs = [query(collection(db, "ideas"), where("status", "in", PUBLIC))];
+  if (user) qs.push(query(collection(db, "ideas"), where("uid", "==", user.uid)));
+  if (isAdmin()) qs.push(query(collection(db, "ideas"), where("status", "==", "pending")));
+  for (const q of qs) { try { (await getDocs(q)).forEach(d => map.set(d.id, { id: d.id, ...d.data() })); } catch (e) { console.error(e); loadErr = e.code || e.message; } }
+  ideas = [...map.values()]; renderLists();
+}
+
+document.addEventListener("submit", async e => {
+  const f = e.target.closest(".idea-box form"); if (!f) return; e.preventDefault();
+  const kind = f.dataset.kind; if (!user || !db) return;
+  if (ideas.filter(i => i.uid === user.uid && i.ts > Date.now() - 864e5).length >= 3) { say(kind, "Limite atteinte : 3 idées par 24 h."); return; }
+  const fd = new FormData(f), title = fd.get("title").trim(), why = fd.get("why").trim();
+  if (title.length < 3 || why.length < 10) { say(kind, "Titre (3 caractères min.) et explication (10 caractères min.) requis."); return; }
+  try {
+    await addDoc(collection(db, "ideas"), { kind, channel: kind === "video" ? fd.get("channel") : "", title, why, uid: user.uid, name: user.displayName || "Anonyme", status: "pending", votes: 0, voters: [], ts: Date.now() });
+    f.reset(); say(kind, "Idée envoyée : elle sera visible de tous après validation."); load();
+  } catch (err) { console.error(err); say(kind, "Envoi impossible (" + (err.code || err.message) + ") : vérifiez les règles Firestore."); }
+});
+
+document.addEventListener("click", async e => {
+  const b = e.target.closest(".idea-box [data-act]"); if (!b) return;
+  const act = b.dataset.act, id = b.dataset.id, kind = b.closest(".idea-box").dataset.kind;
+  if (act === "login") { if (window.openAuthModal) window.openAuthModal("login"); return; }
+  const it = ideas.find(i => i.id === id); if (!it || !db) return;
+  try {
+    if (act === "vote") {
+      if (!user) { window.openAuthModal && window.openAuthModal("login"); return; }
+      const has = (it.voters || []).includes(user.uid);
+      await updateDoc(doc(db, "ideas", id), { voters: has ? arrayRemove(user.uid) : arrayUnion(user.uid), votes: increment(has ? -1 : 1) });
+      it.voters = has ? it.voters.filter(v => v !== user.uid) : [...(it.voters || []), user.uid]; it.votes = (it.votes || 0) + (has ? -1 : 1); renderLists();
+    } else if (act === "del" && confirm("Supprimer cette idée ?")) {
+      await deleteDoc(doc(db, "ideas", id)); ideas = ideas.filter(i => i.id !== id); renderLists();
+    }
+  } catch (err) { console.error(err); say(kind, "Action impossible (" + (err.code || err.message) + ")."); }
+});
+
+document.addEventListener("change", async e => {
+  const s = e.target.closest("select[data-status]"); if (!s || !isAdmin()) return;
+  try { await updateDoc(doc(db, "ideas", s.dataset.id), { status: s.value }); load(); }
+  catch (err) { console.error(err); say(s.closest(".idea-box").dataset.kind, "Changement impossible (" + (err.code || err.message) + ")."); }
+});
+
+renderForm("video"); renderForm("game");
+if (auth) onAuthStateChanged(auth, u => { user = u || null; renderForm("video"); renderForm("game"); load(); }); else load();
 </script>
 
 <!-- SCRIPT MINI JEU : TOUR SANS FIN (jeu intégré dans une iframe, comptes + jetons via Firebase) -->
