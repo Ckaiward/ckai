@@ -1276,6 +1276,19 @@
         .site-footer a:hover{text-decoration:underline}
         .profile-link-btn{background:none;border:0;padding:0;color:inherit;font:inherit;cursor:pointer}
         .profile-link-btn:hover,.profile-link-btn:focus-visible{text-decoration:underline;color:var(--accent-glitch)}
+        .profile-actions{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+        .idea-btn.danger{border-color:#ff4d4d;color:#ff4d4d}
+        .idea-btn.danger:hover{background:#ff4d4d;color:#fff}
+        .forgot-link{display:inline;margin-top:12px;background:none;border:0;padding:0;color:var(--accent-glitch);font:12px 'Share Tech Mono',monospace;cursor:pointer;text-decoration:underline}
+        .legal-body{max-height:65vh;overflow-y:auto;font-size:13px;line-height:1.6;color:var(--text-main)}
+        .legal-body h3{margin:16px 0 4px;font:13px 'Share Tech Mono',monospace;color:var(--accent-glitch)}
+        .legal-body p{margin:0 0 6px;color:var(--text-muted)}
+        .legal-body a{color:var(--accent-glitch)}
+        .profile-avatar-row{display:flex;gap:16px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+        .profile-avatar{width:96px;height:96px;object-fit:cover;border:1px solid var(--border-hard);background:var(--panel-bg)}
+        .profile-avatar.ph{display:grid;place-items:center;color:var(--text-muted);font:32px 'Share Tech Mono',monospace}
+        .idea-avatar{flex:none;width:44px;height:44px;object-fit:cover;border:1px solid var(--border-hard);background:var(--panel-bg)}
+        .idea-avatar.ph{display:grid;place-items:center;color:var(--text-muted);font:16px 'Share Tech Mono',monospace}
         .auth-privacy{margin:14px 0 0;font-size:12px;line-height:1.5;color:var(--text-muted);font-family:'Share Tech Mono',monospace}
     </style>
 </head>
@@ -1862,6 +1875,7 @@
         <a href="https://www.twitch.tv/ckai" target="_blank" rel="noopener">Twitch</a>
         <a href="https://www.youtube.com/@clevraickai" target="_blank" rel="noopener">C’est le C</a>
         <a href="https://www.youtube.com/@Grossegal%C3%A8reckai" target="_blank" rel="noopener">Grosse Galère</a>
+        <a href="#" onclick="openLegalModal();return false">Confidentialité</a>
     </footer>
 
 </div>
@@ -1907,8 +1921,48 @@
             </div>
 
             <button type="submit" class="submit-btn" id="authSubmitBtn">> VALIDER</button>
+            <button type="button" class="forgot-link" id="forgotPwdLink" onclick="window.forgotPassword()">Mot de passe oublié ?</button>
             <p class="auth-privacy" id="authPrivacyNote" style="display:none">Ton compte sert uniquement à sauvegarder ta progression, tes votes et tes idées (stockage Firebase). Aucune donnée n’est revendue.</p>
         </form>
+    </div>
+</div>
+
+<div class="auth-modal-overlay" id="deleteModalOverlay">
+    <div class="auth-modal-box">
+        <div class="auth-modal-header">
+            <span>[SUPPRIMER MON COMPTE]</span>
+            <button class="auth-modal-close" onclick="closeModalById('deleteModalOverlay')" aria-label="Fermer">✕</button>
+        </div>
+        <form onsubmit="confirmDeleteAccount(event)">
+            <p class="auth-privacy" style="margin-top:0;color:var(--text-main)">Cette action est <b>définitive</b> : ton compte, ta progression (Tour sans fin, mots croisés), tes jetons et tes idées seront supprimés.</p>
+            <div class="form-group"><label for="delPassword">Mot de passe</label><input type="password" id="delPassword" class="form-control" required autocomplete="current-password"></div>
+            <div class="form-group"><label for="delConfirm">Tape SUPPRIMER pour confirmer</label><input type="text" id="delConfirm" class="form-control" required autocomplete="off"></div>
+            <div class="auth-privacy" id="delError" role="alert" style="color:var(--accent-gold)"></div>
+            <button type="submit" class="submit-btn" id="delSubmit">> SUPPRIMER DÉFINITIVEMENT</button>
+        </form>
+    </div>
+</div>
+
+<div class="auth-modal-overlay" id="legalModalOverlay">
+    <div class="auth-modal-box" style="max-width:640px">
+        <div class="auth-modal-header">
+            <span>[MENTIONS LÉGALES &amp; CONFIDENTIALITÉ]</span>
+            <button class="auth-modal-close" onclick="closeModalById('legalModalOverlay')" aria-label="Fermer">✕</button>
+        </div>
+        <div class="legal-body">
+            <h3>Éditeur du site</h3>
+            <p>Site personnel, édité à titre non professionnel par « Ckai » (pseudonyme). Conformément à la loi pour la confiance dans l’économie numérique (LCEN), l’identité de l’éditeur a été communiquée à l’hébergeur. Contact : via la chaîne Twitch <a href="https://www.twitch.tv/ckai" target="_blank" rel="noopener">twitch.tv/ckai</a>.</p>
+            <h3>Hébergement</h3>
+            <p>Site : GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.<br>Comptes et données : Google Firebase, Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irlande.</p>
+            <h3>Données collectées</h3>
+            <p>À la création d’un compte : adresse email, pseudo et identifiant de compte. Ensuite : ta progression (Tour sans fin, mots croisés), tes jetons, tes votes et les idées que tu publies (affichées avec ton pseudo).</p>
+            <h3>Utilisation et durée</h3>
+            <p>Ces données servent uniquement au fonctionnement du compte, à la sauvegarde et à la boîte à idées. Elles ne sont ni vendues ni utilisées pour de la publicité. Elles sont conservées jusqu’à la suppression de ton compte.</p>
+            <h3>Tes droits</h3>
+            <p>Tu peux accéder à tes données, les corriger ou les supprimer. La suppression est possible à tout moment depuis ton profil (« Supprimer mon compte »), ou en me contactant. Tu peux aussi adresser une réclamation à la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">cnil.fr</a>).</p>
+            <h3>Cookies et services tiers</h3>
+            <p>Le site enregistre dans ton navigateur des préférences (thème, sauvegarde locale du jeu). Les lecteurs Twitch et YouTube intégrés peuvent déposer leurs propres cookies, selon leurs politiques respectives. Les données du compte sont hébergées par Google et peuvent être traitées en dehors de l’Union européenne avec les garanties prévues par Google.</p>
+        </div>
     </div>
 </div>
 
@@ -1917,14 +1971,18 @@
 <!-- SCRIPTS FIREBASE & LOGIQUE DU SITE -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getFirestore, collection, getDocs, getDoc, setDoc, doc, deleteDoc, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
     import { 
         getAuth, 
         createUserWithEmailAndPassword, 
         signInWithEmailAndPassword, 
         signOut, 
         onAuthStateChanged,
-        updateProfile 
+        updateProfile,
+        sendPasswordResetEmail,
+        EmailAuthProvider,
+        reauthenticateWithCredential,
+        deleteUser
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
     const firebaseConfig = {
@@ -1959,11 +2017,27 @@
             `;
             if (profileDetails) {
                 profileDetails.innerHTML = `
+                    <div class="profile-avatar-row">
+                        <img id="profileAvatar" class="profile-avatar" alt="Mon avatar" hidden>
+                        <div id="profileAvatarPh" class="profile-avatar ph">?</div>
+                        <div>
+                            <label class="idea-btn" for="avatarInput" style="cursor:pointer;display:inline-block">[CHOISIR UN AVATAR]</label>
+                            <input type="file" id="avatarInput" accept="image/*" hidden onchange="window.avatarChosen(this)">
+                            <button type="button" class="idea-btn" onclick="window.removeAvatar()">[RETIRER]</button>
+                            <div class="idea-msg" style="margin-top:6px">Image carrée, 500×500 max (redimensionnée automatiquement).</div>
+                        </div>
+                    </div>
                     <div style="font-size: 16px; color: var(--accent-glitch); margin-bottom: 10px;">> CONNECTÉ EN TANT QUE : ${escapeHtml(displayName)}</div>
                     <div>Email : ${escapeHtml(user.email)}</div>
                     <div style="margin-top:6px;">Jetons : <span class="tk-val" style="color: var(--accent-gold); font-weight:bold;">${window.ckaiTokenText ? window.ckaiTokenText() : '…'}</span></div>
                     <div>ID Utilisateur : ${user.uid}</div>
+                    <div class="profile-actions">
+                        <button type="button" class="idea-btn" onclick="window.resetMyPassword()">[CHANGER MON MOT DE PASSE]</button>
+                        <button type="button" class="idea-btn danger" onclick="window.openDeleteModal()">[SUPPRIMER MON COMPTE]</button>
+                    </div>
+                    <div id="profileMsg" class="idea-msg" role="status" aria-live="polite"></div>
                 `;
+                loadMyAvatar(user);
             }
         } else {
             rightContainer.innerHTML = `
@@ -1992,15 +2066,105 @@
             usernameGroup.style.display = 'flex';
             submitBtn.innerText = '> CRÉER MON COMPTE';
             document.getElementById('authPrivacyNote').style.display = 'block';
+            document.getElementById('forgotPwdLink').style.display = 'none';
         } else {
             title.innerText = '[CONNEXION]';
             usernameGroup.style.display = 'none';
             submitBtn.innerText = '> SE CONNECTER';
             document.getElementById('authPrivacyNote').style.display = 'none';
+            document.getElementById('forgotPwdLink').style.display = 'inline';
         }
 
         overlay.classList.add('active');
     };
+
+    // MOT DE PASSE OUBLIÉ / RÉINITIALISATION
+    window.forgotPassword = async function() {
+        const email = document.getElementById('authEmail').value.trim();
+        const errorMsg = document.getElementById('authErrorMsg');
+        errorMsg.style.display = 'block';
+        if (!email) { errorMsg.innerText = "Entre ton adresse email ci-dessus, puis clique de nouveau sur « Mot de passe oublié ? »."; return; }
+        try { await sendPasswordResetEmail(auth, email); } catch (e) { console.error(e); }
+        errorMsg.innerText = "Si un compte existe avec cette adresse, un email de réinitialisation vient d'être envoyé (pense à regarder les spams).";
+    };
+    window.resetMyPassword = async function() {
+        const u = auth.currentUser, m = document.getElementById('profileMsg');
+        if (!u || !u.email) return;
+        try { await sendPasswordResetEmail(auth, u.email); m.textContent = "Email de réinitialisation envoyé à " + u.email + " (vérifie aussi les spams)."; }
+        catch (e) { console.error(e); m.textContent = "Envoi impossible (" + (e.code || e.message) + ")."; }
+    };
+
+    // SUPPRESSION DE COMPTE (avec confirmation)
+    window.openDeleteModal = function() {
+        document.getElementById('delConfirm').value = '';
+        document.getElementById('delPassword').value = '';
+        document.getElementById('delError').textContent = '';
+        document.getElementById('deleteModalOverlay').classList.add('active');
+    };
+    window.closeModalById = function(id) { document.getElementById(id).classList.remove('active'); };
+    window.confirmDeleteAccount = async function(e) {
+        e.preventDefault();
+        const u = auth.currentUser, err = document.getElementById('delError'), btn = document.getElementById('delSubmit');
+        if (!u) return;
+        if (document.getElementById('delConfirm').value.trim().toUpperCase() !== 'SUPPRIMER') { err.textContent = "Tape exactement SUPPRIMER pour confirmer."; return; }
+        btn.disabled = true; err.textContent = "Suppression en cours…";
+        try {
+            await reauthenticateWithCredential(u, EmailAuthProvider.credential(u.email, document.getElementById('delPassword').value));
+            // 1) données du compte
+            for (const c of ['towerProgress', 'crosswordProgress', 'userTokens', 'avatars']) { try { await deleteDoc(doc(db, c, u.uid)); } catch (x) { console.warn(c, x); } }
+            try { const q = await getDocs(query(collection(db, 'ideas'), where('uid', '==', u.uid))); for (const d of q.docs) await deleteDoc(d.ref); } catch (x) { console.warn('ideas', x); }
+            // 2) le compte lui-même
+            await deleteUser(u);
+            alert("Ton compte et tes données ont été supprimés.");
+            location.reload();
+        } catch (x) {
+            console.error(x); btn.disabled = false;
+            err.textContent = (x.code === 'auth/wrong-password' || x.code === 'auth/invalid-credential') ? "Mot de passe incorrect." : "Suppression impossible (" + (x.code || x.message) + ").";
+        }
+    };
+
+    // AVATAR (stocké dans Firestore : avatars/{uid} = image 500 max + miniature 96)
+    function drawSquare(img, size, q) {
+        const side = Math.min(img.width, img.height), out = Math.min(size, side), c = document.createElement('canvas');
+        c.width = c.height = out;
+        const x = c.getContext('2d'); x.fillStyle = '#121215'; x.fillRect(0, 0, out, out);
+        x.drawImage(img, (img.width - side) / 2, (img.height - side) / 2, side, side, 0, 0, out, out);
+        return c.toDataURL('image/jpeg', q);
+    }
+    function showAvatar(src) {
+        const im = document.getElementById('profileAvatar'), ph = document.getElementById('profileAvatarPh');
+        if (!im || !ph) return;
+        if (src && src.startsWith('data:image/jpeg;base64,')) { im.src = src; im.hidden = false; ph.style.display = 'none'; }
+        else { im.hidden = true; ph.style.display = 'grid'; }
+    }
+    async function loadMyAvatar(user) {
+        try { const a = await getDoc(doc(db, 'avatars', user.uid)); showAvatar(a.exists() ? a.data().img : ''); } catch (e) { console.warn(e); }
+    }
+    window.avatarChosen = function(input) {
+        const f = input.files && input.files[0], m = document.getElementById('profileMsg'), u = auth.currentUser;
+        input.value = '';
+        if (!f || !u) return;
+        if (!f.type.startsWith('image/') || f.size > 10 * 1024 * 1024) { m.textContent = "Choisis une image (10 Mo max)."; return; }
+        const url = URL.createObjectURL(f), img = new Image();
+        img.onerror = () => { URL.revokeObjectURL(url); m.textContent = "Image illisible."; };
+        img.onload = async () => {
+            URL.revokeObjectURL(url);
+            try {
+                let q = 0.85, big = drawSquare(img, 500, q);
+                while (big.length > 150000 && q > 0.4) { q -= 0.1; big = drawSquare(img, 500, q); }
+                await setDoc(doc(db, 'avatars', u.uid), { img: big, thumb: drawSquare(img, 96, 0.8), ts: Date.now() });
+                showAvatar(big); m.textContent = "Avatar enregistré.";
+            } catch (e) { console.error(e); m.textContent = "Enregistrement impossible (" + (e.code || e.message) + ")."; }
+        };
+        img.src = url;
+    };
+    window.removeAvatar = async function() {
+        const u = auth.currentUser, m = document.getElementById('profileMsg'); if (!u) return;
+        try { await deleteDoc(doc(db, 'avatars', u.uid)); showAvatar(''); m.textContent = "Avatar retiré."; }
+        catch (e) { console.error(e); m.textContent = "Action impossible (" + (e.code || e.message) + ")."; }
+    };
+
+    window.openLegalModal = function() { document.getElementById('legalModalOverlay').classList.add('active'); };
 
     window.closeAuthModal = function() {
         document.getElementById('authModalOverlay').classList.remove('active');
@@ -3290,6 +3454,7 @@ async function check(){
   if(!bad.length){
     r.status="success";lockBoard();
     setMsg("Bravo, grille réussie en "+r.checks+" vérification"+(r.checks>1?"s":"")+" !");
+    if(window.ckaiAward)window.ckaiAward("crossword_"+gid,10).then(x=>{if(x&&x.given)setMsg("Bravo, grille réussie en "+r.checks+" vérification"+(r.checks>1?"s":"")+" ! +10 jetons ◈")}).catch(()=>{});
   }else if(r.checks>=MAX_CHECKS){
     r.status="failed";showSolution();r.fill=fillStr();lockBoard();
     setMsg("Raté : "+MAX_CHECKS+" vérifications utilisées. Voici la solution.");
@@ -3361,7 +3526,7 @@ if(auth){
 <!-- BOÎTE À IDÉES (Firestore : collection ideas) -->
 <script type="module">
 import { getApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, query, where, doc, updateDoc, deleteDoc, arrayUnion, arrayRemove, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, getDoc, query, where, doc, updateDoc, deleteDoc, arrayUnion, arrayRemove, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 // Collez ici votre "ID Utilisateur" (onglet profil) pour modérer les idées :
@@ -3402,10 +3567,14 @@ function renderList(kind) {
       Object.keys(STAT).map(s => '<option value="' + s + '"' + (s === i.status ? " selected" : "") + ">" + STAT[s] + "</option>").join("") +
       '</select><button type="button" data-act="del" data-id="' + i.id + '">Supprimer</button></div>'
       : (mine ? '<div class="idea-admin"><button type="button" data-act="del" data-id="' + i.id + '">Retirer mon idée</button></div>' : "");
-    return '<article class="idea-card st-' + esc(i.status) + '"><button type="button" class="idea-vote' + (voted ? " on" : "") + '" data-act="vote" data-id="' + i.id + '" aria-pressed="' + !!voted + '" aria-label="Voter pour cette idée"' + (pend ? " disabled" : "") + ">▲<b>" + (i.votes || 0) + "</b></button>" +
+    return '<article class="idea-card st-' + esc(i.status) + '"><button type="button" class="idea-vote' + (voted ? " on" : "") + '" data-act="vote" data-id="' + i.id + '" aria-pressed="' + !!voted + '" aria-label="Voter pour cette idée"' + (pend ? " disabled" : "") + ">▲<b>" + (i.votes || 0) + "</b></button>" + avatarHtml(i) +
       '<div class="idea-main"><div class="idea-title">' + esc(i.title) + '</div><div class="idea-meta">' + (i.channel ? "[" + esc(i.channel) + "] " : "") + "par " + esc(i.name || "Anonyme") + " · " + (STAT[i.status] || "") + "</div><p>" + esc(i.why) + "</p>" + admin + "</div></article>";
   }).join("");
 }
+const myThumb = async () => { try { const a = await getDoc(doc(db, "avatars", user.uid)); return a.exists() ? (a.data().thumb || "") : ""; } catch (e) { return ""; } };
+const avatarHtml = i => (typeof i.avatar === "string" && i.avatar.startsWith("data:image/jpeg;base64,"))
+  ? '<img class="idea-avatar" src="' + esc(i.avatar) + '" alt="" width="44" height="44">'
+  : '<div class="idea-avatar ph" aria-hidden="true">' + esc((i.name || "?").charAt(0).toUpperCase()) + "</div>";
 const renderLists = () => { renderList("video"); renderList("game"); };
 
 async function load() {
@@ -3423,7 +3592,8 @@ document.addEventListener("submit", async e => {
   const fd = new FormData(f), title = fd.get("title").trim(), why = fd.get("why").trim();
   if (title.length < 3 || why.length < 10) { say(kind, "Titre (3 caractères min.) et explication (10 caractères min.) requis."); return; }
   try {
-    await addDoc(collection(db, "ideas"), { kind, channel: kind === "video" ? fd.get("channel") : "", title, why, uid: user.uid, name: user.displayName || "Anonyme", status: "open", votes: 0, voters: [], ts: Date.now() });
+    const av = await myThumb();
+    await addDoc(collection(db, "ideas"), { ...(av ? { avatar: av } : {}), kind, channel: kind === "video" ? fd.get("channel") : "", title, why, uid: user.uid, name: user.displayName || "Anonyme", status: "open", votes: 0, voters: [], ts: Date.now() });
     f.reset(); say(kind, "Idée publiée : tout le monde peut maintenant voter pour elle."); load();
   } catch (err) { console.error(err); say(kind, "Envoi impossible (" + (err.code || err.message) + ") : vérifiez les règles Firestore."); }
 });
@@ -4007,6 +4177,21 @@ async function claim(kind) {
     return { given: r.given };
   } catch (e) { console.error(e); return { given: 0, err: e.code || e.message }; }
 }
+window.ckaiAward = async function (key, amt) {
+  if (!user || !db) return { guest: true, given: 0 };
+  const ref = doc(db, "userTokens", user.uid);
+  try {
+    const r = await runTransaction(db, async tx => {
+      const sn = await tx.get(ref), d = sn.exists() ? sn.data() : {}, rw = d.rewards || {};
+      if (rw[key]) return { given: 0, tokens: d.tokens || 0 };
+      const t = (d.tokens || 0) + amt;
+      tx.set(ref, { name: nameOf(user), tokens: t, rewards: Object.assign({}, rw, { [key]: true }) }, { merge: true });
+      return { given: amt, tokens: t };
+    });
+    tokens = r.tokens; wallet.rewards = Object.assign({}, wallet.rewards, { [key]: true }); paint();
+    return { given: r.given };
+  } catch (e) { console.error(e); return { given: 0, err: e.code || e.message }; }
+};
 function queueSave(m) {
   if (!user || !db) return;
   pending = { uid: user.uid, name: nameOf(user), m };
