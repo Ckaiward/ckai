@@ -1302,8 +1302,8 @@
         </div>
         
         <nav class="nav-tabs">
-            <button class="tab-btn" onclick="openTab('home', this)">// ARCHIVES</button>
-            <button class="tab-btn active" onclick="openTab('twitch', this)">// LIVE_FEED</button>
+            <button class="tab-btn active" onclick="openTab('home', this)">// ARCHIVES</button>
+            <button class="tab-btn" onclick="openTab('twitch', this)">// LIVE_FEED</button>
             <button class="tab-btn" onclick="openTab('links', this)">// LIENS</button>
             <div class="nav-drop" id="miniDrop">
                 <button class="tab-btn" id="miniBtn" aria-haspopup="true" aria-expanded="false" aria-controls="miniMenu" onclick="toggleMiniMenu(event)">// MINI JEU <span class="caret">▼</span></button>
@@ -1321,7 +1321,7 @@
     </header>
 
     <!-- ONGLET ARCHIVES -->
-    <div id="home" class="tab-content">
+    <div id="home" class="tab-content active">
 
         <div class="section-header">&gt; CORE_NODE // CKAI</div>
         
@@ -1489,7 +1489,7 @@
     </div>
 
     <!-- ONGLET TWITCH -->
-    <div id="twitch" class="tab-content active">
+    <div id="twitch" class="tab-content">
         
         <div class="twitch-container">
             <iframe id="twitch-main-player" class="twitch-frame" allowfullscreen="" src="https://player.twitch.tv/?channel=ckai&amp;parent=localhost"></iframe>
@@ -1519,7 +1519,7 @@
                     <div class="schedule-game-title">nouveau jeu</div>
                 </div>
             </div>
-            <div class="schedule-card auto-today" data-day="4">
+            <div class="schedule-card" data-day="4">
                 <div class="schedule-day">JEU</div>
                 <div class="schedule-content">
                     8H - 12H
@@ -1558,122 +1558,122 @@
             
             <div class="game-grid">
                 <a href="https://www.youtube.com/watch?v=QyPCW9CUkhE&amp;list=PLeaKN15x3GXIFGhljOHJuPhi2ss-bmll-" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/JRnBqW36/007-FIRST-LIGHT.jpg" alt="007 First Light" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/JRnBqW36/007-FIRST-LIGHT.jpg" alt="007 FIRST LIGHT" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">007 FIRST LIGHT</div>
                 </a>
                 <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&amp;list=PLNcyDCaofkHY" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/r2wftb9N/FF7-rebirth.jpg" alt="FF VII Rebirth" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/r2wftb9N/FF7-rebirth.jpg" alt="FF7 Rebirth" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">FF7 Rebirth</div>
                 </a>
                 <a href="https://www.youtube.com/watch?v=FNUDMWKVa-w&amp;list=PLeaKN15x3GXLmQ9j5jQse_G5oCNB3ncYX" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/LD4z5tzf/ff7-remake.jpg" alt="FF VII Remake" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/LD4z5tzf/ff7-remake.jpg" alt="FF7 Remake" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">FF7 Remake</div>
                 </a>
                 <a href="https://www.youtube.com/watch?v=lBpxUooGIhM&amp;list=PLeaKN15x3GXKWbnohpX-aMRaxmSna0LhI" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/zT6BzL61/FIRE-EMBLEM.jpg" alt="Fire Emblem" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/zT6BzL61/FIRE-EMBLEM.jpg" alt="FIRE EMBLEM" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">FIRE EMBLEM</div>
                 </a>
                 <a href="https://www.youtube.com/watch?v=VrpmlWSg5ZU&amp;list=PLeaKN15x3GXImBy0mLy8d94ocz_sXjGhP" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/S4VP8P2K/kenshi.jpg" alt="Kenshi" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/S4VP8P2K/kenshi.jpg" alt="Kenshi" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Kenshi</div>
                 </a>
                 <a href="https://www.youtube.com/watch?v=1Xs7jUmwClA&amp;list=PLeaKN15x3GXLnVahTm5gzuQOK4vmUk1Wn" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/nswkHvGR/Kingdom-come-delivrance.jpg" alt="Kingdom Come Deliverance" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/nswkHvGR/Kingdom-come-delivrance.jpg" alt="Kingdom Come Deliverance" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Kingdom Come Deliverance</div>
                 </a>
                   <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&amp;list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/Ldn8tP4r/KH-FINAL-MIX.jpg" alt="Kingdom Come Deliverance" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/Ldn8tP4r/KH-FINAL-MIX.jpg" alt="Kingdom Hearts I Final Mix" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Kingdom Hearts I Final Mix</div>
                 </a>
                   <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&amp;list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/chCffCMs/KH-COM.jpg" alt="Kingdom Come Deliverance" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/chCffCMs/KH-COM.jpg" alt="Kingdom Hearts Re: Chain of Memories" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Kingdom Hearts Re: Chain of Memories</div>
                 </a>
                   <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&amp;list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/1GzJ6JpG/KH-2.jpg" alt="Kingdom Come Deliverance" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/1GzJ6JpG/KH-2.jpg" alt="Kingdom Hearts II Final Mix" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Kingdom Hearts II Final Mix</div>
                 </a>
                   <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&amp;list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/9kVHyjN4/KH-358-d.jpg" alt="Kingdom Come Deliverance" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/9kVHyjN4/KH-358-d.jpg" alt="Kingdom Hearts 358/2 Days" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Kingdom Hearts 358/2 Days</div>
                 </a>
                   <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&amp;list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/GfQL9YB8/KH-BBS.jpg" alt="Kingdom Come Deliverance" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/GfQL9YB8/KH-BBS.jpg" alt="Kingdom Hearts Birth by Sleep" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Kingdom Hearts Birth by Sleep</div>
                 </a>
                 <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&amp;list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/cXZ7GQHW/kh-recoded.jpg" alt="Kingdom Come Deliverance" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/cXZ7GQHW/kh-recoded.jpg" alt="Kingdom Hearts Re:Coded" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Kingdom Hearts Re:Coded</div>
                 </a>
                 <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&amp;list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/p63W61mg/KH-3D.jpg" alt="Kingdom Come Deliverance" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/p63W61mg/KH-3D.jpg" alt="Kingdom Hearts Dream Drop Distance HD" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Kingdom Hearts Dream Drop Distance HD</div>
                 </a>
                  <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&amp;list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
-                    <img src="LIEN DE LIMG" alt="Kingdom Come Deliverance" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="LIEN DE LIMG" alt="Kingdom Hearts X Back Cover" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Kingdom Hearts X Back Cover</div>
                 </a>
                  <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&amp;list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
-                    <img src="LIEN IMG" alt="Kingdom Come Deliverance" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="LIEN IMG" alt="Kingdom Hearts III + RE Mind" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Kingdom Hearts III + RE Mind</div>
                 </a>
                 <a href="https://www.youtube.com/watch?v=UBzpaYjw2og&amp;list=PLeaKN15x3GXK1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/PvqTCqff/MAX-PAYNE-3.jpg" alt="Max Payne 3" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/PvqTCqff/MAX-PAYNE-3.jpg" alt="MAX PAYNE 3" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">MAX PAYNE 3</div>
                 </a>
                 <a href="https://www.youtube.com/watch?v=bZzgE8-mixc&amp;list=PLNcyDCaofkHY" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/Y4KG5C6Q/minnit.jpg" alt="Minit" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/Y4KG5C6Q/minnit.jpg" alt="Minit" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Minit</div>
                 </a>
                 <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&amp;list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/JRky9Wfw/morrowind.jpg" alt="Morrowind" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/JRky9Wfw/morrowind.jpg" alt="Morrowind" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Morrowind</div>
                 </a>
                 <a href="https://www.youtube.com/watch?v=C0VcqE2K75A&amp;list=PLeaKN15x3GXIRhsxDX5KTs-LqiQNp7y8O" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/gMZjdPX2/MOUSE-PI-FOR-HIRE.jpg" alt="Mouse PI for Hire" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/gMZjdPX2/MOUSE-PI-FOR-HIRE.jpg" alt="MOUSE PI FOR HIRE" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">MOUSE PI FOR HIRE</div>
                 </a>
                 <a href="https://www.youtube.com/watch?v=CyQYS8oNcXw&amp;list=PLeaKN15x3GXItlfhnhL0t3HJg1NPZIqKa" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/7dkm2gGP/replaced.jpg" alt="Replaced" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/7dkm2gGP/replaced.jpg" alt="Replaced" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Replaced</div>
                 </a>
                 <a href="https://www.youtube.com/watch?v=hyyNmbsxJPE&amp;list=PLeaKN15x3GXLBVUOM96o1HqXpC1B_RXhd" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/VpLDfXCP/shadow-man.jpg" alt="Shadow Man" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/VpLDfXCP/shadow-man.jpg" alt="Shadow Man" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Shadow Man</div>
                 </a>
                 <a href="https://www.youtube.com/watch?v=5TmXx08-Ju8&amp;list=PLeaKN15x3GXIDWmIa4stA_5YMlnwAHfO0" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/ym0phSGC/sol-cesto.jpg" alt="Sol Cesto" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/ym0phSGC/sol-cesto.jpg" alt="Sol Cesto" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Sol Cesto</div>
                 </a>
                 <a href="https://www.youtube.com/watch?v=R2T6B8L6C8w&amp;list=PLeaKN15x3GXKN1-jKvTsEr_XiCvuxUEC9y" target="_blank" class="game-card-square">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/13570/header.jpg" alt="Splinter Cell Chaos Theory" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/13570/header.jpg" alt="Splinter Cell Chaos Theory" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Splinter Cell Chaos Theory</div>
                 </a>
                 <a href="https://www.youtube.com/watch?v=47lZhJA_1Hg&amp;list=PLJjQWj1aVnf0" target="_blank" class="game-card-square">
-                    <img src="https://i.ibb.co/LdszVfKr/tunic.jpg" alt="Tunic" class="game-card-bg" referrerpolicy="no-referrer">
+                    <img src="https://i.ibb.co/LdszVfKr/tunic.jpg" alt="Tunic" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">Tunic</div>
                 </a>
