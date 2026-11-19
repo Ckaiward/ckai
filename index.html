@@ -1501,11 +1501,11 @@
             <div class="schedule-card" data-day="1">
                 <div class="schedule-day">LUN</div>
                 <div class="schedule-content">
-                    8h - 12h
+                    8H - 12H
                     <div class="schedule-game-title">METAL GEAR SOLID 2</div>
                 </div>
             </div>
-            <div class="schedule-card auto-today" data-day="2">
+            <div class="schedule-card" data-day="2">
                 <div class="schedule-day">MAR</div>
                 <div class="schedule-content">
                     19H - 23H
@@ -1774,6 +1774,10 @@
                 
                 <div class="points-card-title">GOTCHA FORCE (GC)</div>
                 <div class="points-card-user">par <span>Kirochi</span></div>
+            </div><div class="points-card-compact ">
+                
+                <div class="points-card-title">Gravity Circuit</div>
+                <div class="points-card-user">par <span>sparkcops</span></div>
             </div></div>
         </div>
 
@@ -2314,6 +2318,7 @@
         { id: 'p8', title: 'Splinter Cell Chaos Theory', user: 'Coldacity', completed: true },
         { id: 'p9', title: 'GOTCHA FORCE (GC)', user: 'Kirochi', completed: false },
         { id: 'p10', title: 'DRAGON QUEST I & II HD', user: 'Gon_la_chèvre', completed: false },
+        { id: 'p11', title: 'Gravity Circuit', user: 'sparkcops', completed: false },
     ];
 
     let channelPointsGames = [];
@@ -2329,6 +2334,9 @@
             } else {
                 channelPointsGames = [];
                 pointsSnap.forEach(d => channelPointsGames.push({ id: d.id, ...d.data() }));
+                if (!channelPointsGames.some(g => (g.title || '').toLowerCase() === 'gravity circuit')) {
+                    channelPointsGames.push({ id: 'p11', title: 'Gravity Circuit', user: 'sparkcops', completed: false });
+                }
             }
 
             renderChannelPointsGames();
@@ -2388,7 +2396,8 @@
                 { title: 'MAX PAYNE 3', user: 'Skunksx', completed: true },
                 { title: 'Splinter Cell Chaos Theory', user: 'Coldacity', completed: true },
                 { title: 'GOTCHA FORCE (GC)', user: 'Kirochi', completed: false },
-                { title: 'DRAGON QUEST I & II HD', user: 'Gon_la_chèvre', completed: false }
+                { title: 'DRAGON QUEST I & II HD', user: 'Gon_la_chèvre', completed: false },
+                { title: 'Gravity Circuit', user: 'sparkcops', completed: false }
             ];
             games.forEach(function (g) {
                 var card = document.createElement('div');
@@ -2413,10 +2422,8 @@
         const scheduleCards = document.querySelectorAll('.schedule-card');
         
         scheduleCards.forEach(card => {
-            const cardDay = parseInt(card.getAttribute('data-day'));
-            if (cardDay === currentDayIndex) {
-                card.classList.add('auto-today');
-            }
+            const cardDay = parseInt(card.getAttribute('data-day'), 10);
+            card.classList.toggle('auto-today', cardDay === currentDayIndex);
         });
     });
 
