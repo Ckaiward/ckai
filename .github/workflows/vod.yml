@@ -1,0 +1,14 @@
+name: Post VOD
+on:
+  schedule:
+    - cron: "0 18 * * *"   # 18h UTC = 19h ou 20h en France
+  workflow_dispatch:        # permet de lancer à la main pour tester
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python post_vod.py
+        env:
+          CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
