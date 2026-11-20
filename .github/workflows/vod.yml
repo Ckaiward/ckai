@@ -1,8 +1,8 @@
 name: Post VOD
 on:
   schedule:
-    - cron: "0 18 * * *"   # 18h UTC = 19h ou 20h en France
-  workflow_dispatch:        # permet de lancer à la main pour tester
+    - cron: "5 15 * * *"   # 16h05 en hiver (UTC+1)
+  workflow_dispatch:
 jobs:
   post:
     runs-on: ubuntu-latest
