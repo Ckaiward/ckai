@@ -1,14 +1,25 @@
 name: Post VOD
 on:
   schedule:
-    - cron: "5 15 * * *"   # 16h05 en hiver (UTC+1)
+    - cron: "3 16 * * *"   # 18h03 Paris en été (UTC+2)
+    - cron: "3 17 * * *"   # 18h03 Paris en hiver (UTC+1)
   workflow_dispatch:
 jobs:
   post:
     runs-on: ubuntu-latest
     steps:
+      - name: Vérifier l'heure à Paris
+        id: time
+        run: |
+          if [ "$(TZ=Europe/Paris date +%H)" = "18" ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/checkout@v4
+        if: github.event_name == 'workflow_dispatch' || steps.time.outputs.ok == 'true'
       - run: python post_vod.py
+        if: github.event_name == 'workflow_dispatch' || steps.time.outputs.ok == 'true'
         env:
           CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
