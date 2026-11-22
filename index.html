@@ -873,6 +873,123 @@
             color: var(--accent-glitch);
         }
 
+
+        /* ===== LED LIVE (onglet LIVE_FEED) ===== */
+        .live-led {
+            display: none;
+            width: 9px; height: 9px;
+            margin-left: 8px;
+            border-radius: 50%;
+            background: #ff1a1a;
+            box-shadow: 0 0 6px 2px rgba(255, 26, 26, 0.75);
+            vertical-align: middle;
+            animation: ledPulse 1.4s ease-in-out infinite;
+        }
+        .tab-btn.is-live .live-led { display: inline-block; }
+        @keyframes ledPulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 6px 2px rgba(255, 26, 26, 0.75); }
+            50% { opacity: 0.45; box-shadow: 0 0 2px 0 rgba(255, 26, 26, 0.4); }
+        }
+
+        /* ===== RECHERCHE DE JEUX ===== */
+        .game-search-wrap {
+            position: relative;
+            max-width: 420px;
+            margin-top: 15px;
+        }
+        .game-search-input {
+            width: 100%;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-hard);
+            color: var(--text-main);
+            padding: 10px 14px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 14px;
+            outline: none;
+            box-sizing: border-box;
+        }
+        .game-search-input:focus { border-color: var(--accent-glitch); box-shadow: 0 0 8px rgba(0, 255, 102, 0.25); }
+        .game-search-input::placeholder { color: var(--text-muted); }
+        .game-search-list {
+            position: absolute;
+            top: 100%; left: 0; right: 0;
+            z-index: 50;
+            margin: 2px 0 0; padding: 0;
+            list-style: none;
+            background: var(--panel-bg);
+            border: 1px solid var(--accent-glitch);
+            max-height: 260px;
+            overflow-y: auto;
+            display: none;
+        }
+        .game-search-list.open { display: block; }
+        .game-search-list li {
+            padding: 8px 14px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            color: var(--text-main);
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .game-search-list li mark { background: none; color: var(--accent-glitch); font-weight: bold; }
+        .game-search-list li:hover, .game-search-list li.active { background: var(--text-main); color: var(--bg-dark); }
+        .game-search-list li:hover mark, .game-search-list li.active mark { color: var(--bg-dark); }
+        .game-search-list li .gs-year { color: var(--text-muted); font-size: 11px; margin-left: 6px; }
+        .game-search-list li:hover .gs-year, .game-search-list li.active .gs-year { color: var(--bg-dark); }
+        .game-search-list li.empty { cursor: default; color: var(--text-muted); text-transform: none; }
+        .game-search-list li.empty:hover { background: none; color: var(--text-muted); }
+
+        .game-card-square.search-hit {
+            z-index: 5;
+            border-color: var(--accent-glitch);
+            animation: cardShine 1.2s ease-in-out infinite;
+        }
+        .game-card-square.search-hit .game-card-bg { filter: brightness(1.15) contrast(1.1); }
+        .game-card-square.search-hit .game-card-title { color: var(--accent-glitch); }
+        @keyframes cardShine {
+            0%, 100% { box-shadow: 0 0 10px 2px rgba(0, 255, 102, 0.55); }
+            50% { box-shadow: 0 0 28px 8px rgba(0, 255, 102, 0.95); }
+        }
+
+        /* ===== GOTY ===== */
+        .game-card-square.goty {
+            border: 2px solid var(--accent-gold);
+            box-shadow: 0 0 14px rgba(255, 204, 0, 0.55), inset 0 0 12px rgba(255, 204, 0, 0.35);
+        }
+        .game-card-square.goty:hover {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 22px rgba(255, 204, 0, 0.85), inset 0 0 14px rgba(255, 204, 0, 0.45);
+        }
+        .game-card-square.goty .game-card-title { color: var(--accent-gold); }
+        .game-card-square.goty::after {
+            content: "";
+            position: absolute; top: 0; left: -60%;
+            width: 40%; height: 100%;
+            background: linear-gradient(100deg, transparent, rgba(255, 230, 120, 0.35), transparent);
+            transform: skewX(-20deg);
+            z-index: 2;
+            pointer-events: none;
+            animation: goldSweep 4s ease-in-out infinite;
+        }
+        @keyframes goldSweep {
+            0%, 60% { left: -60%; }
+            100% { left: 130%; }
+        }
+        .goty-badge {
+            position: absolute;
+            top: 8px; right: 8px;
+            z-index: 4;
+            background: var(--accent-gold);
+            color: #111;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 2px 7px;
+            border-radius: 999px;
+            box-shadow: 0 0 8px rgba(255, 204, 0, 0.8);
+        }
+
         .upcoming-header-bar {
             display: flex;
             justify-content: space-between;
@@ -1303,7 +1420,7 @@
         
         <nav class="nav-tabs">
             <button class="tab-btn active" onclick="openTab('home', this)">// ARCHIVES</button>
-            <button class="tab-btn" onclick="openTab('twitch', this)">// LIVE_FEED</button>
+            <button class="tab-btn" id="liveTabBtn" onclick="openTab('twitch', this)">// LIVE_FEED<span class="live-led" id="liveLed" title="Ckai est en live !" aria-label="En live"></span></button>
             <button class="tab-btn" onclick="openTab('links', this)">// LIENS</button>
             <div class="nav-drop" id="miniDrop">
                 <button class="tab-btn" id="miniBtn" aria-haspopup="true" aria-expanded="false" aria-controls="miniMenu" onclick="toggleMiniMenu(event)">// MINI JEU <span class="caret">▼</span></button>
@@ -1550,6 +1667,11 @@
         </div>
 
         <div class="section-header">&gt; PLAYLISTS // ARCHIVES DE STREAM</div>
+
+        <div class="game-search-wrap" style="margin: 15px 0 20px;">
+            <input type="text" id="gameSearchInput" class="game-search-input" placeholder="&gt; Rechercher un jeu dans toutes les années..." autocomplete="off" spellcheck="false" aria-label="Rechercher un jeu dans les archives de stream" aria-controls="gameSearchList" role="combobox" aria-expanded="false">
+            <ul id="gameSearchList" class="game-search-list" role="listbox"></ul>
+        </div>
         
         <div class="single-category-block">
             <div style="font-family: 'VT323', monospace; font-size: 24px; color: var(--accent-glitch);">
@@ -1667,9 +1789,10 @@
                     <div class="game-card-overlay"></div>
                     <div class="game-card-title">P. T.</div>
                 </a>
-                   <a href="LIEN VOD" target="_blank" class="game-card-square">
+                   <a href="LIEN VOD" target="_blank" class="game-card-square goty">
                     <img src="https://i.ibb.co/dwjgTxgv/QUUEN-DOMAIN.jpg" alt="QUEEN'S DOMAIN" class="game-card-bg" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
                     <div class="game-card-overlay"></div>
+                    <span class="goty-badge" title="Game Of The Year">GOTY</span>
                     <div class="game-card-title">QUEEN'S DOMAIN</div>
                 </a>
                 <a href="https://www.youtube.com/watch?v=CyQYS8oNcXw&amp;list=PLeaKN15x3GXItlfhnhL0t3HJg1NPZIqKa" target="_blank" class="game-card-square">
@@ -2426,6 +2549,111 @@
             card.classList.toggle('auto-today', cardDay === currentDayIndex);
         });
     });
+
+
+    /* ===== LED LIVE : détecte si la chaîne Twitch est en direct ===== */
+    (function () {
+        const TWITCH_CHANNEL = 'ckai';
+        const CHECK_EVERY_MS = 60000;
+        const btn = document.getElementById('liveTabBtn');
+        if (!btn) return;
+        async function checkLive() {
+            try {
+                const r = await fetch('https://decapi.me/twitch/uptime/' + TWITCH_CHANNEL + '?t=' + Date.now(), { cache: 'no-store' });
+                const txt = (await r.text()).trim().toLowerCase();
+                // Hors ligne : "ckai is offline" ; en live : une durée ("2 hours, 3 minutes")
+                const live = r.ok && txt.length > 0 && !txt.includes('offline') && !txt.includes('error') && !txt.includes('not found') && !txt.includes('unable');
+                btn.classList.toggle('is-live', live);
+            } catch (e) {
+                btn.classList.remove('is-live'); // en cas d'erreur : pas de LED
+            }
+        }
+        checkLive();
+        setInterval(checkLive, CHECK_EVERY_MS);
+    })();
+
+    /* ===== RECHERCHE DE JEUX (archives / playlists) ===== */
+    (function () {
+        const input = document.getElementById('gameSearchInput');
+        const list = document.getElementById('gameSearchList');
+        if (!input || !list) return;
+        // Lit toutes les listes (une par année) à chaque recherche : les nouvelles listes sont prises en compte automatiquement
+        function getGames() {
+            return Array.from(document.querySelectorAll('.game-grid .game-card-square')).map(c => {
+                const name = ((c.querySelector('.game-card-title') || {}).textContent || '').trim();
+                const block = c.closest('.single-category-block');
+                const titleEl = block && block.firstElementChild;
+                const ym = titleEl ? (titleEl.textContent.match(/(?:19|20)\d{2}/) || [''])[0] : '';
+                return { name: name, norm: norm(name), card: c, year: ym };
+            }).filter(g => g.name);
+        }
+        function allCards() { return Array.from(document.querySelectorAll('.game-grid .game-card-square')); }
+        let results = [], activeIdx = -1;
+
+        function norm(t) {
+            return String(t).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+        }
+        function esc(t) { return t.replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch])); }
+        function clearGlow() { allCards().forEach(c => c.classList.remove('search-hit')); }
+        function close() { list.classList.remove('open'); input.setAttribute('aria-expanded', 'false'); activeIdx = -1; }
+        function highlight(name, q) {
+            // surligne la première occurrence (insensible aux accents/casse)
+            const n = norm(name), i = n.indexOf(q);
+            if (!q || i < 0 || n.length !== name.length) return esc(name);
+            return esc(name.slice(0, i)) + '<mark>' + esc(name.slice(i, i + q.length)) + '</mark>' + esc(name.slice(i + q.length));
+        }
+        function render(q) {
+            list.innerHTML = '';
+            if (!results.length) {
+                list.innerHTML = '<li class="empty">Aucun jeu trouvé</li>';
+            } else {
+                results.forEach((g, i) => {
+                    const li = document.createElement('li');
+                    li.setAttribute('role', 'option');
+                    li.innerHTML = highlight(g.name, q) + (g.year ? ' <span class="gs-year">[' + g.year + ']</span>' : '');
+                    li.addEventListener('mousedown', e => { e.preventDefault(); choose(i); });
+                    list.appendChild(li);
+                });
+            }
+            list.classList.add('open');
+            input.setAttribute('aria-expanded', 'true');
+        }
+        function setActive(i) {
+            const items = list.querySelectorAll('li[role="option"]');
+            items.forEach(li => li.classList.remove('active'));
+            activeIdx = i;
+            if (i >= 0 && items[i]) { items[i].classList.add('active'); items[i].scrollIntoView({ block: 'nearest' }); }
+        }
+        function choose(i) {
+            const g = results[i];
+            if (!g) return;
+            input.value = g.name;
+            close();
+            clearGlow();
+            g.card.classList.add('search-hit');
+            g.card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        input.addEventListener('input', () => {
+            clearGlow();
+            const q = norm(input.value);
+            if (!q) { results = []; close(); return; }
+            const games = getGames();
+            const starts = games.filter(g => g.norm.startsWith(q));
+            const contains = games.filter(g => !g.norm.startsWith(q) && g.norm.includes(q));
+            results = starts.concat(contains).slice(0, 8);
+            render(q);
+            // un seul résultat : la miniature brille déjà pendant la frappe
+            if (results.length === 1) results[0].card.classList.add('search-hit');
+        });
+        input.addEventListener('keydown', e => {
+            if (e.key === 'ArrowDown' && results.length) { e.preventDefault(); setActive((activeIdx + 1) % results.length); }
+            else if (e.key === 'ArrowUp' && results.length) { e.preventDefault(); setActive((activeIdx - 1 + results.length) % results.length); }
+            else if (e.key === 'Enter') { e.preventDefault(); if (results.length) choose(activeIdx >= 0 ? activeIdx : 0); }
+            else if (e.key === 'Escape') { close(); }
+        });
+        input.addEventListener('focus', () => { if (input.value && results.length) list.classList.add('open'); });
+        input.addEventListener('blur', () => setTimeout(close, 120));
+    })();
 
     function toggleTheme() {
         const html = document.documentElement;
